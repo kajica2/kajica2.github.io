@@ -1,0 +1,969 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>ARSENALS // SOVEREIGN SIGNAL — Kai Djuric</title>
+  <meta name="description" content="Full index of every public repository under the SOVEREIGN SIGNAL — categorized by pillar, with descriptions and source links." />
+  <meta name="theme-color" content="#04060a" />
+  <meta property="og:title" content="ARSENALS // SOVEREIGN SIGNAL" />
+  <meta property="og:description" content="Full index. Every public repository, categorized by pillar." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2304060a'/%3E%3Cpath d='M6 24V8l20-3v15' fill='none' stroke='%2300e5ff' stroke-width='2'/%3E%3Ccircle cx='9' cy='24' r='2.5' fill='%23ff3df0'/%3E%3Ccircle cx='23' cy='20' r='2.5' fill='%2300e5ff'/%3E%3C/svg%3E" />
+
+  <style>
+    :root {
+      --bg:        #04060a;
+      --bg-card:   #0a0f17;
+      --bg-elev:   #0e1622;
+      --border:    #1a2533;
+      --border-h:  #2a3a52;
+      --ink:       #d6e1f0;
+      --ink-dim:   #6b7d96;
+      --cyan:      #00e5ff;
+      --magenta:   #ff3df0;
+      --amber:     #ffb547;
+      --green:     #5cffa0;
+      --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Menlo", monospace;
+      --sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { background: var(--bg); color: var(--ink); }
+
+    body {
+      font-family: var(--sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(0, 229, 255, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 100%, rgba(255, 61, 240, 0.06) 0%, transparent 50%),
+        linear-gradient(transparent 0%, transparent 50%, rgba(0, 229, 255, 0.018) 50%, transparent 100%);
+      background-size: 100% 100%, 100% 100%, 100% 4px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::after {
+      content: "";
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(0, 229, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 229, 255, 0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse at 50% 30%, black 0%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 0%, transparent 75%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: clamp(2rem, 6vw, 4.5rem) clamp(1rem, 4vw, 2rem);
+    }
+
+    /* ── TOP NAV ── */
+    .top-nav {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .top-nav a {
+      color: var(--ink-dim);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+    .top-nav a:hover { color: var(--cyan); border-bottom-color: var(--cyan); }
+    .top-nav .back { color: var(--cyan); }
+
+    /* ── HEADER ── */
+    header { margin-bottom: clamp(2.5rem, 6vw, 4rem); }
+    .crest {
+      display: flex; align-items: center; gap: 0.75rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      margin-bottom: 1.5rem;
+    }
+    .crest::before {
+      content: ""; display: inline-block;
+      width: 8px; height: 8px;
+      background: var(--cyan);
+      box-shadow: 0 0 12px var(--cyan);
+      border-radius: 50%;
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+
+    h1 {
+      font-family: var(--mono);
+      font-size: clamp(2.2rem, 7vw, 4rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--cyan) 0%, #fff 50%, var(--magenta) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .lede {
+      font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+      color: var(--ink-dim);
+      max-width: 64ch;
+    }
+    .lede strong { color: var(--ink); font-weight: 500; }
+    .lede .cyan { color: var(--cyan); }
+    .lede .mag { color: var(--magenta); }
+
+    /* ── PILLAR FILTER ── */
+    .filter {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+      margin: 1.75rem 0 0;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .filter button {
+      padding: 0.4rem 0.7rem;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--ink-dim);
+      border-radius: 1px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: inherit;
+      letter-spacing: inherit;
+      text-transform: inherit;
+      transition: all 0.18s ease;
+    }
+    .filter button:hover { color: var(--ink); border-color: var(--border-h); }
+    .filter button.active {
+      color: var(--bg);
+      background: var(--cyan);
+      border-color: var(--cyan);
+    }
+    .filter button.active.magenta { background: var(--magenta); border-color: var(--magenta); }
+    .filter button.active.amber   { background: var(--amber);   border-color: var(--amber);   }
+    .filter button.active.green   { background: var(--green);   border-color: var(--green);   }
+    .filter button.active.gray    { background: var(--ink-dim); border-color: var(--ink-dim); }
+
+    /* ── SECTION LABEL ── */
+    .section-head {
+      display: flex; align-items: baseline; gap: 1rem;
+      margin: 2.5rem 0 1.25rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+    }
+    .section-head::after {
+      content: ""; flex: 1; height: 1px;
+      background: linear-gradient(90deg, var(--border) 0%, transparent 100%);
+    }
+    .section-head .count { color: var(--cyan); }
+    .section-head.hidden { display: none; }
+
+    /* ── GRID ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .grid.hidden { display: none; }
+
+    .card {
+      position: relative;
+      display: flex; flex-direction: column;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 1.25rem 1.25rem 1rem;
+      text-decoration: none;
+      color: var(--ink);
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .card::before {
+      content: ""; position: absolute;
+      top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent, var(--cyan)), transparent);
+      opacity: 0.5;
+      transition: opacity 0.18s ease;
+    }
+    .card::after {
+      content: ""; position: absolute;
+      top: 0; right: 0;
+      width: 80px; height: 80px;
+      background: radial-gradient(circle at top right, var(--accent, var(--cyan)), transparent 70%);
+      opacity: 0.08;
+      transition: opacity 0.18s ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-h);
+      background: var(--bg-elev);
+    }
+    .card:hover::before { opacity: 1; }
+    .card:hover::after  { opacity: 0.18; }
+
+    .card-head {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .card-title {
+      font-family: var(--mono);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      word-break: break-word;
+    }
+    .card-pillar {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent, var(--ink-dim));
+      padding: 0.15rem 0.4rem;
+      border: 1px solid currentColor;
+      border-radius: 1px;
+      white-space: nowrap;
+    }
+    .card-desc {
+      font-size: 0.85rem;
+      color: var(--ink-dim);
+      line-height: 1.5;
+      margin-bottom: 1rem;
+      flex: 1;
+    }
+    .card-desc code {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--ink);
+      background: rgba(0, 229, 255, 0.05);
+      padding: 0.05rem 0.3rem;
+      border-radius: 1px;
+    }
+    .card-foot {
+      display: flex; align-items: center; justify-content: space-between;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--ink-dim);
+    }
+    .card-link {
+      color: var(--accent, var(--cyan));
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+    .card-arrow {
+      display: inline-block;
+      transition: transform 0.18s ease;
+    }
+    .card:hover .card-arrow { transform: translateX(3px); }
+
+    .badge {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.45rem;
+      border: 1px solid currentColor;
+      border-radius: 1px;
+    }
+    .badge.live   { color: var(--green); }
+    .badge.source { color: var(--amber); }
+    .badge.old    { color: var(--ink-dim); }
+
+    /* ── FOOTER ── */
+    footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+    }
+    footer a {
+      color: var(--cyan);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.18s ease;
+    }
+    footer a:hover { border-bottom-color: var(--cyan); }
+    footer .links { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+
+    @media (max-width: 480px) {
+      .card { padding: 1rem; }
+      .filter { font-size: 0.65rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .crest::before, .card, .card-arrow { transition: none; animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <nav class="top-nav">
+      <a class="back" href="/">← SOVEREIGN SIGNAL</a>
+      <span>// ARSENALS // v1.0</span>
+    </nav>
+
+    <header>
+      <div class="crest">SOVEREIGN SIGNAL // ARSENAL INDEX // FULL DUMP</div>
+      <h1>Every repo.<br/>Every signal.</h1>
+      <p class="lede">
+        Complete index of <strong>all 40 public repositories</strong> under
+        <span class="cyan">kajica2</span>. Curated to six pillars plus a sources
+        catch-all. The hub at <span class="mag">/</span> shows the eight that
+        are currently alive. This page shows the rest — the foundation, the
+        experiments, the ones in cold storage.
+      </p>
+      <div class="filter" id="filter">
+        <button data-filter="all" class="active">ALL · 40</button>
+        <button data-filter="music" class="magenta">MUSIC</button>
+        <button data-filter="visuals" class="">VISUALS</button>
+        <button data-filter="wearables">WEARABLES</button>
+        <button data-filter="interfaces" class="amber">INTERFACES</button>
+        <button data-filter="experiments" class="magenta">EXPERIMENTS</button>
+        <button data-filter="atmospheres" class="amber">ATMOSPHERES</button>
+        <button data-filter="sources" class="gray">SOURCES</button>
+      </div>
+    </header>
+
+    <main id="arsenal-root">
+      <!-- Sections generated below. Pillar to accent color: -->
+      <!-- MUSIC=magenta, VISUALS=cyan, WEARABLES=amber, INTERFACES=cyan, EXPERIMENTS=magenta, ATMOSPHERES=amber, SOURCES=gray -->
+
+      <div class="section-head" data-pillar="music">
+        Music <span class="count">[ 06 ]</span>
+      </div>
+      <div class="grid" data-pillar="music">
+
+        <a class="card" style="--accent: #ff3df0" href="https://github.com/kajica2/path-of-the-spheres" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">path-of-the-spheres</div>
+            <div class="card-pillar">MUSIC</div>
+          </div>
+          <p class="card-desc">Create sound of the moment. Generative planetary audio synthesis, Vite + React + WebAudio, Gemini-powered. Living in AI Studio.</p>
+          <div class="card-foot">
+            <span class="badge source">SRC</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #ff3df0" href="https://github.com/kajica2/timbre.js" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">timbre.js</div>
+            <div class="card-pillar">MUSIC</div>
+          </div>
+          <p class="card-desc">JavaScript library for objective sound programming. Looted/preserved fork — Tero Parviainen original. Still the cleanest functional audio graph API in JS.</p>
+          <div class="card-foot">
+            <span class="badge source">SRC</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #ff3df0" href="https://github.com/kajica2/sounf-frquency" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">sounf-frquency</div>
+            <div class="card-pillar">MUSIC</div>
+          </div>
+          <p class="card-desc">Sound and scenes. Frequency-domain visualizer tied to audio sources. Early signal-to-vault prototype.</p>
+          <div class="card-foot">
+            <span class="badge old">EARLY</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #ff3df0" href="https://github.com/kajica2/trumpetkai" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">trumpetkai</div>
+            <div class="card-pillar">MUSIC</div>
+          </div>
+          <p class="card-desc">Trumpet practice companion. Long-dormant study repo — play-along tracks, range charts, tone exercises. Worth re-igniting.</p>
+          <div class="card-foot">
+            <span class="badge old">2021</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #ff3df0" href="https://github.com/kajica2/harmonic-study-engine" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">harmonic-study-engine</div>
+            <div class="card-pillar">MUSIC</div>
+          </div>
+          <p class="card-desc">Learn and practice harmony and melody. Theory drills, interval recognition, ear training. The study tool I kept wishing existed.</p>
+          <div class="card-foot">
+            <span class="badge source">SRC</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #ff3df0" href="https://github.com/kajica2/music-pub" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">music-pub</div>
+            <div class="card-pillar">MUSIC</div>
+          </div>
+          <p class="card-desc">Music publishing workflow scratchpad. Distribution pipeline experiments, metadata, royalty routing. Quiet but alive.</p>
+          <div class="card-foot">
+            <span class="badge source">SRC</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+      </div>
+
+      <div class="section-head" data-pillar="visuals">
+        Visuals <span class="count">[ 05 ]</span>
+      </div>
+      <div class="grid" data-pillar="visuals">
+
+        <a class="card" style="--accent: #00e5ff" href="https://github.com/kajica2/shader-arsenal" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">shader-arsenal</div>
+            <div class="card-pillar">VISUALS</div>
+          </div>
+          <p class="card-desc">A working arsenal of Lygia GLSL shaders — live playground + audio-reactive demos. Looted from Synesthesia.app.</p>
+          <div class="card-foot">
+            <span class="badge live">● LIVE</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #00e5ff" href="https://github.com/kajica2/luminara-remotion" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">luminara-remotion</div>
+            <div class="card-pillar">VISUALS</div>
+          </div>
+          <p class="card-desc">LUMINARA Remotion component (<code>VectorScene</code>) + Vitest unit tests, 13/13 green. The kinetic text engine for the LUMINARA video pipeline.</p>
+          <div class="card-foot">
+            <span class="badge source">SRC</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #00e5ff" href="https://github.com/kajica2/gyromorph" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">gyromorph</div>
+            <div class="card-pillar">VISUALS</div>
+          </div>
+          <p class="card-desc">Gyroscope-driven morphing surfaces. Audio-reactive, motion-reactive, designed for VJ sets. Underscores everything in the ATMOSPHERES stack.</p>
+          <div class="card-foot">
+            <span class="badge source">SRC</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #00e5ff" href="https://github.com/kajica2/Astro-vyzor-main" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">Astro-vyzor-main</div>
+            <div class="card-pillar">VISUALS</div>
+          </div>
+          <p class="card-desc">Astro-based portfolio template fork. Worth keeping around for the static-export patterns and view transitions.</p>
+          <div class="card-foot">
+            <span class="badge old">FORK</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #00e5ff" href="https://github.com/kajica2/envelope-astro" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">envelope-astro</div>
+            <div class="card-pillar">VISUALS</div>
+          </div>
+          <p class="card-desc">Clean rebuild of envelope Astro site. Static site generation patterns and a serious typography system.</p>
+          <div class="card-foot">
+            <span class="badge source">SRC</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+      </div>
+
+      <div class="section-head" data-pillar="interfaces">
+        Interfaces <span class="count">[ 04 ]</span>
+      </div>
+      <div class="grid" data-pillar="interfaces">
+
+        <a class="card" style="--accent: #ffb547" href="https://github.com/kajica2/luminara-pages" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">luminara-pages</div>
+            <div class="card-pillar">INTERFACES</div>
+          </div>
+          <p class="card-desc">Static LUMINARA pages — sovereign-futurism HTML, deployed on Vercel. 16 pages: linktree, memory verdicts, early access, three.js landing, jazzauto-ai, monolith.</p>
+          <div class="card-foot">
+            <span class="badge live">● LIVE</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #ffb547" href="https://github.com/kajica2/kajica2.github.io" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">kajica2.github.io</div>
+            <div class="card-pillar">INTERFACES</div>
+          </div>
+          <p class="card-desc">SOVEREIGN SIGNAL — the hub linking to all active arsenals. You're here.</p>
+          <div class="card-foot">
+            <span class="badge live">● LIVE</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #ffb547" href="https://github.com/kajica2/portfolio_kai_djuric" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">portfolio_kai_djuric</div>
+            <div class="card-pillar">INTERFACES</div>
+          </div>
+          <p class="card-desc">Personal portfolio. Older surface for the same body of work — superseded by kajica2.github.io but kept as a historical record.</p>
+          <div class="card-foot">
+            <span class="badge old">2025</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #ffb547" href="https://github.com/kajica2/moving-media" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">moving-media</div>
+            <div class="card-pillar">INTERFACES</div>
+          </div>
+          <p class="card-desc">Sample DatoCMS site built with GatsbyJS. Preserved as a CMS-driven static site reference.</p>
+          <div class="card-foot">
+            <span class="badge old">FORK</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+      </div>
+
+      <div class="section-head" data-pillar="experiments">
+        Experiments <span class="count">[ 05 ]</span>
+      </div>
+      <div class="grid" data-pillar="experiments">
+
+        <a class="card" style="--accent: #ff3df0" href="https://github.com/kajica2/biometric-arsenal" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">biometric-arsenal</div>
+            <div class="card-pillar">EXPERIMENTS</div>
+          </div>
+          <p class="card-desc">Body / signal / input arsenal. Fresh ground — mic, camera, motion. The repo is public and the build is up.</p>
+          <div class="card-foot">
+            <span class="badge live">● LIVE</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #ff3df0" href="https://github.com/kajica2/advanced-multiagent-saas" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">advanced-multiagent-saas</div>
+            <div class="card-pillar">EXPERIMENTS</div>
+          </div>
+          <p class="card-desc">A scalable platform for orchestrating multiple AI agents with collaborative capabilities for enterprise workflows. Skeleton of a SPARC-style swarm.</p>
+          <div class="card-foot">
+            <span class="badge source">SRC</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #ff3df0" href="https://github.com/kajica2/morpha-protocol" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">morpha-protocol</div>
+            <div class="card-pillar">EXPERIMENTS</div>
+          </div>
+          <p class="card-desc">An open protocol for non-verbal symbolic communication through transformation, sound, and silence. The MORPHA backbone for LUMINARA.</p>
+          <div class="card-foot">
+            <span class="badge source">SRC</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #ff3df0" href="https://github.com/kajica2/binary-ring-credits-system" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">binary-ring-credits-system</div>
+            <div class="card-pillar">EXPERIMENTS</div>
+          </div>
+          <p class="card-desc">Token/credit ledger prototype. The earliest sketch of the binary-ring economy that underpins the SUSTENANCE pipeline.</p>
+          <div class="card-foot">
+            <span class="badge old">EXPERIMENT</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #ff3df0" href="https://github.com/kajica2/project_handwriting_recognition" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">project_handwriting_recognition</div>
+            <div class="card-pillar">EXPERIMENTS</div>
+          </div>
+          <p class="card-desc">Repo following my Medium article series — "Building an AI to Recognize my Handwriting". CNN, MNIST-style, end-to-end pipeline.</p>
+          <div class="card-foot">
+            <span class="badge old">2024</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+      </div>
+
+      <div class="section-head" data-pillar="atmospheres">
+        Atmospheres <span class="count">[ 02 ]</span>
+      </div>
+      <div class="grid" data-pillar="atmospheres">
+
+        <a class="card" style="--accent: #ffb547" href="https://github.com/kajica2/luminara-media" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">luminara-media</div>
+            <div class="card-pillar">ATMOSPHERES</div>
+          </div>
+          <p class="card-desc">Public CDN. The actual video files: <code>luminara-bundle-launch.mp4</code>, <code>sovereign-scale-001.mp4</code>. Where the rendered signal lives.</p>
+          <div class="card-foot">
+            <span class="badge source">CDN</span>
+            <span class="card-link">browse assets <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #ffb547" href="https://github.com/kajica2/vr" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">vr</div>
+            <div class="card-pillar">ATMOSPHERES</div>
+          </div>
+          <p class="card-desc">VR scene experiments. Sparse, dormant, but worth reviving once the headset ergonomics stop fighting me.</p>
+          <div class="card-foot">
+            <span class="badge old">2025</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+      </div>
+
+      <div class="section-head" data-pillar="wearables">
+        Wearables <span class="count">[ 00 ]</span>
+      </div>
+      <div class="grid" data-pillar="wearables">
+        <p class="lede" style="grid-column: 1 / -1; padding: 1rem 0; font-style: italic;">// no public wearables yet — pillar reserved, work in private</p>
+      </div>
+
+      <div class="section-head" data-pillar="sources">
+        Sources &amp; Cold Storage <span class="count">[ 18 ]</span>
+      </div>
+      <div class="grid" data-pillar="sources">
+
+        <a class="card" style="--accent: #6b7d96" href="https://github.com/kajica2/image-to-3d" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">image-to-3d</div>
+            <div class="card-pillar">SOURCES</div>
+          </div>
+          <p class="card-desc">Create 3D printer ready file from a 2D image. Earlier of two attempts at the same problem.</p>
+          <div class="card-foot">
+            <span class="badge old">2025</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #6b7d96" href="https://github.com/kajica2/image-to-3ds" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">image-to-3ds</div>
+            <div class="card-pillar">SOURCES</div>
+          </div>
+          <p class="card-desc">Convert your image to 3D printer ready file. Second pass at the image-to-3d pipeline.</p>
+          <div class="card-foot">
+            <span class="badge old">2025</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #6b7d96" href="https://github.com/kajica2/Vibecode-prompt-converter" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">Vibecode-prompt-converter</div>
+            <div class="card-pillar">SOURCES</div>
+          </div>
+          <p class="card-desc">Vibecode prompt converter. Translate between natural-language intent and structured LLM prompts.</p>
+          <div class="card-foot">
+            <span class="badge old">2026</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #6b7d96" href="https://github.com/kajica2/grid" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">grid</div>
+            <div class="card-pillar">SOURCES</div>
+          </div>
+          <p class="card-desc">rtech grid experiments. Layout primitives, snap-to-grid logic, drag-and-resize. Useful primitives across projects.</p>
+          <div class="card-foot">
+            <span class="badge old">2026</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #6b7d96" href="https://github.com/kajica2/artists-script" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">artists-script</div>
+            <div class="card-pillar">SOURCES</div>
+          </div>
+          <p class="card-desc">A creative study. Notebooks, prompts, image+text fragments from the practice.</p>
+          <div class="card-foot">
+            <span class="badge old">2026</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #6b7d96" href="https://github.com/kajica2/The-artist-script" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">The-artist-script</div>
+            <div class="card-pillar">SOURCES</div>
+          </div>
+          <p class="card-desc">Learn artist language. Companion study to <code>artists-script</code> — vocabulary, framing, references.</p>
+          <div class="card-foot">
+            <span class="badge old">2026</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #6b7d96" href="https://github.com/kajica2/creator-" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">creator-</div>
+            <div class="card-pillar">SOURCES</div>
+          </div>
+          <p class="card-desc">Viral hashtag study. Tried to crack what makes a hashtag circulate. Mostly negative results but kept the data.</p>
+          <div class="card-foot">
+            <span class="badge old">2025</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #6b7d96" href="https://github.com/kajica2/velocity" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">velocity</div>
+            <div class="card-pillar">SOURCES</div>
+          </div>
+          <p class="card-desc">Velocity suite. Performance budgets, motion velocity tracking for animations. The thing that made the sliders feel right.</p>
+          <div class="card-foot">
+            <span class="badge old">2025</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #6b7d96" href="https://github.com/kajica2/ai-agents-for-beginners" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">ai-agents-for-beginners</div>
+            <div class="card-pillar">SOURCES</div>
+          </div>
+          <p class="card-desc">11 Lessons to Get Started Building AI Agents. Curated learning track — fork of the canonical Microsoft course.</p>
+          <div class="card-foot">
+            <span class="badge old">FORK</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #6b7d96" href="https://github.com/kajica2/chatbot" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">chatbot</div>
+            <div class="card-pillar">SOURCES</div>
+          </div>
+          <p class="card-desc">Bare chatbot skeleton. Streaming responses, basic tool use. Worth reviving for the next agent push.</p>
+          <div class="card-foot">
+            <span class="badge old">2025</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #6b7d96" href="https://github.com/kajica2/YourChoice" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">YourChoice</div>
+            <div class="card-pillar">SOURCES</div>
+          </div>
+          <p class="card-desc">LLM OS Version 1! The first attempt at an LLM-native desktop. Crashed hard but the data model was interesting.</p>
+          <div class="card-foot">
+            <span class="badge old">2025</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #6b7d96" href="https://github.com/kajica2/react-video-recorder-buffer" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">react-video-recorder-buffer</div>
+            <div class="card-pillar">SOURCES</div>
+          </div>
+          <p class="card-desc">Comprehensive React video recording system with buffer management, progressive upload, and gallery features. The infrastructure behind JazzAuto's video export.</p>
+          <div class="card-foot">
+            <span class="badge source">SRC</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #6b7d96" href="https://github.com/kajica2/glide" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">glide</div>
+            <div class="card-pillar">SOURCES</div>
+          </div>
+          <p class="card-desc">A dependency-free JavaScript ES6 slider and carousel. Lightweight, flexible, fast. Sliders, no less, no more.</p>
+          <div class="card-foot">
+            <span class="badge old">FORK</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #6b7d96" href="https://github.com/kajica2/sorterry" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">sorterry</div>
+            <div class="card-pillar">SOURCES</div>
+          </div>
+          <p class="card-desc">Sorting experiments. Visualizer + benchmarks. Lived briefly. Kept for the visualizer code.</p>
+          <div class="card-foot">
+            <span class="badge old">2024</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #6b7d96" href="https://github.com/kajica2/Advanced-administration-handbook" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">Advanced-administration-handbook</div>
+            <div class="card-pillar">SOURCES</div>
+          </div>
+          <p class="card-desc">WordPress Advanced Administration Handbook — the technical, general, documentation side. Lives on for the rare client WP build.</p>
+          <div class="card-foot">
+            <span class="badge old">2024</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #6b7d96" href="https://github.com/kajica2/solvok1" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">solvok1</div>
+            <div class="card-pillar">SOURCES</div>
+          </div>
+          <p class="card-desc">Playful and colorful one-page portfolio featuring parallax effects and animations. Built with MDX and Theme UI. Reference for designer's portfolios.</p>
+          <div class="card-foot">
+            <span class="badge old">FORK</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #6b7d96" href="https://github.com/kajica2/solvok-games" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">solvok-games</div>
+            <div class="card-pillar">SOURCES</div>
+          </div>
+          <p class="card-desc">Playful and colorful one-page portfolio with parallax. Games vertical. Built with MDX and Theme UI.</p>
+          <div class="card-foot">
+            <span class="badge old">FORK</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+        <a class="card" style="--accent: #6b7d96" href="https://github.com/kajica2/lab" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">lab</div>
+            <div class="card-pillar">SOURCES</div>
+          </div>
+          <p class="card-desc">The original lab. From 2018 — a time capsule. Kept for sentimental reasons and to remember the starting line.</p>
+          <div class="card-foot">
+            <span class="badge old">2018</span>
+            <span class="card-link">view code <span class="card-arrow">→</span></span>
+          </div>
+        </a>
+
+      </div>
+
+    </main>
+
+    <footer>
+      <div>// signal-to-vault // kai-djuric // est. 2024</div>
+      <div class="links">
+        <a href="/">hub</a>
+        <a href="https://github.com/kajica2" rel="noopener">github</a>
+        <a href="https://luminara-pages.vercel.app" rel="noopener">brand site</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    (function() {
+      var filter = document.getElementById('filter');
+      var sections = document.querySelectorAll('[data-pillar]');
+      var buttons = filter.querySelectorAll('button');
+
+      function applyFilter(pillar) {
+        sections.forEach(function(el) {
+          if (el.classList.contains('section-head')) {
+            var p = el.getAttribute('data-pillar');
+            if (pillar === 'all' || p === pillar) {
+              el.classList.remove('hidden');
+            } else {
+              el.classList.add('hidden');
+            }
+          } else if (el.classList.contains('grid')) {
+            var p = el.getAttribute('data-pillar');
+            if (pillar === 'all' || p === pillar) {
+              el.classList.remove('hidden');
+            } else {
+              el.classList.add('hidden');
+            }
+          }
+        });
+        buttons.forEach(function(b) {
+          if (b.getAttribute('data-filter') === pillar) {
+            b.classList.add('active');
+            // Move accent class to match the chosen pillar
+            b.classList.remove('magenta','amber','green','gray');
+            var accent = {
+              music: 'magenta', visuals: '', wearables: '',
+              interfaces: 'amber', experiments: 'magenta',
+              atmospheres: 'amber', sources: 'gray', all: ''
+            }[pillar] || '';
+            if (accent) b.classList.add(accent);
+          } else {
+            b.classList.remove('active');
+          }
+        });
+        if (history.replaceState) {
+          history.replaceState(null, '', pillar === 'all' ? location.pathname : location.pathname + '#' + pillar);
+        }
+      }
+
+      filter.addEventListener('click', function(e) {
+        var t = e.target.closest('button[data-filter]');
+        if (!t) return;
+        applyFilter(t.getAttribute('data-filter'));
+      });
+
+      // Initial state from hash
+      var hash = location.hash.replace('#','');
+      if (hash && document.querySelector('[data-pillar="' + hash + '"]')) {
+        applyFilter(hash);
+      }
+    })();
+  </script>
+</body>
+</html>
