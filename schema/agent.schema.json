@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent",
+  "description": "One agent in the agent hub team. Must conform to AGENTS.md contract.",
+  "type": "object",
+  "required": [
+    "name",
+    "display_name",
+    "kind",
+    "purpose",
+    "material_access"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "display_name": {
+      "type": "string"
+    },
+    "kind": {
+      "enum": [
+        "utility",
+        "research",
+        "infrastructure",
+        "creative",
+        "orchestrator"
+      ]
+    },
+    "graphic": {
+      "type": "string",
+      "description": "Path to SVG relative to hub root, e.g. assets/agents/keysmith.svg"
+    },
+    "page": {
+      "type": "string",
+      "description": "Path to agent page, e.g. agents/keysmith.html"
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 500
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "MUST be from capability-taxonomy.json"
+    },
+    "calls_into": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Names of other agents or HF Space URLs this agent invokes"
+    },
+    "called_by": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Names of agents that invoke this one. Reverse index; built by build.mjs."
+    },
+    "depend_on": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Names of infrastructure agents or repos this agent requires"
+    },
+    "owned_by": {
+      "enum": [
+        "framework",
+        "instance"
+      ],
+      "default": "instance"
+    },
+    "visibility": {
+      "enum": [
+        "public",
+        "unlisted",
+        "private"
+      ],
+      "default": "public"
+    },
+    "status": {
+      "enum": [
+        "active",
+        "stub",
+        "wip",
+        "archived"
+      ],
+      "default": "stub"
+    },
+    "material_access": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "public",
+          "internal-paywalled",
+          "licensed-restricted",
+          "private"
+        ]
+      },
+      "description": "REQUIRED. License tiers this agent can read/write. MUST be subset of operator's grants."
+    }
+  }
+}

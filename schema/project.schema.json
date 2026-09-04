@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Project",
+  "description": "One project in the agent hub arsenal.",
+  "type": "object",
+  "required": [
+    "name",
+    "umbrella",
+    "repo",
+    "description",
+    "material_license"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "kebab-case slug, matches repo name"
+    },
+    "display_name": {
+      "type": "string"
+    },
+    "umbrella": {
+      "enum": [
+        "music",
+        "audio",
+        "video",
+        "programming",
+        "research",
+        "other"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 240
+    },
+    "url": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri",
+      "description": "Canonical deployment URL. null if repo-only / not deployed."
+    },
+    "repo": {
+      "type": "string",
+      "format": "uri"
+    },
+    "screenshot": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Path relative to hub root, e.g. assets/thumbs/foo.png. null until captured."
+    },
+    "visibility": {
+      "enum": [
+        "public",
+        "unlisted",
+        "private"
+      ],
+      "default": "public"
+    },
+    "status": {
+      "enum": [
+        "active",
+        "stale",
+        "archived",
+        "wip"
+      ],
+      "default": "active"
+    },
+    "last_seen": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "MUST be from capability-taxonomy.json"
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "components": {
+      "type": "object",
+      "properties": {
+        "from_framework": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "from_shared": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "material_license": {
+      "type": "object",
+      "description": "REQUIRED. Determines whether this project surfaces on the public hub. Free-text values are rejected.",
+      "required": [
+        "kind",
+        "source"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "public",
+            "cc-by",
+            "cc-by-sa",
+            "cc0",
+            "internal-paywalled",
+            "licensed-restricted",
+            "private"
+          ]
+        },
+        "source": {
+          "type": "string",
+          "description": "Origin label, e.g. 'bob-mover', 'solokit', 'omnibook', 'self-authored'"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

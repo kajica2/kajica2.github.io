@@ -1,0 +1,209 @@
+[
+  {
+    "name": "keysmith",
+    "display_name": "Keysmith",
+    "kind": "utility",
+    "purpose": "Issues API keys to approved collaborators and rotates them on schedule.",
+    "inputs": [
+      "user-request",
+      "approver-signature"
+    ],
+    "outputs": [
+      "api-key-payload",
+      "audit-log-entry"
+    ],
+    "capabilities": [
+      "produce-json-suite",
+      "deploy-hf-space"
+    ],
+    "calls_into": [
+      "kaidjuric/keysmith-hf"
+    ],
+    "owned_by": "instance",
+    "visibility": "unlisted",
+    "status": "stub",
+    "material_access": [
+      "public"
+    ]
+  },
+  {
+    "name": "image-svg",
+    "display_name": "Image-SVG",
+    "kind": "utility",
+    "purpose": "Accepts image uploads, vectorizes them, returns animated-ready SVG via the PNG-to-SVG converter Space.",
+    "inputs": [
+      "image-file"
+    ],
+    "outputs": [
+      "svg-file",
+      "vectorization-report"
+    ],
+    "capabilities": [
+      "produce-image",
+      "publish-channel"
+    ],
+    "calls_into": [
+      "kaidjuric/png-to-svg-converter-advanced-vectorization-system"
+    ],
+    "owned_by": "instance",
+    "visibility": "public",
+    "status": "stub",
+    "material_access": [
+      "public"
+    ]
+  },
+  {
+    "name": "animator",
+    "display_name": "Animator",
+    "kind": "utility",
+    "purpose": "Takes an SVG, returns an animated SVG / Lottie JSON / MP4 \u2014 selects the best path per output target.",
+    "inputs": [
+      "svg-file",
+      "motion-spec"
+    ],
+    "outputs": [
+      "mp4-file",
+      "lottie-json",
+      "animated-svg"
+    ],
+    "capabilities": [
+      "produce-video",
+      "produce-image"
+    ],
+    "calls_into": [
+      "kaidjuric/sirenic-engine",
+      "kaidjuric/cogvideox-5b-text-to-video"
+    ],
+    "owned_by": "instance",
+    "visibility": "public",
+    "status": "stub",
+    "material_access": [
+      "public"
+    ]
+  },
+  {
+    "name": "hub-bridge",
+    "display_name": "Hub-Bridge",
+    "kind": "utility",
+    "purpose": "Connects a HF Space output to a hub directory; routes files into the right component.",
+    "inputs": [
+      "hf-space-url",
+      "target-path"
+    ],
+    "outputs": [
+      "directory-write",
+      "manifest-update"
+    ],
+    "capabilities": [
+      "deploy-hf-space",
+      "publish-channel"
+    ],
+    "calls_into": [],
+    "owned_by": "instance",
+    "visibility": "public",
+    "status": "stub",
+    "material_access": [
+      "public"
+    ]
+  },
+  {
+    "name": "thumb-collector",
+    "display_name": "Thumb-Collector",
+    "kind": "infrastructure",
+    "purpose": "Captures and refreshes screenshots across all hub projects on a weekly schedule. Operational.",
+    "inputs": [
+      "project-url-list"
+    ],
+    "outputs": [
+      "screenshot-files",
+      "manifest-json"
+    ],
+    "capabilities": [
+      "deploy-vercel",
+      "publish-channel"
+    ],
+    "calls_into": [
+      "puppeteer-headless"
+    ],
+    "owned_by": "instance",
+    "visibility": "public",
+    "status": "active",
+    "material_access": [
+      "public"
+    ]
+  },
+  {
+    "name": "daily-pipeline",
+    "display_name": "Daily Pipeline",
+    "kind": "research",
+    "purpose": "Calls out to the user's existing daily research agent on HF (kaidjuric/daily-pipeline-director-cut). Hub surfaces the report.",
+    "inputs": [
+      "trigger-cron",
+      "manual-trigger"
+    ],
+    "outputs": [
+      "daily-report-md",
+      "research-channel-update"
+    ],
+    "capabilities": [
+      "publish-channel",
+      "produce-report"
+    ],
+    "calls_into": [
+      "kaidjuric/daily-pipeline-director-cut"
+    ],
+    "owned_by": "instance",
+    "visibility": "public",
+    "status": "active",
+    "material_access": [
+      "public",
+      "internal-paywalled"
+    ]
+  },
+  {
+    "name": "kb-indexer",
+    "display_name": "KB-Indexer",
+    "kind": "infrastructure",
+    "purpose": "Walks repos, indexes READMEs and code into a searchable knowledge base.",
+    "inputs": [
+      "repo-list"
+    ],
+    "outputs": [
+      "kb-index-json"
+    ],
+    "capabilities": [
+      "publish-channel",
+      "analyze-form"
+    ],
+    "calls_into": [],
+    "owned_by": "instance",
+    "visibility": "public",
+    "status": "stub",
+    "material_access": [
+      "public"
+    ]
+  },
+  {
+    "name": "taxonomy-keeper",
+    "display_name": "Taxonomy-Keeper",
+    "kind": "infrastructure",
+    "purpose": "Reviews new component capabilities, proposes taxonomy updates with citation.",
+    "inputs": [
+      "component-pr",
+      "capability-proposal"
+    ],
+    "outputs": [
+      "taxonomy-update-pr"
+    ],
+    "capabilities": [
+      "publish-channel"
+    ],
+    "calls_into": [],
+    "owned_by": "framework",
+    "visibility": "public",
+    "status": "stub",
+    "material_access": [
+      "public"
+    ]
+  }
+]

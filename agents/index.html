@@ -1,0 +1,79 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Agents</title>
+<style>body{font:14px/1.5 -apple-system,system-ui,sans-serif;background:#04060a;color:#d6e1f0;margin:0;padding:2rem}h1{color:#00e5ff}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem}.card{background:#0a0f17;border:1px solid #1a2533;border-radius:8px;padding:1rem}.card:hover{border-color:#ff3df0}.card h3{margin:0 0 .5rem}.desc{color:#6b7d96;font-size:.9rem;margin:0 0 .75rem}.meta{display:flex;gap:.5rem;margin-bottom:.5rem}.kind,.status{padding:2px 6px;border-radius:3px;font-size:.75rem;background:#1a2533;color:#00e5ff}.kind.utility{color:#ff3df0}.kind.research{color:#00e5ff}.kind.infrastructure{color:#ffb547}.caps{display:flex;flex-wrap:wrap;gap:4px}.cap{font-size:.7rem;padding:2px 5px;border-radius:2px;background:#1a2533;color:#5cffa0;font-family:ui-monospace,monospace}</style>
+</head><body>
+<h1>Agent Team — 8 personas</h1>
+<div class="grid">
+  <article class="card" data-kind="utility" data-status="stub">
+    <h3>Keysmith</h3>
+    <p class="desc">Issues API keys to approved collaborators and rotates them on schedule.</p>
+    <div class="meta">
+      <span class="kind utility">utility</span>
+      <span class="status">stub</span>
+    </div>
+    <div class="caps"><span class="cap">produce-json-suite</span><span class="cap">deploy-hf-space</span></div>
+  </article>
+  <article class="card" data-kind="utility" data-status="stub">
+    <h3>Image-SVG</h3>
+    <p class="desc">Accepts image uploads, vectorizes them, returns animated-ready SVG via the PNG-to-SVG converter Space.</p>
+    <div class="meta">
+      <span class="kind utility">utility</span>
+      <span class="status">stub</span>
+    </div>
+    <div class="caps"><span class="cap">produce-image</span><span class="cap">publish-channel</span></div>
+  </article>
+  <article class="card" data-kind="utility" data-status="stub">
+    <h3>Animator</h3>
+    <p class="desc">Takes an SVG, returns an animated SVG / Lottie JSON / MP4 — selects the best path per output target.</p>
+    <div class="meta">
+      <span class="kind utility">utility</span>
+      <span class="status">stub</span>
+    </div>
+    <div class="caps"><span class="cap">produce-video</span><span class="cap">produce-image</span></div>
+  </article>
+  <article class="card" data-kind="utility" data-status="stub">
+    <h3>Hub-Bridge</h3>
+    <p class="desc">Connects a HF Space output to a hub directory; routes files into the right component.</p>
+    <div class="meta">
+      <span class="kind utility">utility</span>
+      <span class="status">stub</span>
+    </div>
+    <div class="caps"><span class="cap">deploy-hf-space</span><span class="cap">publish-channel</span></div>
+  </article>
+  <article class="card" data-kind="infrastructure" data-status="active">
+    <h3>Thumb-Collector</h3>
+    <p class="desc">Captures and refreshes screenshots across all hub projects on a weekly schedule. Operational.</p>
+    <div class="meta">
+      <span class="kind infrastructure">infrastructure</span>
+      <span class="status">active</span>
+    </div>
+    <div class="caps"><span class="cap">deploy-vercel</span><span class="cap">publish-channel</span></div>
+  </article>
+  <article class="card" data-kind="research" data-status="active">
+    <h3>Daily Pipeline</h3>
+    <p class="desc">Calls out to the user's existing daily research agent on HF (kaidjuric/daily-pipeline-director-cut). Hub surfaces the report.</p>
+    <div class="meta">
+      <span class="kind research">research</span>
+      <span class="status">active</span>
+    </div>
+    <div class="caps"><span class="cap">publish-channel</span><span class="cap">produce-report</span></div>
+  </article>
+  <article class="card" data-kind="infrastructure" data-status="stub">
+    <h3>KB-Indexer</h3>
+    <p class="desc">Walks repos, indexes READMEs and code into a searchable knowledge base.</p>
+    <div class="meta">
+      <span class="kind infrastructure">infrastructure</span>
+      <span class="status">stub</span>
+    </div>
+    <div class="caps"><span class="cap">publish-channel</span><span class="cap">analyze-form</span></div>
+  </article>
+  <article class="card" data-kind="infrastructure" data-status="stub">
+    <h3>Taxonomy-Keeper</h3>
+    <p class="desc">Reviews new component capabilities, proposes taxonomy updates with citation.</p>
+    <div class="meta">
+      <span class="kind infrastructure">infrastructure</span>
+      <span class="status">stub</span>
+    </div>
+    <div class="caps"><span class="cap">publish-channel</span></div>
+  </article></div>
+</body></html>

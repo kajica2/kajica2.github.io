@@ -1,0 +1,257 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8">
+<title>Sovereign Signal — Research</title>
+<style>
+  body { font: 14px/1.5 -apple-system, system-ui, sans-serif; background:#04060a; color:#d6e1f0; margin:0; padding:2rem; }
+  h1 { color:#00e5ff; margin:0 0 0.5rem; }
+  h2 { color:#ff3df0; text-transform:uppercase; letter-spacing:0.1em; font-size:0.9rem; margin:2rem 0 1rem; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1rem; }
+  .card { background:#0a0f17; border:1px solid #1a2533; border-radius:8px; padding:1rem; }
+  .card:hover { border-color:#00e5ff; }
+  .card h3 { margin:0 0 0.5rem; color:#d6e1f0; font-size:1.1rem; }
+  .desc { color:#6b7d96; font-size:0.9rem; margin:0 0 0.75rem; }
+  .meta { display:flex; gap:0.5rem; margin-bottom:0.5rem; }
+  .umbrella { padding:2px 6px; border-radius:3px; font-size:0.75rem; background:#1a2533; color:#00e5ff; }
+  .umbrella.music { color:#ff3df0; }
+  .umbrella.audio { color:#00e5ff; }
+  .umbrella.video { color:#ffb547; }
+  .umbrella.programming { color:#5cffa0; }
+  .license { padding:2px 6px; border-radius:3px; font-size:0.75rem; background:#0e1622; color:#6b7d96; }
+  .caps { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:0.5rem; }
+  .cap { font-size:0.7rem; padding:2px 5px; border-radius:2px; background:#1a2533; color:#5cffa0; font-family:ui-monospace,monospace; }
+  .links a { color:#00e5ff; text-decoration:none; font-size:0.85rem; }
+  .links a:hover { color:#ff3df0; }
+  header { border-bottom:1px solid #1a2533; padding-bottom:1rem; margin-bottom:2rem; display:flex; justify-content:space-between; align-items:end; }
+  header .entity-switch a { color:#6b7d96; margin-left:1rem; text-decoration:none; font-size:0.85rem; }
+  header .entity-switch a.active { color:#00e5ff; }
+</style></head>
+<body>
+<header>
+  <div>
+    <h1>Sovereign Signal — Research</h1>
+    <p style="color:#6b7d96;margin:0;">21 projects · 8 agents · paywall enforced</p>
+  </div>
+  <nav class="entity-switch">
+    <a href="../research/index.html" class="active">Research</a>
+    <a href="../eye-kairi/index.html" class="">Eye &amp; Kairi</a>
+  </nav>
+</header>
+
+    <section class="umbrella research">
+      <h2>research</h2>
+      <div class="grid">
+        
+    <article class="card" data-umbrella="music">
+      <h3>Sainted Word Records</h3>
+      <p class="desc">Audio-reactive video engine. Single-file, browser-native, MIT. Drops in song + clips → MP4.</p>
+      <div class="meta">
+        <span class="umbrella music">music</span>
+        <span class="license">public</span>
+      </div>
+      <div class="caps"><span class="cap">produce-video</span><span class="cap">analyze-spectrum</span><span class="cap">deploy-vercel</span></div>
+      <div class="links"><a href="https://sainted-word-records.vercel.app" target="_blank" rel="noopener">open ↗</a></div>
+    </article>
+    <article class="card" data-umbrella="music">
+      <h3>Harmonic Study Engine</h3>
+      <p class="desc">Learn and practice harmony and melody. Plug-in shell for any pedagogy corpus.</p>
+      <div class="meta">
+        <span class="umbrella music">music</span>
+        <span class="license">public</span>
+      </div>
+      <div class="caps"><span class="cap">ingest-pdf</span><span class="cap">ingest-mxl</span><span class="cap">transpose</span><span class="cap">produce-json-suite</span></div>
+      <div class="links"><a href="https://harmonic-study-engine.vercel.app" target="_blank" rel="noopener">open ↗</a></div>
+    </article>
+    <article class="card" data-umbrella="music">
+      <h3>MuScriptor</h3>
+      <p class="desc">Multi-platform music transcription (HF Space + Vercel + GH Actions).</p>
+      <div class="meta">
+        <span class="umbrella music">music</span>
+        <span class="license">public</span>
+      </div>
+      <div class="caps"><span class="cap">ingest-audio</span><span class="cap">pitch-detect</span><span class="cap">produce-midi</span><span class="cap">produce-mxl</span></div>
+      <div class="links"><a href="https://kaidjuric-muscriptor-studio.hf.space" target="_blank" rel="noopener">open ↗</a></div>
+    </article>
+    <article class="card" data-umbrella="music">
+      <h3>Better iReal Book</h3>
+      <p class="desc">A better iReal Pro / iReal b book experience with custom transpositions.</p>
+      <div class="meta">
+        <span class="umbrella music">music</span>
+        <span class="license">public</span>
+      </div>
+      <div class="caps"><span class="cap">transpose</span><span class="cap">ingest-mxl</span><span class="cap">visualize-score</span></div>
+      <div class="links"><a href="https://better-ireal-book.vercel.app" target="_blank" rel="noopener">open ↗</a></div>
+    </article>
+    <article class="card" data-umbrella="music">
+      <h3>Solokit</h3>
+      <p class="desc">Pattern search and analysis for jazz solo transcriptions. WJAZD + Omnibook corpora.</p>
+      <div class="meta">
+        <span class="umbrella music">music</span>
+        <span class="license">cc-by</span>
+      </div>
+      <div class="caps"><span class="cap">analyze-form</span><span class="cap">analyze-cadence</span><span class="cap">visualize-graph</span></div>
+      <div class="links"><a href="https://solokit.vercel.app" target="_blank" rel="noopener">open ↗</a></div>
+    </article>
+    <article class="card" data-umbrella="music">
+      <h3>Sheet Music</h3>
+      <p class="desc">Sheet music library by kajica2. Practice-ready PDFs.</p>
+      <div class="meta">
+        <span class="umbrella music">music</span>
+        <span class="license">public</span>
+      </div>
+      <div class="caps"><span class="cap">produce-pdf</span><span class="cap">visualize-score</span></div>
+      <div class="links"><a href="https://sheet-music.vercel.app" target="_blank" rel="noopener">open ↗</a></div>
+    </article>
+    <article class="card" data-umbrella="audio">
+      <h3>Kai Freq Lab</h3>
+      <p class="desc">Frequency-domain audio tools (PWA). Standalone product.</p>
+      <div class="meta">
+        <span class="umbrella audio">audio</span>
+        <span class="license">public</span>
+      </div>
+      <div class="caps"><span class="cap">analyze-spectrum</span><span class="cap">visualize-spectrum</span><span class="cap">denoise</span></div>
+      <div class="links"><a href="https://kaidjuric-freq-lab.hf.space" target="_blank" rel="noopener">open ↗</a></div>
+    </article>
+    <article class="card" data-umbrella="audio">
+      <h3>Gradio Pipelines Directory</h3>
+      <p class="desc">Directory of 24 Gradio audio & video tools. One-line `gradio deploy` per tool.</p>
+      <div class="meta">
+        <span class="umbrella audio">audio</span>
+        <span class="license">public</span>
+      </div>
+      <div class="caps"><span class="cap">deploy-hf-space</span><span class="cap">publish-channel</span></div>
+      <div class="links"><a href="https://kaidjuric-gradio-pipelines.hf.space" target="_blank" rel="noopener">open ↗</a></div>
+    </article>
+    <article class="card" data-umbrella="audio">
+      <h3>AMT Monitor</h3>
+      <p class="desc">Autonomous AMT research + interactive transcription dashboard. ACF2 pitch detection.</p>
+      <div class="meta">
+        <span class="umbrella audio">audio</span>
+        <span class="license">public</span>
+      </div>
+      <div class="caps"><span class="cap">pitch-detect</span><span class="cap">analyze-tempo</span><span class="cap">produce-midi</span></div>
+      <div class="links"><a href="https://music-transcription-monitor.vercel.app" target="_blank" rel="noopener">open ↗</a></div>
+    </article>
+    <article class="card" data-umbrella="video">
+      <h3>Kai Art</h3>
+      <p class="desc">Filaments, sand, attractors, birth charts driven by sound. Generative engine.</p>
+      <div class="meta">
+        <span class="umbrella video">video</span>
+        <span class="license">public</span>
+      </div>
+      <div class="caps"><span class="cap">produce-video</span><span class="cap">visualize-3d</span><span class="cap">produce-image</span></div>
+      <div class="links"><a href="https://kai-art.vercel.app" target="_blank" rel="noopener">open ↗</a></div>
+    </article>
+    <article class="card" data-umbrella="video">
+      <h3>Loopable Segmenter</h3>
+      <p class="desc">Audio-aware loopable video segmenter. Splits MP4s into N loopable clips on beats.</p>
+      <div class="meta">
+        <span class="umbrella video">video</span>
+        <span class="license">public</span>
+      </div>
+      <div class="caps"><span class="cap">segment</span><span class="cap">loop</span><span class="cap">analyze-tempo</span></div>
+      <div class="links"><a href="https://kaidjuric-loopable-video-segmenter.hf.space" target="_blank" rel="noopener">open ↗</a></div>
+    </article>
+    <article class="card" data-umbrella="video">
+      <h3>Shader Arsenal</h3>
+      <p class="desc">Lygia GLSL shaders — live playground + audio-reactive demos.</p>
+      <div class="meta">
+        <span class="umbrella video">video</span>
+        <span class="license">public</span>
+      </div>
+      <div class="caps"><span class="cap">visualize-3d</span><span class="cap">analyze-spectrum</span><span class="cap">produce-image</span></div>
+      <div class="links"><a href="https://shader-arsenal.vercel.app" target="_blank" rel="noopener">open ↗</a></div>
+    </article>
+    <article class="card" data-umbrella="video">
+      <h3>Evolving Art</h3>
+      <p class="desc">Generative art playground feeding kai-art.</p>
+      <div class="meta">
+        <span class="umbrella video">video</span>
+        <span class="license">public</span>
+      </div>
+      <div class="caps"><span class="cap">produce-image</span><span class="cap">visualize-3d</span></div>
+      <div class="links"><a href="https://evolving-art.vercel.app" target="_blank" rel="noopener">open ↗</a></div>
+    </article>
+    <article class="card" data-umbrella="video">
+      <h3>Arteffacts</h3>
+      <p class="desc">Pages HTML experiments — visual artifact gallery.</p>
+      <div class="meta">
+        <span class="umbrella video">video</span>
+        <span class="license">public</span>
+      </div>
+      <div class="caps"><span class="cap">produce-image</span></div>
+      <div class="links"><a href="https://arteffacts.vercel.app" target="_blank" rel="noopener">open ↗</a></div>
+    </article>
+    <article class="card" data-umbrella="programming">
+      <h3>Kai Systems</h3>
+      <p class="desc">Nine production stacks. One philosophy. Zero babysitting.</p>
+      <div class="meta">
+        <span class="umbrella programming">programming</span>
+        <span class="license">public</span>
+      </div>
+      <div class="caps"><span class="cap">deploy-vercel</span><span class="cap">deploy-github-pages</span></div>
+      <div class="links"><a href="https://kai-systems.vercel.app" target="_blank" rel="noopener">open ↗</a></div>
+    </article>
+    <article class="card" data-umbrella="programming">
+      <h3>Kai Orchestrator</h3>
+      <p class="desc">Monorepo for the 9 AGI/Orchestrator HF spaces. One source, nine surfaces.</p>
+      <div class="meta">
+        <span class="umbrella programming">programming</span>
+        <span class="license">public</span>
+      </div>
+      <div class="caps"><span class="cap">deploy-hf-space</span><span class="cap">deploy-vercel</span></div>
+      <div class="links"><a href="https://kai-orchestrator.vercel.app" target="_blank" rel="noopener">open ↗</a></div>
+    </article>
+    <article class="card" data-umbrella="programming">
+      <h3>Pipeline Hub</h3>
+      <p class="desc">Live directory of Gradio pipelines for audio/video — one-click deploy to HF Spaces.</p>
+      <div class="meta">
+        <span class="umbrella programming">programming</span>
+        <span class="license">public</span>
+      </div>
+      <div class="caps"><span class="cap">deploy-hf-space</span><span class="cap">publish-channel</span></div>
+      <div class="links"><a href="https://kaidjuric-gradio-pipeline-hub.hf.space" target="_blank" rel="noopener">open ↗</a></div>
+    </article>
+    <article class="card" data-umbrella="programming">
+      <h3>Toolbox Site</h3>
+      <p class="desc">Music + Video Pipeline Toolbox · 2025–2026.</p>
+      <div class="meta">
+        <span class="umbrella programming">programming</span>
+        <span class="license">public</span>
+      </div>
+      <div class="caps"><span class="cap">publish-channel</span></div>
+      <div class="links"><a href="https://toolbox-site.vercel.app" target="_blank" rel="noopener">open ↗</a></div>
+    </article>
+    <article class="card" data-umbrella="programming">
+      <h3>Omnisocial Studio</h3>
+      <p class="desc">Multiplatform social studio.</p>
+      <div class="meta">
+        <span class="umbrella programming">programming</span>
+        <span class="license">public</span>
+      </div>
+      <div class="caps"><span class="cap">publish-channel</span></div>
+      <div class="links"><a href="https://omnisocial-studio.vercel.app" target="_blank" rel="noopener">open ↗</a></div>
+    </article>
+    <article class="card" data-umbrella="programming">
+      <h3>Digital Twin</h3>
+      <p class="desc">A personal AI twin that knows your stack, your taste, your schedule.</p>
+      <div class="meta">
+        <span class="umbrella programming">programming</span>
+        <span class="license">public</span>
+      </div>
+      <div class="caps"><span class="cap">analyze-form</span><span class="cap">produce-report</span></div>
+      <div class="links"><a href="https://digital-twin.vercel.app" target="_blank" rel="noopener">open ↗</a></div>
+    </article>
+    <article class="card" data-umbrella="programming">
+      <h3>Prompting System</h3>
+      <p class="desc">The 4-Level Prompt System — visual long-read.</p>
+      <div class="meta">
+        <span class="umbrella programming">programming</span>
+        <span class="license">public</span>
+      </div>
+      <div class="caps"><span class="cap">publish-channel</span></div>
+      <div class="links"><a href="https://prompting-system.vercel.app" target="_blank" rel="noopener">open ↗</a></div>
+    </article>
+      </div>
+    </section>
+</body></html>

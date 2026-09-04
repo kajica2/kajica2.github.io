@@ -1,0 +1,92 @@
+[
+  {
+    "name": "bob-mover-lexicon",
+    "display_name": "Bob Mover Jazz Lexicon",
+    "umbrella": "music",
+    "description": "407 practice patterns, 12 transpositions each. Internal-paywalled corpus.",
+    "url": null,
+    "repo": "https://github.com/kajica2/bob-mover-lexicon",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "internal-paywalled",
+      "source": "bob-mover",
+      "notes": "Internal users only. Never surfaces publicly."
+    },
+    "capabilities": [
+      "transpose",
+      "produce-json-suite",
+      "visualize-score"
+    ],
+    "inputs": [
+      "exercise-pattern",
+      "key-signature"
+    ],
+    "outputs": [
+      "transposed-exercises",
+      "practice-report"
+    ]
+  },
+  {
+    "name": "bob-mover-book",
+    "display_name": "Serious Fun",
+    "umbrella": "music",
+    "description": "Bob Mover's Serious Fun — interactive edition. Paywalled book content.",
+    "url": "https://bobmover.vercel.app",
+    "repo": "https://github.com/kajica2/bobmover",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "internal-paywalled",
+      "source": "bob-mover",
+      "notes": "Paywalled book. Members only."
+    },
+    "capabilities": [
+      "ingest-pdf",
+      "transpose",
+      "produce-json-suite"
+    ],
+    "inputs": [
+      "book-section",
+      "lesson-context"
+    ],
+    "outputs": [
+      "study-exercises",
+      "audio-examples"
+    ]
+  },
+  {
+    "name": "jazzability",
+    "display_name": "Jazzability",
+    "umbrella": "music",
+    "description": "Website for Bob Mover Jazzability practice method. Members area only.",
+    "url": "https://jazzability.vercel.app",
+    "repo": "https://github.com/kajica2/Jazzability",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "internal-paywalled",
+      "source": "bob-mover",
+      "notes": "Members-only practice portal."
+    },
+    "capabilities": [
+      "ingest-pdf",
+      "analyze-cadence",
+      "produce-json-suite"
+    ],
+    "inputs": [
+      "practice-context",
+      "mxl-exercise"
+    ],
+    "outputs": [
+      "practice-plan",
+      "study-cards"
+    ]
+  }
+]

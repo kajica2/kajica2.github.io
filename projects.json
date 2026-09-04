@@ -1,0 +1,693 @@
+[
+  {
+    "name": "sainted-word-records",
+    "display_name": "Sainted Word Records",
+    "umbrella": "music",
+    "description": "Audio-reactive video engine. Single-file, browser-native, MIT. Drops in song + clips \u2192 MP4.",
+    "url": "https://sainted-word-records.vercel.app",
+    "repo": "https://github.com/kajica2/sainted-word-records",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored"
+    },
+    "capabilities": [
+      "produce-video",
+      "analyze-spectrum",
+      "deploy-vercel"
+    ],
+    "inputs": [
+      "audio-file",
+      "video-clips",
+      "image-library"
+    ],
+    "outputs": [
+      "mp4-file",
+      "engine-config-json"
+    ]
+  },
+  {
+    "name": "harmonic-study-engine",
+    "display_name": "Harmonic Study Engine",
+    "umbrella": "music",
+    "description": "Learn and practice harmony and melody. Plug-in shell for any pedagogy corpus.",
+    "url": "https://harmonic-study-engine.vercel.app",
+    "repo": "https://github.com/kajica2/harmonic-study-engine",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored"
+    },
+    "capabilities": [
+      "ingest-pdf",
+      "ingest-mxl",
+      "transpose",
+      "produce-json-suite"
+    ],
+    "inputs": [
+      "pdf",
+      "musicxml",
+      "exercise-manifest"
+    ],
+    "outputs": [
+      "exercise-suite-json",
+      "transposed-mxl"
+    ]
+  },
+  {
+    "name": "muscriptor",
+    "display_name": "MuScriptor",
+    "umbrella": "music",
+    "description": "Multi-platform music transcription (HF Space + Vercel + GH Actions).",
+    "url": "https://kaidjuric-muscriptor-studio.hf.space",
+    "repo": "https://github.com/kajica2/muscriptor",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored"
+    },
+    "capabilities": [
+      "ingest-audio",
+      "pitch-detect",
+      "produce-midi",
+      "produce-mxl"
+    ],
+    "inputs": [
+      "audio-file",
+      "video-with-audio"
+    ],
+    "outputs": [
+      "midi-file",
+      "musicxml",
+      "transcription-report"
+    ]
+  },
+  {
+    "name": "bob-mover-lexicon",
+    "display_name": "Bob Mover Jazz Lexicon",
+    "umbrella": "music",
+    "description": "407 practice patterns, 12 transpositions each. Internal-paywalled corpus.",
+    "url": null,
+    "repo": "https://github.com/kajica2/bob-mover-lexicon",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "internal-paywalled",
+      "source": "bob-mover",
+      "notes": "Internal users only. Never surfaces publicly."
+    },
+    "capabilities": [
+      "transpose",
+      "produce-json-suite",
+      "visualize-score"
+    ],
+    "inputs": [
+      "exercise-pattern",
+      "key-signature"
+    ],
+    "outputs": [
+      "transposed-exercises",
+      "practice-report"
+    ]
+  },
+  {
+    "name": "bob-mover-book",
+    "display_name": "Serious Fun",
+    "umbrella": "music",
+    "description": "Bob Mover's Serious Fun \u2014 interactive edition. Paywalled book content.",
+    "url": "https://bobmover.vercel.app",
+    "repo": "https://github.com/kajica2/bobmover",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "internal-paywalled",
+      "source": "bob-mover",
+      "notes": "Paywalled book. Members only."
+    },
+    "capabilities": [
+      "ingest-pdf",
+      "transpose",
+      "produce-json-suite"
+    ],
+    "inputs": [
+      "book-section",
+      "lesson-context"
+    ],
+    "outputs": [
+      "study-exercises",
+      "audio-examples"
+    ]
+  },
+  {
+    "name": "jazzability",
+    "display_name": "Jazzability",
+    "umbrella": "music",
+    "description": "Website for Bob Mover Jazzability practice method. Members area only.",
+    "url": "https://jazzability.vercel.app",
+    "repo": "https://github.com/kajica2/Jazzability",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "internal-paywalled",
+      "source": "bob-mover",
+      "notes": "Members-only practice portal."
+    },
+    "capabilities": [
+      "ingest-pdf",
+      "analyze-cadence",
+      "produce-json-suite"
+    ],
+    "inputs": [
+      "practice-context",
+      "mxl-exercise"
+    ],
+    "outputs": [
+      "practice-plan",
+      "study-cards"
+    ]
+  },
+  {
+    "name": "better-ireal-book",
+    "display_name": "Better iReal Book",
+    "umbrella": "music",
+    "description": "A better iReal Pro / iReal b book experience with custom transpositions.",
+    "url": "https://better-ireal-book.vercel.app",
+    "repo": "https://github.com/kajica2/better-ireal-book",
+    "visibility": "public",
+    "status": "wip",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored"
+    },
+    "capabilities": [
+      "transpose",
+      "ingest-mxl",
+      "visualize-score"
+    ],
+    "inputs": [
+      "ireal-chart",
+      "ireal-mxml"
+    ],
+    "outputs": [
+      "custom-chart",
+      "playback-midi"
+    ]
+  },
+  {
+    "name": "solokit",
+    "display_name": "Solokit",
+    "umbrella": "music",
+    "description": "Pattern search and analysis for jazz solo transcriptions. WJAZD + Omnibook corpora.",
+    "url": "https://solokit.vercel.app",
+    "repo": "https://github.com/kajica2/solokit",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "cc-by",
+      "source": "jazzomat",
+      "notes": "WJAZD corpus under research-use license."
+    },
+    "capabilities": [
+      "analyze-form",
+      "analyze-cadence",
+      "visualize-graph"
+    ],
+    "inputs": [
+      "transcription-mxl",
+      "solo-id"
+    ],
+    "outputs": [
+      "pattern-search-results",
+      "motif-analysis"
+    ]
+  },
+  {
+    "name": "sheet-music",
+    "display_name": "Sheet Music",
+    "umbrella": "music",
+    "description": "Sheet music library by kajica2. Practice-ready PDFs.",
+    "url": "https://sheet-music.vercel.app",
+    "repo": "https://github.com/kajica2/sheet-music",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored"
+    },
+    "capabilities": [
+      "produce-pdf",
+      "visualize-score"
+    ],
+    "inputs": [
+      "mxl-source",
+      "tune-title"
+    ],
+    "outputs": [
+      "printable-pdf",
+      "practice-pages"
+    ]
+  },
+  {
+    "name": "kai-freq-lab",
+    "display_name": "Kai Freq Lab",
+    "umbrella": "audio",
+    "description": "Frequency-domain audio tools (PWA). Standalone product.",
+    "url": "https://kaidjuric-freq-lab.hf.space",
+    "repo": "https://github.com/kajica2/kai-freq-lab",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored"
+    },
+    "capabilities": [
+      "analyze-spectrum",
+      "visualize-spectrum",
+      "denoise"
+    ],
+    "inputs": [
+      "audio-file",
+      "frequency-band"
+    ],
+    "outputs": [
+      "spectrum-image",
+      "filtered-audio"
+    ]
+  },
+  {
+    "name": "gradio-pipelines",
+    "display_name": "Gradio Pipelines Directory",
+    "umbrella": "audio",
+    "description": "Directory of 24 Gradio audio & video tools. One-line `gradio deploy` per tool.",
+    "url": "https://kaidjuric-gradio-pipelines.hf.space",
+    "repo": "https://github.com/kajica2/gradio-pipelines",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored"
+    },
+    "capabilities": [
+      "deploy-hf-space",
+      "publish-channel"
+    ],
+    "inputs": [
+      "pipeline-config",
+      "hf-token"
+    ],
+    "outputs": [
+      "hf-space-url",
+      "deploy-log"
+    ]
+  },
+  {
+    "name": "music-transcription-monitor",
+    "display_name": "AMT Monitor",
+    "umbrella": "audio",
+    "description": "Autonomous AMT research + interactive transcription dashboard. ACF2 pitch detection.",
+    "url": "https://music-transcription-monitor.vercel.app",
+    "repo": "https://github.com/kajica2/music-transcription-monitor",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored"
+    },
+    "capabilities": [
+      "pitch-detect",
+      "analyze-tempo",
+      "produce-midi"
+    ],
+    "inputs": [
+      "audio-file",
+      "instrument-type"
+    ],
+    "outputs": [
+      "transcription-report",
+      "midi-file",
+      "debug-log"
+    ]
+  },
+  {
+    "name": "kai-art",
+    "display_name": "Kai Art",
+    "umbrella": "video",
+    "description": "Filaments, sand, attractors, birth charts driven by sound. Generative engine.",
+    "url": "https://kai-art.vercel.app",
+    "repo": "https://github.com/kajica2/kai-art",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored"
+    },
+    "capabilities": [
+      "produce-video",
+      "visualize-3d",
+      "produce-image"
+    ],
+    "inputs": [
+      "audio-file",
+      "art-preset"
+    ],
+    "outputs": [
+      "mp4-file",
+      "still-image"
+    ]
+  },
+  {
+    "name": "loopable-video-segmenter",
+    "display_name": "Loopable Segmenter",
+    "umbrella": "video",
+    "description": "Audio-aware loopable video segmenter. Splits MP4s into N loopable clips on beats.",
+    "url": "https://kaidjuric-loopable-video-segmenter.hf.space",
+    "repo": "https://github.com/kajica2/loopable-video-segmenter",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored"
+    },
+    "capabilities": [
+      "segment",
+      "loop",
+      "analyze-tempo"
+    ],
+    "inputs": [
+      "mp4-file",
+      "loop-count"
+    ],
+    "outputs": [
+      "clips-zip",
+      "segment-manifest"
+    ]
+  },
+  {
+    "name": "shader-arsenal",
+    "display_name": "Shader Arsenal",
+    "umbrella": "video",
+    "description": "Lygia GLSL shaders \u2014 live playground + audio-reactive demos.",
+    "url": "https://shader-arsenal.vercel.app",
+    "repo": "https://github.com/kajica2/shader-arsenal",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": "Looted from Synesthesia.app under permissive terms."
+    },
+    "capabilities": [
+      "visualize-3d",
+      "analyze-spectrum",
+      "produce-image"
+    ],
+    "inputs": [
+      "audio-file",
+      "shader-preset"
+    ],
+    "outputs": [
+      "glsl-source",
+      "rendered-frame"
+    ]
+  },
+  {
+    "name": "evolving-art",
+    "display_name": "Evolving Art",
+    "umbrella": "video",
+    "description": "Generative art playground feeding kai-art.",
+    "url": "https://evolving-art.vercel.app",
+    "repo": "https://github.com/kajica2/evolving-art",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored"
+    },
+    "capabilities": [
+      "produce-image",
+      "visualize-3d"
+    ],
+    "inputs": [
+      "seed",
+      "evolution-rule"
+    ],
+    "outputs": [
+      "image-sequence",
+      "rule-json"
+    ]
+  },
+  {
+    "name": "arteffacts",
+    "display_name": "Arteffacts",
+    "umbrella": "video",
+    "description": "Pages HTML experiments \u2014 visual artifact gallery.",
+    "url": "https://arteffacts.vercel.app",
+    "repo": "https://github.com/kajica2/arteffacts",
+    "visibility": "public",
+    "status": "stale",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored"
+    },
+    "capabilities": [
+      "produce-image"
+    ],
+    "inputs": [
+      "html-source",
+      "css-spec"
+    ],
+    "outputs": [
+      "rendered-page"
+    ]
+  },
+  {
+    "name": "kai-systems",
+    "display_name": "Kai Systems",
+    "umbrella": "programming",
+    "description": "Nine production stacks. One philosophy. Zero babysitting.",
+    "url": "https://kai-systems.vercel.app",
+    "repo": "https://github.com/kajica2/kai-systems",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored"
+    },
+    "capabilities": [
+      "deploy-vercel",
+      "deploy-github-pages"
+    ],
+    "inputs": [
+      "stack-config",
+      "deploy-target"
+    ],
+    "outputs": [
+      "deployed-stack",
+      "deploy-log"
+    ]
+  },
+  {
+    "name": "kai-orchestrator",
+    "display_name": "Kai Orchestrator",
+    "umbrella": "programming",
+    "description": "Monorepo for the 9 AGI/Orchestrator HF spaces. One source, nine surfaces.",
+    "url": "https://kai-orchestrator.vercel.app",
+    "repo": "https://github.com/kajica2/kai-orchestrator",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored"
+    },
+    "capabilities": [
+      "deploy-hf-space",
+      "deploy-vercel"
+    ],
+    "inputs": [
+      "monorepo-config",
+      "deployment-targets"
+    ],
+    "outputs": [
+      "deployment-urls",
+      "status-report"
+    ]
+  },
+  {
+    "name": "gradio-pipeline-hub",
+    "display_name": "Pipeline Hub",
+    "umbrella": "programming",
+    "description": "Live directory of Gradio pipelines for audio/video \u2014 one-click deploy to HF Spaces.",
+    "url": "https://kaidjuric-gradio-pipeline-hub.hf.space",
+    "repo": "https://github.com/kajica2/gradio-pipeline-hub",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored"
+    },
+    "capabilities": [
+      "deploy-hf-space",
+      "publish-channel"
+    ],
+    "inputs": [
+      "pipeline-id",
+      "hf-token"
+    ],
+    "outputs": [
+      "deployed-space",
+      "pipeline-status"
+    ]
+  },
+  {
+    "name": "toolbox-site",
+    "display_name": "Toolbox Site",
+    "umbrella": "programming",
+    "description": "Music + Video Pipeline Toolbox \u00b7 2025\u20132026.",
+    "url": "https://toolbox-site.vercel.app",
+    "repo": "https://github.com/kajica2/toolbox-site",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored"
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [
+      "tool-list",
+      "tag-set"
+    ],
+    "outputs": [
+      "static-site",
+      "feed-json"
+    ]
+  },
+  {
+    "name": "omnisocial-studio",
+    "display_name": "Omnisocial Studio",
+    "umbrella": "programming",
+    "description": "Multiplatform social studio.",
+    "url": "https://omnisocial-studio.vercel.app",
+    "repo": "https://github.com/kajica2/omnisocial_studio",
+    "visibility": "public",
+    "status": "wip",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored"
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [
+      "platform-list",
+      "content-source"
+    ],
+    "outputs": [
+      "platform-posts",
+      "engagement-report"
+    ]
+  },
+  {
+    "name": "digital-twin",
+    "display_name": "Digital Twin",
+    "umbrella": "programming",
+    "description": "A personal AI twin that knows your stack, your taste, your schedule.",
+    "url": "https://digital-twin.vercel.app",
+    "repo": "https://github.com/kajica2/digital-twin",
+    "visibility": "public",
+    "status": "wip",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored"
+    },
+    "capabilities": [
+      "analyze-form",
+      "produce-report"
+    ],
+    "inputs": [
+      "context-feed",
+      "preferences"
+    ],
+    "outputs": [
+      "twin-response",
+      "context-summary"
+    ]
+  },
+  {
+    "name": "prompting-system",
+    "display_name": "Prompting System",
+    "umbrella": "programming",
+    "description": "The 4-Level Prompt System \u2014 visual long-read.",
+    "url": "https://prompting-system.vercel.app",
+    "repo": "https://github.com/kajica2/prompting-system",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored"
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [
+      "prompt-text",
+      "level-spec"
+    ],
+    "outputs": [
+      "static-page",
+      "diagram"
+    ]
+  }
+]

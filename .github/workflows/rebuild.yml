@@ -1,0 +1,43 @@
+name: rebuild-hub
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 6 * * *'
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install framework deps
+        run: npm install ajv ajv-formats --no-audit --no-fund
+      - name: Validate
+        run: node scripts/validate.mjs projects.json agents.json
+      - name: Rebuild
+        run: node scripts/build.mjs --source . --out dist
+      - name: Move dist/public/* to repo root
+        run: |
+          shopt -s dotglob
+          cp -rn dist/public/* .
+          shopt -u dotglob
+      - name: Move dist/internal/* to /internal
+        run: |
+          mkdir -p internal
+          cp -rn dist/internal/* internal/ 2>/dev/null || true
+      - name: Commit regenerated files
+        run: |
+          git config user.name "hub-builder"
+          git config user.email "builder@agent.local"
+          git add -A
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "hub: regenerate from projects.json + agents.json"
+            git push
+          fi

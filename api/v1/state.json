@@ -1,0 +1,365 @@
+{
+  "version": "v1",
+  "generated_at": "2026-09-04T15:28:58.646Z",
+  "projects": [
+    {
+      "name": "sainted-word-records",
+      "umbrella": "music",
+      "url": "https://sainted-word-records.vercel.app",
+      "repo": "https://github.com/kajica2/sainted-word-records",
+      "description": "Audio-reactive video engine. Single-file, browser-native, MIT. Drops in song + clips → MP4.",
+      "capabilities": [
+        "produce-video",
+        "analyze-spectrum",
+        "deploy-vercel"
+      ],
+      "entity": "research"
+    },
+    {
+      "name": "harmonic-study-engine",
+      "umbrella": "music",
+      "url": "https://harmonic-study-engine.vercel.app",
+      "repo": "https://github.com/kajica2/harmonic-study-engine",
+      "description": "Learn and practice harmony and melody. Plug-in shell for any pedagogy corpus.",
+      "capabilities": [
+        "ingest-pdf",
+        "ingest-mxl",
+        "transpose",
+        "produce-json-suite"
+      ],
+      "entity": "research"
+    },
+    {
+      "name": "muscriptor",
+      "umbrella": "music",
+      "url": "https://kaidjuric-muscriptor-studio.hf.space",
+      "repo": "https://github.com/kajica2/muscriptor",
+      "description": "Multi-platform music transcription (HF Space + Vercel + GH Actions).",
+      "capabilities": [
+        "ingest-audio",
+        "pitch-detect",
+        "produce-midi",
+        "produce-mxl"
+      ],
+      "entity": "research"
+    },
+    {
+      "name": "better-ireal-book",
+      "umbrella": "music",
+      "url": "https://better-ireal-book.vercel.app",
+      "repo": "https://github.com/kajica2/better-ireal-book",
+      "description": "A better iReal Pro / iReal b book experience with custom transpositions.",
+      "capabilities": [
+        "transpose",
+        "ingest-mxl",
+        "visualize-score"
+      ],
+      "entity": "research"
+    },
+    {
+      "name": "solokit",
+      "umbrella": "music",
+      "url": "https://solokit.vercel.app",
+      "repo": "https://github.com/kajica2/solokit",
+      "description": "Pattern search and analysis for jazz solo transcriptions. WJAZD + Omnibook corpora.",
+      "capabilities": [
+        "analyze-form",
+        "analyze-cadence",
+        "visualize-graph"
+      ],
+      "entity": "research"
+    },
+    {
+      "name": "sheet-music",
+      "umbrella": "music",
+      "url": "https://sheet-music.vercel.app",
+      "repo": "https://github.com/kajica2/sheet-music",
+      "description": "Sheet music library by kajica2. Practice-ready PDFs.",
+      "capabilities": [
+        "produce-pdf",
+        "visualize-score"
+      ],
+      "entity": "research"
+    },
+    {
+      "name": "kai-freq-lab",
+      "umbrella": "audio",
+      "url": "https://kaidjuric-freq-lab.hf.space",
+      "repo": "https://github.com/kajica2/kai-freq-lab",
+      "description": "Frequency-domain audio tools (PWA). Standalone product.",
+      "capabilities": [
+        "analyze-spectrum",
+        "visualize-spectrum",
+        "denoise"
+      ],
+      "entity": "research"
+    },
+    {
+      "name": "gradio-pipelines",
+      "umbrella": "audio",
+      "url": "https://kaidjuric-gradio-pipelines.hf.space",
+      "repo": "https://github.com/kajica2/gradio-pipelines",
+      "description": "Directory of 24 Gradio audio & video tools. One-line `gradio deploy` per tool.",
+      "capabilities": [
+        "deploy-hf-space",
+        "publish-channel"
+      ],
+      "entity": "research"
+    },
+    {
+      "name": "music-transcription-monitor",
+      "umbrella": "audio",
+      "url": "https://music-transcription-monitor.vercel.app",
+      "repo": "https://github.com/kajica2/music-transcription-monitor",
+      "description": "Autonomous AMT research + interactive transcription dashboard. ACF2 pitch detection.",
+      "capabilities": [
+        "pitch-detect",
+        "analyze-tempo",
+        "produce-midi"
+      ],
+      "entity": "research"
+    },
+    {
+      "name": "kai-art",
+      "umbrella": "video",
+      "url": "https://kai-art.vercel.app",
+      "repo": "https://github.com/kajica2/kai-art",
+      "description": "Filaments, sand, attractors, birth charts driven by sound. Generative engine.",
+      "capabilities": [
+        "produce-video",
+        "visualize-3d",
+        "produce-image"
+      ],
+      "entity": "research"
+    },
+    {
+      "name": "loopable-video-segmenter",
+      "umbrella": "video",
+      "url": "https://kaidjuric-loopable-video-segmenter.hf.space",
+      "repo": "https://github.com/kajica2/loopable-video-segmenter",
+      "description": "Audio-aware loopable video segmenter. Splits MP4s into N loopable clips on beats.",
+      "capabilities": [
+        "segment",
+        "loop",
+        "analyze-tempo"
+      ],
+      "entity": "research"
+    },
+    {
+      "name": "shader-arsenal",
+      "umbrella": "video",
+      "url": "https://shader-arsenal.vercel.app",
+      "repo": "https://github.com/kajica2/shader-arsenal",
+      "description": "Lygia GLSL shaders — live playground + audio-reactive demos.",
+      "capabilities": [
+        "visualize-3d",
+        "analyze-spectrum",
+        "produce-image"
+      ],
+      "entity": "research"
+    },
+    {
+      "name": "evolving-art",
+      "umbrella": "video",
+      "url": "https://evolving-art.vercel.app",
+      "repo": "https://github.com/kajica2/evolving-art",
+      "description": "Generative art playground feeding kai-art.",
+      "capabilities": [
+        "produce-image",
+        "visualize-3d"
+      ],
+      "entity": "research"
+    },
+    {
+      "name": "arteffacts",
+      "umbrella": "video",
+      "url": "https://arteffacts.vercel.app",
+      "repo": "https://github.com/kajica2/arteffacts",
+      "description": "Pages HTML experiments — visual artifact gallery.",
+      "capabilities": [
+        "produce-image"
+      ],
+      "entity": "research"
+    },
+    {
+      "name": "kai-systems",
+      "umbrella": "programming",
+      "url": "https://kai-systems.vercel.app",
+      "repo": "https://github.com/kajica2/kai-systems",
+      "description": "Nine production stacks. One philosophy. Zero babysitting.",
+      "capabilities": [
+        "deploy-vercel",
+        "deploy-github-pages"
+      ],
+      "entity": "research"
+    },
+    {
+      "name": "kai-orchestrator",
+      "umbrella": "programming",
+      "url": "https://kai-orchestrator.vercel.app",
+      "repo": "https://github.com/kajica2/kai-orchestrator",
+      "description": "Monorepo for the 9 AGI/Orchestrator HF spaces. One source, nine surfaces.",
+      "capabilities": [
+        "deploy-hf-space",
+        "deploy-vercel"
+      ],
+      "entity": "research"
+    },
+    {
+      "name": "gradio-pipeline-hub",
+      "umbrella": "programming",
+      "url": "https://kaidjuric-gradio-pipeline-hub.hf.space",
+      "repo": "https://github.com/kajica2/gradio-pipeline-hub",
+      "description": "Live directory of Gradio pipelines for audio/video — one-click deploy to HF Spaces.",
+      "capabilities": [
+        "deploy-hf-space",
+        "publish-channel"
+      ],
+      "entity": "research"
+    },
+    {
+      "name": "toolbox-site",
+      "umbrella": "programming",
+      "url": "https://toolbox-site.vercel.app",
+      "repo": "https://github.com/kajica2/toolbox-site",
+      "description": "Music + Video Pipeline Toolbox · 2025–2026.",
+      "capabilities": [
+        "publish-channel"
+      ],
+      "entity": "research"
+    },
+    {
+      "name": "omnisocial-studio",
+      "umbrella": "programming",
+      "url": "https://omnisocial-studio.vercel.app",
+      "repo": "https://github.com/kajica2/omnisocial_studio",
+      "description": "Multiplatform social studio.",
+      "capabilities": [
+        "publish-channel"
+      ],
+      "entity": "research"
+    },
+    {
+      "name": "digital-twin",
+      "umbrella": "programming",
+      "url": "https://digital-twin.vercel.app",
+      "repo": "https://github.com/kajica2/digital-twin",
+      "description": "A personal AI twin that knows your stack, your taste, your schedule.",
+      "capabilities": [
+        "analyze-form",
+        "produce-report"
+      ],
+      "entity": "research"
+    },
+    {
+      "name": "prompting-system",
+      "umbrella": "programming",
+      "url": "https://prompting-system.vercel.app",
+      "repo": "https://github.com/kajica2/prompting-system",
+      "description": "The 4-Level Prompt System — visual long-read.",
+      "capabilities": [
+        "publish-channel"
+      ],
+      "entity": "research"
+    }
+  ],
+  "agents": [
+    {
+      "name": "keysmith",
+      "display_name": "Keysmith",
+      "kind": "utility",
+      "purpose": "Issues API keys to approved collaborators and rotates them on schedule.",
+      "capabilities": [
+        "produce-json-suite",
+        "deploy-hf-space"
+      ],
+      "status": "stub",
+      "entity": "research"
+    },
+    {
+      "name": "image-svg",
+      "display_name": "Image-SVG",
+      "kind": "utility",
+      "purpose": "Accepts image uploads, vectorizes them, returns animated-ready SVG via the PNG-to-SVG converter Space.",
+      "capabilities": [
+        "produce-image",
+        "publish-channel"
+      ],
+      "status": "stub",
+      "entity": "research"
+    },
+    {
+      "name": "animator",
+      "display_name": "Animator",
+      "kind": "utility",
+      "purpose": "Takes an SVG, returns an animated SVG / Lottie JSON / MP4 — selects the best path per output target.",
+      "capabilities": [
+        "produce-video",
+        "produce-image"
+      ],
+      "status": "stub",
+      "entity": "research"
+    },
+    {
+      "name": "hub-bridge",
+      "display_name": "Hub-Bridge",
+      "kind": "utility",
+      "purpose": "Connects a HF Space output to a hub directory; routes files into the right component.",
+      "capabilities": [
+        "deploy-hf-space",
+        "publish-channel"
+      ],
+      "status": "stub",
+      "entity": "research"
+    },
+    {
+      "name": "thumb-collector",
+      "display_name": "Thumb-Collector",
+      "kind": "infrastructure",
+      "purpose": "Captures and refreshes screenshots across all hub projects on a weekly schedule. Operational.",
+      "capabilities": [
+        "deploy-vercel",
+        "publish-channel"
+      ],
+      "status": "active",
+      "entity": "research"
+    },
+    {
+      "name": "daily-pipeline",
+      "display_name": "Daily Pipeline",
+      "kind": "research",
+      "purpose": "Calls out to the user's existing daily research agent on HF (kaidjuric/daily-pipeline-director-cut). Hub surfaces the report.",
+      "capabilities": [
+        "publish-channel",
+        "produce-report"
+      ],
+      "status": "active",
+      "entity": "research"
+    },
+    {
+      "name": "kb-indexer",
+      "display_name": "KB-Indexer",
+      "kind": "infrastructure",
+      "purpose": "Walks repos, indexes READMEs and code into a searchable knowledge base.",
+      "capabilities": [
+        "publish-channel",
+        "analyze-form"
+      ],
+      "status": "stub",
+      "entity": "research"
+    },
+    {
+      "name": "taxonomy-keeper",
+      "display_name": "Taxonomy-Keeper",
+      "kind": "infrastructure",
+      "purpose": "Reviews new component capabilities, proposes taxonomy updates with citation.",
+      "capabilities": [
+        "publish-channel"
+      ],
+      "status": "stub",
+      "entity": "research"
+    }
+  ],
+  "paywalled_count": 3,
+  "note": "Paywalled entries are not listed. Contact for engagement terms."
+}

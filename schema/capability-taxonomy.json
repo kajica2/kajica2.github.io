@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Capability Taxonomy",
+  "description": "Closed vocabulary for the capabilities array in project-schema.json. Free-text capabilities are rejected.",
+  "version": "v0",
+  "categories": {
+    "ingest": [
+      "ingest-pdf",
+      "ingest-mxl",
+      "ingest-midi",
+      "ingest-audio",
+      "ingest-manifest",
+      "ingest-youtube",
+      "ingest-url"
+    ],
+    "transform": [
+      "transpose",
+      "harmonize",
+      "rhythm-extract",
+      "pitch-detect",
+      "segment",
+      "loop",
+      "quantize",
+      "denoise"
+    ],
+    "produce": [
+      "produce-mxl",
+      "produce-midi",
+      "produce-json-suite",
+      "produce-report",
+      "produce-video",
+      "produce-image",
+      "produce-pdf"
+    ],
+    "analyze": [
+      "analyze-cadence",
+      "analyze-harmony",
+      "analyze-tempo",
+      "analyze-form",
+      "analyze-key",
+      "analyze-spectrum"
+    ],
+    "visualize": [
+      "visualize-score",
+      "visualize-waveform",
+      "visualize-spectrum",
+      "visualize-graph",
+      "visualize-3d"
+    ],
+    "distribute": [
+      "deploy-vercel",
+      "deploy-hf-space",
+      "deploy-github-pages",
+      "package-embed",
+      "publish-channel"
+    ]
+  }
+}

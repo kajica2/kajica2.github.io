@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Channel",
+  "description": "A research channel \u2014 a curated stream rendered as a page.",
+  "type": "object",
+  "required": [
+    "name",
+    "kind",
+    "sources",
+    "render"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "kind": {
+      "enum": [
+        "research",
+        "news",
+        "metric",
+        "feed"
+      ]
+    },
+    "description": {
+      "type": "string"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "refresh": {
+      "enum": [
+        "on-push",
+        "daily",
+        "weekly",
+        "manual"
+      ],
+      "default": "manual"
+    },
+    "render": {
+      "type": "string",
+      "description": "Path to render template"
+    }
+  }
+}
