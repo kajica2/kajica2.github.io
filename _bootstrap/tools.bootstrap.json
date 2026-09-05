@@ -1,0 +1,1031 @@
+[
+  {
+    "repo": "https://github.com/kajica2/agent-hub-framework",
+    "name": "agent-hub-framework",
+    "umbrella": "programming",
+    "component_hint": "deploy-vercel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/kajica2.github.io",
+    "name": "kajica2.github.io",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/sainted-word-records",
+    "name": "sainted-word-records",
+    "umbrella": "audio",
+    "component_hint": "pitch-detect",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/harmonic-study-engine",
+    "name": "harmonic-study-engine",
+    "umbrella": "music",
+    "component_hint": "transpose",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/minimax_style",
+    "name": "minimax_style",
+    "umbrella": "programming",
+    "component_hint": "deploy-vercel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/toolbox-site",
+    "name": "toolbox-site",
+    "umbrella": "music",
+    "component_hint": "transpose",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/gradio-pipelines",
+    "name": "gradio-pipelines",
+    "umbrella": "audio",
+    "component_hint": "pitch-detect",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/kai-systems",
+    "name": "kai-systems",
+    "umbrella": "programming",
+    "component_hint": "deploy-vercel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/loopable-video-segmenter",
+    "name": "loopable-video-segmenter",
+    "umbrella": "audio",
+    "component_hint": "pitch-detect",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/kai-orchestrator",
+    "name": "kai-orchestrator",
+    "umbrella": "programming",
+    "component_hint": "deploy-vercel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/audio-to-score",
+    "name": "audio-to-score",
+    "umbrella": "music",
+    "component_hint": "transpose",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/kai-art",
+    "name": "kai-art",
+    "umbrella": "video",
+    "component_hint": "produce-video",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/kai-freq-lab",
+    "name": "kai-freq-lab",
+    "umbrella": "audio",
+    "component_hint": "pitch-detect",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/muscriptor",
+    "name": "muscriptor",
+    "umbrella": "music",
+    "component_hint": "transpose",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/evolving-art",
+    "name": "evolving-art",
+    "umbrella": "video",
+    "component_hint": "produce-video",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/rnn",
+    "name": "rnn",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/gradio-pipeline-directory",
+    "name": "gradio-pipeline-directory",
+    "umbrella": "audio",
+    "component_hint": "pitch-detect",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/omnisocial_studio",
+    "name": "omnisocial_studio",
+    "umbrella": "programming",
+    "component_hint": "deploy-vercel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/gradio-pipeline-hub",
+    "name": "gradio-pipeline-hub",
+    "umbrella": "audio",
+    "component_hint": "pitch-detect",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/directory_site",
+    "name": "directory_site",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/dirrectorry",
+    "name": "dirrectorry",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/suno-hermes",
+    "name": "suno-hermes",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/directory_gradio2",
+    "name": "directory_gradio2",
+    "umbrella": "audio",
+    "component_hint": "pitch-detect",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/directory_gradio",
+    "name": "directory_gradio",
+    "umbrella": "audio",
+    "component_hint": "pitch-detect",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/Masterclass-exercises",
+    "name": "Masterclass-exercises",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/masterclass_exercises",
+    "name": "masterclass_exercises",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/bobmover",
+    "name": "bobmover",
+    "umbrella": "music",
+    "component_hint": "transpose",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/Jazzability",
+    "name": "Jazzability",
+    "umbrella": "music",
+    "component_hint": "transpose",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/music-transcription-monitor",
+    "name": "music-transcription-monitor",
+    "umbrella": "music",
+    "component_hint": "transpose",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/bob-mover-jazz-lexicon",
+    "name": "bob-mover-jazz-lexicon",
+    "umbrella": "music",
+    "component_hint": "transpose",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/digital-twin",
+    "name": "digital-twin",
+    "umbrella": "video",
+    "component_hint": "produce-video",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/sheet-music",
+    "name": "sheet-music",
+    "umbrella": "music",
+    "component_hint": "transpose",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/prompting-system",
+    "name": "prompting-system",
+    "umbrella": "programming",
+    "component_hint": "deploy-vercel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/workspace-archive",
+    "name": "workspace-archive",
+    "umbrella": "programming",
+    "component_hint": "deploy-vercel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/inprogress",
+    "name": "inprogress",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/better-ireal-book",
+    "name": "better-ireal-book",
+    "umbrella": "music",
+    "component_hint": "transpose",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/evolving-",
+    "name": "evolving-",
+    "umbrella": "video",
+    "component_hint": "produce-video",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/arteffacts",
+    "name": "arteffacts",
+    "umbrella": "video",
+    "component_hint": "produce-video",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/bob-mover-book",
+    "name": "bob-mover-book",
+    "umbrella": "music",
+    "component_hint": "transpose",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/bob-mover-lexicon",
+    "name": "bob-mover-lexicon",
+    "umbrella": "music",
+    "component_hint": "transpose",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/soloscrub",
+    "name": "soloscrub",
+    "umbrella": "video",
+    "component_hint": "produce-video",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/live-spund-lyra-magenta-realtime",
+    "name": "live-spund-lyra-magenta-realtime",
+    "umbrella": "research",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/solokit",
+    "name": "solokit",
+    "umbrella": "music",
+    "component_hint": "transpose",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/shader-arsenal",
+    "name": "shader-arsenal",
+    "umbrella": "audio",
+    "component_hint": "pitch-detect",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/gfh",
+    "name": "gfh",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/virtulex",
+    "name": "virtulex",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/auto-split-c4",
+    "name": "auto-split-c4",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/auto-split-",
+    "name": "auto-split-",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/font-project-2",
+    "name": "font-project-2",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/font-project",
+    "name": "font-project",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/desktop-organization",
+    "name": "desktop-organization",
+    "umbrella": "audio",
+    "component_hint": "pitch-detect",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/audio-reactive-toy",
+    "name": "audio-reactive-toy",
+    "umbrella": "audio",
+    "component_hint": "pitch-detect",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/flexible-smart-videomaker",
+    "name": "flexible-smart-videomaker",
+    "umbrella": "video",
+    "component_hint": "produce-video",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/liquid_glass",
+    "name": "liquid_glass",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/creative-universe",
+    "name": "creative-universe",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/envelope-astro-vysio",
+    "name": "envelope-astro-vysio",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/chaos_magick",
+    "name": "chaos_magick",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/luminara-global",
+    "name": "luminara-global",
+    "umbrella": "programming",
+    "component_hint": "deploy-vercel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/kais-vault",
+    "name": "kais-vault",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/-luminara_all",
+    "name": "-luminara_all",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/Astro-vyzor-main",
+    "name": "Astro-vyzor-main",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/apex",
+    "name": "apex",
+    "umbrella": "research",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/point4brand",
+    "name": "point4brand",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/cinescript",
+    "name": "cinescript",
+    "umbrella": "audio",
+    "component_hint": "pitch-detect",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/sovereign-universe",
+    "name": "sovereign-universe",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/pattern-tools-",
+    "name": "pattern-tools-",
+    "umbrella": "programming",
+    "component_hint": "deploy-vercel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/arsenal-promo-square",
+    "name": "arsenal-promo-square",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/av-artist-assistant",
+    "name": "av-artist-assistant",
+    "umbrella": "video",
+    "component_hint": "produce-video",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/luminara-pages",
+    "name": "luminara-pages",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/arsenal-promo-vertical",
+    "name": "arsenal-promo-vertical",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/biometric-arsenal",
+    "name": "biometric-arsenal",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/luminara-remotion",
+    "name": "luminara-remotion",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/luminara-media",
+    "name": "luminara-media",
+    "umbrella": "video",
+    "component_hint": "produce-video",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/binary-ring-credits-system",
+    "name": "binary-ring-credits-system",
+    "umbrella": "programming",
+    "component_hint": "deploy-vercel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/artists-script",
+    "name": "artists-script",
+    "umbrella": "video",
+    "component_hint": "produce-video",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/The-artist-script",
+    "name": "The-artist-script",
+    "umbrella": "video",
+    "component_hint": "produce-video",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/image-to-3ds",
+    "name": "image-to-3ds",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/image-to-3d",
+    "name": "image-to-3d",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/vercel-ai-gateway-demo",
+    "name": "vercel-ai-gateway-demo",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/v0-nano-banana-pro-playground",
+    "name": "v0-nano-banana-pro-playground",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/chronosapace",
+    "name": "chronosapace",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/Vibecode-prompt-converter",
+    "name": "Vibecode-prompt-converter",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/28day-ushakable",
+    "name": "28day-ushakable",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/Persona-hashtags",
+    "name": "Persona-hashtags",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/grid",
+    "name": "grid",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/sounf-frquency",
+    "name": "sounf-frquency",
+    "umbrella": "audio",
+    "component_hint": "pitch-detect",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/Astro-vyzor",
+    "name": "Astro-vyzor",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/envelope-astro",
+    "name": "envelope-astro",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/morpha-protocol",
+    "name": "morpha-protocol",
+    "umbrella": "video",
+    "component_hint": "produce-video",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/nanio-fashion-architect",
+    "name": "nanio-fashion-architect",
+    "umbrella": "programming",
+    "component_hint": "deploy-vercel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/advanced-multiagent-saas",
+    "name": "advanced-multiagent-saas",
+    "umbrella": "research",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/portfolio_kai_djuric",
+    "name": "portfolio_kai_djuric",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/velocity",
+    "name": "velocity",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/nextjs",
+    "name": "nextjs",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/unlock-the-magic-",
+    "name": "unlock-the-magic-",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/mochrome",
+    "name": "mochrome",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/monochrome_muse",
+    "name": "monochrome_muse",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/motionflick",
+    "name": "motionflick",
+    "umbrella": "audio",
+    "component_hint": "pitch-detect",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/v0-serverless-architecture-recommendationretret",
+    "name": "v0-serverless-architecture-recommendationretret",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/Spectra_mutator",
+    "name": "Spectra_mutator",
+    "umbrella": "audio",
+    "component_hint": "pitch-detect",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/visual-mind",
+    "name": "visual-mind",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/music-pub",
+    "name": "music-pub",
+    "umbrella": "music",
+    "component_hint": "transpose",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/gyromorph",
+    "name": "gyromorph",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/oasis-in-motion",
+    "name": "oasis-in-motion",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/inner-bloom",
+    "name": "inner-bloom",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/futurecreator",
+    "name": "futurecreator",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/spectra_vault",
+    "name": "spectra_vault",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/FastWritter",
+    "name": "FastWritter",
+    "umbrella": "programming",
+    "component_hint": "deploy-vercel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/react-video-recorder-buffer",
+    "name": "react-video-recorder-buffer",
+    "umbrella": "video",
+    "component_hint": "produce-video",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/build-aps-tensor",
+    "name": "build-aps-tensor",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/cognicare_routine-helper",
+    "name": "cognicare_routine-helper",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/creator-",
+    "name": "creator-",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/hub-glow",
+    "name": "hub-glow",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/ADHD-Strategie-app-ecplored",
+    "name": "ADHD-Strategie-app-ecplored",
+    "umbrella": "programming",
+    "component_hint": "deploy-vercel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/tagds",
+    "name": "tagds",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/dayly-astro-lov",
+    "name": "dayly-astro-lov",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/path-of-the-spheres",
+    "name": "path-of-the-spheres",
+    "umbrella": "audio",
+    "component_hint": "pitch-detect",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/musical-giggle",
+    "name": "musical-giggle",
+    "umbrella": "music",
+    "component_hint": "transpose",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/affirmations",
+    "name": "affirmations",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/v0-linear-card-interaction",
+    "name": "v0-linear-card-interaction",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/splash",
+    "name": "splash",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/v0-cliste-website-navigation",
+    "name": "v0-cliste-website-navigation",
+    "umbrella": "programming",
+    "component_hint": "deploy-vercel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/sound-creator",
+    "name": "sound-creator",
+    "umbrella": "audio",
+    "component_hint": "pitch-detect",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/RhythmColorizer",
+    "name": "RhythmColorizer",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/angular_video",
+    "name": "angular_video",
+    "umbrella": "video",
+    "component_hint": "produce-video",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/tag_cloud_flight",
+    "name": "tag_cloud_flight",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/sonic-weaver",
+    "name": "sonic-weaver",
+    "umbrella": "audio",
+    "component_hint": "pitch-detect",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/vr",
+    "name": "vr",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/glyph-whisperer-tool",
+    "name": "glyph-whisperer-tool",
+    "umbrella": "programming",
+    "component_hint": "deploy-vercel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/docu-render-export",
+    "name": "docu-render-export",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/next-js-saas-starter",
+    "name": "next-js-saas-starter",
+    "umbrella": "video",
+    "component_hint": "produce-video",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/EVobvR",
+    "name": "EVobvR",
+    "umbrella": "audio",
+    "component_hint": "pitch-detect",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/my-dashboard",
+    "name": "my-dashboard",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/v0-add-mutate-function",
+    "name": "v0-add-mutate-function",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/chatbot",
+    "name": "chatbot",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/sveltekit-boilerplate",
+    "name": "sveltekit-boilerplate",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/nextjs-ai-chatbot",
+    "name": "nextjs-ai-chatbot",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/headlesclaude-wp",
+    "name": "headlesclaude-wp",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/scripts",
+    "name": "scripts",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/sorterry",
+    "name": "sorterry",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/solvok1",
+    "name": "solvok1",
+    "umbrella": "video",
+    "component_hint": "produce-video",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/solvok-games",
+    "name": "solvok-games",
+    "umbrella": "video",
+    "component_hint": "produce-video",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/trumpetkai",
+    "name": "trumpetkai",
+    "umbrella": "video",
+    "component_hint": "produce-video",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/moving-media",
+    "name": "moving-media",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": true
+  },
+  {
+    "repo": "https://github.com/kajica2/WaveServer",
+    "name": "WaveServer",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/WaveAdmin",
+    "name": "WaveAdmin",
+    "umbrella": "other",
+    "component_hint": "publish-channel",
+    "extractable": false
+  },
+  {
+    "repo": "https://github.com/kajica2/WaveMusic",
+    "name": "WaveMusic",
+    "umbrella": "music",
+    "component_hint": "transpose",
+    "extractable": false
+  }
+]

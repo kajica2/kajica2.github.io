@@ -1,0 +1,4947 @@
+[
+  {
+    "name": "agent-hub-framework",
+    "display_name": "agent-hub-framework",
+    "umbrella": "programming",
+    "description": "Forkable agent hub framework. Schemas, validate, build, loop orchestration, paywall enforcement. MIT.",
+    "url": null,
+    "repo": "https://github.com/kajica2/agent-hub-framework",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "deploy-vercel",
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "kajica2.github.io",
+    "display_name": "kajica2.github.io",
+    "umbrella": "other",
+    "description": "SOVEREIGN SIGNAL — hub linking to all active arsenals",
+    "url": null,
+    "repo": "https://github.com/kajica2/kajica2.github.io",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "sainted-word-records",
+    "display_name": "sainted-word-records",
+    "umbrella": "audio",
+    "description": "Sainted Word Records — audio-reactive video engine. Single-file, browser-native, MIT.",
+    "url": null,
+    "repo": "https://github.com/kajica2/sainted-word-records",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "sainted-word-records",
+      "notes": ""
+    },
+    "capabilities": [
+      "pitch-detect",
+      "analyze-spectrum",
+      "produce-report"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "harmonic-study-engine",
+    "display_name": "harmonic-study-engine",
+    "umbrella": "music",
+    "description": "learn and practice harmony and melody",
+    "url": null,
+    "repo": "https://github.com/kajica2/harmonic-study-engine",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "transpose",
+      "produce-mxl",
+      "produce-midi"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "minimax_style",
+    "display_name": "minimax_style",
+    "umbrella": "programming",
+    "description": "minimax_style (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/minimax_style",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "deploy-vercel",
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "toolbox-site",
+    "display_name": "toolbox-site",
+    "umbrella": "music",
+    "description": "Music + Video Pipeline Toolbox · 2025–2026",
+    "url": null,
+    "repo": "https://github.com/kajica2/toolbox-site",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "transpose",
+      "produce-mxl",
+      "produce-midi"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "gradio-pipelines",
+    "display_name": "gradio-pipelines",
+    "umbrella": "audio",
+    "description": "Hand-curated directory of 24 Gradio audio & video tools. Each ships with a one-line `gradio deploy` command + a working reference Space.",
+    "url": null,
+    "repo": "https://github.com/kajica2/gradio-pipelines",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "pitch-detect",
+      "analyze-spectrum",
+      "produce-report"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "kai-systems",
+    "display_name": "kai-systems",
+    "umbrella": "programming",
+    "description": "Nine production stacks. One philosophy. Zero babysitting.",
+    "url": null,
+    "repo": "https://github.com/kajica2/kai-systems",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "deploy-vercel",
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "loopable-video-segmenter",
+    "display_name": "loopable-video-segmenter",
+    "umbrella": "audio",
+    "description": "Gradio + librosa audio-aware loopable video segmenter — splits MP4s into N loopable clips on detected beats.",
+    "url": null,
+    "repo": "https://github.com/kajica2/loopable-video-segmenter",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "pitch-detect",
+      "analyze-spectrum",
+      "produce-report"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "kai-orchestrator",
+    "display_name": "kai-orchestrator",
+    "umbrella": "programming",
+    "description": "Monorepo for the 9 AGI/Orchestrator HF spaces. One source of truth, nine deployment surfaces.",
+    "url": null,
+    "repo": "https://github.com/kajica2/kai-orchestrator",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "deploy-vercel",
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "audio-to-score",
+    "display_name": "audio-to-score",
+    "umbrella": "music",
+    "description": "Minimal agentic audio-to-score pipeline: Demucs -> Basic Pitch -> music21 -> MuseScore. Plus a one-command eval recipe and threshold sweep.",
+    "url": null,
+    "repo": "https://github.com/kajica2/audio-to-score",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "audio-to-score",
+      "notes": ""
+    },
+    "capabilities": [
+      "transpose",
+      "produce-mxl",
+      "produce-midi"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "kai-art",
+    "display_name": "kai-art",
+    "umbrella": "video",
+    "description": "kai-art spoke — living art engine. Filaments, sand, attractors, birth charts driven by ...",
+    "url": null,
+    "repo": "https://github.com/kajica2/kai-art",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "produce-video",
+      "visualize-3d"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "kai-freq-lab",
+    "display_name": "kai-freq-lab",
+    "umbrella": "audio",
+    "description": "Freq-Lab — frequency-domain audio tools (PWA). Standalone product; not under a kai-systems spoke. HF mirror: kaidjuric/freq-lab",
+    "url": null,
+    "repo": "https://github.com/kajica2/kai-freq-lab",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "pitch-detect",
+      "analyze-spectrum",
+      "produce-report"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "muscriptor",
+    "display_name": "muscriptor",
+    "umbrella": "music",
+    "description": "MuScriptor — multi-platform music transcription (HF Space + Vercel + GH Actions)",
+    "url": null,
+    "repo": "https://github.com/kajica2/muscriptor",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "transpose",
+      "produce-mxl",
+      "produce-midi"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "evolving-art",
+    "display_name": "evolving-art",
+    "umbrella": "video",
+    "description": "kai-art spoke — evolving-art playground. Generative art study feeding kai-art.",
+    "url": null,
+    "repo": "https://github.com/kajica2/evolving-art",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "produce-video",
+      "visualize-3d"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "rnn",
+    "display_name": "rnn",
+    "umbrella": "other",
+    "description": "rnn (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/rnn",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "gradio-pipeline-directory",
+    "display_name": "gradio-pipeline-directory",
+    "umbrella": "audio",
+    "description": "A live, mcp.so-style directory of Gradio audio/video pipelines. Copy one command, paste a HF token, ship a Space in 60s. Zero local setup.",
+    "url": null,
+    "repo": "https://github.com/kajica2/gradio-pipeline-directory",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "pitch-detect",
+      "analyze-spectrum",
+      "produce-report"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "omnisocial_studio",
+    "display_name": "omnisocial_studio",
+    "umbrella": "programming",
+    "description": "multiplatform",
+    "url": null,
+    "repo": "https://github.com/kajica2/omnisocial_studio",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "deploy-vercel",
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser"
+      ]
+    }
+  },
+  {
+    "name": "gradio-pipeline-hub",
+    "display_name": "gradio-pipeline-hub",
+    "umbrella": "audio",
+    "description": "Live directory of Gradio pipelines for audio/video — one-click deploy to HF Spaces",
+    "url": null,
+    "repo": "https://github.com/kajica2/gradio-pipeline-hub",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "pitch-detect",
+      "analyze-spectrum",
+      "produce-report"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "directory_site",
+    "display_name": "directory_site",
+    "umbrella": "other",
+    "description": "directory_site (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/directory_site",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [],
+      "from_shared": [
+        "audio-utils",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "dirrectorry",
+    "display_name": "dirrectorry",
+    "umbrella": "other",
+    "description": "dirrectorry (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/dirrectorry",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [],
+      "from_shared": [
+        "audio-utils",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "suno-hermes",
+    "display_name": "suno-hermes",
+    "umbrella": "other",
+    "description": "suno-hermes (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/suno-hermes",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "directory_gradio2",
+    "display_name": "directory_gradio2",
+    "umbrella": "audio",
+    "description": "bjk;",
+    "url": null,
+    "repo": "https://github.com/kajica2/directory_gradio2",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "pitch-detect",
+      "analyze-spectrum",
+      "produce-report"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [],
+      "from_shared": [
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "directory_gradio",
+    "display_name": "directory_gradio",
+    "umbrella": "audio",
+    "description": "directory_gradio (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/directory_gradio",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "pitch-detect",
+      "analyze-spectrum",
+      "produce-report"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [],
+      "from_shared": [
+        "audio-utils",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "Masterclass-exercises",
+    "display_name": "Masterclass-exercises",
+    "umbrella": "other",
+    "description": "Masterclass-exercises (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/Masterclass-exercises",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "masterclass_exercises",
+    "display_name": "masterclass_exercises",
+    "umbrella": "other",
+    "description": "masterclass",
+    "url": null,
+    "repo": "https://github.com/kajica2/masterclass_exercises",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser"
+      ]
+    }
+  },
+  {
+    "name": "bobmover",
+    "display_name": "bobmover",
+    "umbrella": "music",
+    "description": "Serious Fun — the Interactive Edition of Bob Mover's JazzAbility Practice Book. Static HTML/CSS/JS, deployed to Vercel.",
+    "url": null,
+    "repo": "https://github.com/kajica2/bobmover",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "internal-paywalled",
+      "source": "bobmover",
+      "notes": ""
+    },
+    "capabilities": [
+      "transpose",
+      "produce-mxl",
+      "produce-midi"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "Jazzability",
+    "display_name": "Jazzability",
+    "umbrella": "music",
+    "description": "website for bob mover jazzability",
+    "url": null,
+    "repo": "https://github.com/kajica2/Jazzability",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "internal-paywalled",
+      "source": "Jazzability",
+      "notes": ""
+    },
+    "capabilities": [
+      "transpose",
+      "produce-mxl",
+      "produce-midi"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "music-transcription-monitor",
+    "display_name": "music-transcription-monitor",
+    "umbrella": "music",
+    "description": "Autonomous AMT research + interactive transcription dashboard. Subagent swarm (arXiv + GitHub + assets) with clickable reports, browser-based solo-instrument pitch detection (ACF2+), tempo autocorrelation with octave correction, MIDI export",
+    "url": null,
+    "repo": "https://github.com/kajica2/music-transcription-monitor",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "transpose",
+      "produce-mxl",
+      "produce-midi"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "bob-mover-jazz-lexicon",
+    "display_name": "bob-mover-jazz-lexicon",
+    "umbrella": "music",
+    "description": "Static Vercel-deployable port of the Bob Mover Jazz Lexicon practice library (407 exercises, 12 pre-baked transpositions each, MXL editor, etude generator).",
+    "url": null,
+    "repo": "https://github.com/kajica2/bob-mover-jazz-lexicon",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "internal-paywalled",
+      "source": "bob-mover-jazz-lexicon",
+      "notes": ""
+    },
+    "capabilities": [
+      "transpose",
+      "produce-mxl",
+      "produce-midi"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "digital-twin",
+    "display_name": "digital-twin",
+    "umbrella": "video",
+    "description": "A personal AI twin that knows your stack, your taste, your schedule. Part of the kai-systems series — the meta-layer that runs the rest.",
+    "url": null,
+    "repo": "https://github.com/kajica2/digital-twin",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "produce-video",
+      "visualize-3d"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "sheet-music",
+    "display_name": "sheet-music",
+    "umbrella": "music",
+    "description": "Sheet music by kajica2",
+    "url": null,
+    "repo": "https://github.com/kajica2/sheet-music",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "transpose",
+      "produce-mxl",
+      "produce-midi"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "prompting-system",
+    "display_name": "prompting-system",
+    "umbrella": "programming",
+    "description": "The 4-Level Prompt System — visual long-read",
+    "url": null,
+    "repo": "https://github.com/kajica2/prompting-system",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "deploy-vercel",
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "workspace-archive",
+    "display_name": "workspace-archive",
+    "umbrella": "programming",
+    "description": "Auto-synced mirror of ~/.minimax/workspace/ — new files are auto-committed and pushed by workspace-watcher.sh",
+    "url": null,
+    "repo": "https://github.com/kajica2/workspace-archive",
+    "visibility": "public",
+    "status": "archived",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "deploy-vercel",
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "inprogress",
+    "display_name": "inprogress",
+    "umbrella": "other",
+    "description": "randon",
+    "url": null,
+    "repo": "https://github.com/kajica2/inprogress",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "better-ireal-book",
+    "display_name": "better-ireal-book",
+    "umbrella": "music",
+    "description": "A better iReal Pro / iReal b book experience",
+    "url": null,
+    "repo": "https://github.com/kajica2/better-ireal-book",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "transpose",
+      "produce-mxl",
+      "produce-midi"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "evolving-",
+    "display_name": "evolving-",
+    "umbrella": "video",
+    "description": "e",
+    "url": null,
+    "repo": "https://github.com/kajica2/evolving-",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "produce-video",
+      "visualize-3d"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "arteffacts",
+    "display_name": "arteffacts",
+    "umbrella": "video",
+    "description": "pages html experiments ",
+    "url": null,
+    "repo": "https://github.com/kajica2/arteffacts",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "produce-video",
+      "visualize-3d"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "bob-mover-book",
+    "display_name": "bob-mover-book",
+    "umbrella": "music",
+    "description": "Bob Mover's Serious Fun: Developing a True Jazz Conception — 22 chapters, 101 notated examples. Plus the 9-chapter JazzAbility Method.",
+    "url": null,
+    "repo": "https://github.com/kajica2/bob-mover-book",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "internal-paywalled",
+      "source": "bob-mover-book",
+      "notes": ""
+    },
+    "capabilities": [
+      "transpose",
+      "produce-mxl",
+      "produce-midi"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "bob-mover-lexicon",
+    "display_name": "bob-mover-lexicon",
+    "umbrella": "music",
+    "description": "Self-contained web app for browsing, practicing, and tracking 407 exercise patterns from the Bob Mover Jazz Lexicon (2nd Edition, Treble Clef)",
+    "url": null,
+    "repo": "https://github.com/kajica2/bob-mover-lexicon",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "internal-paywalled",
+      "source": "bob-mover-lexicon",
+      "notes": ""
+    },
+    "capabilities": [
+      "transpose",
+      "produce-mxl",
+      "produce-midi"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "soloscrub",
+    "display_name": "soloscrub",
+    "umbrella": "video",
+    "description": "Web app that finds the parts of a YouTube video where you appear on screen",
+    "url": null,
+    "repo": "https://github.com/kajica2/soloscrub",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "produce-video",
+      "visualize-3d"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "live-spund-lyra-magenta-realtime",
+    "display_name": "live-spund-lyra-magenta-realtime",
+    "umbrella": "research",
+    "description": "live-spund-lyra-magenta-realtime (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/live-spund-lyra-magenta-realtime",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel",
+      "produce-report"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "solokit",
+    "display_name": "solokit",
+    "umbrella": "music",
+    "description": "Pattern search and analysis for jazz solo transcriptions — modern Python port of the jazzomat research stack with bundled WJAZD (456 solos) and Omnibook (50 Charlie Parker solos) corpora",
+    "url": null,
+    "repo": "https://github.com/kajica2/solokit",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "transpose",
+      "produce-mxl",
+      "produce-midi"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "shader-arsenal",
+    "display_name": "shader-arsenal",
+    "umbrella": "audio",
+    "description": "A working arsenal of Lygia GLSL shaders — live playground + audio-reactive demos. Looted from Synesthesia.app.",
+    "url": null,
+    "repo": "https://github.com/kajica2/shader-arsenal",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "pitch-detect",
+      "analyze-spectrum",
+      "produce-report"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "gfh",
+    "display_name": "gfh",
+    "umbrella": "other",
+    "description": "hgdfgh",
+    "url": null,
+    "repo": "https://github.com/kajica2/gfh",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "gfh",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens"
+      ],
+      "from_shared": []
+    }
+  },
+  {
+    "name": "virtulex",
+    "display_name": "virtulex",
+    "umbrella": "other",
+    "description": "cvvvcx",
+    "url": null,
+    "repo": "https://github.com/kajica2/virtulex",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "virtulex",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "auto-split-c4",
+    "display_name": "auto-split-c4",
+    "umbrella": "other",
+    "description": "boilerplate for spitting ",
+    "url": null,
+    "repo": "https://github.com/kajica2/auto-split-c4",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "auto-split-",
+    "display_name": "auto-split-",
+    "umbrella": "other",
+    "description": "svg ede detection and splitter ",
+    "url": null,
+    "repo": "https://github.com/kajica2/auto-split-",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "font-project-2",
+    "display_name": "font-project-2",
+    "umbrella": "other",
+    "description": "font-project-2 (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/font-project-2",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "font-project-2",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [],
+      "from_shared": [
+        "audio-utils",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "font-project",
+    "display_name": "font-project",
+    "umbrella": "other",
+    "description": "font-project (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/font-project",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [],
+      "from_shared": [
+        "audio-utils",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "desktop-organization",
+    "display_name": "desktop-organization",
+    "umbrella": "audio",
+    "description": "Desktop consolidation report & inventory — generated by Hermes (2026-06-25). 195k files catalogued; only the docs layer is published.",
+    "url": null,
+    "repo": "https://github.com/kajica2/desktop-organization",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "pitch-detect",
+      "analyze-spectrum",
+      "produce-report"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "audio-reactive-toy",
+    "display_name": "audio-reactive-toy",
+    "umbrella": "audio",
+    "description": "boilerplate for series of aps",
+    "url": null,
+    "repo": "https://github.com/kajica2/audio-reactive-toy",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "audio-reactive-toy",
+      "notes": ""
+    },
+    "capabilities": [
+      "pitch-detect",
+      "analyze-spectrum",
+      "produce-report"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "flexible-smart-videomaker",
+    "display_name": "flexible-smart-videomaker",
+    "umbrella": "video",
+    "description": "Browser-based WebGL camera app: FX, blends, palette extraction, recording, teleprompter, and debug overlay — all in one page.",
+    "url": null,
+    "repo": "https://github.com/kajica2/flexible-smart-videomaker",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "produce-video",
+      "visualize-3d"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "liquid_glass",
+    "display_name": "liquid_glass",
+    "umbrella": "other",
+    "description": "bare bones",
+    "url": null,
+    "repo": "https://github.com/kajica2/liquid_glass",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [],
+      "from_shared": [
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "creative-universe",
+    "display_name": "creative-universe",
+    "umbrella": "other",
+    "description": "capture ideas",
+    "url": null,
+    "repo": "https://github.com/kajica2/creative-universe",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "creative-universe",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "envelope-astro-vysio",
+    "display_name": "envelope-astro-vysio",
+    "umbrella": "other",
+    "description": "envelope-astro-vysio (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/envelope-astro-vysio",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "envelope-astro-vysio",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "chaos_magick",
+    "display_name": "chaos_magick",
+    "umbrella": "other",
+    "description": "chaos_magick (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/chaos_magick",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "chaos_magick",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "luminara-global",
+    "display_name": "luminara-global",
+    "umbrella": "programming",
+    "description": "LUMINARA — local-first AI ecosystem. Marketing site.",
+    "url": null,
+    "repo": "https://github.com/kajica2/luminara-global",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "deploy-vercel",
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "kais-vault",
+    "display_name": "kais-vault",
+    "umbrella": "other",
+    "description": "Obsidian vault — sovereign knowledge base",
+    "url": null,
+    "repo": "https://github.com/kajica2/kais-vault",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "kais-vault",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "-luminara_all",
+    "display_name": "-luminara_all",
+    "umbrella": "other",
+    "description": "-luminara_all (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/-luminara_all",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "-luminara_all",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [],
+      "from_shared": [
+        "audio-utils",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "Astro-vyzor-main",
+    "display_name": "Astro-vyzor-main",
+    "umbrella": "other",
+    "description": "Astro-vyzor-main (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/Astro-vyzor-main",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "apex",
+    "display_name": "apex",
+    "umbrella": "research",
+    "description": "Apex OS — agent-first SaaS platform. Breathing supervisor with pgvector memory and parallel sub-agent delegation.",
+    "url": null,
+    "repo": "https://github.com/kajica2/apex",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "apex",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel",
+      "produce-report"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "point4brand",
+    "display_name": "point4brand",
+    "umbrella": "other",
+    "description": "point4brand (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/point4brand",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "point4brand",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "cinescript",
+    "display_name": "cinescript",
+    "umbrella": "audio",
+    "description": "sound and scenes ",
+    "url": null,
+    "repo": "https://github.com/kajica2/cinescript",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "cinescript",
+      "notes": ""
+    },
+    "capabilities": [
+      "pitch-detect",
+      "analyze-spectrum",
+      "produce-report"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "sovereign-universe",
+    "display_name": "sovereign-universe",
+    "umbrella": "other",
+    "description": "sovereign-universe (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/sovereign-universe",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "pattern-tools-",
+    "display_name": "pattern-tools-",
+    "umbrella": "programming",
+    "description": "self app",
+    "url": null,
+    "repo": "https://github.com/kajica2/pattern-tools-",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "pattern-tools-",
+      "notes": ""
+    },
+    "capabilities": [
+      "deploy-vercel",
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "arsenal-promo-square",
+    "display_name": "arsenal-promo-square",
+    "umbrella": "other",
+    "description": "Three live deploys · sovereign futurism · 1080x1080 square promo",
+    "url": null,
+    "repo": "https://github.com/kajica2/arsenal-promo-square",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "av-artist-assistant",
+    "display_name": "av-artist-assistant",
+    "umbrella": "video",
+    "description": "ai",
+    "url": null,
+    "repo": "https://github.com/kajica2/av-artist-assistant",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "av-artist-assistant",
+      "notes": ""
+    },
+    "capabilities": [
+      "produce-video",
+      "visualize-3d"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "luminara-pages",
+    "display_name": "luminara-pages",
+    "umbrella": "other",
+    "description": "Static LUMINARA pages — sovereign-futurism HTML, deployed on Vercel",
+    "url": null,
+    "repo": "https://github.com/kajica2/luminara-pages",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "arsenal-promo-vertical",
+    "display_name": "arsenal-promo-vertical",
+    "umbrella": "other",
+    "description": "Three live deploys · sovereign futurism · 1080x1920 vertical promo",
+    "url": null,
+    "repo": "https://github.com/kajica2/arsenal-promo-vertical",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "biometric-arsenal",
+    "display_name": "biometric-arsenal",
+    "umbrella": "other",
+    "description": "biometric-arsenal (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/biometric-arsenal",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [],
+      "from_shared": [
+        "audio-utils",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "luminara-remotion",
+    "display_name": "luminara-remotion",
+    "umbrella": "other",
+    "description": "LUMINARA Remotion component (VectorScene) + Vitest unit tests",
+    "url": null,
+    "repo": "https://github.com/kajica2/luminara-remotion",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "luminara-media",
+    "display_name": "luminara-media",
+    "umbrella": "video",
+    "description": "Public CDN for LUMINARA + Sovereign Scale video assets",
+    "url": null,
+    "repo": "https://github.com/kajica2/luminara-media",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "produce-video",
+      "visualize-3d"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "binary-ring-credits-system",
+    "display_name": "binary-ring-credits-system",
+    "umbrella": "programming",
+    "description": "binary-ring-credits-system (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/binary-ring-credits-system",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "deploy-vercel",
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [],
+      "from_shared": [
+        "audio-utils",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "artists-script",
+    "display_name": "artists-script",
+    "umbrella": "video",
+    "description": "kai-art spoke — creative study (visual scripting / generative).",
+    "url": null,
+    "repo": "https://github.com/kajica2/artists-script",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "produce-video",
+      "visualize-3d"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "The-artist-script",
+    "display_name": "The-artist-script",
+    "umbrella": "video",
+    "description": "learn artist language",
+    "url": null,
+    "repo": "https://github.com/kajica2/The-artist-script",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "produce-video",
+      "visualize-3d"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "image-to-3ds",
+    "display_name": "image-to-3ds",
+    "umbrella": "other",
+    "description": "convert your image to 3d printer ready file",
+    "url": null,
+    "repo": "https://github.com/kajica2/image-to-3ds",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "image-to-3d",
+    "display_name": "image-to-3d",
+    "umbrella": "other",
+    "description": "create 3d printer ready file",
+    "url": null,
+    "repo": "https://github.com/kajica2/image-to-3d",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "vercel-ai-gateway-demo",
+    "display_name": "vercel-ai-gateway-demo",
+    "umbrella": "other",
+    "description": "vercel-ai-gateway-demo (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/vercel-ai-gateway-demo",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "vercel-ai-gateway-demo",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [],
+      "from_shared": [
+        "audio-utils",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "v0-nano-banana-pro-playground",
+    "display_name": "v0-nano-banana-pro-playground",
+    "umbrella": "other",
+    "description": "v0-nano-banana-pro-playground (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/v0-nano-banana-pro-playground",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "v0-nano-banana-pro-playground",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [],
+      "from_shared": [
+        "audio-utils",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "chronosapace",
+    "display_name": "chronosapace",
+    "umbrella": "other",
+    "description": "youre exebviytion",
+    "url": null,
+    "repo": "https://github.com/kajica2/chronosapace",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "chronosapace",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "Vibecode-prompt-converter",
+    "display_name": "Vibecode-prompt-converter",
+    "umbrella": "other",
+    "description": "kai-terminal spoke — convert prompts between LLM dialects.",
+    "url": null,
+    "repo": "https://github.com/kajica2/Vibecode-prompt-converter",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "28day-ushakable",
+    "display_name": "28day-ushakable",
+    "umbrella": "other",
+    "description": "28-day-unshakable",
+    "url": null,
+    "repo": "https://github.com/kajica2/28day-ushakable",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "28day-ushakable",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [],
+      "from_shared": [
+        "mxl-parser"
+      ]
+    }
+  },
+  {
+    "name": "Persona-hashtags",
+    "display_name": "Persona-hashtags",
+    "umbrella": "other",
+    "description": "collect all the different personas of url (person or company)",
+    "url": null,
+    "repo": "https://github.com/kajica2/Persona-hashtags",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "Persona-hashtags",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "grid",
+    "display_name": "grid",
+    "umbrella": "other",
+    "description": "rtech",
+    "url": null,
+    "repo": "https://github.com/kajica2/grid",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "sounf-frquency",
+    "display_name": "sounf-frquency",
+    "umbrella": "audio",
+    "description": "sound and scenes ",
+    "url": null,
+    "repo": "https://github.com/kajica2/sounf-frquency",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "pitch-detect",
+      "analyze-spectrum",
+      "produce-report"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "Astro-vyzor",
+    "display_name": "Astro-vyzor",
+    "umbrella": "other",
+    "description": "VJ",
+    "url": null,
+    "repo": "https://github.com/kajica2/Astro-vyzor",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [],
+      "from_shared": [
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "envelope-astro",
+    "display_name": "envelope-astro",
+    "umbrella": "other",
+    "description": "Clean rebuild of envelope Astro site.",
+    "url": null,
+    "repo": "https://github.com/kajica2/envelope-astro",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "morpha-protocol",
+    "display_name": "morpha-protocol",
+    "umbrella": "video",
+    "description": "kai-art spoke — open protocol for non-verbal symbolic communication through transformation.",
+    "url": null,
+    "repo": "https://github.com/kajica2/morpha-protocol",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "produce-video",
+      "visualize-3d"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "nanio-fashion-architect",
+    "display_name": "nanio-fashion-architect",
+    "umbrella": "programming",
+    "description": "A web application built with modern web technologies",
+    "url": null,
+    "repo": "https://github.com/kajica2/nanio-fashion-architect",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "nanio-fashion-architect",
+      "notes": ""
+    },
+    "capabilities": [
+      "deploy-vercel",
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "advanced-multiagent-saas",
+    "display_name": "advanced-multiagent-saas",
+    "umbrella": "research",
+    "description": "Advanced Multiagent SaaS - A scalable platform for orchestrating multiple AI agents with collaborative capabilities for enterprise workflows.",
+    "url": null,
+    "repo": "https://github.com/kajica2/advanced-multiagent-saas",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel",
+      "produce-report"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "portfolio_kai_djuric",
+    "display_name": "portfolio_kai_djuric",
+    "umbrella": "other",
+    "description": "portfolio",
+    "url": null,
+    "repo": "https://github.com/kajica2/portfolio_kai_djuric",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "velocity",
+    "display_name": "velocity",
+    "umbrella": "other",
+    "description": "velocity_suite",
+    "url": null,
+    "repo": "https://github.com/kajica2/velocity",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [],
+      "from_shared": [
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "nextjs",
+    "display_name": "nextjs",
+    "umbrella": "other",
+    "description": "nextjs (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/nextjs",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "nextjs",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "unlock-the-magic-",
+    "display_name": "unlock-the-magic-",
+    "umbrella": "other",
+    "description": "magick",
+    "url": null,
+    "repo": "https://github.com/kajica2/unlock-the-magic-",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "unlock-the-magic-",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser"
+      ]
+    }
+  },
+  {
+    "name": "mochrome",
+    "display_name": "mochrome",
+    "umbrella": "other",
+    "description": "saff",
+    "url": null,
+    "repo": "https://github.com/kajica2/mochrome",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "mochrome",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest"
+      ]
+    }
+  },
+  {
+    "name": "monochrome_muse",
+    "display_name": "monochrome_muse",
+    "umbrella": "other",
+    "description": "ecommerce",
+    "url": null,
+    "repo": "https://github.com/kajica2/monochrome_muse",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "monochrome_muse",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "motionflick",
+    "display_name": "motionflick",
+    "umbrella": "audio",
+    "description": "sound and scenes ",
+    "url": null,
+    "repo": "https://github.com/kajica2/motionflick",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "motionflick",
+      "notes": ""
+    },
+    "capabilities": [
+      "pitch-detect",
+      "analyze-spectrum",
+      "produce-report"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "v0-serverless-architecture-recommendationretret",
+    "display_name": "v0-serverless-architecture-recommendationretret",
+    "umbrella": "other",
+    "description": "v0-serverless-architecture-recommendationretret (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/v0-serverless-architecture-recommendationretret",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "v0-serverless-architecture-recommendationretret",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [],
+      "from_shared": [
+        "audio-utils",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "Spectra_mutator",
+    "display_name": "Spectra_mutator",
+    "umbrella": "audio",
+    "description": "sound and scenes ",
+    "url": null,
+    "repo": "https://github.com/kajica2/Spectra_mutator",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "Spectra_mutator",
+      "notes": ""
+    },
+    "capabilities": [
+      "pitch-detect",
+      "analyze-spectrum",
+      "produce-report"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "visual-mind",
+    "display_name": "visual-mind",
+    "umbrella": "other",
+    "description": "grow ",
+    "url": null,
+    "repo": "https://github.com/kajica2/visual-mind",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "visual-mind",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "music-pub",
+    "display_name": "music-pub",
+    "umbrella": "music",
+    "description": "music-pub (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/music-pub",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "transpose",
+      "produce-mxl",
+      "produce-midi"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "gyromorph",
+    "display_name": "gyromorph",
+    "umbrella": "other",
+    "description": "gyromorph (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/gyromorph",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "oasis-in-motion",
+    "display_name": "oasis-in-motion",
+    "umbrella": "other",
+    "description": "Make it use gyroscope as a way to control the GLF model so with phone moving up and down, it will be bouncing whatever object we have if it's a iPad, it will stay in 3-D is is just like",
+    "url": null,
+    "repo": "https://github.com/kajica2/oasis-in-motion",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "oasis-in-motion",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "inner-bloom",
+    "display_name": "inner-bloom",
+    "umbrella": "other",
+    "description": "enlightement",
+    "url": null,
+    "repo": "https://github.com/kajica2/inner-bloom",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "inner-bloom",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "futurecreator",
+    "display_name": "futurecreator",
+    "umbrella": "other",
+    "description": "information",
+    "url": null,
+    "repo": "https://github.com/kajica2/futurecreator",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "futurecreator",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest"
+      ]
+    }
+  },
+  {
+    "name": "spectra_vault",
+    "display_name": "spectra_vault",
+    "umbrella": "other",
+    "description": "data depository rag",
+    "url": null,
+    "repo": "https://github.com/kajica2/spectra_vault",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "spectra_vault",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "FastWritter",
+    "display_name": "FastWritter",
+    "umbrella": "programming",
+    "description": "app for letting users create books",
+    "url": null,
+    "repo": "https://github.com/kajica2/FastWritter",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "FastWritter",
+      "notes": ""
+    },
+    "capabilities": [
+      "deploy-vercel",
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "react-video-recorder-buffer",
+    "display_name": "react-video-recorder-buffer",
+    "umbrella": "video",
+    "description": "🎥 Comprehensive React video recording system with buffer management, progressive upload, and gallery features",
+    "url": null,
+    "repo": "https://github.com/kajica2/react-video-recorder-buffer",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "produce-video",
+      "visualize-3d"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "build-aps-tensor",
+    "display_name": "build-aps-tensor",
+    "umbrella": "other",
+    "description": "tensor_path",
+    "url": null,
+    "repo": "https://github.com/kajica2/build-aps-tensor",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "build-aps-tensor",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest"
+      ]
+    }
+  },
+  {
+    "name": "cognicare_routine-helper",
+    "display_name": "cognicare_routine-helper",
+    "umbrella": "other",
+    "description": "cognicare",
+    "url": null,
+    "repo": "https://github.com/kajica2/cognicare_routine-helper",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "cognicare_routine-helper",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "creator-",
+    "display_name": "creator-",
+    "umbrella": "other",
+    "description": "Viral Hashtag",
+    "url": null,
+    "repo": "https://github.com/kajica2/creator-",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens"
+      ],
+      "from_shared": [
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "hub-glow",
+    "display_name": "hub-glow",
+    "umbrella": "other",
+    "description": "hub for all creative and exceptional creators thsat need output",
+    "url": null,
+    "repo": "https://github.com/kajica2/hub-glow",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "hub-glow",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "ADHD-Strategie-app-ecplored",
+    "display_name": "ADHD-Strategie-app-ecplored",
+    "umbrella": "programming",
+    "description": "compare different opportunities",
+    "url": null,
+    "repo": "https://github.com/kajica2/ADHD-Strategie-app-ecplored",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "ADHD-Strategie-app-ecplored",
+      "notes": ""
+    },
+    "capabilities": [
+      "deploy-vercel",
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "tagds",
+    "display_name": "tagds",
+    "umbrella": "other",
+    "description": "pic to hash",
+    "url": null,
+    "repo": "https://github.com/kajica2/tagds",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "tagds",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "dayly-astro-lov",
+    "display_name": "dayly-astro-lov",
+    "umbrella": "other",
+    "description": "horoscope for couples",
+    "url": null,
+    "repo": "https://github.com/kajica2/dayly-astro-lov",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "dayly-astro-lov",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "path-of-the-spheres",
+    "display_name": "path-of-the-spheres",
+    "umbrella": "audio",
+    "description": "create sound of the moment",
+    "url": null,
+    "repo": "https://github.com/kajica2/path-of-the-spheres",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "pitch-detect",
+      "analyze-spectrum",
+      "produce-report"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "musical-giggle",
+    "display_name": "musical-giggle",
+    "umbrella": "music",
+    "description": "Music_visualizer_midi_composer",
+    "url": null,
+    "repo": "https://github.com/kajica2/musical-giggle",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "musical-giggle",
+      "notes": ""
+    },
+    "capabilities": [
+      "transpose",
+      "produce-mxl",
+      "produce-midi"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser"
+      ]
+    }
+  },
+  {
+    "name": "affirmations",
+    "display_name": "affirmations",
+    "umbrella": "other",
+    "description": "learning",
+    "url": null,
+    "repo": "https://github.com/kajica2/affirmations",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "affirmations",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens"
+      ],
+      "from_shared": [
+        "mxl-parser",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "v0-linear-card-interaction",
+    "display_name": "v0-linear-card-interaction",
+    "umbrella": "other",
+    "description": "v0-linear-card-interaction (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/v0-linear-card-interaction",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "v0-linear-card-interaction",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [],
+      "from_shared": [
+        "audio-utils",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "splash",
+    "display_name": "splash",
+    "umbrella": "other",
+    "description": "gfgf",
+    "url": null,
+    "repo": "https://github.com/kajica2/splash",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "splash",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "v0-cliste-website-navigation",
+    "display_name": "v0-cliste-website-navigation",
+    "umbrella": "programming",
+    "description": "v0-cliste-website-navigation (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/v0-cliste-website-navigation",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "v0-cliste-website-navigation",
+      "notes": ""
+    },
+    "capabilities": [
+      "deploy-vercel",
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [],
+      "from_shared": [
+        "audio-utils",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "sound-creator",
+    "display_name": "sound-creator",
+    "umbrella": "audio",
+    "description": "create sound of the moment",
+    "url": null,
+    "repo": "https://github.com/kajica2/sound-creator",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "sound-creator",
+      "notes": ""
+    },
+    "capabilities": [
+      "pitch-detect",
+      "analyze-spectrum",
+      "produce-report"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "RhythmColorizer",
+    "display_name": "RhythmColorizer",
+    "umbrella": "other",
+    "description": "RhythmColorizer (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/RhythmColorizer",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "RhythmColorizer",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "angular_video",
+    "display_name": "angular_video",
+    "umbrella": "video",
+    "description": "VJ",
+    "url": null,
+    "repo": "https://github.com/kajica2/angular_video",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "angular_video",
+      "notes": ""
+    },
+    "capabilities": [
+      "produce-video",
+      "visualize-3d"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [],
+      "from_shared": [
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "tag_cloud_flight",
+    "display_name": "tag_cloud_flight",
+    "umbrella": "other",
+    "description": "tag_flight",
+    "url": null,
+    "repo": "https://github.com/kajica2/tag_cloud_flight",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "tag_cloud_flight",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest"
+      ]
+    }
+  },
+  {
+    "name": "sonic-weaver",
+    "display_name": "sonic-weaver",
+    "umbrella": "audio",
+    "description": "sound healing app",
+    "url": null,
+    "repo": "https://github.com/kajica2/sonic-weaver",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "sonic-weaver",
+      "notes": ""
+    },
+    "capabilities": [
+      "pitch-detect",
+      "analyze-spectrum",
+      "produce-report"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "vr",
+    "display_name": "vr",
+    "umbrella": "other",
+    "description": "vr (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/vr",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [],
+      "from_shared": [
+        "audio-utils",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "glyph-whisperer-tool",
+    "display_name": "glyph-whisperer-tool",
+    "umbrella": "programming",
+    "description": "glyph-whisperer-tool (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/glyph-whisperer-tool",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "glyph-whisperer-tool",
+      "notes": ""
+    },
+    "capabilities": [
+      "deploy-vercel",
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "docu-render-export",
+    "display_name": "docu-render-export",
+    "umbrella": "other",
+    "description": "docu-render-export (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/docu-render-export",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "docu-render-export",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [],
+      "from_shared": [
+        "audio-utils",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "next-js-saas-starter",
+    "display_name": "next-js-saas-starter",
+    "umbrella": "video",
+    "description": "next-js-saas-starter (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/next-js-saas-starter",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "next-js-saas-starter",
+      "notes": ""
+    },
+    "capabilities": [
+      "produce-video",
+      "visualize-3d"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "EVobvR",
+    "display_name": "EVobvR",
+    "umbrella": "audio",
+    "description": "EVobvR (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/EVobvR",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "EVobvR",
+      "notes": ""
+    },
+    "capabilities": [
+      "pitch-detect",
+      "analyze-spectrum",
+      "produce-report"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "my-dashboard",
+    "display_name": "my-dashboard",
+    "umbrella": "other",
+    "description": "my-dashboard (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/my-dashboard",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "my-dashboard",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "v0-add-mutate-function",
+    "display_name": "v0-add-mutate-function",
+    "umbrella": "other",
+    "description": "v0-add-mutate-function (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/v0-add-mutate-function",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "v0-add-mutate-function",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [],
+      "from_shared": [
+        "audio-utils",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "chatbot",
+    "display_name": "chatbot",
+    "umbrella": "other",
+    "description": "chatbot (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/chatbot",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "sveltekit-boilerplate",
+    "display_name": "sveltekit-boilerplate",
+    "umbrella": "other",
+    "description": "sveltekit-boilerplate (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/sveltekit-boilerplate",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "sveltekit-boilerplate",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "nextjs-ai-chatbot",
+    "display_name": "nextjs-ai-chatbot",
+    "umbrella": "other",
+    "description": "nextjs-ai-chatbot (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/nextjs-ai-chatbot",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "nextjs-ai-chatbot",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "headlesclaude-wp",
+    "display_name": "headlesclaude-wp",
+    "umbrella": "other",
+    "description": "headlesclaude-wp (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/headlesclaude-wp",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "headlesclaude-wp",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "scripts",
+    "display_name": "scripts",
+    "umbrella": "other",
+    "description": "scripts (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/scripts",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "scripts",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "sorterry",
+    "display_name": "sorterry",
+    "umbrella": "other",
+    "description": "sorterry (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/sorterry",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "solvok1",
+    "display_name": "solvok1",
+    "umbrella": "video",
+    "description": "Playful and Colorful One-Page portfolio featuring Parallax effects and animations. Especially designers and/or photographers will love this theme! Built with MDX and Theme UI.",
+    "url": null,
+    "repo": "https://github.com/kajica2/solvok1",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "produce-video",
+      "visualize-3d"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "solvok-games",
+    "display_name": "solvok-games",
+    "umbrella": "video",
+    "description": "Playful and Colorful One-Page portfolio featuring Parallax effects and animations. Especially designers and/or photographers will love this theme! Built with MDX and Theme UI.",
+    "url": null,
+    "repo": "https://github.com/kajica2/solvok-games",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "produce-video",
+      "visualize-3d"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "trumpetkai",
+    "display_name": "trumpetkai",
+    "umbrella": "video",
+    "description": "Playful and Colorful One-Page portfolio featuring Parallax effects and animations. Especially designers and/or photographers will love this theme! Built with MDX and Theme UI.",
+    "url": null,
+    "repo": "https://github.com/kajica2/trumpetkai",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "produce-video",
+      "visualize-3d"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "moving-media",
+    "display_name": "moving-media",
+    "umbrella": "other",
+    "description": "Sample DatoCMS website built with GatsbyJS",
+    "url": null,
+    "repo": "https://github.com/kajica2/moving-media",
+    "visibility": "public",
+    "status": "active",
+    "entity": "research",
+    "availability": "open",
+    "material_license": {
+      "kind": "public",
+      "source": "self-authored",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "WaveServer",
+    "display_name": "WaveServer",
+    "umbrella": "other",
+    "description": "WaveServer (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/WaveServer",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "WaveServer",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [],
+      "from_shared": [
+        "audio-utils",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "WaveAdmin",
+    "display_name": "WaveAdmin",
+    "umbrella": "other",
+    "description": "Admin interface for the server, made with Mithril",
+    "url": null,
+    "repo": "https://github.com/kajica2/WaveAdmin",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "WaveAdmin",
+      "notes": ""
+    },
+    "capabilities": [
+      "publish-channel"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [
+        "design-tokens",
+        "motion-spec"
+      ],
+      "from_shared": [
+        "audio-utils",
+        "mxl-parser",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  },
+  {
+    "name": "WaveMusic",
+    "display_name": "WaveMusic",
+    "umbrella": "music",
+    "description": "WaveMusic (no description)",
+    "url": null,
+    "repo": "https://github.com/kajica2/WaveMusic",
+    "visibility": "private",
+    "status": "active",
+    "entity": "research",
+    "availability": "consulting",
+    "material_license": {
+      "kind": "private",
+      "source": "WaveMusic",
+      "notes": ""
+    },
+    "capabilities": [
+      "transpose",
+      "produce-mxl",
+      "produce-midi"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "components": {
+      "from_framework": [],
+      "from_shared": [
+        "audio-utils",
+        "pdf-ingest",
+        "grader-ui"
+      ]
+    }
+  }
+]
