@@ -1,0 +1,69 @@
+name: watchdog
+
+on:
+  # PR merged: published content changes
+  pull_request:
+    types: [closed]
+    branches: [main]
+  # Push to specific meaningful paths (NOT channels/daily-reports/ which is auto-ingested)
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'research/**'
+      - 'eye-kairi/**'
+      - 'agents/**'
+      - 'devices/**'
+      - 'legacy/**'
+      - 'internal/**'
+      - 'projects.json'
+      - 'agents.json'
+      - 'schema/**'
+      - 'scripts/**'
+      - 'watchdog/**'
+      - '_bootstrap/**'
+  schedule:
+    - cron: '0 */8 * * *'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Message mode'
+        required: true
+        default: 'heartbeat'
+      step:
+        description: 'Which step'
+        required: false
+        default: '?'
+      summary:
+        description: 'Summary'
+        required: false
+        default: ''
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install deps
+        run: npm install ajv ajv-formats --no-audit --no-fund
+      - name: Send watchdog message
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          IMESSAGE_BUDDY: ${{ secrets.IMESSAGE_BUDDY }}
+          WD_MODE: ${{ github.event.inputs.mode || 'heartbeat' }}
+          WD_STEP: ${{ github.event.inputs.step || github.event.pull_request.number || github.event.head_commit.id || '?' }}
+          WD_SUMMARY: ${{ github.event.inputs.summary || github.event.head_commit.message || '' }}
+        # Watchdog is notify-only. If Telegram/iMessage aren't configured, this
+        # is informational, not a failure. Don't break CI on it.
+        run: |
+          node watchdog/watchdog.mjs \
+            --mode "$WD_MODE" \
+            --step "$WD_STEP" \
+            --summary "$WD_SUMMARY" || echo "(watchdog message could not be delivered — configure TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID secrets to enable)"
