@@ -1,0 +1,30 @@
+name: ingest-daily-reports
+
+on:
+  # Daily: ingest any new reports from the HF daily pipeline
+  schedule:
+    - cron: '30 5 * * *'  # 05:30 UTC daily — just before the rebuild at 06:00
+  workflow_dispatch:
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Ingest daily reports from HF
+        run: node channels/daily-reports/ingest.mjs
+      - name: Commit any new reports
+        run: |
+          git config user.name "daily-ingest"
+          git config user.email "ingest@agent.local"
+          git add channels/daily-reports/
+          if [ -n "$(git status --porcelain channels/daily-reports/)" ]; then
+            git commit -m "ingest: $(date -u +%Y-%m-%d) daily reports"
+            git push
+          fi
