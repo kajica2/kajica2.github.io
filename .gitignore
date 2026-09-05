@@ -1,3 +1,6 @@
 dist/
 .DS_Store
 node_modules/
+
+# Node modules if any are added
+node_modules/

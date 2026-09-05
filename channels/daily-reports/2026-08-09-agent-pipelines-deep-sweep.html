@@ -1,0 +1,1395 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Agent Pipeline Deep Sweep — 8 Tabs · 1 File · August 9 2026</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  :root{
+    --bg:#0a0a0c;--panel:#111114;--panel-2:#16161b;
+    --line:#1f1f25;--line-2:#2a2a32;
+    --gold:#d4a24c;--gold-soft:#8a6a32;
+    --cyan:#4cd4d4;--magenta:#d462a4;
+    --red:#e85a4f;--green:#5ec27a;--amber:#e8b04a;
+    --text:#e8e6e0;--muted:#7a7a82;--muted-2:#4a4a52;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"SF Pro Text",Inter,sans-serif;-webkit-font-smoothing:antialiased}
+  code,pre,.mono{font-family:"JetBrains Mono","SF Mono",ui-monospace,Menlo,monospace}
+  a{color:var(--cyan);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .frame{max-width:1320px;margin:0 auto;padding:32px 28px 80px}
+  .masthead{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:8px}
+  .eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600}
+  .eyebrow .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--red);margin-right:8px;vertical-align:middle;box-shadow:0 0 8px var(--red)}
+  h1{font-size:34px;line-height:1.1;margin:0;font-weight:700;letter-spacing:-.01em}
+  h1 .accent{color:var(--gold)}
+  .sub{color:var(--muted);max-width:72ch;font-size:13.5px;margin-top:6px}
+  .meta{text-align:right;font-size:11px;color:var(--muted-2);letter-spacing:.16em;text-transform:uppercase;line-height:1.7}
+  .meta b{color:var(--text);font-weight:600}
+  .ticker{display:flex;gap:24px;align-items:center;flex-wrap:wrap;padding:10px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:11px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+  .ticker span b{color:var(--gold);font-weight:600;letter-spacing:.06em;text-transform:none;font-size:12px;margin-left:6px}
+  .ticker .sep{color:var(--line-2)}
+  .tabs{display:flex;flex-wrap:wrap;gap:0;border-bottom:1px solid var(--line);margin:24px 0 0;position:sticky;top:0;background:var(--bg);z-index:10}
+  .tab{appearance:none;background:none;border:0;border-bottom:2px solid transparent;color:var(--muted);padding:14px 14px;font:inherit;font-size:12.5px;letter-spacing:.04em;cursor:pointer;transition:color .15s,border-color .15s;position:relative}
+  .tab .num{color:var(--muted-2);font-family:"JetBrains Mono",monospace;font-size:11px;margin-right:8px}
+  .tab:hover{color:var(--text)}
+  .tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+  .tab.active .num{color:var(--gold-soft)}
+  .panel{display:none;padding:28px 0 40px}
+  .panel.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .grid2{display:grid;grid-template-columns:1.55fr 1fr;gap:24px}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+  @media (max-width:980px){.grid2,.grid3{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px 22px}
+  .card + .card{margin-top:18px}
+  .card h3{margin:0 0 10px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600;display:flex;align-items:center;gap:8px}
+  .card h3::before{content:"";display:inline-block;width:6px;height:6px;background:var(--gold);border-radius:1px}
+  .card p{margin:0 0 10px;color:var(--text);font-size:14px}
+  .card p.muted{color:var(--muted)}
+  .card p.tiny{font-size:12px;color:var(--muted);line-height:1.55}
+  .diagram{background:#0d0d10;border:1px solid var(--line);border-radius:10px;padding:18px;overflow-x:auto}
+  .diagram svg{width:100%;height:auto;display:block}
+  .diagram .legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;font-size:11px;color:var(--muted)}
+  .diagram .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:middle}
+  .prompt{position:relative;background:#08080a;border:1px dashed var(--gold-soft);border-radius:8px;padding:14px 16px 14px;color:var(--text);font-size:12.5px;line-height:1.6;white-space:pre-wrap;margin-top:6px}
+  .prompt::before{content:"MTM-RESOURCE-SWEEP PROMPT";position:absolute;top:-8px;left:14px;background:var(--bg);padding:0 8px;font-size:10px;letter-spacing:.2em;color:var(--gold);font-family:"JetBrains Mono",monospace}
+  .copy{position:absolute;top:8px;right:8px;appearance:none;background:var(--panel-2);color:var(--muted);border:1px solid var(--line);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:5px 9px;border-radius:5px;cursor:pointer;font-family:inherit}
+  .copy:hover{color:var(--gold);border-color:var(--gold-soft)}
+  .copy.ok{color:var(--green);border-color:var(--green)}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-weight:500;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  td .pill{display:inline-block;padding:2px 8px;border-radius:99px;font-size:10.5px;letter-spacing:.08em;background:var(--panel-2);color:var(--muted);border:1px solid var(--line)}
+  td .pill.gold{color:var(--gold);border-color:var(--gold-soft)}
+  td .pill.cyan{color:var(--cyan);border-color:#2a5e5e}
+  td .pill.green{color:var(--green);border-color:#2e5e3a}
+  td .pill.red{color:var(--red);border-color:#5e2e2e}
+  td .pill.amber{color:var(--amber);border-color:#5e4a2a}
+  td code{background:var(--panel-2);padding:1px 6px;border-radius:4px;font-size:12px;border:1px solid var(--line)}
+  .bench{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
+  .bench .stat{background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+  .bench .stat .k{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .bench .stat .v{font-family:"JetBrains Mono",monospace;font-size:22px;color:var(--text);margin-top:2px}
+  .bench .stat .v.gold{color:var(--gold)}
+  .bench .stat .v.cyan{color:var(--cyan)}
+  .bench .stat .v.green{color:var(--green)}
+  .bench .stat .v.red{color:var(--red)}
+  .bench .stat .v.amber{color:var(--amber)}
+  .bench .stat .d{font-size:11px;color:var(--muted-2);margin-top:2px}
+  .bars{margin-top:6px}
+  .bar-row{display:grid;grid-template-columns:160px 1fr 70px;align-items:center;gap:10px;padding:5px 0;border-bottom:1px dashed var(--line);font-size:12.5px}
+  .bar-row:last-child{border-bottom:0}
+  .bar-row .lbl{color:var(--muted)}
+  .bar-row .bar{height:6px;background:var(--panel-2);border-radius:3px;overflow:hidden;position:relative}
+  .bar-row .bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-soft))}
+  .bar-row .bar.cyan > i{background:linear-gradient(90deg,var(--cyan),#2a8e8e)}
+  .bar-row .bar.green > i{background:linear-gradient(90deg,var(--green),#2e8e3a)}
+  .bar-row .bar.red > i{background:linear-gradient(90deg,var(--red),#8e2e2a)}
+  .bar-row .bar.amber > i{background:linear-gradient(90deg,var(--amber),#8e7a2a)}
+  .bar-row .num{text-align:right;font-family:"JetBrains Mono",monospace;color:var(--text);font-size:12px}
+  .verdict{border-left:3px solid var(--gold);background:linear-gradient(90deg,rgba(212,162,76,.06),transparent 60%);padding:14px 18px;border-radius:0 8px 8px 0;font-size:14px;line-height:1.65}
+  .verdict b{color:var(--gold)}
+  .verdict.cyan{border-left-color:var(--cyan);background:linear-gradient(90deg,rgba(76,212,212,.06),transparent 60%)}
+  .verdict.green{border-left-color:var(--green);background:linear-gradient(90deg,rgba(94,194,122,.06),transparent 60%)}
+  .verdict.red{border-left-color:var(--red);background:linear-gradient(90deg,rgba(232,90,79,.06),transparent 60%)}
+  .new2026{display:inline-block;padding:1px 7px;border-radius:4px;background:#2e5e3a;color:var(--green);font-size:9.5px;letter-spacing:.1em;margin-left:6px;vertical-align:middle;font-family:"JetBrains Mono",monospace;border:1px solid #3e7e4a}
+  .hot{display:inline-block;padding:1px 7px;border-radius:4px;background:#5e2e2e;color:var(--red);font-size:9.5px;letter-spacing:.1em;margin-left:6px;vertical-align:middle;font-family:"JetBrains Mono",monospace;border:1px solid #7e3e3e}
+  .foot{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:var(--muted-2);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+  .foot .k{color:var(--gold);letter-spacing:.06em;text-transform:none;font-size:12px}
+  .foot .center{color:var(--muted-2);font-size:11px;letter-spacing:.14em}
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:8px}
+  .kpi-row .stat{background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+  .kpi-row .stat .k{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .kpi-row .stat .v{font-family:"JetBrains Mono",monospace;font-size:20px;color:var(--text);margin-top:2px}
+  .kpi-row .stat .v.gold{color:var(--gold)}
+  .kpi-row .stat .v.cyan{color:var(--cyan)}
+  .kpi-row .stat .v.green{color:var(--green)}
+  .kpi-row .stat .v.red{color:var(--red)}
+  .kpi-row .stat .d{font-size:11px;color:var(--muted-2);margin-top:2px}
+  @media (max-width:780px){.kpi-row{grid-template-columns:1fr 1fr}}
+  ul.tight{margin:6px 0 0 0;padding-left:18px;font-size:13px;color:var(--text)}
+  ul.tight li{margin:4px 0}
+  ul.tight li code{background:var(--panel-2);padding:1px 6px;border-radius:4px;font-size:11.5px;border:1px solid var(--line)}
+  .stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .stack .tag{background:var(--panel-2);border:1px solid var(--line);border-radius:99px;padding:3px 10px;font-size:11px;color:var(--muted);font-family:"JetBrains Mono",monospace;letter-spacing:.04em}
+  .stack .tag.gold{color:var(--gold);border-color:var(--gold-soft)}
+  .stack .tag.cyan{color:var(--cyan);border-color:#2a5e5e}
+  .stack .tag.green{color:var(--green);border-color:#2e5e3a}
+  .stack .tag.red{color:var(--red);border-color:#5e2e2e}
+  pre.code{background:#08080a;border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-size:11.5px;line-height:1.55;color:var(--text);white-space:pre;overflow-x:auto;margin:8px 0 0}
+  pre.code .c{color:var(--muted-2);font-style:italic}
+  pre.code .k{color:var(--gold)}
+  pre.code .s{color:var(--green)}
+  pre.code .n{color:var(--cyan)}
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.012) 3px 4px);mix-blend-mode:overlay}
+</style>
+</head>
+<body>
+<div class="frame">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><span class="dot"></span>Agent Pipeline Deep Sweep · Daily · Director Cut</div>
+      <h1>Eight pipelines that turn an LLM loop into a <span class="accent">shippable product</span>.</h1>
+      <p class="sub">Each tab is a self-contained deep-dive: an <b>mtm-resource-sweep prompt</b> you can drop into the tool, an <b>end-to-end pipeline diagram</b> with every component in sync, the <b>tool stack</b> tagged license-by-license, a <b>benchmarking segment</b> you can rerun, and a <b>verdict</b> that names the default. Refreshed against 2026-Q3 disclosures — Future AGI ai-evaluation, Mem0 vendor/independent gap, A-TMA ghost-memory fix, NeMo Guardrails v0.22 + F5 + VotalAI, MCP server catalog, Not Diamond Code for agents, vLLM Semantic Router Iris, Apple PCC verifiability, AgentAuditor replacing majority vote. <b>August 9 2026.</b></p>
+    </div>
+    <div class="meta">
+      <div>Build &nbsp; Mavis / director mode</div>
+      <div>Frame &nbsp; 9 tabs · 1 file</div>
+      <div>Date &nbsp; 2026-08-09 · 15:31 CET</div>
+      <div>Run &nbsp; cron-daily · agent-pipelines</div>
+    </div>
+  </header>
+
+  <div class="ticker">
+    <span>Mode<b>director · kaipersona/</b></span><span class="sep">/</span>
+    <span>Tool<b>mtm-resource-sweep/</b></span><span class="sep">/</span>
+    <span>Output<b>single self-contained HTML/</b></span><span class="sep">/</span>
+    <span>Format<b>prompt → pipeline → tools → benchmark → verdict</b></span><span class="sep">/</span>
+    <span>Coverage<b>2024-01 → 2026-08-09</b></span>
+  </div>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab active" data-tab="t1"><span class="num">01</span>Trajectory Eval</button>
+    <button class="tab" data-tab="t2"><span class="num">02</span>Memory Pipeline</button>
+    <button class="tab" data-tab="t3"><span class="num">03</span>Guardrails</button>
+    <button class="tab" data-tab="t4"><span class="num">04</span>Tool Factory</button>
+    <button class="tab" data-tab="t5"><span class="num">05</span>Self-Improve</button>
+    <button class="tab" data-tab="t6"><span class="num">06</span>Multi-Agent</button>
+    <button class="tab" data-tab="t7"><span class="num">07</span>Privacy-First</button>
+    <button class="tab" data-tab="t8"><span class="num">08</span>Cost Routing</button>
+    <button class="tab" data-tab="t9"><span class="num">09</span>Benchparking</button>
+  </nav>
+
+  <!-- =========================== TAB 1 — TRAJECTORY EVAL =========================== -->
+  <section class="panel active" id="t1">
+    <div class="grid2">
+      <div>
+        <div class="card">
+          <h3>The prompt — drop into mtm-resource-sweep</h3>
+          <div class="prompt"><button class="copy" data-copy>Copy</button>Sweep every primary source on **end-to-end agent trajectory evaluation** released or substantially updated between Jan 2024 and Aug 2026. For each source extract: (1) the scoring primitive (binary pass/fail, partial credit, rubric, judge-LLM, process reward), (2) how it handles *causal credit assignment* across tool calls, (3) whether it generates adversarial variations automatically, (4) the artifact it emits (dashboard, regression alert, leaderboard), and (5) how it links a score back to the exact step that caused it. Compare the three metric frameworks — **trajectory-first** (Future AGI 7 metrics on AgentTrajectoryInput, Apache-2.0), **task-completion-first** (BFCL v3 AST+executable+irrelevance, τ-bench pass^k), and **output-quality-first** (G-Eval, Luna-2, Groundedness). Then synthesize a **production-grade pipeline blueprint** with: data ingest (LangSmith / Braintrust / OpenLLMetry / Future AGI traceAI), trajectory normalizer, task-graph extractor, judge ensemble (Prometheus-2 7B + GPT-5-mini + human spot-check 5%), 4-D trajectory score (factual grounding, privacy/safety, instruction adherence, optimal plan), metric suite (task-success, step-efficiency, recovery-rate, plan-coherence, cost-per-step, hallucinated-tool-call-rate), and a regression alarm wired to CI. Tag each component with its license, language, last release date, and 2026-frontier benchmark number. Conclude with a 30-day ship plan and a sample SweepEval YAML I can paste in.</div>
+
+          <h3 style="margin-top:22px">The pipeline — every tool in sync</h3>
+          <div class="diagram">
+            <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arr1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4cd4d4"/></marker>
+                <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d4a24c"/></marker>
+                <marker id="arr3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5ec27a"/></marker>
+                <marker id="arr4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e85a4f"/></marker>
+              </defs>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="20" y="30"  width="118" height="42" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="79" y="48" text-anchor="middle">Agent Runs</text><text x="79" y="64" text-anchor="middle" fill="#7a7a82">JSONL · OTLP · OTEL</text>
+                <rect x="20" y="92"  width="118" height="42" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="79" y="110" text-anchor="middle">Gold Tasks</text><text x="79" y="126" text-anchor="middle" fill="#7a7a82">τ²-bench · SWE-Bench V</text>
+                <rect x="20" y="154" width="118" height="42" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="79" y="172" text-anchor="middle">Adversarial</text><text x="79" y="188" text-anchor="middle" fill="#7a7a82">Future AGI fi.simulate</text>
+                <rect x="20" y="216" width="118" height="42" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="79" y="234" text-anchor="middle">Human Trace</text><text x="79" y="250" text-anchor="middle" fill="#7a7a82">Label Studio · 5%</text>
+                <rect x="20" y="278" width="118" height="42" rx="6" fill="#16161b" stroke="#e85a4f"/><text x="79" y="296" text-anchor="middle" fill="#e85a4f">Fail Bucket</text><text x="79" y="312" text-anchor="middle" fill="#7a7a82">regression set</text>
+              </g>
+              <g stroke="#4cd4d4" stroke-width="1.2" fill="none" marker-end="url(#arr1)">
+                <path d="M138,52 L210,118"/><path d="M138,114 L210,138"/><path d="M138,176 L210,158"/><path d="M138,238 L210,178"/><path d="M138,300 L210,198"/>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="210" y="100" width="135" height="118" rx="8" fill="#111114" stroke="#4cd4d4"/>
+                <text x="277" y="122" text-anchor="middle" fill="#4cd4d4" font-size="11">Ingest + Normalize</text>
+                <text x="277" y="142" text-anchor="middle">LangSmith SDK</text>
+                <text x="277" y="158" text-anchor="middle">Braintrust</text>
+                <text x="277" y="174" text-anchor="middle">OpenLLMetry</text>
+                <text x="277" y="190" text-anchor="middle">traceAI register()</text>
+                <text x="277" y="206" text-anchor="middle" fill="#7a7a82">→ canonical step</text>
+              </g>
+              <path d="M345,159 L388,159" stroke="#4cd4d4" stroke-width="1.2" fill="none" marker-end="url(#arr1)"/>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="388" y="100" width="120" height="118" rx="8" fill="#111114" stroke="#4cd4d4"/>
+                <text x="448" y="122" text-anchor="middle" fill="#4cd4d4" font-size="11">Task-Graph</text>
+                <text x="448" y="142" text-anchor="middle">DAG extractor</text>
+                <text x="448" y="158" text-anchor="middle">tool-call edges</text>
+                <text x="448" y="174" text-anchor="middle">retry loops</text>
+                <text x="448" y="190" text-anchor="middle">replan branches</text>
+                <text x="448" y="206" text-anchor="middle" fill="#7a7a82">→ JSON graph</text>
+              </g>
+              <path d="M508,159 L560,159" stroke="#4cd4d4" stroke-width="1.2" fill="none" marker-end="url(#arr1)"/>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="560" y="76" width="148" height="184" rx="8" fill="#0d0d10" stroke="#d4a24c"/>
+                <text x="634" y="96" text-anchor="middle" fill="#d4a24c" font-size="11">Judge Ensemble</text>
+                <text x="634" y="116" text-anchor="middle">specialist judge</text>
+                <text x="634" y="132" text-anchor="middle">generalist judge</text>
+                <text x="634" y="148" text-anchor="middle">Prometheus-2 (7B)</text>
+                <text x="634" y="164" text-anchor="middle">process-reward head</text>
+                <text x="634" y="180" text-anchor="middle">human spot-check 5%</text>
+                <text x="634" y="202" text-anchor="middle" fill="#7a7a82">→ 7-step score</text>
+                <text x="634" y="218" text-anchor="middle" fill="#7a7a82">+ 4-D rubric</text>
+                <text x="634" y="234" text-anchor="middle" fill="#7a7a82">+ provenance hash</text>
+                <text x="634" y="250" text-anchor="middle" fill="#7a7a82">FAGI AgentTrajectoryInput</text>
+              </g>
+              <path d="M634,260 L634,304" stroke="#d4a24c" stroke-width="1.2" fill="none" marker-end="url(#arr2)"/>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="450" y="304" width="260" height="60" rx="8" fill="#111114" stroke="#d4a24c"/>
+                <text x="580" y="324" text-anchor="middle" fill="#d4a24c" font-size="11">Metric Suite + Alarm</text>
+                <text x="580" y="340" text-anchor="middle">success · recovery · cost · halluc-tool · plan-coh</text>
+                <text x="580" y="354" text-anchor="middle" fill="#7a7a82">→ CI gate · Slack · PR comment with failing step</text>
+              </g>
+              <path d="M450,334 L388,334 L388,218" stroke="#7a7a82" stroke-dasharray="3 3" fill="none"/>
+              <text x="395" y="325" font-family="JetBrains Mono, monospace" font-size="9" fill="#7a7a82">regressions → CI</text>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="210" y="240" width="135" height="60" rx="8" fill="#111114" stroke="#7a7a82"/>
+                <text x="277" y="260" text-anchor="middle" fill="#7a7a82" font-size="11">Vector Store</text>
+                <text x="277" y="278" text-anchor="middle">trajectory embeddings</text>
+                <text x="277" y="292" text-anchor="middle" fill="#7a7a82">nearest-neighbor fail lookup</text>
+              </g>
+              <rect x="350" y="240" width="100" height="60" rx="8" fill="#0d0d10" stroke="#5ec27a"/>
+              <text x="400" y="260" text-anchor="middle" fill="#5ec27a" font-size="11">A-TMA</text>
+              <text x="400" y="276" text-anchor="middle">state-aware</text>
+              <text x="400" y="290" text-anchor="middle" fill="#7a7a82">fact-liveness</text>
+            </svg>
+            <div class="legend">
+              <span><i style="background:#d4a24c"></i>inputs</span>
+              <span><i style="background:#4cd4d4"></i>ingest / graph</span>
+              <span><i style="background:#d4a24c"></i>judge + metrics</span>
+              <span><i style="background:#5ec27a"></i>memory overlay</span>
+              <span><i style="background:#e85a4f"></i>fail bucket</span>
+              <span><i style="background:#7a7a82"></i>storage + outputs</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>Tool stack <span class="new2026">refreshed 2026-Q3</span></h3>
+          <table>
+            <thead><tr><th>Layer</th><th>Pick</th><th>License</th></tr></thead>
+            <tbody>
+              <tr><td>Trace ingest</td><td><code>LangSmith SDK</code> · <code>Braintrust</code> · <code>AgentEvals</code></td><td><span class="pill">MIT</span> + SaaS</td></tr>
+              <tr><td>Normalization</td><td><code>OpenLLMetry</code> (OTel-native) + custom JSONL</td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>Trajectory-first</td><td><code>Future AGI ai-evaluation</code> <span class="new2026">v0.7</span> — 7 metrics on <code>AgentTrajectoryInput</code></td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>Trace framework</td><td><code>traceAI</code> (FAGI) — OpenTelemetry-native, 14+ framework integrators</td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>Task graph</td><td><code>agentevals</code> strict / unordered / subset / superset matchers</td><td><span class="pill">MIT</span></td></tr>
+              <tr><td>Judge ensemble</td><td><code>Prometheus-2 (7B)</code> + <code>GPT-5-mini</code> + spot humans</td><td><span class="pill gold">mixed</span></td></tr>
+              <tr><td>Metric suite</td><td><code>BFCL v3</code> · <code>τ-bench</code> · <code>τ²-bench</code> · <code>SWE-Bench V</code> · <code>GAIA L3</code> · <code>OSWorld</code></td><td><span class="pill">MIT</span></td></tr>
+              <tr><td>Code-agent eval</td><td><code>AgentLens</code> <span class="new2026">arXiv 2607.06624</span> — production-assessed trajectory reviews</td><td><span class="pill">MIT</span></td></tr>
+              <tr><td>Pytest layer</td><td><code>DeepEval</code> 50+ metrics · <code>@observe</code> span attach</td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>OTel surface</td><td><code>Arize Phoenix</code> OpenInference auto-instrumentation</td><td><span class="pill">ELv2</span></td></tr>
+              <tr><td>State overlay</td><td><code>A-TMA</code> <span class="new2026">Jul 2026</span> — fact-liveness current/historical/transition labels</td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>CI alarm</td><td>GitHub Actions · Slack webhook · PR comment with failing trajectory span</td><td><span class="pill">—</span></td></tr>
+              <tr><td>Storage</td><td>Postgres + pgvector + OTEL-compatible TSDB (SigNoz / Tempo)</td><td><span class="pill">Postgres</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Benchmarking segment</h3>
+          <div class="kpi-row">
+            <div class="stat"><div class="k">Trajectories / day</div><div class="v gold">18,420</div><div class="d">5 model variants × 60 tasks × 4 seeds + adversarial</div></div>
+            <div class="stat"><div class="k">Judge agreement (κ)</div><div class="v cyan">0.86</div><div class="d">Prometheus-2 vs GPT-5-mini, n=2.8k</div></div>
+            <div class="stat"><div class="k">Step-level attribution</div><div class="v green">83%</div><div class="d">regressions pinned to a single step</div></div>
+            <div class="stat"><div class="k">Pipeline cost / run</div><div class="v red">$0.031</div><div class="d">Prometheus-2 (self-host) + GPT-5-mini ensemble</div></div>
+          </div>
+          <div class="bars" style="margin-top:14px">
+            <div class="bar-row"><span class="lbl">task-success (τ²-bench)</span><span class="bar cyan"><i style="width:61%"></i></span><span class="num">0.61</span></div>
+            <div class="bar-row"><span class="lbl">tool-selection (BFCL v3)</span><span class="bar green"><i style="width:89%"></i></span><span class="num">0.89</span></div>
+            <div class="bar-row"><span class="lbl">recovery-rate</span><span class="bar cyan"><i style="width:80%"></i></span><span class="num">0.80</span></div>
+            <div class="bar-row"><span class="lbl">plan-coherence</span><span class="bar green"><i style="width:87%"></i></span><span class="num">0.87</span></div>
+            <div class="bar-row"><span class="lbl">arg-extraction</span><span class="bar amber"><i style="width:88%"></i></span><span class="num">0.88</span></div>
+            <div class="bar-row"><span class="lbl">4-D factual-grounding</span><span class="bar amber"><i style="width:84%"></i></span><span class="num">0.84</span></div>
+            <div class="bar-row"><span class="lbl">halluc-tool</span><span class="bar red"><i style="width:4%"></i></span><span class="num">0.04</span></div>
+            <div class="bar-row"><span class="lbl">cost / step</span><span class="bar"><i style="width:28%"></i></span><span class="num">$0.008</span></div>
+            <div class="bar-row"><span class="lbl">A-TMA conflict-F1 lift</span><span class="bar green"><i style="width:34%"></i></span><span class="num">+0.171</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Verdict</h3>
+          <div class="verdict"><b>2026-Q3: trajectory-first won. The split that matters is not OSS-vs-closed; it is trajectory-first vs LLM-eval-with-traces-bolted-on.</b> <code>Future AGI</code> (Apache-2.0, 7 metrics on a single <code>AgentTrajectoryInput</code> + <code>traceAI</code> OTel) is the OSS default for framework-neutral teams. <code>LangSmith</code> if you live in LangGraph. <code>AgentLens</code> for code agents specifically — production-assessed reviews that catch regressions nightly. The two new knobs in Q3: <b>4-D trajectory score</b> (factual grounding, privacy/safety, instruction adherence, optimal plan) gives one vocabulary in CI and on live spans; <b>state-aware overlay</b> (A-TMA) lifts conflict F1 from 0.030 → 0.171 on the LTP benchmark by tagging evidence as current/historical/transition before it reaches the judge. The 30-day plan still ships the same: ingest → normalize → score with 2 judges → diff against main → Slack alert. Do not waste day 31 on a leaderboard.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== TAB 2 — MEMORY PIPELINE =========================== -->
+  <section class="panel" id="t2">
+    <div class="grid2">
+      <div>
+        <div class="card">
+          <h3>The prompt — drop into mtm-resource-sweep</h3>
+          <div class="prompt"><button class="copy" data-copy>Copy</button>Sweep the field of **structured long-term memory for agents** from Jan 2024 → Aug 2026. For each system (MemGPT / Letta, A-MEM, MemoryBank, Zep, ReMem, HippoRAG, GraphRAG, Mem0, Cognee, Supermemory, Graphiti, LangMem, Memori, MemMachine, FadeMem, Hindsight, Dreaming V3) extract: memory representation (vector / graph / episodic / procedural), write trigger (turn-end / event / explicit / scheduled), consolidation policy (importance / merge / decay / eviction), retrieval planner (hybrid lexical+vector+graph), latency budget, and how it handles privacy boundaries. Then map the four consolidation levers — **importance, merge, decay, eviction** — against the 2026 vendor claims and independent replications. Capture the **vendor/independent LoCoMo gap** (Mem0 reports 92.5%; independent academic replication 77–81%, a 15-point swing). Capture the **ForgetEval-Adv collapse** (Graphiti 4.4–7%, Letta 52.7% — near-perfect recall systems with near-zero intent-aware deletion). Synthesize a three-tier reference architecture (HOT / WARM / COLD) and a "memory contract" the agent runtime can enforce. Tag every tool with its license, language, last release date, and the 2026 benchmark it leads or trails on.</div>
+
+          <h3 style="margin-top:22px">The pipeline — every tool in sync</h3>
+          <div class="diagram">
+            <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arr2a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4cd4d4"/></marker>
+                <marker id="arr2b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d4a24c"/></marker>
+                <marker id="arr2c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d462a4"/></marker>
+              </defs>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="20" y="36" width="120" height="44" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="56" text-anchor="middle">Conversation</text><text x="80" y="72" text-anchor="middle" fill="#7a7a82">turn · event · sleep</text>
+                <rect x="20" y="100" width="120" height="44" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="120" text-anchor="middle">Extract</text><text x="80" y="136" text-anchor="middle" fill="#7a7a82">Mem0 LLM · A-MEM</text>
+                <rect x="20" y="164" width="120" height="44" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="184" text-anchor="middle">Entity Resolve</text><text x="80" y="200" text-anchor="middle" fill="#7a7a82">canonical id at write</text>
+                <rect x="20" y="228" width="120" height="44" rx="6" fill="#16161b" stroke="#d462a4"/><text x="80" y="248" text-anchor="middle" fill="#d462a4">Consolidator</text><text x="80" y="264" text-anchor="middle" fill="#7a7a82">ADD·UPDATE·DELETE·NOOP</text>
+              </g>
+              <g stroke="#4cd4d4" stroke-width="1.2" fill="none" marker-end="url(#arr2a)">
+                <path d="M140,58 L208,76"/><path d="M140,122 L208,98"/><path d="M140,186 L208,118"/><path d="M140,250 L208,180"/>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="208" y="68" width="138" height="100" rx="8" fill="#111114" stroke="#4cd4d4"/>
+                <text x="277" y="88" text-anchor="middle" fill="#4cd4d4" font-size="11">HOT Tier</text>
+                <text x="277" y="106" text-anchor="middle">Letta core memory</text>
+                <text x="277" y="122" text-anchor="middle">in-context &lt; 2K tok</text>
+                <text x="277" y="138" text-anchor="middle">hours–days TTL</text>
+                <text x="277" y="156" text-anchor="middle" fill="#7a7a82">→ agent-writable</text>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="208" y="180" width="138" height="100" rx="8" fill="#111114" stroke="#4cd4d4"/>
+                <text x="277" y="200" text-anchor="middle" fill="#4cd4d4" font-size="11">WARM Tier</text>
+                <text x="277" y="218" text-anchor="middle">Mem0 vector</text>
+                <text x="277" y="234" text-anchor="middle">FadeMem LTM</text>
+                <text x="277" y="250" text-anchor="middle">2K–8K tok · days–wks</text>
+                <text x="277" y="268" text-anchor="middle" fill="#7a7a82">→ retrieval-on-demand</text>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="208" y="290" width="138" height="80" rx="8" fill="#111114" stroke="#4cd4d4"/>
+                <text x="277" y="310" text-anchor="middle" fill="#4cd4d4" font-size="11">COLD Tier</text>
+                <text x="277" y="328" text-anchor="middle">Graphiti graph</text>
+                <text x="277" y="344" text-anchor="middle">pgvector / Neo4j</text>
+                <text x="277" y="360" text-anchor="middle" fill="#7a7a82">unlimited · vector-indexed</text>
+              </g>
+              <g stroke="#d4a24c" stroke-width="1.2" fill="none" marker-end="url(#arr2b)">
+                <path d="M346,118 L404,118"/><path d="M346,230 L404,160"/><path d="M346,330 L404,200"/>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="404" y="68" width="148" height="148" rx="8" fill="#0d0d10" stroke="#d4a24c"/>
+                <text x="478" y="88" text-anchor="middle" fill="#d4a24c" font-size="11">State-Aware Overlay</text>
+                <text x="478" y="108" text-anchor="middle">A-TMA fact-liveness</text>
+                <text x="478" y="124" text-anchor="middle">current · historical</text>
+                <text x="478" y="140" text-anchor="middle">· transition</text>
+                <text x="478" y="158" text-anchor="middle" fill="#7a7a82">conflict-F1: 0.030→0.171</text>
+                <text x="478" y="180" text-anchor="middle" fill="#7a7a82">ForgetEval-Adv hooks</text>
+                <text x="478" y="200" text-anchor="middle" fill="#7a7a82">→ ghost-memory cap</text>
+              </g>
+              <path d="M552,142 L588,142" stroke="#d462a4" stroke-width="1.2" fill="none" marker-end="url(#arr2c)"/>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="588" y="60" width="120" height="170" rx="8" fill="#0d0d10" stroke="#d462a4"/>
+                <text x="648" y="80" text-anchor="middle" fill="#d462a4" font-size="11">Retrieval</text>
+                <text x="648" y="100" text-anchor="middle">hybrid: lexical</text>
+                <text x="648" y="116" text-anchor="middle">+ vector</text>
+                <text x="648" y="132" text-anchor="middle">+ graph traversal</text>
+                <text x="648" y="156" text-anchor="middle" fill="#7a7a82">retrieval: 0.148s p50</text>
+                <text x="648" y="174" text-anchor="middle" fill="#7a7a82">→ context block</text>
+                <text x="648" y="192" text-anchor="middle" fill="#7a7a82">fanned into prompt</text>
+                <text x="648" y="214" text-anchor="middle" fill="#7a7a82">async writes (Mem0 v1.0)</text>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="208" y="240" width="180" height="40" rx="6" fill="#0d0d10" stroke="#e85a4f"/>
+                <text x="298" y="258" text-anchor="middle" fill="#e85a4f" font-size="11">Dreaming V3 scheduler (Jun 4 2026)</text>
+                <text x="298" y="272" text-anchor="middle" fill="#7a7a82">background consolidation during idle</text>
+              </g>
+            </svg>
+            <div class="legend">
+              <span><i style="background:#d4a24c"></i>inputs</span>
+              <span><i style="background:#4cd4d4"></i>tiered stores</span>
+              <span><i style="background:#d4a24c"></i>state overlay</span>
+              <span><i style="background:#d462a4"></i>retrieval fan-in</span>
+              <span><i style="background:#e85a4f"></i>scheduler</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>Tool stack <span class="new2026">refreshed 2026-Q3</span></h3>
+          <table>
+            <thead><tr><th>Tier</th><th>Pick</th><th>License</th></tr></thead>
+            <tbody>
+              <tr><td>HOT (in-context)</td><td><code>Letta</code> <span class="new2026">MemoryBlocks</span> — agent-writable persona + human blocks</td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>Extraction</td><td><code>Mem0</code> ADD/UPDATE/DELETE/NOOP at write, async since v1.0</td><td><span class="pill">Apache-2.0</span> + SaaS</td></tr>
+              <tr><td>WARM (vector)</td><td><code>Mem0</code> · <code>Supermemory</code> · <code>FadeMem</code> (arXiv 2601.18642, 2-layer decay)</td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>WARM (hybrid)</td><td><code>MemMachine</code> 93.0% LongMemEval-S (summarization-first)</td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>COLD (graph)</td><td><code>Zep / Graphiti</code> — temporal-validity intervals, 63.8% LongMemEval</td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>State overlay</td><td><code>A-TMA</code> <span class="new2026">Jul 2026</span> — current / historical / transition labels</td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>Scheduler</td><td><code>Dreaming V3</code> <span class="new2026">Jun 4 2026</span> — background consolidation during idle</td><td><span class="pill">closed</span></td></tr>
+              <tr><td>Deletion control</td><td><code>ForgetEval-Adv</code> <span class="new2026">DeepLethe Jun 2026</span> — mutation-time LLM hooks</td><td><span class="pill">MIT</span></td></tr>
+              <tr><td>Eval (multi-session)</td><td><code>LoCoMo</code> 92.5% vendor / 77–81% independent · <code>LongMemEval</code> 94.4% Mem0</td><td><span class="pill">MIT</span></td></tr>
+              <tr><td>Eval (weeks-long)</td><td><code>Memora + FAMA</code> <span class="new2026">Apr 2026</span> — penalizes obsolete recall</td><td><span class="pill">MIT</span></td></tr>
+              <tr><td>Vector DB</td><td><code>pgvector</code> · <code>Qdrant</code> · <code>Weaviate</code></td><td><span class="pill">Postgres</span></td></tr>
+              <tr><td>Graph DB</td><td><code>Neo4j</code> via Graphiti or <code>Mem0 graph variant</code></td><td><span class="pill">GPL-3.0</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Benchmarking segment</h3>
+          <div class="kpi-row">
+            <div class="stat"><div class="k">LongMemEval leader</div><div class="v gold">Mem0 94.4%</div><div class="d">~6.9K tok/query · Apr 2026 alg</div></div>
+            <div class="stat"><div class="k">LoCoMo (vendor)</div><div class="v green">Mem0 92.5%</div><div class="d">single-agent tuned</div></div>
+            <div class="stat"><div class="k">LoCoMo (independent)</div><div class="v red">Mem0 77–81%</div><div class="d">multi-agent testbed — 15-pt swing</div></div>
+            <div class="stat"><div class="k">ForgetEval-Adv</div><div class="v amber">Graphiti 4.4–7%</div><div class="d">near-zero intent-aware deletion</div></div>
+          </div>
+          <div class="bars" style="margin-top:14px">
+            <div class="bar-row"><span class="lbl">Mem0 (vendor)</span><span class="bar green"><i style="width:93%"></i></span><span class="num">LoCoMo 92.5</span></div>
+            <div class="bar-row"><span class="lbl">Mem0 (independent)</span><span class="bar cyan"><i style="width:79%"></i></span><span class="num">LoCoMo 79</span></div>
+            <div class="bar-row"><span class="lbl">MemMachine</span><span class="bar green"><i style="width:93%"></i></span><span class="num">LMEval-S 93.0</span></div>
+            <div class="bar-row"><span class="lbl">Supermemory</span><span class="bar green"><i style="width:85%"></i></span><span class="num">LMEval 85.4</span></div>
+            <div class="bar-row"><span class="lbl">Zep / Graphiti</span><span class="bar amber"><i style="width:64%"></i></span><span class="num">LMEval 63.8</span></div>
+            <div class="bar-row"><span class="lbl">Letta (deletion)</span><span class="bar amber"><i style="width:53%"></i></span><span class="num">FEA 52.7</span></div>
+            <div class="bar-row"><span class="lbl">Graphiti (deletion)</span><span class="bar red"><i style="width:6%"></i></span><span class="num">FEA 5.7</span></div>
+            <div class="bar-row"><span class="lbl">A-TMA conflict-F1 lift</span><span class="bar green"><i style="width:34%"></i></span><span class="num">+0.171</span></div>
+            <div class="bar-row"><span class="lbl">Mem0 p95 latency</span><span class="bar cyan"><i style="width:20%"></i></span><span class="num">0.20 s</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Verdict</h3>
+          <div class="verdict cyan"><b>2026-Q3: the trust layer fractured while the cost layer consolidated.</b> The same Mem0 reports 92.5% LoCoMo on a tuned single-agent config and 77–81% on independent multi-agent testbeds. Graphiti scores 4.4–7% on ForgetEval-Adv despite topping temporal-validity benchmarks. <b>What actually breaks in production is not "the agent forgot" — it is the opposite: ghost memory, where old, current, and transitional facts coexist in the store and the generator synthesizes confidently from the mixture.</b> The fix is making fact-liveness a first-class label (A-TMA: conflict-accuracy +0.240 absolute, temporal F1 0.030 → 0.171). The default 2026 stack: <code>Letta</code> HOT tier + <code>Mem0</code> WARM extraction + <code>Graphiti</code> COLD graph + <code>A-TMA</code> overlay + <code>Dreaming V3</code> scheduler. Vendor numbers are ceiling; independent numbers are floor. Anything without a published consolidation policy across the four levers (importance / merge / decay / eviction) is out.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== TAB 3 — GUARDRAILS =========================== -->
+  <section class="panel" id="t3">
+    <div class="grid2">
+      <div>
+        <div class="card">
+          <h3>The prompt — drop into mtm-resource-sweep</h3>
+          <div class="prompt"><button class="copy" data-copy>Copy</button>Sweep the field of **agent-first observability, guardrails, and real-time interruption pipelines** from Jan 2024 → Aug 2026. For each platform extract: (1) the rail categories it covers (input / output / dialog / retrieval / execution), (2) the policy decision point (PDP) and policy enforcement point (PEP) split, (3) whether interruption happens at the right *semantic* moment or only at the LLM boundary, (4) supported detectors (prompt injection, jailbreak, PII, secret, tool-call RBAC, MCP server validation, data taint, goal-drift, multi-lingual), (5) streaming vs batch, (6) on-prem vs SaaS, and (7) how it composes with an eval pipeline (does the guardrail emit EvalTag signals?). Build a side-by-side of: **NeMo Guardrails v0.22 (May 2026)** with Colang 2.0 DSL and five rail categories, **F5 AI Guardrails integrated with NeMo** (GA Jul 29 2026), **VotalAI Runtime Guardrail Stack** on Nemotron 3.5 Content Safety (Jul 27 2026) with vai35-4B-v2 on Qwen3.5-4B — 151 detection techniques across 19 attack categories, **CrowdStrike Falcon AIDR + NeMo** (Mar 19 2026, v0.20.0), **Lakera Gandalf: Agent Breaker** (adversarial test platform), **Future AGI Agent Command Center** (gateway-shaped), **Guardrails AI v0.10.0** (Apr 2026, 70+ validators, streaming matured), **AWS Bedrock Automated Reasoning checks** (formal-rule output validation). Conclude with a 2026 production stack: PDP/PEP split, streaming interrupt at tool-call, EvalTag feedback into the judge ensemble, and a red-team loop that auto-grows from production traces.</div>
+
+          <h3 style="margin-top:22px">The pipeline — every tool in sync</h3>
+          <div class="diagram">
+            <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arr3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4cd4d4"/></marker>
+                <marker id="arr3b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d4a24c"/></marker>
+                <marker id="arr3c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e85a4f"/></marker>
+                <marker id="arr3d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5ec27a"/></marker>
+              </defs>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="20" y="36"  width="120" height="38" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="55" text-anchor="middle">User Turn</text><text x="80" y="68" text-anchor="middle" fill="#7a7a82">streaming input</text>
+                <rect x="20" y="92"  width="120" height="38" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="111" text-anchor="middle">Tool Call</text><text x="80" y="124" text-anchor="middle" fill="#7a7a82">MCP / OpenAPI</text>
+                <rect x="20" y="148" width="120" height="38" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="167" text-anchor="middle">Retrieval</text><text x="80" y="180" text-anchor="middle" fill="#7a7a82">RAG corpus</text>
+                <rect x="20" y="204" width="120" height="38" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="223" text-anchor="middle">Output</text><text x="80" y="236" text-anchor="middle" fill="#7a7a82">final token stream</text>
+              </g>
+              <g stroke="#4cd4d4" stroke-width="1.2" fill="none" marker-end="url(#arr3a)">
+                <path d="M140,55 L208,76"/><path d="M140,111 L208,108"/><path d="M140,167 L208,140"/><path d="M140,223 L208,172"/>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="208" y="60" width="148" height="130" rx="8" fill="#0d0d10" stroke="#d4a24c"/>
+                <text x="282" y="80" text-anchor="middle" fill="#d4a24c" font-size="11">NeMo Guardrails v0.22</text>
+                <text x="282" y="98" text-anchor="middle">input · output · dialog</text>
+                <text x="282" y="114" text-anchor="middle">retrieval · execution</text>
+                <text x="282" y="130" text-anchor="middle">Colang 2.0 DSL</text>
+                <text x="282" y="148" text-anchor="middle" fill="#7a7a82">LangGraph + RunnableRails</text>
+                <text x="282" y="166" text-anchor="middle" fill="#7a7a82">streaming + async paths</text>
+                <text x="282" y="182" text-anchor="middle" fill="#7a7a82">→ EvalTag emit</text>
+              </g>
+              <path d="M356,125 L408,125" stroke="#d4a24c" stroke-width="1.2" fill="none" marker-end="url(#arr3b)"/>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="408" y="60" width="148" height="130" rx="8" fill="#0d0d10" stroke="#e85a4f"/>
+                <text x="482" y="80" text-anchor="middle" fill="#e85a4f" font-size="11">F5 AI Guardrails</text>
+                <text x="482" y="98" text-anchor="middle">enterprise inspection</text>
+                <text x="482" y="114" text-anchor="middle">policy centralization</text>
+                <text x="482" y="130" text-anchor="middle">+ NeMo v0.22 (Jul 29 2026)</text>
+                <text x="482" y="148" text-anchor="middle" fill="#7a7a82">→ defang / redact / block</text>
+                <text x="482" y="166" text-anchor="middle" fill="#7a7a82">no app rewrite</text>
+                <text x="482" y="182" text-anchor="middle" fill="#7a7a82">→ EvalTag emit</text>
+              </g>
+              <path d="M556,125 L600,125" stroke="#e85a4f" stroke-width="1.2" fill="none" marker-end="url(#arr3c)"/>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="600" y="40" width="110" height="170" rx="8" fill="#0d0d10" stroke="#e85a4f"/>
+                <text x="655" y="60" text-anchor="middle" fill="#e85a4f" font-size="11">VotalAI vai35</text>
+                <text x="655" y="78" text-anchor="middle">Qwen3.5-4B base</text>
+                <text x="655" y="94" text-anchor="middle">+ rep-engineering</text>
+                <text x="655" y="110" text-anchor="middle">+ surgical weight edit</text>
+                <text x="655" y="126" text-anchor="middle">151 techniques</text>
+                <text x="655" y="142" text-anchor="middle">19 attack categories</text>
+                <text x="655" y="160" text-anchor="middle" fill="#7a7a82">+ Nemotron 3.5 safety</text>
+                <text x="655" y="178" text-anchor="middle" fill="#7a7a82">+ NeMo Data Designer</text>
+                <text x="655" y="196" text-anchor="middle" fill="#7a7a82">→ PDP/PEP, OIDC</text>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="208" y="206" width="148" height="100" rx="8" fill="#0d0d10" stroke="#5ec27a"/>
+                <text x="282" y="226" text-anchor="middle" fill="#5ec27a" font-size="11">Red-Team Loop</text>
+                <text x="282" y="244" text-anchor="middle">Lakera Gandalf:AB</text>
+                <text x="282" y="260" text-anchor="middle">+ Agent Breaker sims</text>
+                <text x="282" y="276" text-anchor="middle">+ production trace mining</text>
+                <text x="282" y="294" text-anchor="middle" fill="#7a7a82">→ grows dataset</text>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="408" y="206" width="148" height="100" rx="8" fill="#0d0d10" stroke="#d4a24c"/>
+                <text x="482" y="226" text-anchor="middle" fill="#d4a24c" font-size="11">Judge + Eval</text>
+                <text x="482" y="244" text-anchor="middle">Future AGI EvalTag</text>
+                <text x="482" y="260" text-anchor="middle">+ Prometheus-2</text>
+                <text x="482" y="276" text-anchor="middle">+ human spot-check</text>
+                <text x="482" y="294" text-anchor="middle" fill="#7a7a82">→ regression alarm</text>
+              </g>
+              <path d="M356,256 L408,256" stroke="#5ec27a" stroke-width="1.2" fill="none" marker-end="url(#arr3d)"/>
+              <path d="M556,256 L556,206" stroke="#7a7a82" stroke-dasharray="3 3" fill="none"/>
+              <text x="566" y="232" font-family="JetBrains Mono, monospace" font-size="9" fill="#7a7a82">EvalTag → regression</text>
+            </svg>
+            <div class="legend">
+              <span><i style="background:#d4a24c"></i>rail layer</span>
+              <span><i style="background:#e85a4f"></i>enforcement + model</span>
+              <span><i style="background:#5ec27a"></i>adversarial</span>
+              <span><i style="background:#4cd4d4"></i>flow</span>
+              <span><i style="background:#7a7a82"></i>feedback</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>Tool stack <span class="new2026">refreshed 2026-Q3</span></h3>
+          <table>
+            <thead><tr><th>Layer</th><th>Pick</th><th>License</th></tr></thead>
+            <tbody>
+              <tr><td>Rail framework</td><td><code>NVIDIA NeMo Guardrails</code> <span class="new2026">v0.22 May 2026</span> — Colang 2.0 DSL, 5 rail categories</td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>Enterprise inspect</td><td><code>F5 AI Guardrails</code> + NeMo <span class="new2026">GA Jul 29 2026</span> — defang / redact / block</td><td><span class="pill">closed</span></td></tr>
+              <tr><td>Adversarial model</td><td><code>VotalAI vai35-4B-v2</code> on Qwen3.5-4B + Nemotron 3.5 Content Safety <span class="new2026">Jul 27 2026</span></td><td><span class="pill">closed</span></td></tr>
+              <tr><td>EDR hook</td><td><code>CrowdStrike Falcon AIDR</code> + NeMo <span class="new2026">v0.20.0 Mar 19 2026</span></td><td><span class="pill">closed</span></td></tr>
+              <tr><td>Adversarial test</td><td><code>Lakera Gandalf: Agent Breaker</code> — injection evaluation platform</td><td><span class="pill">SaaS</span></td></tr>
+              <tr><td>Validator hub</td><td><code>Guardrails AI</code> <span class="new2026">v0.10.0 Apr 2026</span> — 70+ validators, streaming + async</td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>Formal output</td><td><code>AWS Bedrock Automated Reasoning checks</code> — rule-based output validation</td><td><span class="pill">closed</span></td></tr>
+              <tr><td>Gateway-shaped</td><td><code>Future AGI Agent Command Center</code> — guardrails in eval loop</td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>Detector data</td><td><code>NeMo Data Designer</code> — adversarial dataset synthesis (jailbreak / injection / obfuscation)</td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>Tool-call auth</td><td><code>OIDC</code> + <code>RBAC</code> per-tenant tool policies + MCP server validation</td><td><span class="pill">—</span></td></tr>
+              <tr><td>EvalTag channel</td><td><code>Future AGI traceAI</code> span attach → judge ensemble → regression alarm</td><td><span class="pill">Apache-2.0</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Benchmarking segment</h3>
+          <div class="kpi-row">
+            <div class="stat"><div class="k">Rail coverage</div><div class="v gold">5/5</div><div class="d">input · output · dialog · retrieval · execution</div></div>
+            <div class="stat"><div class="k">Detect techniques</div><div class="v cyan">151</div><div class="d">VotalAI across 19 attack categories</div></div>
+            <div class="stat"><div class="k">Stream latency</div><div class="v green">&lt; 80 ms</div><div class="d">NeMo v0.22 token-level interrupt</div></div>
+            <div class="stat"><div class="k">PDP/PEP</div><div class="v amber">native</div><div class="d">VotalAI · no redeploy for policy edits</div></div>
+          </div>
+          <div class="bars" style="margin-top:14px">
+            <div class="bar-row"><span class="lbl">NeMo Guardrails v0.22</span><span class="bar green"><i style="width:92%"></i></span><span class="num">DSL 9.2</span></div>
+            <div class="bar-row"><span class="lbl">F5 + NeMo (enterprise)</span><span class="bar green"><i style="width:88%"></i></span><span class="num">coverage 8.8</span></div>
+            <div class="bar-row"><span class="lbl">VotalAI vai35-4B-v2</span><span class="bar cyan"><i style="width:86%"></i></span><span class="num">attack-coverage 8.6</span></div>
+            <div class="bar-row"><span class="lbl">CrowdStrike Falcon AIDR</span><span class="bar cyan"><i style="width:80%"></i></span><span class="num">detector 8.0</span></div>
+            <div class="bar-row"><span class="lbl">Guardrails AI v0.10.0</span><span class="bar amber"><i style="width:74%"></i></span><span class="num">hub 7.4</span></div>
+            <div class="bar-row"><span class="lbl">AWS Bedrock AR checks</span><span class="bar green"><i style="width:81%"></i></span><span class="num">formal 8.1</span></div>
+            <div class="bar-row"><span class="lbl">Lakera Gandalf: AB</span><span class="bar red"><i style="width:68%"></i></span><span class="num">adversarial 6.8</span></div>
+            <div class="bar-row"><span class="lbl">Future AGI ACC</span><span class="bar green"><i style="width:85%"></i></span><span class="num">loop-fit 8.5</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Verdict</h3>
+          <div class="verdict red"><b>2026-Q3: guardrails stopped being a wrapper and became a runtime.</b> Three inflection points shipped in 60 days: <code>NeMo Guardrails v0.22</code> (May 2026) with Colang 2.0 DSL and full LangGraph + RunnableRails integration, <code>F5 AI Guardrails + NeMo</code> (GA Jul 29 2026) bringing enterprise policy centralization without an app rewrite, and <code>VotalAI Runtime Guardrail Stack</code> (Jul 27 2026) on Nemotron 3.5 Content Safety with 151 detection techniques across 19 attack categories and a clean PDP/PEP split. <b>The decisive architectural decision: interruption must happen at the *semantic* moment — the tool-call RBAC, the retrieval payload, the goal-drift delta — not at the LLM boundary.</b> Pair NeMo with a red-team loop (Lakera Gandalf: Agent Breaker + production trace mining) and pipe every guardrail decision into the judge ensemble as an EvalTag. Anything that cannot emit EvalTag does not ship in 2026.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== TAB 4 — TOOL FACTORY =========================== -->
+  <section class="panel" id="t4">
+    <div class="grid2">
+      <div>
+        <div class="card">
+          <h3>The prompt — drop into mtm-resource-sweep</h3>
+          <div class="prompt"><button class="copy" data-copy>Copy</button>Sweep the field of **tool integration and dynamic API orchestration for agents** from Jan 2024 → Aug 2026. For each tool/system extract: (1) ingestion format (OpenAPI 3.1, GraphQL schema, gRPC proto, plain docs), (2) what it generates (function calling JSON Schema, MCP server, CLI, SDK, capability model), (3) PII detection and redaction at the request/response boundary, (4) rate-limit / cache / credential-rotation built in or bolted on, (5) auth model (OIDC, OBO, API key, Entra passthrough), (6) observability hooks, (7) whether it generates adversarial test cases for the tool itself. Compare: **OpenAPI → MCP** generation pipelines (Azure API Management, Stainless, Fern, Speakeasy), **MCP server catalogs** (the August 2026 ecosystem), **iPaaS connectors as tools** (Zapier / Make / N8N action layer), **capability-model CRUD abstraction**, **unified gateway** (GraphQL / API proxy), and the **tool-without-API** pattern (DSL plan → executor). Output the **5-pattern matrix** (thin wrappers / schema-driven / CRUD / DSL / gateway / iPaaS), the **MCP catalog** with categories, a copy-pasteable **MCP server manifest** for an Azure-managed tool, and a 30-day tool-factory blueprint: ingest spec → generate tool + test suite → policy attach → register in gateway → ship.</div>
+
+          <h3 style="margin-top:22px">The pipeline — every tool in sync</h3>
+          <div class="diagram">
+            <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arr4a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d4a24c"/></marker>
+                <marker id="arr4b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4cd4d4"/></marker>
+                <marker id="arr4c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5ec27a"/></marker>
+              </defs>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="20" y="30"  width="120" height="36" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="48" text-anchor="middle">OpenAPI 3.1</text><text x="80" y="60" text-anchor="middle" fill="#7a7a82">REST spec</text>
+                <rect x="20" y="78"  width="120" height="36" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="96" text-anchor="middle">GraphQL schema</text>
+                <rect x="20" y="126" width="120" height="36" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="144" text-anchor="middle">gRPC proto</text>
+                <rect x="20" y="174" width="120" height="36" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="192" text-anchor="middle">iPaaS action</text>
+                <rect x="20" y="222" width="120" height="36" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="240" text-anchor="middle">Docs / curl</text>
+                <rect x="20" y="270" width="120" height="36" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="288" text-anchor="middle">CRUD capability</text>
+              </g>
+              <g stroke="#d4a24c" stroke-width="1.2" fill="none" marker-end="url(#arr4a)">
+                <path d="M140,48 L208,82"/><path d="M140,96 L208,98"/><path d="M140,144 L208,114"/><path d="M140,192 L208,130"/><path d="M140,240 L208,146"/><path d="M140,288 L208,162"/>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="208" y="60" width="148" height="120" rx="8" fill="#0d0d10" stroke="#d4a24c"/>
+                <text x="282" y="80" text-anchor="middle" fill="#d4a24c" font-size="11">Tool Generator</text>
+                <text x="282" y="98" text-anchor="middle">Stainless · Speakeasy</text>
+                <text x="282" y="114" text-anchor="middle">Fern · openapi-mcp</text>
+                <text x="282" y="130" text-anchor="middle">→ JSON Schema + MCP</text>
+                <text x="282" y="148" text-anchor="middle">→ typed SDK (TS/Py/Go)</text>
+                <text x="282" y="166" text-anchor="middle" fill="#7a7a82">→ built-in test cases</text>
+              </g>
+              <path d="M356,120 L408,120" stroke="#4cd4d4" stroke-width="1.2" fill="none" marker-end="url(#arr4b)"/>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="408" y="60" width="148" height="120" rx="8" fill="#0d0d10" stroke="#4cd4d4"/>
+                <text x="482" y="80" text-anchor="middle" fill="#4cd4d4" font-size="11">Wrapper + Policy</text>
+                <text x="482" y="98" text-anchor="middle">PII detect / redact</text>
+                <text x="482" y="114" text-anchor="middle">rate-limit · cache</text>
+                <text x="482" y="130" text-anchor="middle">credential rotation</text>
+                <text x="482" y="148" text-anchor="middle">RBAC · OIDC · OBO</text>
+                <text x="482" y="166" text-anchor="middle" fill="#7a7a82">→ EvalTag emit</text>
+              </g>
+              <path d="M556,120 L600,120" stroke="#4cd4d4" stroke-width="1.2" fill="none" marker-end="url(#arr4b)"/>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="600" y="40" width="110" height="160" rx="8" fill="#0d0d10" stroke="#4cd4d4"/>
+                <text x="655" y="60" text-anchor="middle" fill="#4cd4d4" font-size="11">MCP Catalog</text>
+                <text x="655" y="78" text-anchor="middle">Aug 2026</text>
+                <text x="655" y="94" text-anchor="middle">~ 1.4k servers</text>
+                <text x="655" y="110" text-anchor="middle">discovery · version</text>
+                <text x="655" y="126" text-anchor="middle">auth · telemetry</text>
+                <text x="655" y="146" text-anchor="middle" fill="#7a7a82">+ Azure APIM</text>
+                <text x="655" y="162" text-anchor="middle" fill="#7a7a82">+ Istio sidecar</text>
+                <text x="655" y="178" text-anchor="middle" fill="#7a7a82">+ OTel spans</text>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="208" y="200" width="148" height="100" rx="8" fill="#0d0d10" stroke="#5ec27a"/>
+                <text x="282" y="220" text-anchor="middle" fill="#5ec27a" font-size="11">Red-Team Suite</text>
+                <text x="282" y="238" text-anchor="middle">prompt-injection</text>
+                <text x="282" y="254" text-anchor="middle">tool-call RBAC fuzz</text>
+                <text x="282" y="270" text-anchor="middle">PII exfil probes</text>
+                <text x="282" y="288" text-anchor="middle" fill="#7a7a82">→ CI gate before ship</text>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="408" y="200" width="148" height="100" rx="8" fill="#0d0d10" stroke="#d4a24c"/>
+                <text x="482" y="220" text-anchor="middle" fill="#d4a24c" font-size="11">Registry + Lineage</text>
+                <text x="482" y="238" text-anchor="middle">versioned manifests</text>
+                <text x="482" y="254" text-anchor="middle">+ ground-truth doc</text>
+                <text x="482" y="270" text-anchor="middle">+ tool-call map</text>
+                <text x="482" y="288" text-anchor="middle" fill="#7a7a82">→ agent runtime</text>
+              </g>
+              <path d="M556,250 L600,250" stroke="#5ec27a" stroke-width="1.2" fill="none" marker-end="url(#arr4c)"/>
+            </svg>
+            <div class="legend">
+              <span><i style="background:#d4a24c"></i>spec inputs</span>
+              <span><i style="background:#4cd4d4"></i>generation + policy</span>
+              <span><i style="background:#5ec27a"></i>testing</span>
+              <span><i style="background:#7a7a82"></i>storage / output</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>Tool stack <span class="new2026">refreshed 2026-Q3</span></h3>
+          <table>
+            <thead><tr><th>Pattern</th><th>Pick</th><th>License</th></tr></thead>
+            <tbody>
+              <tr><td>OpenAPI → tool</td><td><code>Stainless</code> · <code>Speakeasy</code> · <code>Fern</code> <span class="new2026">CLI gen Jun 2026</span> · <code>openapi-mcp</code></td><td><span class="pill">MIT</span> / SaaS</td></tr>
+              <tr><td>Protocol</td><td><code>Model Context Protocol (MCP)</code> <span class="new2026">Aug 2026 catalog ~1.4k</span></td><td><span class="pill">MIT</span></td></tr>
+              <tr><td>Capability model</td><td><code>CRUD abstraction</code> — <code>create(entity)</code>/<code>read</code>/<code>update</code>/<code>delete</code> mapped per vendor</td><td><span class="pill">—</span></td></tr>
+              <tr><td>Gateway</td><td><code>Azure API Management</code> + self-hosted gateway · <code>Istio</code> sidecar · <code>Kong AI Gateway</code></td><td><span class="pill">mixed</span></td></tr>
+              <tr><td>iPaaS tools</td><td><code>Zapier Actions</code> · <code>Make</code> · <code>N8N</code> — curated actions exposed as tools</td><td><span class="pill">SaaS</span></td></tr>
+              <tr><td>Identity</td><td><code>OIDC</code> · <code>OAuth OBO</code> · <code>Entra ID</code> identity passthrough</td><td><span class="pill">—</span></td></tr>
+              <tr><td>Observability</td><td><code>traceAI</code> OTel instrumentor for MCP · <code>Agent Command Center</code></td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>CLI generation</td><td><code>Fern generate</code> <span class="new2026">early access</span> — <code>mycli users get --id 123</code></td><td><span class="pill">MIT</span></td></tr>
+              <tr><td>SDK generation</td><td><code>Stainless</code> / <code>Speakeasy</code> · TypeScript / Python / Go / Java</td><td><span class="pill">MIT</span></td></tr>
+              <tr><td>Contract testing</td><td><code>Schemathesis</code> · <code>Dredd</code> · <code>Prism</code></td><td><span class="pill">MIT</span></td></tr>
+              <tr><td>Ground-truth doc</td><td><code>Stoplight Elements</code> · <code>Redocly</code> · <code>ReadMe</code></td><td><span class="pill">mixed</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Benchmarking segment</h3>
+          <div class="kpi-row">
+            <div class="stat"><div class="k">MCP servers live</div><div class="v gold">~1.4k</div><div class="d">Aug 2026 ecosystem count</div></div>
+            <div class="stat"><div class="k">Spec → tool min</div><div class="v cyan">6 min</div><div class="d">Fern regenerate cycle</div></div>
+            <div class="stat"><div class="k">PII detect F1</div><div class="v green">0.93</div><div class="d">Presidio + custom redaction</div></div>
+            <div class="stat"><div class="k">Tool-call RBAC fuzz</div><div class="v amber">142</div><div class="d">probes / tool / release</div></div>
+          </div>
+          <div class="bars" style="margin-top:14px">
+            <div class="bar-row"><span class="lbl">OpenAPI → MCP (Fern)</span><span class="bar green"><i style="width:90%"></i></span><span class="num">speed 9.0</span></div>
+            <div class="bar-row"><span class="lbl">CRUD capability model</span><span class="bar amber"><i style="width:72%"></i></span><span class="num">vendor-fit 7.2</span></div>
+            <div class="bar-row"><span class="lbl">MCP direct (1.4k)</span><span class="bar green"><i style="width:86%"></i></span><span class="num">coverage 8.6</span></div>
+            <div class="bar-row"><span class="lbl">Zapier actions</span><span class="bar cyan"><i style="width:82%"></i></span><span class="num">breadth 8.2</span></div>
+            <div class="bar-row"><span class="lbl">Unified gateway</span><span class="bar amber"><i style="width:74%"></i></span><span class="num">policy 7.4</span></div>
+            <div class="bar-row"><span class="lbl">DSL plan → executor</span><span class="bar cyan"><i style="width:68%"></i></span><span class="num">rigor 6.8</span></div>
+            <div class="bar-row"><span class="lbl">Fern CLI gen</span><span class="bar green"><i style="width:85%"></i></span><span class="num">DX 8.5</span></div>
+            <div class="bar-row"><span class="lbl">OBO passthrough</span><span class="bar amber"><i style="width:78%"></i></span><span class="num">auth 7.8</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Verdict</h3>
+          <div class="verdict green"><b>2026-Q3: the spec is the source of truth, and MCP is the wire.</b> Five patterns, ranked by production share: <b>(1) schema-driven from OpenAPI → JSON Schema + MCP server</b> via Fern / Stainless / Speakeasy / openapi-mcp; <b>(2) iPaaS actions</b> from Zapier / Make / N8N for breadth; <b>(3) capability-model CRUD</b> for vendor-neutral multi-API; <b>(4) unified gateway</b> (Azure APIM, Kong AI, Istio) for policy centralization; <b>(5) DSL plan → executor</b> for hard-fidelity. The MCP catalog crossed ~1.4k servers in Aug 2026; treat it as your default tool library, not a side experiment. The 5 design principles from Azure AI Foundry still hold: <b>start with the contract</b>, <b>choose the right packaging</b> (OpenAPI for well-documented REST, MCP for portability), <b>centralize governance</b>, <b>bind every action to identity</b> (OBO / Entra), <b>instrument before production</b> (traceAI OTel on every tool call).</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== TAB 5 — SELF-IMPROVE =========================== -->
+  <section class="panel" id="t5">
+    <div class="grid2">
+      <div>
+        <div class="card">
+          <h3>The prompt — drop into mtm-resource-sweep</h3>
+          <div class="prompt"><button class="copy" data-copy>Copy</button>Sweep the field of **self-improving agent pipelines** from Jan 2024 → Aug 2026. For each technique extract: signal type (production trace / human preference / verifiable reward / failure), training method (SFT / DPO / KTO / ORPO / GRPO / DAPO / RLVR / continual pretraining), accelerator (LoRA / QLoRA / Unsloth / TRL / OpenRLHF), data floor, compute floor, and how it preserves capability (catastrophic-forgetting guard). Cover the **2026 consensus stack**: SFT → DPO → GRPO/DAPO with verifiable rewards, with RLVR replacing human preference labels where the output is checkable. Compare **DPO** (default, 1k–10k pairs), **KTO** (binary thumbs, noisy data), **ORPO** (single-model in memory, ≤7B), **GRPO** (DeepSeek-R1 style, verifiable math/code/structured), **DAPO** (scaled reasoning, frontier labs), **RLHF/PPO** (gold standard, expensive). Cover the **self-evolving-agent** thread: MemRL runtime RL on episodic memory (arXiv 2601.03192), Autogenesis protocol (arXiv 2606…), RLAIF, Voyager-style skill libraries. Output a **closed-loop blueprint**: capture → score → DPO pairs → train (LoRA) → canary → eval (Prometheus-2 + capability regression) → promote or roll back. Tag every tool with its license, last release, and the cost band (single-GPU vs multi-GPU).</div>
+
+          <h3 style="margin-top:22px">The pipeline — every tool in sync</h3>
+          <div class="diagram">
+            <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arr5a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4cd4d4"/></marker>
+                <marker id="arr5b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d4a24c"/></marker>
+                <marker id="arr5c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5ec27a"/></marker>
+                <marker id="arr5d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e85a4f"/></marker>
+              </defs>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="20" y="30"  width="120" height="34" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="48" text-anchor="middle">Production Traces</text>
+                <rect x="20" y="76"  width="120" height="34" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="94" text-anchor="middle">Human Prefs</text>
+                <rect x="20" y="122" width="120" height="34" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="140" text-anchor="middle">Verifiable Reward</text>
+                <rect x="20" y="168" width="120" height="34" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="186" text-anchor="middle">Fail Traces</text>
+                <rect x="20" y="214" width="120" height="34" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="232" text-anchor="middle">Skills / Memory</text>
+              </g>
+              <g stroke="#4cd4d4" stroke-width="1.2" fill="none" marker-end="url(#arr5a)">
+                <path d="M140,46 L208,82"/><path d="M140,92 L208,98"/><path d="M140,138 L208,114"/><path d="M140,184 L208,130"/><path d="M140,230 L208,146"/>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="208" y="60" width="148" height="100" rx="8" fill="#0d0d10" stroke="#4cd4d4"/>
+                <text x="282" y="80" text-anchor="middle" fill="#4cd4d4" font-size="11">Pair Builder</text>
+                <text x="282" y="98" text-anchor="middle">traceAI · fi.evals</text>
+                <text x="282" y="114" text-anchor="middle">judge: Prometheus-2</text>
+                <text x="282" y="130" text-anchor="middle">→ (prompt, win, lose)</text>
+                <text x="282" y="148" text-anchor="middle" fill="#7a7a82">+ dedup + balance</text>
+              </g>
+              <path d="M356,110 L408,110" stroke="#d4a24c" stroke-width="1.2" fill="none" marker-end="url(#arr5b)"/>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="408" y="60" width="148" height="100" rx="8" fill="#0d0d10" stroke="#d4a24c"/>
+                <text x="482" y="80" text-anchor="middle" fill="#d4a24c" font-size="11">Training</text>
+                <text x="482" y="98" text-anchor="middle">SFT → DPO</text>
+                <text x="482" y="114" text-anchor="middle">+ KTO / ORPO</text>
+                <text x="482" y="130" text-anchor="middle">+ GRPO / DAPO</text>
+                <text x="482" y="148" text-anchor="middle" fill="#7a7a82">TRL · Unsloth · OpenRLHF</text>
+              </g>
+              <path d="M556,110 L600,110" stroke="#d4a24c" stroke-width="1.2" fill="none" marker-end="url(#arr5b)"/>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="600" y="40" width="110" height="140" rx="8" fill="#0d0d10" stroke="#d4a24c"/>
+                <text x="655" y="60" text-anchor="middle" fill="#d4a24c" font-size="11">Adapter</text>
+                <text x="655" y="78" text-anchor="middle">LoRA / QLoRA</text>
+                <text x="655" y="94" text-anchor="middle">single 24GB GPU</text>
+                <text x="655" y="110" text-anchor="middle">canary deploy</text>
+                <text x="655" y="126" text-anchor="middle">shadow eval</text>
+                <text x="655" y="146" text-anchor="middle" fill="#7a7a82">→ judge ensemble</text>
+                <text x="655" y="162" text-anchor="middle" fill="#7a7a82">→ regression gate</text>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="208" y="180" width="148" height="100" rx="8" fill="#0d0d10" stroke="#5ec27a"/>
+                <text x="282" y="200" text-anchor="middle" fill="#5ec27a" font-size="11">Skill Library</text>
+                <text x="282" y="218" text-anchor="middle">Voyager-style</text>
+                <text x="282" y="234" text-anchor="middle">MemRL runtime RL</text>
+                <text x="282" y="250" text-anchor="middle">Autogenesis</text>
+                <text x="282" y="268" text-anchor="middle" fill="#7a7a82">→ agent runtime</text>
+              </g>
+              <path d="M356,230 L408,160" stroke="#5ec27a" stroke-width="1.2" fill="none" marker-end="url(#arr5c)"/>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="208" y="290" width="148" height="78" rx="8" fill="#0d0d10" stroke="#e85a4f"/>
+                <text x="282" y="310" text-anchor="middle" fill="#e85a4f" font-size="11">Capability Guard</text>
+                <text x="282" y="328" text-anchor="middle">MMLU · HumanEval</text>
+                <text x="282" y="344" text-anchor="middle">IFEval · MT-Bench</text>
+                <text x="282" y="360" text-anchor="middle" fill="#7a7a82">→ rollback if delta&lt;0</text>
+              </g>
+              <path d="M408,250 L356,328" stroke="#e85a4f" stroke-width="1.2" fill="none" marker-end="url(#arr5d)"/>
+            </svg>
+            <div class="legend">
+              <span><i style="background:#d4a24c"></i>signals</span>
+              <span><i style="background:#4cd4d4"></i>pair builder</span>
+              <span><i style="background:#d4a24c"></i>training</span>
+              <span><i style="background:#5ec27a"></i>skills / memory</span>
+              <span><i style="background:#e85a4f"></i>capability guard</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>Tool stack <span class="new2026">refreshed 2026-Q3</span></h3>
+          <table>
+            <thead><tr><th>Layer</th><th>Pick</th><th>License</th></tr></thead>
+            <tbody>
+              <tr><td>Signal capture</td><td><code>traceAI</code> · <code>OpenLLMetry</code> · <code>LangSmith</code> spans → fi.evals</td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>Judge for pairs</td><td><code>Prometheus-2 7B</code> + <code>GPT-5-mini</code> ensemble (κ=0.86)</td><td><span class="pill gold">mixed</span></td></tr>
+              <tr><td>Pair builder</td><td><code>Argilla</code> · <code>Snorkel</code> · <code>Future AGI pair-miner</code></td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>SFT</td><td><code>Hugging Face TRL</code> · <code>Unsloth</code> · <code>axolotl</code> · <code>LLaMA-Factory</code></td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>Preference</td><td><code>DPO</code> (1k–10k pairs) · <code>KTO</code> (binary) · <code>ORPO</code> (no ref model)</td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>Reasoning RL</td><td><code>GRPO</code> (DeepSeek-R1) · <code>DAPO</code> (scaled) · <code>RLVR</code> (verifiable)</td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>Multi-algorithm</td><td><code>OpenRLHF</code> <span class="new2026">Ray + vLLM</span> — PPO / GRPO / REINFORCE++ / DAPO</td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>Accelerator</td><td><code>LoRA</code> / <code>QLoRA</code> / <code>Unsloth</code> — single 24GB GPU</td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>Self-evolving</td><td><code>MemRL</code> <span class="new2026">arXiv 2601.03192</span> runtime RL on episodic memory</td><td><span class="pill">research</span></td></tr>
+              <tr><td>Self-evolving</td><td><code>Autogenesis</code> <span class="new2026">arXiv 2606</span> self-evolving agent protocol</td><td><span class="pill">research</span></td></tr>
+              <tr><td>Capability guard</td><td><code>MMLU</code> · <code>HumanEval</code> · <code>IFEval</code> · <code>MT-Bench</code> · <code>BFCL v3</code></td><td><span class="pill">MIT</span></td></tr>
+              <tr><td>Canary</td><td><code>Kubernetes</code> shadow pods · 5% traffic · Prometheus judge metrics</td><td><span class="pill">—</span></td></tr>
+              <tr><td>Rollback</td><td><code>LoRA swap</code> + capability guard delta&lt;0 → revert</td><td><span class="pill">—</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Benchmarking segment</h3>
+          <div class="kpi-row">
+            <div class="stat"><div class="k">DPO floor</div><div class="v gold">1k pairs</div><div class="d">5k–10k for meaningful lift</div></div>
+            <div class="stat"><div class="k">GRPO rewards</div><div class="v cyan">verifiable</div><div class="d">math / code / JSON-schema</div></div>
+            <div class="stat"><div class="k">Single-GPU fit</div><div class="v green">7B + LoRA</div><div class="d">QLoRA extends to 70B</div></div>
+            <div class="stat"><div class="k">Pair quality (κ)</div><div class="v amber">0.86</div><div class="d">judge ensemble on 2.8k pairs</div></div>
+          </div>
+          <div class="bars" style="margin-top:14px">
+            <div class="bar-row"><span class="lbl">DPO (default)</span><span class="bar green"><i style="width:84%"></i></span><span class="num">alignment 8.4</span></div>
+            <div class="bar-row"><span class="lbl">KTO (noisy data)</span><span class="bar cyan"><i style="width:76%"></i></span><span class="num">tolerance 7.6</span></div>
+            <div class="bar-row"><span class="lbl">ORPO (small models)</span><span class="bar amber"><i style="width:72%"></i></span><span class="num">memory 7.2</span></div>
+            <div class="bar-row"><span class="lbl">GRPO (reasoning)</span><span class="bar green"><i style="width:88%"></i></span><span class="num">reasoning 8.8</span></div>
+            <div class="bar-row"><span class="lbl">DAPO (frontier)</span><span class="bar green"><i style="width:90%"></i></span><span class="num">scaled 9.0</span></div>
+            <div class="bar-row"><span class="lbl">RLHF / PPO</span><span class="bar cyan"><i style="width:80%"></i></span><span class="num">gold 8.0</span></div>
+            <div class="bar-row"><span class="lbl">SFT only</span><span class="bar amber"><i style="width:62%"></i></span><span class="num">floor 6.2</span></div>
+            <div class="bar-row"><span class="lbl">RLVR</span><span class="bar green"><i style="width:87%"></i></span><span class="num">verifiable 8.7</span></div>
+            <div class="bar-row"><span class="lbl">Catastrophic-forgetting</span><span class="bar red"><i style="width:18%"></i></span><span class="num">guard 1.8</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Verdict</h3>
+          <div class="verdict green"><b>2026-Q3: DPO is the new default; RLVR is the new lever; capability guard is the new tax.</b> The progression is now codified: <b>imitation → preference → self-improvement</b> (SFT → DPO/SimPO → GRPO/DAPO with verifiable rewards). DPO is what you reach for first (1k–10k preference pairs, ~1 epoch, single 24GB GPU with LoRA). KTO when the data is noisy binary feedback. ORPO for ≤7B single-GPU. GRPO when the reward is checkable (math, code, JSON schema). RLHF/PPO is the escalation path for safety-critical alignment, not the default. The 2026 production loop: <b>capture → judge → DPO pairs → train (LoRA) → canary 5% → judge ensemble + capability regression → promote or revert</b>. Self-evolving threads (MemRL runtime RL on episodic memory, Autogenesis protocol) are research-stage but the closed loop is real. The decision that matters more than the method: <b>whether you should be fine-tuning at all</b> — prompt-optimize and instrument first, fine-tune when the gap is real and measured.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== TAB 6 — MULTI-AGENT =========================== -->
+  <section class="panel" id="t6">
+    <div class="grid2">
+      <div>
+        <div class="card">
+          <h3>The prompt — drop into mtm-resource-sweep</h3>
+          <div class="prompt"><button class="copy" data-copy>Copy</button>Sweep the field of **multi-agent collaboration and debate with provenance** from Jan 2024 → Aug 2026. For each framework extract: topology (round-robin / supervisor-worker / debate / blackboard / decentralized), shared-state substrate (in-memory / Redis / ledger / graph), provenance primitive (cryptographic hash chain / W3C PROV / graph fragments / signed spans), conflict-resolution algorithm (majority vote / LLM-as-judge / path search / Bayesian / TLA+ verified), hallucination-amplification behavior, audit/compliance fit (ISO/IEC 23894:2023 · EU AI Act · SOC 2). Cover: **ROT-MAS** (graphlet optimization + MAD debate + LLM-guided provenance tracker with 4 granularity levels), **HEAD (Hybrid Evidence-Augmented Decentralized Debate)** by Corpora.ai (May 14 2026, <3% hallucination amplification, 30–40% improvement over baseline, 15% over existing multi-agent, ISO/IEC 23894 compliant, HEAD API Q3 2026), **AgentAuditor** (arXiv 2602.09341, replaces majority vote with reasoning-tree path search + ACPO training, +5% over MV, +3% over LLM-as-Judge), **TraceFix** (TLA+-verified coordination protocols compiled into per-agent system prompts, monitor rejects out-of-topology ops), **EMAD** evidence-based multi-agent debate, **InsightSwarm**, **LLM Data Auditor Framework** (Bayesian IRL + ledger + lifecycle event chain), **The Cost of Consensus** (Blaž Bertalanič 2026 — homogeneous debate amplifies errors through sycophancy; isolated self-correction wins on hard benchmarks), **AgentPex** (procedural-failure detection in execution traces). Output a **multi-agent decision contract** with provenance hash chain, a **verdict policy** (when debate beats single, when path-search beats vote), and a 2026 production stack.</div>
+
+          <h3 style="margin-top:22px">The pipeline — every tool in sync</h3>
+          <div class="diagram">
+            <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arr6a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4cd4d4"/></marker>
+                <marker id="arr6b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d4a24c"/></marker>
+                <marker id="arr6c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5ec27a"/></marker>
+                <marker id="arr6d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d462a4"/></marker>
+              </defs>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="20" y="30"  width="120" height="34" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="48" text-anchor="middle">Task</text>
+                <rect x="20" y="78"  width="120" height="34" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="96" text-anchor="middle">Evidence</text>
+                <rect x="20" y="126" width="120" height="34" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="144" text-anchor="middle">Domain KB</text>
+                <rect x="20" y="174" width="120" height="34" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="192" text-anchor="middle">Tool Outputs</text>
+              </g>
+              <g stroke="#4cd4d4" stroke-width="1.2" fill="none" marker-end="url(#arr6a)">
+                <path d="M140,46 L208,90"/><path d="M140,94 L208,106"/><path d="M140,142 L208,122"/><path d="M140,190 L208,138"/>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="208" y="60" width="118" height="100" rx="8" fill="#0d0d10" stroke="#d4a24c"/>
+                <text x="267" y="80" text-anchor="middle" fill="#d4a24c" font-size="11">Debate Pool</text>
+                <text x="267" y="98" text-anchor="middle">Executive</text>
+                <text x="267" y="114" text-anchor="middle">Critic</text>
+                <text x="267" y="130" text-anchor="middle">Reflector</text>
+                <text x="267" y="148" text-anchor="middle" fill="#7a7a82">MAD · HEAD</text>
+              </g>
+              <path d="M326,110 L376,110" stroke="#d4a24c" stroke-width="1.2" fill="none" marker-end="url(#arr6b)"/>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="376" y="60" width="124" height="100" rx="8" fill="#0d0d10" stroke="#4cd4d4"/>
+                <text x="438" y="80" text-anchor="middle" fill="#4cd4d4" font-size="11">Adjudicator</text>
+                <text x="438" y="98" text-anchor="middle">Reasoning Tree</text>
+                <text x="438" y="114" text-anchor="middle">FPD path search</text>
+                <text x="438" y="130" text-anchor="middle">+ ACPO training</text>
+                <text x="438" y="148" text-anchor="middle" fill="#7a7a82">AgentAuditor</text>
+              </g>
+              <path d="M500,110 L552,110" stroke="#4cd4d4" stroke-width="1.2" fill="none" marker-end="url(#arr6a)"/>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="552" y="60" width="148" height="100" rx="8" fill="#0d0d10" stroke="#5ec27a"/>
+                <text x="626" y="80" text-anchor="middle" fill="#5ec27a" font-size="11">Verdict + Audit</text>
+                <text x="626" y="98" text-anchor="middle">decision + cite</text>
+                <text x="626" y="114" text-anchor="middle">+ provenance hash</text>
+                <text x="626" y="130" text-anchor="middle">+ lifecycle ledger</text>
+                <text x="626" y="148" text-anchor="middle" fill="#7a7a82">EU AI Act · ISO 23894</text>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="208" y="180" width="118" height="80" rx="8" fill="#0d0d10" stroke="#d462a4"/>
+                <text x="267" y="200" text-anchor="middle" fill="#d462a4" font-size="11">TLA+ Verifier</text>
+                <text x="267" y="218" text-anchor="middle">TraceFix</text>
+                <text x="267" y="234" text-anchor="middle">monitor rejects</text>
+                <text x="267" y="250" text-anchor="middle" fill="#7a7a82">out-of-topology</text>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="376" y="180" width="124" height="80" rx="8" fill="#0d0d10" stroke="#d4a24c"/>
+                <text x="438" y="200" text-anchor="middle" fill="#d4a24c" font-size="11">Bayesian Calib</text>
+                <text x="438" y="218" text-anchor="middle">HEAD priors</text>
+                <text x="438" y="234" text-anchor="middle">peer review</text>
+                <text x="438" y="250" text-anchor="middle" fill="#7a7a82">HITL hooks</text>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="208" y="280" width="292" height="80" rx="8" fill="#0d0d10" stroke="#e85a4f"/>
+                <text x="354" y="300" text-anchor="middle" fill="#e85a4f" font-size="11">Anti-Consensus Guard (CAIS 2026)</text>
+                <text x="354" y="318" text-anchor="middle">isolated self-correction &gt; homogeneous debate on hard bench</text>
+                <text x="354" y="334" text-anchor="middle">Consensus collapse from sycophancy is a measurable risk</text>
+                <text x="354" y="350" text-anchor="middle" fill="#7a7a82">→ path search &gt; majority vote when stakes are high</text>
+              </g>
+              <path d="M500,220 L552,140" stroke="#d462a4" stroke-width="1.2" fill="none" marker-end="url(#arr6d)"/>
+              <path d="M626,160 L626,280" stroke="#5ec27a" stroke-width="1.2" fill="none" marker-end="url(#arr6c)"/>
+            </svg>
+            <div class="legend">
+              <span><i style="background:#d4a24c"></i>inputs / debate</span>
+              <span><i style="background:#4cd4d4"></i>adjudicator</span>
+              <span><i style="background:#5ec27a"></i>audit / verdict</span>
+              <span><i style="background:#d462a4"></i>formal verifier</span>
+              <span><i style="background:#e85a4f"></i>anti-consensus</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>Tool stack <span class="new2026">refreshed 2026-Q3</span></h3>
+          <table>
+            <thead><tr><th>Layer</th><th>Pick</th><th>License</th></tr></thead>
+            <tbody>
+              <tr><td>Debate framework</td><td><code>AutoGen</code> · <code>CrewAI</code> · <code>LangGraph multi-agent</code></td><td><span class="pill">MIT</span></td></tr>
+              <tr><td>Evidence + debate</td><td><code>HEAD (Corpora.ai)</code> <span class="new2026">May 14 2026</span> — &lt;3% halluc amplification</td><td><span class="pill">closed</span></td></tr>
+              <tr><td>Adjudicator</td><td><code>AgentAuditor</code> <span class="new2026">arXiv 2602.09341</span> — reasoning-tree path search + ACPO</td><td><span class="pill">research</span></td></tr>
+              <tr><td>Verifier</td><td><code>TraceFix</code> <span class="new2026">CAIS 2026</span> — TLA+-verified protocols, monitor reject</td><td><span class="pill">research</span></td></tr>
+              <tr><td>Multi-optimizer</td><td><code>ROT-MAS</code> — MAD + LLM-guided provenance tracker (4 granularity levels)</td><td><span class="pill">research</span></td></tr>
+              <tr><td>Procedural check</td><td><code>AgentPex</code> <span class="new2026">CAIS 2026</span> — workflow-rule extraction + trace audit</td><td><span class="pill">research</span></td></tr>
+              <tr><td>Compliance</td><td><code>EU AI Act</code> · <code>ISO/IEC 23894:2023</code> · <code>SOC 2 AI</code></td><td><span class="pill">—</span></td></tr>
+              <tr><td>Provenance</td><td><code>W3C PROV</code> · <code>cryptographic hash chain</code> · <code>lifecycle ledger</code></td><td><span class="pill">mixed</span></td></tr>
+              <tr><td>Bayesian calib</td><td><code>PyMC</code> · <code>NumPyro</code> · <code>Stan</code> for confidence priors</td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>Formal methods</td><td><code>TLA+</code> · <code>PlusCal</code> · <code>Alloy</code> — coordination spec → runtime monitor</td><td><span class="pill">MIT</span></td></tr>
+              <tr><td>Empirical caution</td><td><code>Cost of Consensus (Bertalanič 2026)</code> — isolated self-correction &gt; homogeneous debate on hard bench</td><td><span class="pill">research</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Benchmarking segment</h3>
+          <div class="kpi-row">
+            <div class="stat"><div class="k">HEAD halluc amp</div><div class="v green">&lt; 3%</div><div class="d">vs ~30–40% baseline LLM</div></div>
+            <div class="stat"><div class="k">AgentAuditor lift</div><div class="v gold">+5%</div><div class="d">over majority vote (5 settings)</div></div>
+            <div class="stat"><div class="k">vs LLM-as-Judge</div><div class="v cyan">+3%</div><div class="d">reasoning-tree path search</div></div>
+            <div class="stat"><div class="k">Compliance fit</div><div class="v amber">ISO 23894</div><div class="d">EU AI Act · SOC 2</div></div>
+          </div>
+          <div class="bars" style="margin-top:14px">
+            <div class="bar-row"><span class="lbl">Majority vote (baseline)</span><span class="bar red"><i style="width:58%"></i></span><span class="num">acc 0.58</span></div>
+            <div class="bar-row"><span class="lbl">LLM-as-Judge</span><span class="bar amber"><i style="width:60%"></i></span><span class="num">acc 0.60</span></div>
+            <div class="bar-row"><span class="lbl">AgentAuditor (path)</span><span class="bar cyan"><i style="width:63%"></i></span><span class="num">acc 0.63</span></div>
+            <div class="bar-row"><span class="lbl">HEAD (Bayesian+evid)</span><span class="bar green"><i style="width:73%"></i></span><span class="num">acc 0.73</span></div>
+            <div class="bar-row"><span class="lbl">Homogeneous debate</span><span class="bar red"><i style="width:48%"></i></span><span class="num">sycophancy 0.48</span></div>
+            <div class="bar-row"><span class="lbl">Isolated self-correct</span><span class="bar amber"><i style="width:55%"></i></span><span class="num">acc 0.55</span></div>
+            <div class="bar-row"><span class="lbl">TraceFix (TLA+)</span><span class="bar green"><i style="width:81%"></i></span><span class="num">spec-correct 0.81</span></div>
+            <div class="bar-row"><span class="lbl">Provenance coverage</span><span class="bar cyan"><i style="width:78%"></i></span><span class="num">coverage 0.78</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Verdict</h3>
+          <div class="verdict cyan"><b>2026-Q3: voting lost. The decisive empirical result of the year is "The Cost of Consensus" (Bertalanič, Jožef Stefan Institute, CAIS 2026): homogeneous multi-agent debate amplifies errors through sycophancy and consensus collapse, and often performs *worse* than a single isolated model on hard benchmarks.</b> Two replacements shipped: <b>AgentAuditor</b> replaces majority vote with a reasoning-tree path search and trains the adjudicator on majority-failure cases via Anti-Consensus Preference Optimization (ACPO) — +5% over MV, +3% over LLM-as-Judge, MAS-agnostic; <b>HEAD</b> (Corpora.ai, May 14 2026) drops hallucination amplification below 3% by marrying evidence retrieval + Bayesian calibration + cryptographic provenance + HITL hooks, already EU AI Act and ISO/IEC 23894:2023 compliant, API Q3 2026. The 2026 default for high-stakes multi-agent work: <b>debate pool (Executive + Critic + Reflector) → AgentAuditor path search → provenance hash chain on a lifecycle ledger</b>. For hard-bench work where sycophancy is measurable, <b>isolated self-correction beats debate</b>. Add TLA+ verification (TraceFix) for the topology and AgentPex for the procedural rules.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== TAB 7 — PRIVACY-FIRST =========================== -->
+  <section class="panel" id="t7">
+    <div class="grid2">
+      <div>
+        <div class="card">
+          <h3>The prompt — drop into mtm-resource-sweep</h3>
+          <div class="prompt"><button class="copy" data-copy>Copy</button>Sweep the field of **privacy-preserving agent pipelines for personal data** from Jan 2024 → Aug 2026. For each system extract: data tier (Tier 1 on-device / Tier 2 PCC / Tier 3 third-party), cryptographic primitives (OHTTP / RSA blind signatures / TEE / Secure Enclave attestation / DP-SGD / homomorphic encryption / secure aggregation), threat model (passive observer / malicious operator / malicious co-tenant), verifiability claim (transparency log / public image audit / hardware attestation), agent-action authorization (Xcode allow-list / permission prompt / RBAC), memory isolation (per-user / per-tenant / CloudKit / Keychain), and offline-runnable surface (Foundation Models framework · Whisper on device · MLX-LM). Cover: **Apple Intelligence on-device 3B AFM** (iOS 27 / iPadOS 27 / macOS 27 / watchOS 27 / visionOS 27, fall 2026, SynthID watermarks), **Private Cloud Compute** (M5 silicon, OHTTP, RSA blind sigs, no retention, third-party auditor verifiable, June 2026 arXiv 2605.24239 analysis — model state-independent, accuracy below SOTA, IAS third-party model integration), **Apple × Google Gemini** (Gemini models hosted *inside* PCC for intelligence routing, raw personal context never reaches Google), **MLX-LM** (Apple Silicon local LLM runner), **Foundation Models framework** (any app, on-device, offline), **CloudKit / Keychain** (data sync + secrets), **F5 + NeMo** for enterprise policy on prompts/responses without touching the app. Build a **tiered local-first reference architecture** with the cryptographic primitives, the agent-action allow-list, and a "what-never-leaves-the-device" boundary diagram.</div>
+
+          <h3 style="margin-top:22px">The pipeline — every tool in sync</h3>
+          <div class="diagram">
+            <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arr7a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5ec27a"/></marker>
+                <marker id="arr7b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4cd4d4"/></marker>
+                <marker id="arr7c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d4a24c"/></marker>
+                <marker id="arr7d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e85a4f"/></marker>
+              </defs>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="20" y="30"  width="120" height="34" rx="6" fill="#16161b" stroke="#5ec27a"/><text x="80" y="48" text-anchor="middle" fill="#5ec27a">User Request</text>
+                <rect x="20" y="78"  width="120" height="34" rx="6" fill="#16161b" stroke="#5ec27a"/><text x="80" y="96" text-anchor="middle" fill="#5ec27a">Personal Context</text>
+                <rect x="20" y="126" width="120" height="34" rx="6" fill="#16161b" stroke="#5ec27a"/><text x="80" y="144" text-anchor="middle" fill="#5ec27a">Secrets / Keychain</text>
+                <rect x="20" y="174" width="120" height="34" rx="6" fill="#16161b" stroke="#5ec27a"/><text x="80" y="192" text-anchor="middle" fill="#5ec27a">Photos / Voice</text>
+              </g>
+              <g stroke="#5ec27a" stroke-width="1.2" fill="none" marker-end="url(#arr7a)">
+                <path d="M140,46 L208,86"/><path d="M140,94 L208,102"/><path d="M140,142 L208,118"/><path d="M140,190 L208,134"/>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="208" y="60" width="148" height="100" rx="8" fill="#0d0d10" stroke="#5ec27a"/>
+                <text x="282" y="80" text-anchor="middle" fill="#5ec27a" font-size="11">Tier 1: On-Device</text>
+                <text x="282" y="98" text-anchor="middle">AFM 3B (Apple)</text>
+                <text x="282" y="114" text-anchor="middle">Foundation Models API</text>
+                <text x="282" y="130" text-anchor="middle">MLX-LM (open)</text>
+                <text x="282" y="148" text-anchor="middle" fill="#7a7a82">→ never leaves device</text>
+              </g>
+              <path d="M356,110 L408,110" stroke="#4cd4d4" stroke-width="1.2" fill="none" marker-end="url(#arr7b)"/>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="408" y="60" width="148" height="100" rx="8" fill="#0d0d10" stroke="#4cd4d4"/>
+                <text x="482" y="80" text-anchor="middle" fill="#4cd4d4" font-size="11">Tier 2: PCC</text>
+                <text x="482" y="98" text-anchor="middle">M5 silicon</text>
+                <text x="482" y="114" text-anchor="middle">OHTTP + RSA blind</text>
+                <text x="482" y="130" text-anchor="middle">no retention · auditable</text>
+                <text x="482" y="148" text-anchor="middle" fill="#7a7a82">→ Apple-verifiable</text>
+              </g>
+              <path d="M556,110 L600,110" stroke="#4cd4d4" stroke-width="1.2" fill="none" marker-end="url(#arr7b)"/>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="600" y="40" width="110" height="160" rx="8" fill="#0d0d10" stroke="#d4a24c"/>
+                <text x="655" y="60" text-anchor="middle" fill="#d4a24c" font-size="11">Tier 3</text>
+                <text x="655" y="78" text-anchor="middle">Third-party</text>
+                <text x="655" y="94" text-anchor="middle">(Gemini in PCC</text>
+                <text x="655" y="110" text-anchor="middle">or ChatGPT opt-in)</text>
+                <text x="655" y="130" text-anchor="middle" fill="#7a7a82">+ user grant</text>
+                <text x="655" y="146" text-anchor="middle" fill="#7a7a82">+ their TOS apply</text>
+                <text x="655" y="166" text-anchor="middle" fill="#e85a4f">audit before opt-in</text>
+                <text x="655" y="184" text-anchor="middle" fill="#7a7a82">→ F5/NeMo gateway</text>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="208" y="180" width="148" height="100" rx="8" fill="#0d0d10" stroke="#d4a24c"/>
+                <text x="282" y="200" text-anchor="middle" fill="#d4a24c" font-size="11">Agent Authorization</text>
+                <text x="282" y="218" text-anchor="middle">Xcode allow-list</text>
+                <text x="282" y="234" text-anchor="middle">+ permission prompt</text>
+                <text x="282" y="250" text-anchor="middle">+ tool-call RBAC</text>
+                <text x="282" y="268" text-anchor="middle" fill="#7a7a82">→ runs in sandbox</text>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="408" y="180" width="148" height="100" rx="8" fill="#0d0d10" stroke="#5ec27a"/>
+                <text x="482" y="200" text-anchor="middle" fill="#5ec27a" font-size="11">Local Memory</text>
+                <text x="482" y="218" text-anchor="middle">Keychain (CryptoKit</text>
+                <text x="482" y="234" text-anchor="middle">Secure Enclave bind)</text>
+                <text x="482" y="250" text-anchor="middle">+ CloudKit (own acct)</text>
+                <text x="482" y="268" text-anchor="middle" fill="#7a7a82">→ data protection class</text>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="208" y="300" width="350" height="60" rx="8" fill="#0d0d10" stroke="#e85a4f"/>
+                <text x="383" y="320" text-anchor="middle" fill="#e85a4f" font-size="11">Privacy Boundary</text>
+                <text x="383" y="338" text-anchor="middle">PCC guarantee: data never stored · only used for the request · verifiable</text>
+                <text x="383" y="352" text-anchor="middle" fill="#7a7a82">"no cloud" requires 100% on-device · not even PCC</text>
+              </g>
+            </svg>
+            <div class="legend">
+              <span><i style="background:#5ec27a"></i>tier 1 (on-device)</span>
+              <span><i style="background:#4cd4d4"></i>tier 2 (PCC)</span>
+              <span><i style="background:#d4a24c"></i>tier 3 (third-party)</span>
+              <span><i style="background:#e85a4f"></i>boundary</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>Tool stack <span class="new2026">refreshed 2026-Q3</span></h3>
+          <table>
+            <thead><tr><th>Layer</th><th>Pick</th><th>License</th></tr></thead>
+            <tbody>
+              <tr><td>On-device LLM</td><td><code>Apple AFM 3B</code> · <code>Foundation Models framework</code> <span class="new2026">iOS 27 fall 2026</span></td><td><span class="pill">closed</span></td></tr>
+              <tr><td>Local LLM runner</td><td><code>MLX-LM</code> · <code>llama.cpp</code> · <code>Ollama</code> on Apple Silicon</td><td><span class="pill">MIT</span></td></tr>
+              <tr><td>Confidential compute</td><td><code>Private Cloud Compute</code> <span class="new2026">M5 silicon</span> · OHTTP + RSA blind sigs</td><td><span class="pill">closed</span></td></tr>
+              <tr><td>Auditor</td><td><code>Apple PCC transparency log</code> (public image audit, 3rd-party verifiable)</td><td><span class="pill">—</span></td></tr>
+              <tr><td>Third-party model</td><td><code>Gemini on PCC</code> <span class="new2026">Jun 2026</span> — raw context stays in Apple silicon</td><td><span class="pill">closed</span></td></tr>
+              <tr><td>Secrets</td><td><code>Keychain</code> + <code>CryptoKit</code> Secure Enclave binding</td><td><span class="pill">Apple</span></td></tr>
+              <tr><td>Data sync</td><td><code>CloudKit</code> · end-to-end encryption for sensitive fields</td><td><span class="pill">Apple</span></td></tr>
+              <tr><td>Agent auth</td><td><code>Xcode allow-list</code> · permission prompt · <code>RBAC</code> per-tool</td><td><span class="pill">Apple</span></td></tr>
+              <tr><td>Watermark</td><td><code>SynthID</code> (Apple-Google joint, hidden in AI-edited photos)</td><td><span class="pill">closed</span></td></tr>
+              <tr><td>Enterprise</td><td><code>F5 AI Guardrails + NeMo</code> — policy centralization without app rewrite</td><td><span class="pill">mixed</span></td></tr>
+              <tr><td>Research (PCC)</td><td><code>arXiv 2605.24239</code> <span class="new2026">Jun 2026</span> — model state-independent, accuracy &lt; SOTA</td><td><span class="pill">—</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Benchmarking segment</h3>
+          <div class="kpi-row">
+            <div class="stat"><div class="k">AFM on-device</div><div class="v green">3 B</div><div class="d">A19 Pro / M5 silicon native</div></div>
+            <div class="stat"><div class="k">PCC: data stored</div><div class="v green">no</div><div class="d">auditable · no retention claim</div></div>
+            <div class="stat"><div class="k">Verifiability</div><div class="v gold">math</div><div class="d">3rd-party image audit (PCC public)</div></div>
+            <div class="stat"><div class="k">PCC MMLU gap</div><div class="v amber">-3.1%</div><div class="d">vs SOTA 5-shot (arXiv 2605.24239)</div></div>
+          </div>
+          <div class="bars" style="margin-top:14px">
+            <div class="bar-row"><span class="lbl">On-device (AFM 3B)</span><span class="bar green"><i style="width:90%"></i></span><span class="num">privacy 9.0</span></div>
+            <div class="bar-row"><span class="lbl">PCC (Apple)</span><span class="bar green"><i style="width:88%"></i></span><span class="num">verifiable 8.8</span></div>
+            <div class="bar-row"><span class="lbl">Gemini on PCC</span><span class="bar cyan"><i style="width:82%"></i></span><span class="num">isolation 8.2</span></div>
+            <div class="bar-row"><span class="lbl">ChatGPT opt-in</span><span class="bar red"><i style="width:42%"></i></span><span class="num">privacy 4.2</span></div>
+            <div class="bar-row"><span class="lbl">Cloud-only frontier API</span><span class="bar red"><i style="width:30%"></i></span><span class="num">privacy 3.0</span></div>
+            <div class="bar-row"><span class="lbl">MLX-LM local open</span><span class="bar green"><i style="width:85%"></i></span><span class="num">offline 8.5</span></div>
+            <div class="bar-row"><span class="lbl">F5 + NeMo enterprise</span><span class="bar amber"><i style="width:78%"></i></span><span class="num">policy 7.8</span></div>
+            <div class="bar-row"><span class="lbl">Keychain + Enclave</span><span class="bar green"><i style="width:94%"></i></span><span class="num">secrets 9.4</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Verdict</h3>
+          <div class="verdict green"><b>2026-Q3: privacy-first stopped being a marketing claim and became a verifiability claim.</b> The Apple Intelligence stack (iOS 27 family, fall 2026) is the reference architecture: a 3B AFM that runs on-device for the long tail, a Private Cloud Compute path for the heavy lifts with cryptographic guarantees (OHTTP, RSA blind signatures, no retention, third-party-verifiable software images), and a Tier 3 third-party path (Gemini *inside* PCC, ChatGPT on explicit user grant) whose data handling no longer inherits Apple's promise. The big 2026 architectural shift: <b>Apple now hosts third-party model weights (including Gemini) directly on its own PCC hardware, so the "intelligence routing" decision does not leak raw personal context to Google.</b> The honest caveat (Basilai 2026): truly private AI requires 100% on-device — even PCC is still a cloud. The 2026 local-first reference: <b>AFM 3B + Foundation Models framework + Keychain/Enclave + CloudKit + Xcode allow-list</b>, with F5+NeMo for enterprise policy and SynthID for AI-edited media provenance. If your privacy claim survives only because "users would notice," it is not a privacy claim.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== TAB 8 — COST ROUTING =========================== -->
+  <section class="panel" id="t8">
+    <div class="grid2">
+      <div>
+        <div class="card">
+          <h3>The prompt — drop into mtm-resource-sweep</h3>
+          <div class="prompt"><button class="copy" data-copy>Copy</button>Sweep the field of **cost-optimization and inference routing for agent loops** from Jan 2024 → Aug 2026. For each system extract: routing signal (semantic / static rules / bandit feedback / trajectory-aware / cache-aware), model pool (proprietary-only / vendor-neutral / open-weight / hybrid), objective function (cost subject to quality / quality subject to cost / latency-aware multi-objective), KV-cache awareness (yes / no / partial), latency overhead, observability surface, and how it composes with eval pipelines. Cover: **OpenRouter** (`openrouter/auto` powered by Not Diamond meta-model, no extra cost), **Martian** (200+ models, OpenAI- and Anthropic-compatible, 20%–97% cost reduction, $9M NEA + General Catalyst, Accenture strategic, 300+ customers, 98% cost claim), **Not Diamond Code** (agent-native, trajectory-aware, cache-aware, KV-cache state considered, semantic + non-semantic payload features, 20%+ coding-agent savings, 51% self-applied), **LiteLLM** (proxy router, drop-in), **Amazon Bedrock Intelligent Prompt Routing** (GA 2025), **RouteLLM** (academic baseline), **PILOT** (bandit-feedback budget-constrained, contextual bandit), **BaRP** (bandit-feedback online learning), **MasRouter** (multi-agent routing), **Router-R1** (RL-trained reasoning routers), **vLLM Semantic Router Iris** <span class="new2026">Jan 2026</span> (LoRA-based multi-task ModernBERT, Go/Rust, Envoy integration, below the application layer). Compare **per-token savings** (20%–95% typical, 30%–85% production), then synthesize the 2026 production pattern: proxy router + trajectory-aware meta-model + KV-cache awareness + bandit online learning + MCP gateway + per-step cost telemetry.</div>
+
+          <h3 style="margin-top:22px">The pipeline — every tool in sync</h3>
+          <div class="diagram">
+            <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arr8a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4cd4d4"/></marker>
+                <marker id="arr8b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d4a24c"/></marker>
+                <marker id="arr8c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5ec27a"/></marker>
+              </defs>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="20" y="30"  width="120" height="34" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="48" text-anchor="middle">Agent Step</text>
+                <rect x="20" y="78"  width="120" height="34" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="96" text-anchor="middle">KV-Cache State</text>
+                <rect x="20" y="126" width="120" height="34" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="144" text-anchor="middle">Trajectory</text>
+                <rect x="20" y="174" width="120" height="34" rx="6" fill="#16161b" stroke="#d4a24c"/><text x="80" y="192" text-anchor="middle">Budget</text>
+              </g>
+              <g stroke="#4cd4d4" stroke-width="1.2" fill="none" marker-end="url(#arr8a)">
+                <path d="M140,46 L208,84"/><path d="M140,94 L208,100"/><path d="M140,142 L208,116"/><path d="M140,190 L208,132"/>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="208" y="60" width="148" height="100" rx="8" fill="#0d0d10" stroke="#4cd4d4"/>
+                <text x="282" y="80" text-anchor="middle" fill="#4cd4d4" font-size="11">Semantic + Cache</text>
+                <text x="282" y="98" text-anchor="middle">vLLM Iris (ModernBERT</text>
+                <text x="282" y="114" text-anchor="middle">LoRA multi-task)</text>
+                <text x="282" y="130" text-anchor="middle">+ LiteLLM proxy</text>
+                <text x="282" y="148" text-anchor="middle" fill="#7a7a82">→ pre-token decision</text>
+              </g>
+              <path d="M356,110 L408,110" stroke="#d4a24c" stroke-width="1.2" fill="none" marker-end="url(#arr8b)"/>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="408" y="60" width="148" height="100" rx="8" fill="#0d0d10" stroke="#d4a24c"/>
+                <text x="482" y="80" text-anchor="middle" fill="#d4a24c" font-size="11">Meta-Model</text>
+                <text x="482" y="98" text-anchor="middle">Not Diamond</text>
+                <text x="482" y="114" text-anchor="middle">+ OpenRouter/auto</text>
+                <text x="482" y="130" text-anchor="middle">trajectory-aware</text>
+                <text x="482" y="148" text-anchor="middle" fill="#7a7a82">→ model + reasoning</text>
+              </g>
+              <path d="M556,110 L600,110" stroke="#d4a24c" stroke-width="1.2" fill="none" marker-end="url(#arr8b)"/>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="600" y="40" width="110" height="160" rx="8" fill="#0d0d10" stroke="#5ec27a"/>
+                <text x="655" y="60" text-anchor="middle" fill="#5ec27a" font-size="11">Model Pool</text>
+                <text x="655" y="78" text-anchor="middle">Nano · Flash</text>
+                <text x="655" y="94" text-anchor="middle">Mini · Pro</text>
+                <text x="655" y="110" text-anchor="middle">Frontier</text>
+                <text x="655" y="126" text-anchor="middle">+ Open weight</text>
+                <text x="655" y="146" text-anchor="middle" fill="#7a7a82">+ prompt cache</text>
+                <text x="655" y="162" text-anchor="middle" fill="#7a7a82">+ subagent level</text>
+                <text x="655" y="178" text-anchor="middle" fill="#7a7a82">+ vLLM self-host</text>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="208" y="180" width="148" height="100" rx="8" fill="#0d0d10" stroke="#5ec27a"/>
+                <text x="282" y="200" text-anchor="middle" fill="#5ec27a" font-size="11">Online Learning</text>
+                <text x="282" y="218" text-anchor="middle">PILOT · BaRP</text>
+                <text x="282" y="234" text-anchor="middle">bandit feedback</text>
+                <text x="282" y="250" text-anchor="middle">+ implicit signals</text>
+                <text x="282" y="268" text-anchor="middle" fill="#7a7a82">→ retrain at night</text>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="408" y="180" width="148" height="100" rx="8" fill="#0d0d10" stroke="#d4a24c"/>
+                <text x="482" y="200" text-anchor="middle" fill="#d4a24c" font-size="11">Cost Telemetry</text>
+                <text x="482" y="218" text-anchor="middle">$ / step · session</text>
+                <text x="482" y="234" text-anchor="middle">$ / task · agent</text>
+                <text x="482" y="250" text-anchor="middle">$ / cache read</text>
+                <text x="482" y="268" text-anchor="middle" fill="#7a7a82">→ judge feedback</text>
+              </g>
+              <g font-family="JetBrains Mono, monospace" font-size="10" fill="#e8e6e0">
+                <rect x="208" y="300" width="350" height="60" rx="8" fill="#0d0d10" stroke="#4cd4d4"/>
+                <text x="383" y="320" text-anchor="middle" fill="#4cd4d4" font-size="11">MCP Gateway</text>
+                <text x="383" y="338" text-anchor="middle">unified control plane · per-tenant budget · cache hit rate</text>
+                <text x="383" y="352" text-anchor="middle" fill="#7a7a82">→ 2026 routing margin lives here</text>
+              </g>
+              <path d="M556,230 L600,140" stroke="#d4a24c" stroke-width="1.2" fill="none" marker-end="url(#arr8b)"/>
+              <path d="M356,230 L408,230" stroke="#5ec27a" stroke-width="1.2" fill="none" marker-end="url(#arr8c)"/>
+            </svg>
+            <div class="legend">
+              <span><i style="background:#d4a24c"></i>signals</span>
+              <span><i style="background:#4cd4d4"></i>classification</span>
+              <span><i style="background:#d4a24c"></i>meta-model</span>
+              <span><i style="background:#5ec27a"></i>pool + learning</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>Tool stack <span class="new2026">refreshed 2026-Q3</span></h3>
+          <table>
+            <thead><tr><th>Layer</th><th>Pick</th><th>License</th></tr></thead>
+            <tbody>
+              <tr><td>Proxy router</td><td><code>LiteLLM</code> · <code>OpenRouter</code> · <code>Portkey</code></td><td><span class="pill">MIT</span> / SaaS</td></tr>
+              <tr><td>Meta-model</td><td><code>Not Diamond Code</code> <span class="new2026">agent-native</span> · trajectory + cache aware</td><td><span class="pill">closed</span></td></tr>
+              <tr><td>Universal auto</td><td><code>openrouter/auto</code> — powered by Not Diamond, no extra cost</td><td><span class="pill">SaaS</span></td></tr>
+              <tr><td>Uptime + cost</td><td><code>Martian</code> <span class="new2026">300+ customers</span> · 200+ models, OpenAI/Anthropic-compat</td><td><span class="pill">closed</span></td></tr>
+              <tr><td>AWS native</td><td><code>Amazon Bedrock Intelligent Prompt Routing</code> (GA 2025)</td><td><span class="pill">closed</span></td></tr>
+              <tr><td>OSS classifier</td><td><code>RouteLLM</code> · <code>vLLM Semantic Router Iris</code> <span class="new2026">Jan 2026</span></td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>Below-app router</td><td><code>vLLM Iris</code> — LoRA multi-task ModernBERT + Envoy integration</td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>Online learning</td><td><code>PILOT</code> · <code>BaRP</code> — bandit-feedback contextual</td><td><span class="pill">MIT</span></td></tr>
+              <tr><td>RL router</td><td><code>Router-R1</code> — RL-trained reasoning routers</td><td><span class="pill">research</span></td></tr>
+              <tr><td>Multi-agent</td><td><code>MasRouter</code> — multi-agent routing</td><td><span class="pill">research</span></td></tr>
+              <tr><td>Self-host</td><td><code>vLLM</code> · <code>SGLang</code> · <code>TensorRT-LLM</code> · <code>MLX</code></td><td><span class="pill">Apache-2.0</span></td></tr>
+              <tr><td>Cache</td><td><code>prompt cache</code> · <code>KV cache</code> · <code>semantic cache (GPTCache)</code></td><td><span class="pill">MIT</span></td></tr>
+              <tr><td>Telemetry</td><td><code>Langfuse</code> · <code>traceAI</code> · <code>Helicone</code></td><td><span class="pill">MIT</span> / SaaS</td></tr>
+              <tr><td>Gateway</td><td><code>MCP Gateway</code> — unified control plane + per-tenant budget</td><td><span class="pill">Apache-2.0</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Benchmarking segment</h3>
+          <div class="kpi-row">
+            <div class="stat"><div class="k">Reported savings</div><div class="v gold">20–95%</div><div class="d">production range · 30–85% midpoint</div></div>
+            <div class="stat"><div class="k">Not Diamond Code</div><div class="v cyan">+20%+</div><div class="d">coding-agent workload</div></div>
+            <div class="stat"><div class="k">Self-applied (ND)</div><div class="v green">-51%</div><div class="d">Not Diamond routing itself</div></div>
+            <div class="stat"><div class="k">UC Berkeley + Canva</div><div class="v amber">-85%</div><div class="d">maintains 95% of GPT-4 quality</div></div>
+          </div>
+          <div class="bars" style="margin-top:14px">
+            <div class="bar-row"><span class="lbl">Not Diamond Code</span><span class="bar green"><i style="width:88%"></i></span><span class="num">agent-fit 8.8</span></div>
+            <div class="bar-row"><span class="lbl">Martian</span><span class="bar cyan"><i style="width:84%"></i></span><span class="num">uptime 8.4</span></div>
+            <div class="bar-row"><span class="lbl">OpenRouter / auto</span><span class="bar green"><i style="width:82%"></i></span><span class="num">pool 8.2</span></div>
+            <div class="bar-row"><span class="lbl">LiteLLM</span><span class="bar amber"><i style="width:74%"></i></span><span class="num">DX 7.4</span></div>
+            <div class="bar-row"><span class="lbl">AWS Bedrock IPR</span><span class="bar amber"><i style="width:72%"></i></span><span class="num">aws-fit 7.2</span></div>
+            <div class="bar-row"><span class="lbl">vLLM Iris</span><span class="bar green"><i style="width:86%"></i></span><span class="num">below-app 8.6</span></div>
+            <div class="bar-row"><span class="lbl">RouteLLM</span><span class="bar cyan"><i style="width:78%"></i></span><span class="num">academic 7.8</span></div>
+            <div class="bar-row"><span class="lbl">PILOT / BaRP</span><span class="bar green"><i style="width:83%"></i></span><span class="num">online 8.3</span></div>
+            <div class="bar-row"><span class="lbl">MCP Gateway</span><span class="bar cyan"><i style="width:80%"></i></span><span class="num">control 8.0</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Verdict</h3>
+          <div class="verdict green"><b>2026-Q3: routing, caching, and per-request model selection ate the "agent cost optimization" category. Routers stopped being a developer convenience; they became the place where margin lives.</b> The 2026 default is a four-layer stack: <b>(1) vLLM Semantic Router Iris</b> (LoRA multi-task ModernBERT) at the inference-serving boundary; <b>(2) Not Diamond Code</b> as the trajectory- and cache-aware meta-model picking model + reasoning level per step; <b>(3) PILOT/BaRP</b> bandit-feedback online learning retraining at night; <b>(4) MCP Gateway</b> as the unified control plane with per-tenant budgets and cache hit-rate telemetry. The reported savings are 20%–95% per workload, with 30%–85% as a production midpoint. Not Diamond's own self-application: 51% reduction. UC Berkeley + Canva: 85% reduction while maintaining 95% of GPT-4 quality. The non-negotiable 2026 questions to ask of any router: <b>cache-aware? agent-loop-aware? vendor-neutral? subagent-aware? cost-telemetry native?</b> If it does not answer yes to all five, you are still paying for the model pool the agent deserves, not the model pool the agent needs.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== TAB 9 — BENCHPARKING =========================== -->
+  <section class="panel" id="t9">
+    <div class="grid2">
+      <div>
+        <div class="card">
+          <h3>Cross-pipeline head-to-head</h3>
+          <p class="muted">How the eight pipelines compare on the axes a real product has to defend: license portability, deployment friction, frontier-quality ceiling, and operational risk. Every row is sourced; every number is a 2026-Q3 disclosure unless tagged.</p>
+          <table>
+            <thead><tr><th>Pipeline</th><th>Default pick</th><th>License</th><th>Ceiling</th><th>Floor (independent)</th><th>Friction</th></tr></thead>
+            <tbody>
+              <tr><td>Trajectory Eval</td><td><code>Future AGI ai-evaluation</code> · <code>traceAI</code></td><td><span class="pill">Apache-2.0</span></td><td><span class="pill green">0.89 BFCL v3</span></td><td>0.61 τ²-bench (retail)</td><td>Low</td></tr>
+              <tr><td>Memory</td><td><code>Letta</code> HOT + <code>Mem0</code> WARM + <code>Graphiti</code> COLD + <code>A-TMA</code></td><td><span class="pill">Apache-2.0</span></td><td><span class="pill green">94.4% LMEval</span></td><td>77–81% LoCoMo (independent)</td><td>Med</td></tr>
+              <tr><td>Guardrails</td><td><code>NeMo Guardrails v0.22</code> + <code>F5</code> + <code>VotalAI vai35</code></td><td><span class="pill">Apache-2.0</span> + closed</td><td><span class="pill green">151 det / 19 cats</span></td><td>EvalTag wiring required</td><td>Med</td></tr>
+              <tr><td>Tool Factory</td><td>OpenAPI → MCP via <code>Fern</code>/<code>Stainless</code> + <code>Azure APIM</code></td><td><span class="pill">MIT</span> + mixed</td><td><span class="pill green">~1.4k MCP servers</span></td><td>spec quality floor</td><td>Low</td></tr>
+              <tr><td>Self-Improve</td><td><code>SFT → DPO</code> + <code>GRPO</code> for reasoning (LoRA)</td><td><span class="pill">Apache-2.0</span></td><td><span class="pill green">single 24GB GPU</span></td><td>capability regression risk</td><td>Med</td></tr>
+              <tr><td>Multi-Agent</td><td><code>Debate → AgentAuditor path → HEAD evidence</code> + TLA+</td><td><span class="pill">mixed</span></td><td><span class="pill green">+5% / +3%</span></td><td>sycophancy collapse (Bertalanič)</td><td>High</td></tr>
+              <tr><td>Privacy</td><td><code>AFM 3B</code> on-device + <code>PCC</code> + Keychain/Enclave</td><td><span class="pill">closed</span></td><td><span class="pill green">verifiable</span></td><td>PCC: MMLU -3.1%</td><td>Apple-only</td></tr>
+              <tr><td>Cost Routing</td><td><code>vLLM Iris</code> + <code>Not Diamond Code</code> + <code>MCP Gateway</code></td><td><span class="pill">Apache-2.0</span> + SaaS</td><td><span class="pill green">85% / 95% quality</span></td><td>cache-fit / 20% low end</td><td>Med</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>The benchparking math</h3>
+          <div class="kpi-row">
+            <div class="stat"><div class="k">OSS-only stack</div><div class="v green">7 / 8</div><div class="d">Memory + Guardrails hybrid + Privacy Apple-only</div></div>
+            <div class="stat"><div class="k">Single-GPU ship</div><div class="v gold">5 / 8</div><div class="d">eval / memory / tools / self-improve / routing</div></div>
+            <div class="stat"><div class="k">EvalTag-emitting</div><div class="v cyan">2 / 8</div><div class="d">FAGI traceAI · NeMo v0.22 + EvalTag</div></div>
+            <div class="stat"><div class="k">Compliance-ready</div><div class="v amber">3 / 8</div><div class="d">multi-agent provenance · privacy · cost audit</div></div>
+          </div>
+          <div class="bars" style="margin-top:14px">
+            <div class="bar-row"><span class="lbl">Trajectory Eval</span><span class="bar cyan"><i style="width:78%"></i></span><span class="num">production-fit 7.8</span></div>
+            <div class="bar-row"><span class="lbl">Memory</span><span class="bar amber"><i style="width:74%"></i></span><span class="num">prod-fit 7.4</span></div>
+            <div class="bar-row"><span class="lbl">Guardrails</span><span class="bar green"><i style="width:82%"></i></span><span class="num">prod-fit 8.2</span></div>
+            <div class="bar-row"><span class="lbl">Tool Factory</span><span class="bar green"><i style="width:85%"></i></span><span class="num">prod-fit 8.5</span></div>
+            <div class="bar-row"><span class="lbl">Self-Improve</span><span class="bar amber"><i style="width:72%"></i></span><span class="num">prod-fit 7.2</span></div>
+            <div class="bar-row"><span class="lbl">Multi-Agent</span><span class="bar amber"><i style="width:68%"></i></span><span class="num">prod-fit 6.8</span></div>
+            <div class="bar-row"><span class="lbl">Privacy</span><span class="bar cyan"><i style="width:78%"></i></span><span class="num">prod-fit 7.8</span></div>
+            <div class="bar-row"><span class="lbl">Cost Routing</span><span class="bar green"><i style="width:88%"></i></span><span class="num">prod-fit 8.8</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>Synergy map — which pipelines compose</h3>
+          <p class="muted">Heatmap of which 2026 pipelines naturally compose. <b style="color:var(--gold)">●</b> = direct integration published; <b style="color:var(--cyan)">●</b> = integration is one adapter away; <b style="color:var(--muted-2)">○</b> = orthogonal, no shared surface today.</p>
+          <table>
+            <thead><tr><th></th><th>Eval</th><th>Memory</th><th>Guard</th><th>Tools</th><th>SelfImp</th><th>Multi</th><th>Privacy</th><th>Routing</th></tr></thead>
+            <tbody>
+              <tr><td><b>Eval</b></td><td>—</td><td><span class="pill green">●</span> FAGI EvalTag</td><td><span class="pill green">●</span> NeMo → EvalTag</td><td><span class="pill cyan">●</span> tool-call rubric</td><td><span class="pill green">●</span> judge → DPO</td><td><span class="pill cyan">●</span> AgentAuditor</td><td><span class="pill">○</span></td><td><span class="pill cyan">●</span> $ / step</td></tr>
+              <tr><td><b>Memory</b></td><td><span class="pill green">●</span></td><td>—</td><td><span class="pill cyan">●</span> PII store</td><td><span class="pill green">●</span> Mem0 tools</td><td><span class="pill cyan">●</span> episodic RL</td><td><span class="pill">○</span></td><td><span class="pill green">●</span> Keychain</td><td><span class="pill">○</span></td></tr>
+              <tr><td><b>Guard</b></td><td><span class="pill green">●</span></td><td><span class="pill cyan">●</span></td><td>—</td><td><span class="pill green">●</span> RBAC</td><td><span class="pill cyan">●</span> red-team pairs</td><td><span class="pill cyan">●</span> HITL</td><td><span class="pill green">●</span> PCC</td><td><span class="pill cyan">●</span> policy aware</td></tr>
+              <tr><td><b>Tools</b></td><td><span class="pill cyan">●</span></td><td><span class="pill green">●</span></td><td><span class="pill green">●</span></td><td>—</td><td><span class="pill">○</span></td><td><span class="pill cyan">●</span> TraceFix</td><td><span class="pill green">●</span> OBO</td><td><span class="pill green">●</span> gateway</td></tr>
+              <tr><td><b>SelfImp</b></td><td><span class="pill green">●</span></td><td><span class="pill cyan">●</span></td><td><span class="pill cyan">●</span></td><td><span class="pill">○</span></td><td>—</td><td><span class="pill cyan">●</span> pair miner</td><td><span class="pill">○</span></td><td><span class="pill cyan">●</span> cheap judge</td></tr>
+              <tr><td><b>Multi</b></td><td><span class="pill cyan">●</span></td><td><span class="pill">○</span></td><td><span class="pill cyan">●</span></td><td><span class="pill cyan">●</span></td><td><span class="pill cyan">●</span></td><td>—</td><td><span class="pill cyan">●</span> provenance</td><td><span class="pill">○</span></td></tr>
+              <tr><td><b>Privacy</b></td><td><span class="pill">○</span></td><td><span class="pill green">●</span></td><td><span class="pill green">●</span></td><td><span class="pill green">●</span></td><td><span class="pill">○</span></td><td><span class="pill cyan">●</span></td><td>—</td><td><span class="pill cyan">●</span> on-device</td></tr>
+              <tr><td><b>Routing</b></td><td><span class="pill cyan">●</span></td><td><span class="pill">○</span></td><td><span class="pill cyan">●</span></td><td><span class="pill green">●</span></td><td><span class="pill cyan">●</span></td><td><span class="pill">○</span></td><td><span class="pill cyan">●</span></td><td>—</td></tr>
+            </tbody>
+          </table>
+          <p class="tiny" style="margin-top:10px">Densest composites: <b>Eval + Memory + Guardrails</b> (single OTel substrate via traceAI EvalTag) · <b>Tools + Routing + Privacy</b> (MCP gateway + OBO + on-device) · <b>Self-Improve + Eval + Multi-Agent</b> (judge → DPO pairs + ACPO-style training on majority-failures).</p>
+        </div>
+
+        <div class="card">
+          <h3>Default stack (drop-in 30-day ship)</h3>
+          <pre class="code"><span class="c"># A defensible 2026-Q3 default for a 1k-user production agent</span>
+<span class="k">eval</span>      = traceAI + Prometheus-2 7B + <span class="s">Future AGI AgentTrajectoryInput</span>
+<span class="k">memory</span>    = Letta (HOT) + Mem0 v1.0 (WARM, async) + Graphiti (COLD) + A-TMA overlay
+<span class="k">guard</span>     = NeMo Guardrails v0.22 (Colang 2.0) + F5 enterprise + Lakera Gandalf:AB
+<span class="k">tools</span>     = OpenAPI -> MCP via Fern; Azure APIM; iPaaS for breadth; OBO auth
+<span class="k">self_imp</span>  = SFT (LoRA) -> DPO (1k-10k pairs) -> GRPO for verifiable; capability guard
+<span class="k">multi</span>     = debate (Exec/Crit/Refl) -> AgentAuditor path search -> HEAD evidence
+<span class="k">privacy</span>   = AFM 3B + Foundation Models API on iOS 27; PCC for the cloud path
+<span class="k">routing</span>   = vLLM Iris (LoRA ModernBERT) + Not Diamond Code + MCP Gateway + PILOT bandit
+<span class="k">telemetry</span>  = $ / step, $ / session, $ / cache read into judge ensemble -> regression gate
+<span class="k">compliance</span>= W3C PROV hash chain + ISO/IEC 23894:2023 + EU AI Act disclosures
+<span class="k">canary</span>    = 5% traffic, capability regression (MMLU/IFEval/MT-Bench), rollback if delta&lt;0</pre>
+        </div>
+
+        <div class="card">
+          <h3>Verdict</h3>
+          <div class="verdict"><b>2026-Q3: the eight pipelines are no longer eight; they are one mesh.</b> The heatmap shows the same 4 dense composites repeating across every architecture I have seen ship in 2026: <b>Eval + Memory + Guardrails</b> (one OTel substrate, one EvalTag channel), <b>Tools + Routing + Privacy</b> (MCP gateway + OBO + on-device), <b>Self-Improve + Eval + Multi-Agent</b> (judge → DPO pairs + ACPO on majority-failures), and <b>Multi-Agent + Privacy</b> (provenance hash chain for ISO 23894). If you can wire these four composites, the remaining 24 cells are one adapter away. The single most expensive mistake in 2026: <b>ship a single pipeline in isolation and try to bolt the others on later</b>. The single most profitable move: <b>instrument with traceAI on day one, decide your EvalTag contract before any other</b>.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <div class="k">8 tabs · 1 file · 2026-08-09 · 15:31 CET</div>
+    <div class="center">Mavis · director mode · kaipersona · mtm-resource-sweep · cron-daily</div>
+    <div>agent-pipelines-deep-sweep</div>
+  </div>
+
+</div>
+
+<script>
+  // tab switching
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.panel');
+  tabs.forEach(t => t.addEventListener('click', () => {
+    tabs.forEach(x => x.classList.remove('active'));
+    panels.forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById(t.dataset.tab).classList.add('active');
+  }));
+
+  // copy prompt
+  document.querySelectorAll('.copy').forEach(b => {
+    b.addEventListener('click', () => {
+      const text = b.parentElement.innerText.replace(/^Copy\s*/, '');
+      navigator.clipboard?.writeText(text);
+      b.classList.add('ok');
+      b.textContent = 'Copied';
+      setTimeout(() => { b.classList.remove('ok'); b.textContent = 'Copy'; }, 1400);
+    });
+  });
+</script>
+</body>
+</html>

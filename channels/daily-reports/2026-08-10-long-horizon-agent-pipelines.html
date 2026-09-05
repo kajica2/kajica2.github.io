@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Long-Horizon Agent Pipelines — 8 Tabs of Latest · MTM Resource Sweep · 2026-08-10</title>
+<style>
+  :root {
+    --ink: #0e1116;
+    --ink-2: #2a2f3a;
+    --muted: #6b7280;
+    --line: #e6e6ea;
+    --line-2: #f1f1f4;
+    --bg: #fafafb;
+    --card: #ffffff;
+    --accent: #d33b3b;
+    --accent-2: #0a5fff;
+    --good: #167d4c;
+    --warn: #b15c00;
+    --code: #0b1020;
+    --code-ink: #e6edf3;
+    --tag: #f3f4f6;
+    --shadow: 0 1px 0 rgba(0,0,0,.04), 0 6px 22px -16px rgba(0,0,0,.12);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.55;
+    font-size: 16.5px;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 24px 28px 96px; }
+  header {
+    padding: 28px 0 18px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 22px;
+  }
+  .eyebrow {
+    display: inline-block;
+    font-size: 11.5px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--tag);
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-size: 38px;
+    line-height: 1.1;
+    margin: 6px 0 10px;
+    letter-spacing: -.02em;
+  }
+  h1 .em { color: var(--accent); }
+  .sub { color: var(--muted); font-size: 15.5px; max-width: 720px; }
+  .meta {
+    display: flex; gap: 14px; flex-wrap: wrap;
+    margin-top: 14px; color: var(--muted); font-size: 13.5px;
+  }
+  .meta b { color: var(--ink-2); font-weight: 600; }
+
+  nav.tabs {
+    position: sticky; top: 0;
+    background: rgba(250,250,251,.92);
+    backdrop-filter: saturate(140%) blur(8px);
+    -webkit-backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--line);
+    z-index: 50;
+    margin: 0 -28px 28px;
+    padding: 10px 28px;
+  }
+  nav.tabs .inner { max-width: 980px; margin: 0 auto; display: flex; gap: 6px; flex-wrap: wrap; }
+  nav.tabs a {
+    text-decoration: none; color: var(--ink-2);
+    padding: 7px 11px; border-radius: 6px; font-size: 13.5px;
+    border: 1px solid transparent;
+  }
+  nav.tabs a:hover { background: var(--tag); }
+  nav.tabs a .num { color: var(--muted); margin-right: 6px; font-variant-numeric: tabular-nums; }
+  nav.tabs a.bench { color: var(--accent); border-color: var(--line); }
+
+  section.tab {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 28px 30px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow);
+  }
+  section.tab h2 {
+    font-size: 26px; line-height: 1.2; margin: 0 0 4px;
+    letter-spacing: -.01em;
+  }
+  section.tab .lede {
+    color: var(--muted); font-size: 14.5px; margin: 0 0 18px;
+  }
+  section.tab h3 {
+    font-size: 13.5px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted); margin: 26px 0 10px; font-weight: 600;
+  }
+  p { margin: 0 0 12px; }
+  p strong { color: var(--ink); }
+  ul, ol { margin: 0 0 14px; padding-left: 20px; }
+  li { margin-bottom: 5px; }
+  code {
+    font-family: "SF Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+    font-size: 13.5px;
+    background: var(--tag);
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+  pre {
+    margin: 0 0 14px;
+    background: var(--code); color: var(--code-ink);
+    padding: 14px 16px; border-radius: 8px; overflow-x: auto;
+    font-family: "SF Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+    font-size: 13px; line-height: 1.5;
+  }
+  pre .c { color: #7d8590; font-style: italic; }
+  .grid {
+    display: grid; gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    margin: 0 0 18px;
+  }
+  .chip {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px 12px;
+    background: #fff;
+  }
+  .chip .name { font-weight: 600; font-size: 14px; }
+  .chip .meta-row { color: var(--muted); font-size: 12.5px; margin-top: 2px; }
+  .chip .num { color: var(--good); font-weight: 600; font-size: 13px; margin-top: 4px; }
+  .pipeline {
+    background: #f6f7f9; border: 1px solid var(--line); border-radius: 8px;
+    padding: 12px 14px; font-family: "SF Mono", ui-monospace, monospace;
+    font-size: 13px; line-height: 1.7; color: var(--ink-2);
+    white-space: pre-wrap; margin: 0 0 16px;
+  }
+  .arrow { color: var(--accent); font-weight: 600; }
+  .landing {
+    margin-top: 18px; padding: 14px 16px;
+    background: #fff5f5; border-left: 3px solid var(--accent);
+    font-style: italic; color: var(--ink-2);
+  }
+  table {
+    width: 100%; border-collapse: collapse; margin: 0 0 18px;
+    font-size: 14px;
+  }
+  th, td {
+    text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th {
+    background: var(--line-2); color: var(--ink-2); font-weight: 600; font-size: 13px;
+  }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .pill {
+    display: inline-block; font-size: 11.5px; padding: 2px 7px; border-radius: 99px;
+    background: var(--tag); color: var(--ink-2); margin-right: 4px;
+  }
+  .pill.good { background: #e6f6ec; color: var(--good); }
+  .pill.warn { background: #fff2e0; color: var(--warn); }
+  .pill.bad  { background: #fde7e7; color: var(--accent); }
+  footer { color: var(--muted); font-size: 13px; margin-top: 32px; text-align: center; }
+  .footer-rule { border-top: 1px solid var(--line); margin: 32px 0 16px; }
+  .small { font-size: 13px; color: var(--muted); }
+  hr.soft { border: none; border-top: 1px solid var(--line-2); margin: 24px 0; }
+  @media (max-width: 640px) {
+    .wrap { padding: 18px 16px 80px; }
+    h1 { font-size: 28px; }
+    section.tab { padding: 20px 18px; }
+    nav.tabs { margin: 0 -16px 22px; padding: 8px 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">MTM Resource Sweep · Long-Horizon Agent Pipelines</span>
+  <h1>Eight pipelines that turn an LLM from a <span class="em">demo</span> into a system you can actually ship.</h1>
+  <p class="sub">One report. Eight tabs. Each one names the problem, the 2026 tools, a working end-to-end pipeline, prompts you can copy, and the numbers that prove it works. A benchmarking segment at the end sorts what to build first, second, and not at all.</p>
+  <div class="meta">
+    <span><b>Date</b> 2026-08-10</span>
+    <span><b>Sources swept</b> 56 web queries · 30+ first-party docs · 12 papers</span>
+    <span><b>Voice</b> article-writer · kai persona</span>
+    <span><b>Format</b> self-contained HTML · no external deps</span>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="inner">
+    <a href="#t1"><span class="num">01</span>Agent Eval</a>
+    <a href="#t2"><span class="num">02</span>Long-Term Memory</a>
+    <a href="#t3"><span class="num">03</span>Observability &amp; Guardrails</a>
+    <a href="#t4"><span class="num">04</span>Tool Orchestration</a>
+    <a href="#t5"><span class="num">05</span>Self-Improving Agents</a>
+    <a href="#t6"><span class="num">06</span>Multi-Agent Debate</a>
+    <a href="#t7"><span class="num">07</span>Privacy / Local-First</a>
+    <a href="#t8"><span class="num">08</span>Cost &amp; Routing</a>
+    <a href="#bench" class="bench">Benchmarking</a>
+  </div>
+</nav>
+
+<!-- ============================================================ -->
+<section class="tab" id="t1">
+  <h2>Tab 01 · End-to-End Agent Evaluation &amp; Trajectory Benchmarking</h2>
+  <p class="lede">Final-answer scoring marks a failing agent green. The answer was right. The path was wrong — 20 steps, two policy violations, an exfiltration. Trajectory eval closes that gap.</p>
+
+  <h3>Why it matters</h3>
+  <p>A correct answer reached in 20 steps with two policy-violating intermediate calls is a <strong>failing trajectory</strong>. Production agents need four layers: <em>unit, trajectory, outcome, online</em>. Anything less accumulates technical debt in the form of undetected regressions.</p>
+
+  <h3>Latest 2026 landscape</h3>
+  <div class="grid">
+    <div class="chip"><div class="name">LangSmith agentevals</div><div class="meta-row">MIT SDK · closed platform</div><div class="num">4 trajectory-match modes (strict / unordered / subset / superset)</div></div>
+    <div class="chip"><div class="name">Arize Phoenix</div><div class="meta-row">ELv2 · OTel-native</div><div class="num">~9.9k★ · OpenInference auto-instrumentation across 14+ frameworks</div></div>
+    <div class="chip"><div class="name">Braintrust</div><div class="meta-row">Closed · $249/mo Pro</div><div class="num">$80M Series B Feb 2026 · best dataset-diff UX</div></div>
+    <div class="chip"><div class="name">DeepEval</div><div class="meta-row">Apache 2.0 · pytest-style</div><div class="num">~16.3k★ · 50+ metrics incl. G-Eval, task completion, faithfulness</div></div>
+    <div class="chip"><div class="name">Confident AI</div><div class="meta-row">Closed · $200/mo Starter</div><div class="num">CI/CD report, release gates, tool-call regression</div></div>
+    <div class="chip"><div class="name">Future AGI</div><div class="meta-row">Apache 2.0 · self-hostable</div><div class="num">Trajectory-first, framework-neutral, span-attached evals + gateway</div></div>
+    <div class="chip"><div class="name">AgentAssay</div><div class="meta-row">arXiv:2603.02601</div><div class="num">78–100% cost cut via SPRT · 86% detection where binary has 0%</div></div>
+    <div class="chip"><div class="name">Langfuse v4</div><div class="meta-row">MIT (was AGPL)</div><div class="num">Observations-first data model · ClickHouse acquired Jan 2026</div></div>
+  </div>
+  <p class="small">Benchmarks worth tracking: <code>tau-bench</code>, <code>tau2-bench</code>, <code>SWE-Bench</code>, <code>AgentBench</code>, <code>LongMemEval</code>, <code>LoCoMo</code>.</p>
+
+  <h3>End-to-end pipeline demo</h3>
+  <div class="pipeline">golden-50.yaml  <span class="arrow">→</span>  OpenTelemetry spans (Phoenix)  <span class="arrow">→</span>  trajectory diff (agentevals strict+unordered)  <span class="arrow">→</span>  pytest gate (DeepEval task_completion ≥ 0.95)  <span class="arrow">→</span>  PR block on threshold fail  <span class="arrow">→</span>  nightly LLM-judge (Braintrust)  <span class="arrow">→</span>  shadow 5% traffic  <span class="arrow">→</span>  canary 50% with error budget  <span class="arrow">→</span>  AgentAssay SPRT sampling in production  <span class="arrow">→</span>  failed traces back to golden</div>
+
+  <h3>Prompts that work</h3>
+  <pre><span class="c"># 1) Strict trajectory match (reference) — bloqueia qualquer desvio de ordem/argumento</span>
+from agentevals import create_trajectory_match_evaluator
+strict = create_trajectory_match_evaluator(mode="strict")
+strict(inputs=case.input, outputs=agent_run, reference_trajectory=case.golden)
+
+<span class="c"># 2) Tool-selection LLM judge (reference-free) — quando não dá pra manter golden</span>
+judge_prompt = """
+You are grading an agent&apos;s tool selection.
+For each tool call, decide:
+  (a) Was the right tool picked for the user&apos;s goal?
+  (b) Are the arguments schema-valid AND semantically correct?
+  (c) Did the agent recover from a failed tool call, or did it loop?
+Return JSON: { "tool_selection": 0-1, "args": 0-1, "recovery": 0-1, "reasoning": "..." }
+Trajectory: {trajectory}
+User goal: {goal}
+"""
+
+<span class="c"># 3) Step-level faithfulness — segura contra hallucinated intermediate steps</span>
+faith = """
+For each model turn, classify:
+  CLAIM  — agent asserted a fact
+  GROUND — fact is supported by tool result or retrieved doc
+  FAB    — fact is unsupported or contradicts retrieved context
+FAB &gt; 0 fails the step. Report counts and the offending turn IDs.
+"""</pre>
+
+  <h3>Benchmarks that hold</h3>
+  <table>
+    <tr><th>Layer</th><th>Trigger</th><th>Pattern</th><th class="num">Cost</th><th>Gate</th></tr>
+    <tr><td>Unit</td><td>Every PR</td><td>Deterministic tool/arg/schema</td><td class="num">~$0</td><td>block merge</td></tr>
+    <tr><td>Trajectory</td><td>Every PR</td><td>50–200 cases, strict+unordered</td><td class="num">$0–$5</td><td>block merge</td></tr>
+    <tr><td>Outcome</td><td>Nightly</td><td>100-prompt LLM-judge (4o-mini)</td><td class="num">~$2/night</td><td>alert on –5pp</td></tr>
+    <tr><td>Online</td><td>Continuous</td><td>1–5% sampled + judge</td><td class="num">$60+/mo</td><td>error-budget burn → rollback</td></tr>
+  </table>
+  <p class="small">AgentAssay (arXiv 2603.02601): <code>78–100% cost reduction</code> at equivalent statistical guarantees via SPRT; <code>86% behavioral detection power</code> where binary pass/fail has 0%. Total: $227 across 5 models, 3 scenarios, 7,605 trials.</p>
+
+  <div class="landing">The unit is the <em>trajectory</em>, not the response. Score tool selection, argument extraction, result utilization, error recovery, plan coherence, and task completion — separately. If a framework can't do those six independently, it's LLM eval, not agent eval.</div>
+</section>
+
+<!-- ============================================================ -->
+<section class="tab" id="t2">
+  <h2>Tab 02 · Structured, Long-Term Memory with Automatic Consolidation</h2>
+  <p class="lede">A context window is short-term and re-paid every turn. Memory is persistent, has its own storage tier, evolution rules, and a forgetting policy. The two are complements, not substitutes.</p>
+
+  <h3>Why it matters</h3>
+  <p>LongMemEval showed 1M-token models drop 30%+ accuracy when forced to recall across sessions without a memory layer. The dream is hybrid: structured graph for relations, vector store for surface recall, the agent itself paging between them — and a sleep-time process that consolidates the way the hippocampus does.</p>
+
+  <h3>Latest 2026 landscape</h3>
+  <div class="grid">
+    <div class="chip"><div class="name">Letta (MemGPT)</div><div class="meta-row">Open source · Berkeley lineage</div><div class="num">83.2% LoCoMo · three tiers: core/archival/recall</div></div>
+    <div class="chip"><div class="name">Mem0 v3</div><div class="meta-row">41k★ · 14M downloads</div><div class="num">94.4 on LongMemEval · p95 17.12s → 1.44s (–91%)</div></div>
+    <div class="chip"><div class="name">Zep / Graphiti</div><div class="meta-row">Open source</div><div class="num">94.8% on Deep Memory Retrieval · bi-temporal graph</div></div>
+    <div class="chip"><div class="name">LangMem</div><div class="meta-row">LangGraph-native</div><div class="num">Checkpointer + store · async background consolidation</div></div>
+    <div class="chip"><div class="name">Anthropic Memory Tool + Dreaming</div><div class="meta-row">Shipped May 6, 2026</div><div class="num">Async hippocampal-style consolidation between sessions</div></div>
+    <div class="chip"><div class="name">Google Memory Bank</div><div class="meta-row">Gemini Enterprise</div><div class="num">Identity-scoped DB primitive</div></div>
+    <div class="chip"><div class="name">APEX-MEM</div><div class="meta-row">ACL 2026 long</div><div class="num">88.88% LoCoMo QA · 86.2% LongMemEval · property graph</div></div>
+    <div class="chip"><div class="name">Memanto</div><div class="meta-row">arXiv 2604.22085</div><div class="num">89.8% LongMemEval · 87.1% LoCoMo · sub-90ms</div></div>
+    <div class="chip"><div class="name">GBrain (Garry Tan)</div><div class="meta-row">Open source · hybrid</div><div class="num">49.1% P@5 vs 17.7% w/o graph · vector+BM25+KG</div></div>
+  </div>
+
+  <h3>End-to-end pipeline demo</h3>
+  <div class="pipeline">user turn  <span class="arrow">→</span>  Mem0 single-pass ADD extraction (LLM-agnostic)  <span class="arrow">→</span>  Zep Graphiti bi-temporal edge upsert  <span class="arrow">→</span>  LangMem store (vector+graph, same canonical IDs)  <span class="arrow">→</span>  Letta core memory block (always-in-context persona+task)  <span class="arrow">→</span>  Anthropic Dreaming (nightly, async) merges duplicates, rewrites stale  <span class="arrow">→</span>  retriever: vector similarity → graph hops → recency decay  <span class="arrow">→</span>  top-k into context  <span class="arrow">→</span>  agent turn</div>
+
+  <h3>Prompts that work</h3>
+  <pre><span class="c"># 1) Single-pass ADD-only extraction (Mem0 v3 idiom) — one LLM call, no UPDATE/DELETE</span>
+extract_prompt = """
+Read this conversation turn. Emit only NEW facts about the user
+that are not already in the existing memory store. Skip generic chit-chat.
+Skip things the user already corrected this turn.
+Each fact: { "subject": str, "predicate": str, "object": str, "confidence": 0-1, "ts": ISO8601 }
+Existing memory (for dedup awareness): {existing}
+Conversation: {turn}
+"""
+
+<span class="c"># 2) Conflict resolution — when new info contradicts old, stamp the old invalid, keep history</span>
+conflict_prompt = """
+New fact: {new_fact}
+Candidate conflicting edges: {candidates}
+Decide:
+  REPLACE — new supersedes (mark old invalid_at=now, add new with valid_at=now)
+  COEXIST — both can be true (e.g., user has two roles over time)
+  REJECT — new is hallucinated; ignore
+Return JSON with decision, reason, and updated edges.
+"""
+
+<span class="c"># 3) Sleep-time reflection (Anthropic Dreaming / Letta sleep-time agent idiom)</span>
+reflect = """
+Recent episodic trace (last 24h): {episodes}
+Long-term store: {store}
+Produce 0–5 NEW high-order insights that:
+  (a) cross multiple episodes,
+  (b) are not yet in the store,
+  (c) are at a higher abstraction than the events themselves.
+Do not summarize. Do not repeat. Output JSON array of insights.
+"""
+
+<span class="c"># 4) Recency-decay reranking (production default)</span>
+final_score = 0.7 * relevance + 0.3 * exp(-lambda * days_since)
+<span class="c">#  lambda ≈ ln(2) / 14d → 14-day half-life, tune from production retrieval</span></pre>
+
+  <h3>Benchmarks that hold</h3>
+  <table>
+    <tr><th>System</th><th>LongMemEval</th><th>LoCoMo</th><th>Notes</th></tr>
+    <tr><td>Mem0 v3</td><td class="num">94.4</td><td class="num">—</td><td>~7k tokens/query vs 25k+ full-context</td></tr>
+    <tr><td>Memanto</td><td class="num">89.8</td><td class="num">87.1</td><td>32× compression · sub-90ms · single retrieval</td></tr>
+    <tr><td>APEX-MEM</td><td class="num">86.2</td><td class="num">88.88 (QA)</td><td>Append-only, retrieval-time resolution</td></tr>
+    <tr><td>Letta</td><td>—</td><td class="num">83.2</td><td>MemGPT lineage, 3-tier model</td></tr>
+    <tr><td>Zep (Graphiti)</td><td colspan="2" class="num">94.8% Deep Memory Retrieval</td><td>beats MemGPT 93.4% · 90% latency cut</td></tr>
+  </table>
+  <p class="small">Production target: HOT tier &lt;2K tokens (current session) · WARM 2K–8K (prefs+recent decisions) · COLD unlimited vector-indexed. Recency default: 14-day half-life.</p>
+
+  <div class="landing">Hybrid wins. <em>Vector for surface, graph for relations, the agent itself for paging.</em> Add a sleep-time process that consolidates every 25–50 task completions, and the store keeps getting smarter without retraining the model.</div>
+</section>
+
+<!-- ============================================================ -->
+<section class="tab" id="t3">
+  <h2>Tab 03 · Agent Observability, Guardrails, and Real-Time Interruption</h2>
+  <p class="lede">Tracing tells you what happened. Eval tells you if it was good. Guardrails stop the bad from reaching the user — at sub-200ms, with graduated interventions, ideally before the tool call.</p>
+
+  <h3>Why it matters</h3>
+  <p>Agents autonomously call tools, send email, write rows. Enterprises won't deploy them without runtime enforcement. A keyword filter is too blunt. A post-hoc audit is too late. The new floor: streaming interception, intent modeling, and policy-as-code with hardware-rooted attestation behind it.</p>
+
+  <h3>Latest 2026 landscape</h3>
+  <div class="grid">
+    <div class="chip"><div class="name">Langfuse v4</div><div class="meta-row">MIT · observations-first</div><div class="num">~29.8k★ · ClickHouse acquired Jan 2026</div></div>
+    <div class="chip"><div class="name">Arize Phoenix / AX</div><div class="meta-row">ELv2 / SaaS</div><div class="num">~$50/mo entry · $70M Series C Feb 2025</div></div>
+    <div class="chip"><div class="name">LangSmith</div><div class="meta-row">Closed · $39/seat</div><div class="num">SmithDB ~12× faster trace queries · 5K traces free</div></div>
+    <div class="chip"><div class="name">OpenTelemetry GenAI v1.41</div><div class="meta-row">Open standard</div><div class="num">Status: Development (not yet Stable)</div></div>
+    <div class="chip"><div class="name">NeMo Guardrails</div><div class="meta-row">Apache 2.0</div><div class="num">Colang DSL · 6 rail types · F5 integration GA Jul 2026</div></div>
+    <div class="chip"><div class="name">Lakera Guard</div><div class="meta-row">Closed · sub-200ms</div><div class="num">Threat-intel DB · prompt-injection firewall</div></div>
+    <div class="chip"><div class="name">GAAT</div><div class="meta-row">arXiv 2604.05119</div><div class="num">98.3% VPR · 8.4ms median detection · beats NeMo +19.5pp</div></div>
+    <div class="chip"><div class="name">Lean-Agent Protocol</div><div class="meta-row">arXiv 2604.01483</div><div class="num">Lean 4 + Aristotle · deterministic financial compliance</div></div>
+    <div class="chip"><div class="name">Tumeryk</div><div class="meta-row">NemoClaw + NeMo</div><div class="num">Trust-score control plane · Mar 15, 2026</div></div>
+  </div>
+
+  <h3>End-to-end pipeline demo</h3>
+  <div class="pipeline">agent run  <span class="arrow">→</span>  OTel GenAI spans (Phoenix, gen_ai.* attrs)  <span class="arrow">→</span>  Langfuse v4 observation table (one row per LLM call)  <span class="arrow">→</span>  Lakera Guard &lt;200ms injection/PII check  <span class="arrow">→</span>  NeMo Colang topical + jailbreak rail  <span class="arrow">→</span>  GAAT OPA policy check (graduated: L0 ALLOW → L4 QUARANTINE)  <span class="arrow">→</span>  if high-stakes → Lean 4 type-checker (microsecond verdict)  <span class="arrow">→</span>  PII redaction on tool results (TasmanianDevil / Openlayer)  <span class="arrow">→</span>  span scored online  <span class="arrow">→</span>  Datadog export via OTLP</div>
+
+  <h3>Prompts that work</h3>
+  <pre><span class="c"># 1) NeMo Colang — jailbreak + content safety rail</span>
+# config.yml
+rails:
+  input:
+    flows:
+      - content safety check input $model=llama-3.1-nemoguard-8b-content-safety
+      - self check jailbreak
+  output:
+    flows:
+      - content safety check output $model=llama-3.1-nemoguard-8b-content-safety
+      - self check hallucination
+  execution:
+    flows:
+      - check tool call $allowed_tools=[&apos;search&apos;,&apos;create_ticket&apos;]
+
+<span class="c"># 2) GAAT Governance Telemetry Schema (OPA-compatible)</span>
+package agent.guardrails
+
+deny[msg] {
+  input.tool_call.name == "send_email"
+  not input.user.consent.email_outbound
+  msg := sprintf("tool %v requires email_outbound consent", [input.tool_call.name])
+}
+
+warn[msg] {
+  input.tool_call.arguments.pii_detected == true
+  msg := "PII in tool arguments — redact before send"
+}
+
+<span class="c"># 3) Graduated intervention (L0–L4)</span>
+intervene(severity, action) = {"L0":"allow","L1":"alert","L2":"flag","L3":"redirect","L4":"quarantine"}[severity]</pre>
+
+  <h3>Benchmarks that hold</h3>
+  <table>
+    <tr><th>System</th><th class="num">Detection (VPR)</th><th class="num">Latency median</th><th>Notes</th></tr>
+    <tr><td>GAAT (arXiv 2604.05119)</td><td class="num">98.3% ±0.7</td><td class="num">8.4 ms (detect) · 127 ms (e2e)</td><td>5,000 synthetic flows · 95% CI [97.1, 99.2]</td></tr>
+    <tr><td>NeMo Guardrails</td><td class="num">78.8%</td><td class="num">~45 ms</td><td>agent-boundary only · misses cross-agent</td></tr>
+    <tr><td>Centralized gateway</td><td class="num">89.4%</td><td>—</td><td>single chokepoint</td></tr>
+    <tr><td>Cedar (AWS)</td><td class="num">76.8%</td><td>—</td><td>policy engine</td></tr>
+    <tr><td>Dashboard-only</td><td class="num">27.1%</td><td>—</td><td>no enforcement</td></tr>
+  </table>
+  <p class="small">Deterministic checks &lt;50ms · LLM-judge 1–5s on cloud Turing models · budget the synchronous chain &lt;300ms end-to-end. Defense in depth beats any single layer.</p>
+
+  <div class="landing"><em>Observability is a witness.</em> Guardrails are the boundary. Wire the boundary with policy-as-code in version control, score every decision, and ship the audit log to the regulator's mailbox before they ask for it.</div>
+</section>
+
+<!-- ============================================================ -->
+<section class="tab" id="t4">
+  <h2>Tab 04 · Tool Integration &amp; Dynamic API Orchestration</h2>
+  <p class="lede">Function calling is a runtime convention inside one LLM API. MCP is a transport-level protocol that lives outside it. In 2026 you ship one MCP server and every compatible client can use it. That's the unlock.</p>
+
+  <h3>Why it matters</h3>
+  <p>Connecting agents to real APIs is still messy. The 2026-07-28 MCP spec — stateless core, MRTR, async tasks, formal extension system — pushed the protocol from a developer-facing tool-calling convention toward enterprise-grade production infrastructure. Auto-generation from OpenAPI collapsed the onboarding tax.</p>
+
+  <h3>Latest 2026 landscape</h3>
+  <div class="grid">
+    <div class="chip"><div class="name">MCP 2026-07-28</div><div class="meta-row">Anthropic-led, community standard</div><div class="num">1,000+ community servers · stateless · MRTR</div></div>
+    <div class="chip"><div class="name">AutoMCP</div><div class="meta-row">arXiv 2507.16044</div><div class="num">76.5% OOTB success · 99.9% with 19 LOC fixes (1,023 tool calls)</div></div>
+    <div class="chip"><div class="name">McProxy (Okta)</div><div class="meta-row">NL → MCP · patent-pending</div><div class="num">Onboarding 16 hours → 30 seconds</div></div>
+    <div class="chip"><div class="name">Tyk AI Studio</div><div class="meta-row">Open source gateway</div><div class="num">MCP tool generation from OpenAPI · scoped RBAC · PII redaction</div></div>
+    <div class="chip"><div class="name">Foundry Agent Service</div><div class="meta-row">Azure · managed identity</div><div class="num">OpenAPI 3.0 → tool with Entra ID auth</div></div>
+    <div class="chip"><div class="name">Code mode (programmatic tool calling)</div><div class="meta-row">Deno · Monty · pctx · Wasmtime</div><div class="num">Sandboxed code composes tool calls · only final result back</div></div>
+    <div class="chip"><div class="name">Semantic Kernel MCP</div><div class="meta-row">Microsoft</div><div class="num">Native in Microsoft Agent Framework 1.0</div></div>
+    <div class="chip"><div class="name">AgentGuard / TasmanianDevil</div><div class="meta-row">.NET · offline</div><div class="num">PII redaction on input, output, AND tool results</div></div>
+  </div>
+
+  <h3>End-to-end pipeline demo</h3>
+  <div class="pipeline">OpenAPI 3.0 spec  <span class="arrow">→</span>  AutoMCP compiler (auth scaffold + schemas)  <span class="arrow">→</span>  MCP server (stdio / streamable HTTP)  <span class="arrow">→</span>  Tyk AI Studio registers server, attaches policy + PII redaction  <span class="arrow">→</span>  agent calls via tools/list + tools/call  <span class="arrow">→</span>  if multi-step → code-mode sandbox composes  <span class="arrow">→</span>  PII redaction on tool result (AgentGuard)  <span class="arrow">→</span>  audit log to OTel  <span class="arrow">→</span>  progressive discovery loads tool defs on demand</div>
+
+  <h3>Prompts that work</h3>
+  <pre><span class="c"># 1) Tool description generation — LLM writes the JSON-schema description a model will see</span>
+describe_tool = """
+Given this OpenAPI operation, produce an MCP tool definition:
+  - name: snake_case, action_object
+  - description: 1–2 sentences stating WHEN to call (not what it returns)
+  - inputSchema: JSON Schema, required fields marked
+  - outputSchema: shape of the success response
+  - examples: 2 input/output pairs
+OpenAPI op: {op}
+"""
+
+<span class="c"># 2) Argument schema validation — never trust the LLM</span>
+from jsonschema import validate, ValidationError
+try:
+    validate(instance=tool_call.arguments, schema=tool.inputSchema)
+except ValidationError as e:
+    <span class="c"># refuse + emit structured error so agent can retry with corrected args</span>
+    return {"error": "schema_violation", "path": e.absolute_path, "msg": e.message}
+
+<span class="c"># 3) Progressive discovery — defer tool defs into context</span>
+search_tools_prompt = """
+Available MCP servers: {server_list}
+For this user request, which 1–2 servers are needed? Reply with [server_name].
+Do not list tools — defs load on demand.
+"""
+
+<span class="c"># 4) Tool-result PII redaction (the under-appreciated surface)</span>
+policy = (GuardrailPolicyBuilder()
+    .RedactPii()             <span class="c"># order 20 — runs on input, output, AND tool results</span>
+    .GuardToolResults()      <span class="c"># wires the tool-result interception lane</span>
+    .Build())</pre>
+
+  <h3>Benchmarks that hold</h3>
+  <table>
+    <tr><th>Tool</th><th>Result</th></tr>
+    <tr><td>AutoMCP OOTB</td><td class="num">76.5% of 1,023 tool calls</td></tr>
+    <tr><td>AutoMCP after ≤19 LOC fixes per API</td><td class="num">99.9%</td></tr>
+    <tr><td>McProxy onboarding</td><td class="num">16 h → 30 s</td></tr>
+    <tr><td>MCP community servers (2026)</td><td class="num">1,000+</td></tr>
+    <tr><td>Code-mode sandbox overhead (Monty, Wasmtime)</td><td class="num">near-native</td></tr>
+  </table>
+  <p class="small">PII has 4 entry points — training data, user inputs, retrieved context, model outputs. The fifth is <em>tool-call arguments</em>, which execute before any output guardrail sees them. Cover all five or you have a hole.</p>
+
+  <div class="landing">MCP is the new USB. <em>One server, every client, every model.</em> Auto-generate from OpenAPI, slap policy + PII redaction on the gateway, and the agent gets a tool that any model can drive.</div>
+</section>
+
+<!-- ============================================================ -->
+<section class="tab" id="t5">
+  <h2>Tab 05 · Self-Improving Agent Pipelines (Auto Fine-Tuning from Experience)</h2>
+  <p class="lede">Human labels are expensive. Static prompts plateau. The agent should learn from production — failure → preference pair → DPO → canary → ship or roll back, all without a human in the loop.</p>
+
+  <h3>Why it matters</h3>
+  <p>Production agents accumulate failure modes faster than anyone can label them. The 2026 stack: SFT for instruction following, DPO/SimPO for general preferences, GRPO/DAPO with verifiable rewards for reasoning. The closed loop: <em>capture failures → synthesize preference pairs → fine-tune a smaller model → canary it → beat the old one on cost and quality, or revert</em>.</p>
+
+  <h3>Latest 2026 landscape</h3>
+  <div class="grid">
+    <div class="chip"><div class="name">OpenRLHF</div><div class="meta-row">Apache 2.0</div><div class="num">PPO / GRPO / REINFORCE++ / DAPO · 34B DPO on 8 A100</div></div>
+    <div class="chip"><div class="name">TRL (Hugging Face)</div><div class="meta-row">Apache 2.0</div><div class="num">DPOTrainer, SFTTrainer, QLoRA, Online-DPO</div></div>
+    <div class="chip"><div class="name">Voyager (Wang et al. 2023)</div><div class="meta-row">NVIDIA/Caltech</div><div class="num">Skill library · 3.3× items · 15.3× tech tree · 0%→100% zero-shot</div></div>
+    <div class="chip"><div class="name">Claude Agent SDK Skills</div><div class="meta-row">Anthropic · 2026 reference</div><div class="num">SKILL.md + 3-level disclosure (metadata/body/bundled)</div></div>
+    <div class="chip"><div class="name">skillkit</div><div class="meta-row">npm · cross-agent</div><div class="num">Works with 32+ coding agents</div></div>
+    <div class="chip"><div class="name">GRPO / DAPO</div><div class="meta-row">Verifiable rewards</div><div class="num">No reward model · rule-based · math/code/structured</div></div>
+    <div class="chip"><div class="name">Online DPO</div><div class="meta-row">Iterative</div><div class="num">Iter-1: easy pairs → Iter-N: hard pairs</div></div>
+    <div class="chip"><div class="name">Evaluation-Driven Development (EDD)</div><div class="meta-row">explainx.ai 2026</div><div class="num">3 JSON eval cases BEFORE the SKILL.md</div></div>
+  </div>
+
+  <h3>End-to-end pipeline demo</h3>
+  <div class="pipeline">production traces (Arize)  <span class="arrow">→</span>  failure classifier (LLM judge, pass^k)  <span class="arrow">→</span>  promote to golden dataset  <span class="arrow">→</span>  Best-of-16 sampling (current policy)  <span class="arrow">→</span>  rule-based judge = (won, lost) pair  <span class="arrow">→</span>  TRL DPOTrainer (QLoRA, 1 epoch, β=0.1)  <span class="arrow">→</span>  eval on golden (DeepEval)  <span class="arrow">→</span>  if pass: canary 5% with error budget  <span class="arrow">→</span>  if budget burn → rollback, ship skill to library  <span class="arrow">→</span>  new model replaces old in router</div>
+
+  <h3>Prompts that work</h3>
+  <pre><span class="c"># 1) Best-of-N task prompt — rejection sampling for DPO pairs</span>
+bos_prompt = """
+You are attempting: {task}.
+Run the test suite when done. Return:
+  status: "pass" | "fail"
+  diff:   unified diff of your changes
+  notes:  one-paragraph rationale
+Do not explain before attempting. Just attempt.
+"""
+
+<span class="c"># 2) DPO preference pair generator — deterministic judge (no LLM cost)</span>
+def to_pair(trace, test_runner):
+    won  = next((t for t in trace.attempts if test_runner(t) == "pass"), None)
+    lost = next((t for t in trace.attempts if test_runner(t) == "fail"), None)
+    if won and lost:
+        return {"prompt": trace.prompt, "chosen": won.code, "rejected": lost.code}
+    return None
+
+<span class="c"># 3) Automatic curriculum (Voyager-style — what skill to learn next?)</span>
+curriculum = """
+Current skill library (embeddings): {skill_descs}
+Recent failures (last 24h): {failures}
+Open unexplored territory in: {domain}
+Propose the next 3 skills to acquire. Each skill: name, description (1 sentence), why now.
+Do not duplicate. Do not propose skills already in the library.
+"""
+
+<span class="c"># 4) Self-verifier (Voyager iterative prompting)</span>
+verify = """
+The skill output was: {output}
+Environment state: {state}
+Did the skill achieve its stated goal? Reply:
+  VERIFIED — clear evidence in state
+  REJECTED — no evidence, here&apos;s why
+  AMBIGUOUS — partial; what to check next
+"""</pre>
+
+  <h3>Benchmarks that hold</h3>
+  <table>
+    <tr><th>Method</th><th>Data</th><th>Compute</th><th>When</th></tr>
+    <tr><td>SFT</td><td>(prompt, ideal_response) pairs</td><td>Low</td><td>First, always</td></tr>
+    <tr><td>DPO</td><td>10K+ pairs (50–100K comfortable)</td><td>Low (2 models in memory)</td><td>Default for alignment 2026</td></tr>
+    <tr><td>Online DPO</td><td>Self-generated + judge</td><td>Medium (iterative)</td><td>Continuous improvement</td></tr>
+    <tr><td>GRPO / DAPO</td><td>Verifiable (math/code)</td><td>Medium</td><td>Reasoning, structured output</td></tr>
+    <tr><td>PPO (full RLHF)</td><td>50–500K comparisons</td><td>Very high (4 models)</td><td>Frontier labs, max quality</td></tr>
+  </table>
+  <p class="small">Voyager: removing the skill library plateaued late runs; removing self-verification dropped performance 73%. Skill library transfer lifted AutoGPT zero-shot from 0/3 to 1–2/3.</p>
+
+  <div class="landing">Skills, not weights. <em>Voyager showed you don't need fine-tuning to get accumulation</em> — a well-indexed code store plus a capable base model is sufficient. Fine-tune only when the skill library has plateaued and the cost math works out above ~100M tokens/month per task.</div>
+</section>
+
+<!-- ============================================================ -->
+<section class="tab" id="t6">
+  <h2>Tab 06 · Multi-Agent Collaboration &amp; Debate with Provenance</h2>
+  <p class="lede">Three models agreed. It was still wrong. An ICML 2025 study found that when two models both err, they converge on the same wrong answer 60% of the time. The fix isn't more votes — it's structured debate with provenance.</p>
+
+  <h3>Why it matters</h3>
+  <p>Cross-model agreement is correlated evidence, not confirmation. Models share training data, architectures, post-training recipes. The 2026 audit: agreement-to-correctness Spearman ρ of 0.20–0.59 — positive but weak. The most agreement-prone model had the least trustworthy agreement signal. Real reconciliation is a designed process, not a vote count.</p>
+
+  <h3>Latest 2026 landscape</h3>
+  <div class="grid">
+    <div class="chip"><div class="name">LangGraph</div><div class="meta-row">MIT · production default</div><div class="num">Klarna, Uber, LinkedIn · 36k★ · 1.2.7</div></div>
+    <div class="chip"><div class="name">CrewAI</div><div class="meta-row">MIT</div><div class="num">~54k★ · role/goal/backstory · v1.15.1</div></div>
+    <div class="chip"><div class="name">Microsoft Agent Framework</div><div class="meta-row">Apr 3, 2026 · 1.0</div><div class="num">AutoGen successor · .NET support</div></div>
+    <div class="chip"><div class="name">OpenAgents</div><div class="meta-row">Community</div><div class="num">Native MCP + A2A · persistent agent networks</div></div>
+    <div class="chip"><div class="name">GAVEL</div><div class="meta-row">ACL Findings 2026</div><div class="num">FEVEROUS 41.80 (+4.20) · HOVER 49.60 (+4.10)</div></div>
+    <div class="chip"><div class="name">Minority Sentinel</div><div class="meta-row">arXiv 2606.29270</div><div class="num">10+4+8 dim fingerprint + LightGBM · 81.2% precision on majority-overturn</div></div>
+    <div class="chip"><div class="name">CARA</div><div class="meta-row">arXiv 2606.08457</div><div class="num">Cross-agent reasoning alignment · consistency illusion</div></div>
+    <div class="chip"><div class="name">Evidence Tracing survey</div><div class="meta-row">arXiv 2606.04990</div><div class="num">Provenance as typed graph: memory writes, handoffs, claims</div></div>
+  </div>
+
+  <h3>End-to-end pipeline demo</h3>
+  <div class="pipeline">question  <span class="arrow">→</span>  3 independent briefs (different framings, different words)  <span class="arrow">→</span>  LangGraph supervisor dispatches  <span class="arrow">→</span>  round 1: argue  <span class="arrow">→</span>  round 2: forced refutation (strongest case AGAINST emerging answer)  <span class="arrow">→</span>  GAVEL Evidence Contract: each atomic subclaim bound to evidence unit  <span class="arrow">→</span>  Mechanized Scrutinizer validates cited IDs and quoted spans  <span class="arrow">→</span>  Minority Sentinel: 10+4+8 dim fingerprint  <span class="arrow">→</span>  LightGBM decides: keep majority OR overturn  <span class="arrow">→</span>  Judge emits decision + provenance graph  <span class="arrow">→</span>  audit log (who-said-what-when-with-what-evidence)</div>
+
+  <h3>Prompts that work</h3>
+  <pre><span class="c"># 1) Independent briefs (kill shared-input bias — different words, different framing)</span>
+def brief(question, framing):
+    return f"""You are a {framing}. Answer ONLY this question, in 200 words.
+Do not mention other reviewers. Do not hedge. State your position and the top 2 pieces
+of evidence you would cite. Question: {question}"""
+
+<span class="c"># 2) Forced refutation (kill agreeableness)</span>
+refute = """The other reviewers currently lean toward: "{emerging_answer}".
+Make the STRONGEST possible case that this answer is WRONG.
+Cite specific evidence. Do NOT play devil&apos;s advocate — only argue if you genuinely believe it.
+If you cannot find a real flaw, say "I cannot refute this on present evidence."
+"""
+
+<span class="c"># 3) GAVEL Evidence Contract (atomic subclaim ↔ evidence unit)</span>
+claim = {
+  "id": "C1",
+  "text": "The acquisition closed on 2025-04-12",
+  "evidence": [
+    {"type": "doc", "id": "sec-filing-2025-Q2.pdf#p14", "span": "...closed April 12, 2025..."},
+    {"type": "doc", "id": "press-release-2025-04-12.html#body", "span": "...today announced the closing..."}
+  ]
+}
+
+<span class="c"># 4) Minority Sentinel fingerprint (LightGBM input)</span>
+fingerprint = {
+  "dynamics":  [agreement_velocity, persistence, refutation_strength]*3 + [...],   <span class="c"># 10 dims</span>
+  "voting":    [majority_size, dissent_persistence, refuter_count, vote_flip],     <span class="c"># 4 dims</span>
+  "semantic":  [novel_evidence_introduced, claim_grounding, citation_density, ...]  <span class="c"># 8 dims</span>
+}</pre>
+
+  <h3>Benchmarks that hold</h3>
+  <table>
+    <tr><th>Setup</th><th>Result</th><th>Source</th></tr>
+    <tr><td>Multi-model errors converge on same wrong answer</td><td class="num">60%</td><td>ICML 2025, 350+ LLMs</td></tr>
+    <tr><td>Agreement ↔ correctness correlation</td><td class="num">ρ = 0.20–0.59</td><td>July 2026 audit, 265k samples</td></tr>
+    <tr><td>Minority is correct when agents diverge</td><td class="num">~25%</td><td>Minority Sentinel preprint, Jun 2026</td></tr>
+    <tr><td>Minority Sentinel precision on overturn</td><td class="num">81.2%</td><td>arXiv 2606.29270</td></tr>
+    <tr><td>GAVEL FEVEROUS (with evidence)</td><td class="num">41.80 (+4.20)</td><td>ACL Findings 2026</td></tr>
+    <tr><td>GAVEL HOVER (with evidence)</td><td class="num">49.60 (+4.10)</td><td>ACL Findings 2026</td></tr>
+  </table>
+  <p class="small">Self-consistency (one model, vote) still works for checkable answers (+17.9pp on GSM8K). But cross-model consensus on open-ended judgment is unproven — that's a different claim with weaker evidence.</p>
+
+  <div class="landing">Vote count is not a verification method. <em>Evidence-locked debate with mechanized scrutiny is.</em> When the minority consistently introduces new evidence while the majority only endorses each other, overturn.</div>
+</section>
+
+<!-- ============================================================ -->
+<section class="tab" id="t7">
+  <h2>Tab 07 · Privacy-Preserving Local-First Agents</h2>
+  <p class="lede">The most useful agents need intimate data. The most intimate data is the one you can't send to a third party. Local-first isn't a preference in 2026 — it's a regulatory and trust floor.</p>
+
+  <h3>Why it matters</h3>
+  <p>Cloud agents leak. Always. Even with the best contract. The 2026 answer: on-device processing by default, confidential compute for the heavy lifts, no raw data ever leaving the user's machine or its attested enclave. Federighi's line: <em>privacy is non-negotiable</em>, verifiable by outside experts.</p>
+
+  <h3>Latest 2026 landscape</h3>
+  <div class="grid">
+    <div class="chip"><div class="name">Apple Intelligence + PCC</div><div class="meta-row">iOS 27 · fall 2026</div><div class="num">~3B param on-device · Private Cloud Compute for heavy lifts</div></div>
+    <div class="chip"><div class="name">Foundation Models framework</div><div class="meta-row">iOS 26+</div><div class="num">~3B on-device LLM · NPU-optimized</div></div>
+    <div class="chip"><div class="name">MLX LM Server</div><div class="meta-row">Apple Silicon-native</div><div class="num">Local LLM serving on macOS, optimal perf</div></div>
+    <div class="chip"><div class="name">iClaw (barrasso.me)</div><div class="meta-row">Apr 27, 2026</div><div class="num">Local agent using Apple Intelligence, App Sandbox</div></div>
+    <div class="chip"><div class="name">AgenTEE</div><div class="meta-row">arXiv 2604.18231</div><div class="num">Multi-cVM on Arm CCA · &lt;5.15% overhead</div></div>
+    <div class="chip"><div class="name">Confidential Computing Summit</div><div class="meta-row">Jun 23–24, 2026 · SF</div><div class="num">Workload-based identity, Confidential Tenancy</div></div>
+    <div class="chip"><div class="name">Multi-Agent Firewall</div><div class="meta-row">arXiv 2607.08282</div><div class="num">Local-first, browser+MiTM, F1 94.93% on PII</div></div>
+    <div class="chip"><div class="name">ADAPT</div><div class="meta-row">ACL ARR 2026 Jan</div><div class="num">Local LLM learns dynamic privacy-preserving delegation</div></div>
+  </div>
+
+  <h3>End-to-end pipeline demo</h3>
+  <div class="pipeline">user data (Health, Mail, Calendar)  <span class="arrow">→</span>  Foundation Models framework loads 3B on-device LLM  <span class="arrow">→</span>  PII detector local (TasmanianDevil)  <span class="arrow">→</span>  agent runs entirely on Apple Silicon  <span class="arrow">→</span>  if task exceeds on-device cap → escalate to Private Cloud Compute  <span class="arrow">→</span>  PCC: data never stored, only used to fulfill request, verifiable by outside experts  <span class="arrow">→</span>  result back on device  <span class="arrow">→</span>  audit log on device (Apple Intelligence Report export)  <span class="arrow">→</span>  zero raw data persistence</div>
+
+  <h3>Prompts that work</h3>
+  <pre><span class="c"># 1) ADAPT dynamic privacy-preserving delegation (local decides what to ship)</span>
+delegate_prompt = """
+Local user context: {context}
+Remote task: {task}
+Decide:
+  LOCAL_ONLY      — task can be answered from local context, do not call remote
+  PRIVACY_SAFE    — sanitize context, then call remote with the sanitized prompt
+  FULL_CONTEXT    — task needs full context; call remote but only over attested PCC
+For each decision emit: { "mode": ..., "sanitized_prompt": ..., "why": "..." }
+"""
+
+<span class="c"># 2) iClaw scaffolding for the Apple Foundation Model (small-model constraints)</span>
+instructions = InstructionsBuilder() \\
+    .limit_tool_choice(max_tools=2-3)             <span class="c"># AFM gets distracted past that</span>
+    .set_maximum_response_tokens(256)             <span class="c"># keep responses predictable</span>
+    .temperature(0.3)                              <span class="c"># diverse but constrained</span>
+    .prewarm()                                     <span class="c"># reduce latency, cache prefix</span>
+    .build()
+
+<span class="c"># 3) Multi-Agent Firewall local PII redaction (T10 config, best F1)</span>
+firewall_config = {
+  "interceptors": ["browser", "mitm_proxy"],
+  "agents": [
+    {"role":"deterministic_pii", "model":"regex+ner", "lane":"sync"},
+    {"role":"semantic_pii",      "model":"llm-judge", "lane":"async"},
+    {"role":"code_leakage",      "model":"ast_diff",   "lane":"sync"},
+  ],
+  "policy": "block_on_high_confidence, redact_on_medium"
+}
+
+<span class="c"># 4) CryptoKit + Secure Enclave for credentials</span>
+let key = SecKeyCreateRandomKey(...)             <span class="c"># never leaves enclave</span>
+let att = SecKeyCreateAttestation(key, ...)      <span class="c"># prove enclave-bound</span></pre>
+
+  <h3>Benchmarks that hold</h3>
+  <table>
+    <tr><th>System</th><th>Result</th></tr>
+    <tr><td>AgenTEE (Arm CCA, multi-cVM)</td><td class="num">&lt;5.15% runtime overhead</td></tr>
+    <tr><td>Multi-Agent Firewall (PII)</td><td class="num">P 94.95 · R 94.92 · F1 94.93</td></tr>
+    <tr><td>Apple Foundation Model on-device</td><td class="num">~3B params · 4,096-token window</td></tr>
+    <tr><td>Apple Intelligence availability (iOS 27)</td><td>iPhone 16+ · iPhone 15 Pro · M1+</td></tr>
+  </table>
+  <p class="small">Hybrid is the production standard: local for data-sensitive + high-frequency + pre-processing; cloud frontier for complex reasoning, long context, MCP-compatible local-model endpoints. Pure-local is not yet recommended for most production requirements in 2026.</p>
+
+  <div class="landing">The cloud is an accelerator, not a default. <em>Send the minimum. Keep the keys in the enclave. Verify the contract by hardware, not by promise.</em> When Apple can prove PCC and outside experts can audit the binaries, the trust math actually works.</div>
+</section>
+
+<!-- ============================================================ -->
+<section class="tab" id="t8">
+  <h2>Tab 08 · Cost-Optimisation &amp; Inference Routing for Agent Loops</h2>
+  <p class="lede">Frontier models cost 20–100× more than their small-model cousins. The cheapest way to cut an AI bill without cutting capability is to stop paying frontier prices for easy requests.</p>
+
+  <h3>Why it matters</h3>
+  <p>40–70% of production queries can be served by the cheap model with no detectable quality loss. 20–30% require frontier. The middle 10–20% benefits from cascade verification. The 2026 stack: semantic cache → difficulty router → cheap → escalate on confidence → cost attribution per step → drift monitor. Done right, you keep 95% of frontier quality at 15–30% of the bill.</p>
+
+  <h3>Latest 2026 landscape</h3>
+  <div class="grid">
+    <div class="chip"><div class="name">RouteNLP</div><div class="meta-row">arXiv 2604.23577</div><div class="num">40–85% cost cut · p99 1847ms → 387ms · 91% acceptance</div></div>
+    <div class="chip"><div class="name">RouteLLM</div><div class="meta-row">LMSYS</div><div class="num">95% GPT-4 quality at 26% cost · 74% production savings</div></div>
+    <div class="chip"><div class="name">FrugalGPT</div><div class="meta-row">Chen et al. 2023</div><div class="num">Original cascade framework</div></div>
+    <div class="chip"><div class="name">Martian</div><div class="meta-row">Commercial · 200+ models</div><div class="num">$9M NEA · claims 20–97% cost cut</div></div>
+    <div class="chip"><div class="name">Not Diamond</div><div class="meta-row">Meta-model router</div><div class="num">Default inside OpenRouter Auto</div></div>
+    <div class="chip"><div class="name">OpenRouter</div><div class="meta-row">500+ models · 60+ providers</div><div class="num">5.5% markup · inverse-square price weighting</div></div>
+    <div class="chip"><div class="name">LiteLLM</div><div class="meta-row">Open source proxy</div><div class="num">Self-hostable · routing + fallback + retry</div></div>
+    <div class="chip"><div class="name">PILOT</div><div class="meta-row">2025</div><div class="num">Budget-constrained contextual bandit</div></div>
+  </div>
+
+  <h3>End-to-end pipeline demo</h3>
+  <div class="pipeline">query  <span class="arrow">→</span>  semantic cache (cosine &gt; 0.92) hit-rate ~40%  <span class="arrow">→</span>  else RouteLLM classifier (difficulty)  <span class="arrow">→</span>  nano tier (Haiku 4.5 / GPT-5.4 nano) at $0.05–$0.30/M  <span class="arrow">→</span>  conformal confidence check  <span class="arrow">→</span>  if low confidence → Sonnet 4 / GPT-5 mid ($0.50–$3/M)  <span class="arrow">→</span>  if still low → Opus 4 / o3 frontier ($3–$15/M)  <span class="arrow">→</span>  PII redact result  <span class="arrow">→</span>  cost attribution per agent step  <span class="arrow">→</span>  weekly re-routing audit (drift check)</div>
+
+  <h3>Prompts that work</h3>
+  <pre><span class="c"># 1) Difficulty classifier (the cheap-LLM-as-router)</span>
+classify = """
+Read this user query and rate its difficulty on 3 axes (0=trivial, 10=hard):
+  reasoning      — multi-step logic required?
+  tool_count     — how many distinct tools will the agent need?
+  context_depth  — needs deep retrieval / long doc reasoning?
+Reply JSON: {"reasoning": int, "tool_count": int, "context_depth": int, "tier": "nano|mid|frontier"}
+Query: {query}
+"""
+
+<span class="c"># 2) Conformal threshold setter (distribution-free, no calibration drift)</span>
+def conformal_threshold(scores, alpha=0.1):
+    <span class="c"># 90% of cheap-model outputs that score above this are actually correct</span>
+    return np.quantile(scores, 1 - alpha)
+
+<span class="c"># 3) Cascade trigger (cheaper than re-querying)</span>
+trigger = cheap_response if confidence(conformal, cheap.score) &gt; tau else escalate(cheap, mid)
+
+<span class="c"># 4) SLO tier → model pool mapping (production default)</span>
+TIERS = {
+  "realtime":  {"latency_ms": 500,  "cost_per_req": 0.001,  "pool": ["haiku-4.5", "gpt-5.4-nano"]},
+  "standard":  {"latency_ms": 3000, "cost_per_req": 0.01,   "pool": ["sonnet-4", "gpt-5"]},
+  "premium":   {"latency_ms": 30000,"cost_per_req": 0.10,   "pool": ["opus-4", "o3"]},
+  "batch":     {"latency_ms": None, "cost_per_req": 0.0001, "pool": ["local-llama", "deepseek-r1"]}
+}</pre>
+
+  <h3>Benchmarks that hold</h3>
+  <table>
+    <tr><th>Strategy</th><th class="num">Cost cut</th><th>Quality</th></tr>
+    <tr><td>Model routing only (learned)</td><td class="num">40–85%</td><td>95% of frontier</td></tr>
+    <tr><td>Routing + semantic caching</td><td class="num">40–70%</td><td>95%+</td></tr>
+    <tr><td>Cascade at 80% cheap-resolution</td><td class="num">~72%</td><td>95%+</td></tr>
+    <tr><td>Single-provider overspend (no routing)</td><td class="num">–30% to –50% (lost)</td><td>100%</td></tr>
+  </table>
+  <p class="small">Tier price gap in 2026: 100×. Claude Opus 4.6 $5/$25 vs GPT-5.4 nano $0.05/$0.40 per 1M. Route 70% cheap / 20% mid / 10% frontier → $15/M → $2.10/M blended.</p>
+
+  <div class="landing">Stop defaulting to GPT-4. <em>Static rules for the obvious 70%, learned router for the rest, cascade for the ambiguous middle.</em> Semantic caching before routing. Cost attribution per step. Monthly re-audit or the routing mix drifts toward the cheap model and quality dies silently.</div>
+</section>
+
+<!-- ============================================================ -->
+<section class="tab" id="bench">
+  <h2>Benchmarking · What to build first, second, and not at all</h2>
+  <p class="lede">Cross-cutting comparison: maturity, leverage, time-to-value, lock-in, and the order you should ship them.</p>
+
+  <h3>Maturity × leverage matrix</h3>
+  <table>
+    <tr><th>Pipeline</th><th>Maturity</th><th>Leverage</th><th>Time to ship</th><th>Lock-in</th></tr>
+    <tr><td>1 · Agent Eval</td><td><span class="pill good">Production</span></td><td>Critical — without it you ship regressions blind</td><td>1–2 weeks</td><td>Low (Langfuse MIT, DeepEval Apache)</td></tr>
+    <tr><td>2 · Long-Term Memory</td><td><span class="pill good">Production</span></td><td>High — unlocks multi-session agents</td><td>2–4 weeks</td><td>Medium (Mem0 proprietary, Letta/Zep OSS)</td></tr>
+    <tr><td>3 · Observability &amp; Guardrails</td><td><span class="pill good">Production</span></td><td>Critical — without it you can't ship to enterprise</td><td>2–3 weeks</td><td>Medium (NeMo OSS, Lakera/GAAT mixed)</td></tr>
+    <tr><td>4 · Tool Orchestration</td><td><span class="pill good">Production</span></td><td>High — every tool you add is a new revenue surface</td><td>1 week per tool with MCP + AutoMCP</td><td>Low (MCP is open standard)</td></tr>
+    <tr><td>5 · Self-Improving Agents</td><td><span class="pill warn">Pilot</span></td><td>High long-term, marginal short-term</td><td>4–8 weeks</td><td>Medium (TRL/OpenRLHF OSS)</td></tr>
+    <tr><td>6 · Multi-Agent Debate</td><td><span class="pill warn">Pilot</span></td><td>Niche — high-stakes domains only</td><td>3–6 weeks</td><td>Low (LangGraph OSS, GAVEL OSS)</td></tr>
+    <tr><td>7 · Privacy / Local-First</td><td><span class="pill good">Production</span> (Apple) / <span class="pill warn">Pilot</span> (cross-platform)</td><td>Critical for regulated industries</td><td>4–12 weeks (depends on stack)</td><td>High (PCC is Apple-only; AgenTEE needs Arm CCA)</td></tr>
+    <tr><td>8 · Cost &amp; Routing</td><td><span class="pill good">Production</span></td><td>Highest dollar leverage, 1st-week ROI</td><td>3–7 days</td><td>Low (LiteLLM OSS, OpenRouter plug-in)</td></tr>
+  </table>
+
+  <h3>The shipping order, ranked by ROI</h3>
+  <ol>
+    <li><strong>Tab 8 — Cost &amp; Routing.</strong> Three days of work, recovers 40–70% of the bill. The money funds everything else. Start with semantic cache + static rules, then RouteLLM.</li>
+    <li><strong>Tab 1 — Agent Eval.</strong> You cannot safely ship anything else without it. Two weeks. Start with DeepEval in CI on golden-50.</li>
+    <li><strong>Tab 3 — Observability + Guardrails.</strong> Phoenix + Langfuse for the trace story, NeMo + Lakera for the runtime story. Two to three weeks. Required for enterprise.</li>
+    <li><strong>Tab 4 — Tool Orchestration.</strong> Stand up MCP server per API, wire AutoMCP. Pays off the moment you have a second tool.</li>
+    <li><strong>Tab 2 — Long-Term Memory.</strong> Add Mem0 + Zep hybrid the moment your agent has cross-session requirements. Two to four weeks.</li>
+    <li><strong>Tab 5 — Self-Improving Agents.</strong> Pilot Online DPO only after eval infrastructure catches the regressions. Then iterate.</li>
+    <li><strong>Tab 7 — Privacy / Local-First.</strong> Apple-native if iOS/macOS; AgenTEE on Arm for cross-platform confidential compute. Required for health, legal, finance.</li>
+    <li><strong>Tab 6 — Multi-Agent Debate.</strong> Niche. Add GAVEL + Minority Sentinel only when stakes justify the cost — legal review, medical, financial analysis.</li>
+  </ol>
+
+  <h3>Concrete dollar math (illustrative)</h3>
+  <table>
+    <tr><th>Optimization</th><th class="num">Typical savings</th><th class="num">Effort</th></tr>
+    <tr><td>Prompt caching (60–80% on agent/chat)</td><td class="num">60–80%</td><td>1–2 days</td></tr>
+    <tr><td>Model routing (50–70% on mixed workloads)</td><td class="num">50–70%</td><td>3–7 days</td></tr>
+    <tr><td>Batch API for async work (50%)</td><td class="num">50%</td><td>1 day</td></tr>
+    <tr><td>Output-shape engineering (strict JSON, max-tokens, no CoT bloat)</td><td class="num">20–40%</td><td>1 week</td></tr>
+    <tr><td>Semantic caching (repetitive workloads)</td><td class="num">30–60%</td><td>3–5 days</td></tr>
+    <tr><td>Fine-tune a small model (&gt;100M tokens/month/task)</td><td class="num">10–30× cost/request</td><td>4–8 weeks</td></tr>
+  </table>
+
+  <h3>The benchmark that matters most</h3>
+  <p>It's not the one in the paper. It's the one in <em>your</em> production: <strong>CPSO — cost per successful outcome</strong>. Not tokens. Not traces. <em>Successful outcomes</em> — generated, sent, accepted by the business without rework. That single number tells you whether every other optimization is real or theater.</p>
+
+  <div class="landing">Eight pipelines. One report. The cheap ones — cost routing and agent eval — fund the expensive ones — memory, debate, confidential compute. <em>Ship the cheap ones first. They pay for the rest.</em></div>
+</section>
+
+<div class="footer-rule"></div>
+<footer>
+  <p>Long-Horizon Agent Pipelines · MTM Resource Sweep · 2026-08-10<br>
+  Sources: 56 web queries · 30+ first-party docs · 12 papers (arXiv, ACL, ICML, arXiv 2603/2604/2606/2607/2608). Voice: article-writer skill, kai persona. Format: self-contained HTML, no external dependencies.</p>
+  <p>Next sweep: when this folder changes. Save as <code>2026-08-10_long-horizon-agent-pipelines.html</code> alongside the previous runs.</p>
+</footer>
+
+</div>
+</body>
+</html>

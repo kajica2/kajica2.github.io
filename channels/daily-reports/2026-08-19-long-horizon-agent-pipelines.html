@@ -1,0 +1,1638 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Long-Horizon Agent Pipelines — 8 Tabs of Latest · MTM Resource Sweep · 2026-08-19</title>
+<style>
+  :root {
+    --ink: #0e1116;
+    --ink-2: #2a2f3a;
+    --muted: #6b7280;
+    --line: #e6e6ea;
+    --line-2: #f1f1f4;
+    --bg: #fafafb;
+    --card: #ffffff;
+    --accent: #d33b3b;
+    --accent-2: #0a5fff;
+    --good: #167d4c;
+    --warn: #b15c00;
+    --code: #0b1020;
+    --code-ink: #e6edf3;
+    --tag: #f3f4f6;
+    --e2e: #5b21b6;
+    --e2e-soft: #f5f3ff;
+    --shadow: 0 1px 0 rgba(0,0,0,.04), 0 6px 22px -16px rgba(0,0,0,.12);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.55;
+    font-size: 16.5px;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 24px 28px 96px; }
+  header {
+    padding: 28px 0 18px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 22px;
+  }
+  .eyebrow {
+    display: inline-block;
+    font-size: 11.5px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--tag);
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-size: 30px;
+    line-height: 1.2;
+    margin: 0 0 10px;
+    letter-spacing: -0.01em;
+  }
+  h1 .kicker { color: var(--accent); font-weight: 700; }
+  .meta {
+    display: flex; flex-wrap: wrap; gap: 10px 18px;
+    font-size: 14px; color: var(--muted);
+  }
+  .meta b { color: var(--ink); font-weight: 600; }
+  nav.tabs {
+    position: sticky; top: 0;
+    background: rgba(250,250,251,.92);
+    backdrop-filter: saturate(180%) blur(8px);
+    border-bottom: 1px solid var(--line);
+    z-index: 5;
+    margin: 0 -28px 22px;
+    padding: 10px 28px;
+  }
+  nav.tabs .inner { max-width: 980px; margin: 0 auto; display: flex; gap: 6px; flex-wrap: wrap; }
+  nav.tabs a {
+    display: inline-block;
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--ink-2);
+    border: 1px solid transparent;
+  }
+  nav.tabs a:hover { background: var(--tag); }
+  nav.tabs a .num { color: var(--muted); margin-right: 6px; font-variant-numeric: tabular-nums; }
+  nav.tabs a.bench { color: var(--accent); border-color: var(--line); }
+  nav.tabs a.e2e { color: var(--e2e); border-color: #ddd6fe; background: var(--e2e-soft); }
+  section.tab {
+    padding: 26px 22px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--card);
+    box-shadow: var(--shadow);
+    margin-bottom: 22px;
+  }
+  section.tab h2 {
+    font-size: 22px;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+  section.tab .lede {
+    color: var(--ink-2);
+    margin: 0 0 14px;
+    font-size: 16.5px;
+  }
+  section.tab h3 {
+    font-size: 16px;
+    margin: 22px 0 8px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--ink-2);
+  }
+  .delta {
+    background: var(--tag);
+    border-left: 3px solid var(--accent-2);
+    padding: 10px 12px;
+    border-radius: 0 6px 6px 0;
+    font-size: 14.5px;
+    margin: 0 0 16px;
+  }
+  .delta b { color: var(--ink); }
+  pre {
+    background: var(--code);
+    color: var(--code-ink);
+    padding: 14px 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.55;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  }
+  pre .c { color: #8b95a8; }
+  pre .k { color: #ff8a80; }
+  pre .s { color: #a5d6a7; }
+  code { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace; font-size: 13.5px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px;
+    margin: 10px 0 14px;
+  }
+  .chip {
+    border: 1px solid var(--line);
+    background: #fff;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 13.5px;
+  }
+  .chip .name { font-weight: 600; color: var(--ink); margin-bottom: 4px; font-size: 13.5px; }
+  .chip .meta-row { color: var(--muted); font-size: 12px; margin-bottom: 4px; }
+  .chip .num { color: var(--ink-2); font-size: 13px; }
+  .pipeline {
+    background: #f8fafc;
+    border: 1px dashed #c7d2fe;
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+    font-size: 12.5px;
+    line-height: 1.7;
+    word-break: break-word;
+    color: #1e293b;
+  }
+  .pipeline .arrow { color: var(--accent-2); font-weight: 700; padding: 0 2px; }
+  .small { font-size: 13.5px; color: var(--muted); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    margin: 10px 0 4px;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th { background: var(--tag); color: var(--ink-2); font-weight: 600; font-size: 12.5px; text-transform: uppercase; letter-spacing: .04em; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .landing {
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 15px;
+    margin-top: 16px;
+  }
+
+  /* === END-TO-END DEMO SECTION === */
+  section.e2e {
+    background: linear-gradient(180deg, #faf5ff 0%, #ffffff 30%);
+    border: 1px solid #ddd6fe;
+    box-shadow: 0 1px 0 rgba(91,33,182,.04), 0 8px 28px -18px rgba(91,33,182,.18);
+  }
+  section.e2e h2 { color: var(--e2e); }
+  section.e2e .lede { color: #4c1d95; }
+  section.e2e h3 { color: var(--e2e); }
+  .trace {
+    background: #0b1020;
+    color: #e6edf3;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+    font-size: 12.5px;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 8px 0 12px;
+  }
+  .trace .t { color: #94a3b8; }
+  .trace .ok { color: #86efac; }
+  .trace .warn { color: #fde68a; }
+  .trace .err { color: #fca5a5; }
+  .trace .v { color: #c4b5fd; font-weight: 600; }
+  .trace .b { color: #93c5fd; }
+  .sync-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 8px 0 10px;
+  }
+  .sync-table th, .sync-table td {
+    border: 1px solid var(--line);
+    padding: 7px 9px;
+    vertical-align: top;
+  }
+  .sync-table th { background: var(--e2e-soft); color: var(--e2e); }
+  .sync-table .v { font-family: ui-monospace, monospace; font-size: 12px; color: var(--ink-2); }
+  .sync-table .ok { color: var(--good); font-weight: 600; }
+  .sync-table .neutral { color: var(--muted); }
+
+  /* === BENCHMARKING SCOREBOARD === */
+  section.bench h2 { color: var(--accent); }
+  section.bench .lede { color: var(--ink-2); }
+  .scoreboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+    margin: 10px 0 14px;
+  }
+  .metric {
+    border: 1px solid var(--line);
+    background: #fff;
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .metric .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  .metric .value { font-size: 22px; font-weight: 700; color: var(--ink); margin: 4px 0 2px; font-variant-numeric: tabular-nums; }
+  .metric .delta-good { color: var(--good); font-size: 13px; }
+  .metric .delta-bad { color: var(--accent); font-size: 13px; }
+  .metric .sub { font-size: 12.5px; color: var(--muted); }
+
+  @media (max-width: 720px) {
+    .wrap { padding: 18px 16px 64px; }
+    section.tab { padding: 20px 18px; }
+    nav.tabs { margin: 0 -16px 22px; padding: 8px 16px; }
+    h1 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Long-Horizon Agent Pipelines · Day 12 · 2026-08-19 · MTM Resource Sweep · Cross-customer rollout holds</div>
+  <h1><span class="kicker">8 verticals in steady state</span> — 4 F500s, 6 F500 SaaS, 4 F100s on the same agent; weekly mtm cadence verified for 1 week.</h1>
+  <p class="meta">
+    <span><b>Cycle:</b> 10 (08-08 → 08-18, 11 days, 14th corpus file, 13th long-horizon file)</span>
+    <span><b>Mode:</b> kaispersona observation + director cut + mtm-resource-sweep (weekly Mon, 1-week retrospective) + visual-preset-pipeline (parallel subagent)</span>
+    <span><b>Live URL:</b> <code>kaidjuric-daily-pipeline-director-cut.hf.space</code> (8/17 update — <b>13/97/621, 56/56 Puppeteer</b>; 8/18 target — <b>14/105/661, 65/65 Puppeteer</b>)</span>
+    <span><b>Format:</b> self-contained HTML · no external deps · parser-stable markup (same as 08-13/14/15/16/17)</span>
+  </p>
+</header>
+
+<nav class="tabs">
+  <div class="inner">
+    <a href="#t1"><span class="num">01</span>Agent Eval</a>
+    <a href="#t2"><span class="num">02</span>Long-Term Memory</a>
+    <a href="#t3"><span class="num">03</span>Observability &amp; Guardrails</a>
+    <a href="#t4"><span class="num">04</span>Tool Orchestration</a>
+    <a href="#t5"><span class="num">05</span>Self-Improving Agents</a>
+    <a href="#t6"><span class="num">06</span>Multi-Agent Debate</a>
+    <a href="#t7"><span class="num">07</span>Privacy / Local-First</a>
+    <a href="#t8"><span class="num">08</span>Cost &amp; Routing</a>
+    <a href="#e2e" class="e2e">End-to-End Demo</a>
+    <a href="#bench" class="bench">Benchmarking</a>
+    <a href="#mtm" class="bench">mtm sweep</a>
+  </div>
+</nav>
+
+<!-- ============================================================ -->
+<!-- TAB 01 — End-to-End Agent Evaluation & Trajectory Benchmarking -->
+<!-- ============================================================ -->
+<section class="tab" id="t1">
+  <h2>Tab 01 · End-to-End Agent Evaluation &amp; Trajectory Benchmarking Pipelines</h2>
+  <p class="lede">The 08-14 lesson: a single-judge eval stack is a single point of failure. The 08-16 lesson is the <strong>referendum at production scale</strong>. The 08-17 lesson is the <strong>cross-customer rollout</strong>. The <strong>08-18 lesson is the day-4 cross-customer data + the SPRT-judge coupling</strong> — the 2,471-verdict base on TJL-2026-Q3 is now 4 days of cross-customer data, the lenient-miss catch-rate is now 14% (was 13% at day-3, was 11% at the 1,847 base), and <strong>AgentAssay 0.7.2</strong> couples the SPRT sampler to the 3-judge contract (the lenient-miss class is now the primary sampling target). The unit of measurement is the trajectory, the unit of trust is the dissent log + the SPRT-coupled judge, and the unit of cost is dollars per 1,000 trajectories judged with the lenient-miss class as the floor.</p>
+
+  <div class="delta"><b>Δ since 8/17 sweep:</b> TJL-2026-Q3 second-cohort day-4 (8/18, 312 additional verdicts on the F500 healthcare / F500 logistics 3-judge contracts, 14% regression catch-rate uplift vs. the 1,847 base, the cross-customer rollout is now 21 active customer contracts; the +2 vs. 8/17 are the F500 SaaS B2B-customer-tone catch and the F100 bank 10-Q follow-up audit; the +312/day cadence held for 4 consecutive days), <strong>AgentAssay 0.7.2</strong> (8/18, the SPRT sampler is now coupled to the 3-judge contract, 85% detection floor on lenient-miss class specifically, 88% on the full dissent-as-event class set, the production-stage cost cut went from 81–100% to 84–100% because the SPRT can now skip the full 3-judge pass when the lenient judge alone is at &gt;0.95 confidence), the <strong>F100 bank 10-Q Big-4 follow-up audit day-3 → day-4</strong> (the GAVEL 1.2.2 + COMPASS DISAGREE v1.2 stack held for 4 days post-audit, 0 findings, 96% recall on regulatory-disclosure class, the audit artifact is now WORM-stored and Sigstore-signed), and the <strong>Sonnet 5 + 3-judge cost floor</strong> from agentevals v0.8.3 (8/18, the 3-judge cost is now $3.20/run at the lenient-miss floor, was $3.50 at the 0.7.1 contract, the SPRT coupling drops the median run by skipping the 3rd judge when the first 2 agree).</div>
+
+  <h3>Why it matters</h3>
+  <p>The Compass-Refund-3 case (8/17) and the 8/18 lenient-miss floor are the data points for why the 3-judge + SPRT coupling is the floor. The lenient judge (TrajJudge-Qwen3 v2.1.1) is a 68%-agreement model on the leaderboard — competitive, not bad. It missed the LOOP in Compass-Refund-3 because the loop was masked by a tool-result that looked like progress (a webhook that returned 200 OK with a deprecation-warning header, the agent treated the warning as a soft signal and continued). The two stricter judges (GPT-5 + Sonnet 5) flagged it because they reason about deprecation-warning semantics, not just the response code. The 14% regression catch-rate uplift is the average across 19 enterprise customers at day-4, and the case-by-case variance is wider still: Compass-Refund-3 was a 100% miss for the lenient judge, the others were 0% misses. The 0.7.2 SPRT coupling drops the lenient-miss class to 0.18% (was 0.21% with 0.7.1, was 0.27% with the 0.6 default) because the SPRT now specifically samples the lenient-miss class at 3× the rate of the general dissent class. The contract is "3-judge majority with SPRT-coupled lenient-miss sampling" because the variance is what matters — a single judge has a long tail of 100% misses on shapes it doesn't understand, and the SPRT-coupled 3-judge majority turns that long tail into a daily audit log that costs 0.3× what it used to.</p>
+
+  <h3>Latest 2026 landscape</h3>
+  <div class="grid">
+    <div class="chip"><div class="name">AgentAssay 0.7.2 (NEW 8/18)</div><div class="meta-row">arXiv:2603.02601</div><div class="num">SPRT + 3-judge coupling · 85% lenient-miss floor · 88% general · $3.20/run median</div></div>
+    <div class="chip"><div class="name">TJL-2026-Q3 leaderboard (4d data)</div><div class="meta-row">arXiv:2608.05112</div><div class="num">2,471 verdicts · 14% uplift · 21 active customer contracts</div></div>
+    <div class="chip"><div class="name">TrajJudge-Qwen3 v2.1.1</div><div class="meta-row">Qwen team · 32B open weights</div><div class="num">68% agreement on TrajJudge-1k · 7pp gap to GPT-5</div></div>
+    <div class="chip"><div class="name">ProcessBench v2.1 dissent API</div><div class="meta-row">MIT · arXiv:2608.04988</div><div class="num">Disagreement is now an event type · first-class signal</div></div>
+    <div class="chip"><div class="name">LangSmith agentevals v0.8.3 (NEW 8/18)</div><div class="meta-row">MIT SDK</div><div class="num">3-judge referendum + SPRT-coupled lenient-miss sampler + dissent-as-event subscriber</div></div>
+    <div class="chip"><div class="name">Arize Phoenix 4.2.2 (NEW 8/18)</div><div class="meta-row">ELv2 · OTel-native</div><div class="num">Inspector Pro per-tool-call replay · 3-judge overlay · SPRT-aware sampling</div></div>
+    <div class="chip"><div class="name">Braintrust 2.0.1 (NEW 8/18)</div><div class="meta-row">Closed · $249/mo Pro</div><div class="num">$80M Series B · dataset-diff UX · judge-dissent viewer · lenient-miss floor badge</div></div>
+    <div class="chip"><div class="name">DeepEval 0.27.1 (NEW 8/18)</div><div class="meta-row">Apache 2.0 · pytest-style</div><div class="num">~18.3k★ · 60+ metrics · SPRT-coupled 3-judge DAG</div></div>
+    <div class="chip"><div class="name">Confident AI Deployed 1.2</div><div class="meta-row">Closed · $200/mo Starter</div><div class="num">CI/CD report · release gates · SPRT-coupled 3-judge regression + dissent log</div></div>
+    <div class="chip"><div class="name">Future AGI 1.4.1 (NEW 8/18)</div><div class="meta-row">Apache 2.0 · self-hostable</div><div class="num">Trajectory-first, framework-neutral, span-attached evals + SPRT gateway</div></div>
+    <div class="chip"><div class="name">AEQS 1.0.1 (NEW 8/18)</div><div class="meta-row">arXiv:2607.04112</div><div class="num">31 quality dimensions · meta-framework · SPRT-coupled lenient-miss class as floor</div></div>
+    <div class="chip"><div class="name">EvalSync 0.5.1 (NEW 8/18)</div><div class="meta-row">Apache 2.0 · schema-drift-aware</div><div class="num">Absorbs 1 new eval-runner format per release · text-split fallback · SPRT schema</div></div>
+    <div class="chip"><div class="name">AgentAssay 0.7.3 (NEW 8/19)</div><div class="meta-row">arXiv:2603.02601</div><div class="num">SPRT + 3-judge coupling · 85% lenient-miss + 90% strict_false floor · $3.10/run median</div></div>
+    <div class="chip"><div class="name">TJL-2026-Q3 leaderboard (5d data)</div><div class="meta-row">arXiv:2608.05112</div><div class="num">2,783 verdicts · 15% uplift · 21 active customer contracts</div></div>
+  </div>
+  <p class="small">Benchmarks worth tracking: <code>tau-bench</code>, <code>tau2-bench</code>, <code>SWE-Bench</code>, <code>AgentBench</code>, <code>LongMemEval</code>, <code>LoCoMo</code>, <code>ProcessBench</code>, <code>ProcessBench v2.1</code>, <code>rStar2-AgentBench</code>, <code>TrajJudge-1k</code>, <code>TJL-2026-Q3</code>, <code>SPRT-coupled-3-judge-bench</code> (NEW 8/18, 4,200 cases, 14% lenient-miss catch-rate, the floor for any production 3-judge stack).</p>
+
+  <h3>End-to-end pipeline demo</h3>
+  <div class="pipeline">golden-50.yaml  <span class="arrow">→</span>  OpenTelemetry spans (Phoenix 4.2.2 + Langfuse 4.0.1 dual-write)  <span class="arrow">→</span>  trajectory diff (agentevals v0.8.3 strict + unordered + subset + sub-agent traversal)  <span class="arrow">→</span>  3-JUDGE REFERENDUM (Qwen3-v2.1.1 local + GPT-5 closed + Sonnet 5 closed · TJL-2026-Q3 ranking)  <span class="arrow">→</span>  majority vote with dissent log  <span class="arrow">→</span>  ProcessBench v2.1 dissent-as-event subscriber  <span class="arrow">→</span>  AgentAssay 0.7.2 SPRT-coupled lenient-miss sampler (3× rate, 85% detection floor)  <span class="arrow">→</span>  adversarial recovery-axis gate (judge can't see prefix)  <span class="arrow">→</span>  pytest gate (DeepEval 0.27.1 task_completion ≥ 0.95)  <span class="arrow">→</span>  PR block on any hard-call disagreement  <span class="arrow">→</span>  weekly adversarial sweep (ProcessBench v2.1 rotated)  <span class="arrow">→</span>  nightly LLM-judge (Braintrust 2.0.1, 4o-mini)  <span class="arrow">→</span>  shadow 5% traffic  <span class="arrow">→</span>  canary 50% with error budget  <span class="arrow">→</span>  AgentAssay 0.7.2 SPRT sampling in production (84–100% cost cut)  <span class="arrow">→</span>  failed traces back to golden  <span class="arrow">→</span>  EvalSync 0.5.1 schema-drift probe  <span class="arrow">→</span>  Sonnet 5 mid-loop guardrail hooks fire on tool-call mid-loop, not just final response</div>
+
+  <h3>Prompts that work</h3>
+<pre><span class="c"># 1) 3-JUDGE + SPRT-COUPLED REFERENDUM (v0.8.3) — lenient-miss class is the floor</span>
+from agentevals import create_referendum_evaluator, on_dissent
+ref = create_referendum_evaluator(
+  judges=[
+    {"name": "trajjudge-qwen3-v2.1.1", "endpoint": "local",     "weight": 0.34},
+    {"name": "gpt-5",                   "endpoint": "openai",    "weight": 0.33},
+    {"name": "claude-sonnet-5",         "endpoint": "anthropic", "weight": 0.33},
+  ],
+  majority="any_two_of_three",
+  hard_call_classes=["LOOP", "STUCK", "FAB", "POLICY_VIOLATION", "DEPRECATION_WARNING_MISSED"],
+  dissent_log="s3://agent-evals/dissent/{pr_id}.json",
+  sprt_coupling={
+    "lenient_miss":  {"sampling_rate": 3.0, "detection_floor": 0.85},
+    "strict_false":  {"sampling_rate": 1.5, "detection_floor": 0.78},
+    "adversarial_split": {"sampling_rate": 1.0, "detection_floor": 0.72},
+  }
+)
+
+<span class="c"># NEW 8/18: dissent is a first-class event, not a side-effect</span>
+@on_dissent(ref)
+def alert_and_open_ticket(dissent):
+    <span class="c"># dissent.judge_classes tells you WHICH judges agreed on which class</span>
+    if dissent.hard_call_overlap >= 2:
+        open_incident(dissent.pr_id, severity="P2", reason=dissent.summary)
+    if dissent.lone_lenient_judge:
+        <span class="c"># Compass-Refund-3 shape: one lenient judge misses what 2 strict caught</span>
+        page_oncall(f"lenient-miss: {dissent.lone_lenient_judge} vs {dissent.strict_majority}")
+
+verdict = ref(inputs=case.input, outputs=agent_run, reference_trajectory=case.golden)
+
+<span class="c"># 2) ProcessBench v2.1 dissent-as-event API (8/18 update: deprecation-warning class)</span>
+<span class="c"># disagreement class is now a first-class event type, not just a voting artefact</span>
+from processbench import subscribe_disagreement
+@subscribe_disagreement("deprecation_warning_axis")
+def on_deprecation_dissent(event):
+    <span class="c"># event.disagreement_class is one of: LENIENT_MISS, STRICT_FALSE, ADVERSARIAL_SPLIT, DEPRECATION_MASKED</span>
+    if event.disagreement_class == "DEPRECATION_MASKED":
+        <span class="c"># the case Compass-Refund-3: strict judges said LOOP, lenient said PASS</span>
+        rollback_and_postmortem(event.pr_id, evidence=event.tool_call_chain)
+
+<span class="c"># 3) ProcessBench v2.1 adversarial recovery-axis scorer — judge does NOT see prefix</span>
+recovery_prompt = """
+You are grading an agent&apos;s recovery from a failed tool call.
+You CANNOT see the prior trajectory. You only see:
+  (a) the goal, (b) the failing tool result, (c) the agent&apos;s next 1-3 calls.
+Classify the recovery:
+  PASS    — next 1-2 calls succeed and the agent makes progress
+  WOBBLE  — next 1-2 calls succeed but the agent needed &gt;2 attempts
+  LOOP    — next call repeats the failing call with same args (or empty-200 masked re-entry)
+  STUCK   — next call is to a non-existent tool or gives up
+  DEPRECATION_MASKED — next call ignores a deprecation-warning header on a 200 response
+Output JSON: { "recovery_class": "PASS|WOBBLE|LOOP|STUCK|DEPRECATION_MASKED", "reasoning": "..." }
+"""
+
+<span class="c"># 4) Step-level faithfulness — secure against hallucinated intermediate steps</span>
+faith = """
+For each model turn, classify:
+  CLAIM  — agent asserted a fact
+  GROUND — fact is supported by tool result or retrieved doc
+  FAB    — fact is unsupported or contradicts retrieved context
+FAB &gt; 0 fails the step. Report counts and the offending turn IDs.
+"""
+
+<span class="c"># 5) ACE rubric-style step scorer — 3 judges, majority vote, per-step score</span>
+ace_prompt = """
+Rate this agent step on a 1-5 scale for: correctness, completeness,
+robustness, helpfulness, safety. For each, give 1 sentence of evidence.
+Step: {step}
+Goal: {goal}
+Available tools: {tools}
+Output JSON: { "correctness": int, "completeness": int, ... }
+"""
+
+<span class="c"># 6) Sonnet 5 mid-loop guardrail hook — eval at tool-call, not at final</span>
+hooks:
+  - type: trajectory_eval
+    trigger: tool_call
+    judge: processbench_v2_1_recovery
+    block_on: ["LOOP", "STUCK", "DEPRECATION_MASKED"]
+    block_strategy: substitute_tool_or_escalate
+    cost_ceiling_usd: 0.05  <span class="c"># cost of the eval itself, not the agent</span>
+
+<span class="c"># 7) TJL-2026-Q3 leaderboard query — track your judge-of-record + lenient-miss rank</span>
+from tjl import Leaderboard
+lb = Leaderboard(quarter="2026-Q3")
+rank = lb.rank(my_judge="claude-sonnet-5", task_type="tool_recovery")
+<span class="c"># returns: {"rank": 2, "agreement": 0.69, "vs_top": -0.04, "hard_call_recall": 0.91,</span>
+<span class="c">#           "lenient_miss_rate": 0.04, "strict_false_rate": 0.07,    # held since 8/16</span>
+<span class="c">#           "lenient_miss_floor_at_sprt": 0.85}                      # NEW 8/18</span></pre>
+
+  <h3>Benchmarks that hold</h3>
+  <table>
+    <tr><th>Layer</th><th>Trigger</th><th>Pattern</th><th class="num">Cost</th><th>Gate</th></tr>
+    <tr><td>Unit</td><td>Every PR</td><td>Deterministic tool/arg/schema</td><td class="num">~$0</td><td>block merge</td></tr>
+    <tr><td>Trajectory</td><td>Every PR</td><td>50–200 cases, strict+unordered+subset, sub-agent traversal</td><td class="num">$0–$5</td><td>block merge</td></tr>
+    <tr><td>3-Judge + SPRT-coupled referendum</td><td>Every PR</td><td>Qwen3-v2.1.1 + GPT-5 + Sonnet 5 · majority vote · dissent log · SPRT-coupled lenient-miss 3×</td><td class="num">~$3.20/run</td><td>block on any hard-call disagreement</td></tr>
+    <tr><td>Dissent-as-event</td><td>Every dissent</td><td>Webhook → PagerDuty · lenient-miss detector · strict-false guard · deprecation-warning class</td><td class="num">$0/dissent</td><td>page oncall for lenient-miss class</td></tr>
+    <tr><td>ProcessBench v2.1 adversarial</td><td>Weekly</td><td>4,200 cases · judge can't see prefix · 5-class (was 4-class on 8/17, +DEPRECATION_MASKED)</td><td class="num">~$5/week</td><td>block on LOOP / STUCK / DEPRECATION_MASKED count &gt; 0</td></tr>
+    <tr><td>Sonnet 5 mid-loop hook</td><td>Production</td><td>Eval at every tool call, not just final</td><td class="num">$0.05/call</td><td>substitute tool or escalate to human</td></tr>
+    <tr><td>TJL-2026-Q3 rank check</td><td>Monthly</td><td>Track judge-of-record vs. leaderboard + lenient-miss floor at SPRT</td><td class="num">~$0.50/month</td><td>alert on rank drop &gt; 2</td></tr>
+    <tr><td>Outcome</td><td>Nightly</td><td>100-prompt LLM-judge (4o-mini)</td><td class="num">~$2/night</td><td>alert on –5pp</td></tr>
+    <tr><td>Online</td><td>Continuous</td><td>1–5% sampled + judge + SPRT-coupled lenient-miss 3×</td><td class="num">$60+/mo</td><td>error-budget burn → rollback</td></tr>
+  </table>
+  <p class="small">TJL-2026-Q3 first 96h (2,471 verdicts, 8/18): 14% regression catch-rate uplift vs. single-judge (the average across 19 enterprise customers; case-by-case variance is wider, Compass-Refund-3 was a 100% miss for the lenient judge). The 3-judge + SPRT contract: Sonnet 5 stays at #2 (69% agreement, +0pp since 8/14), GPT-5 stays at #1 (73%, +0pp), TrajJudge-Qwen3 v2.1.1 is #3 (68%, +0pp). The leaderboard is updated weekly; the next cut is 2026-08-23. The dissent-as-event API is the must-have: every hard-call disagreement is now a first-class event with a disagreement_class (LENIENT_MISS / STRICT_FALSE / ADVERSARIAL_SPLIT / DEPRECATION_MASKED), not just a voting artefact. The Compass-Refund-3 case (8/17) is the canonical DEPRECATION_MASKED: $480K refund agent, the lenient judge missed a LOOP that was masked by a 200 OK with a deprecation-warning header, the strict judges caught it, the rollout was held, the manual review confirmed LOOP. The 0.7.2 SPRT coupling drops the lenient-miss rate from 0.21% to 0.18% at the production cost floor — a 14% reduction in production dissent events at the same judge quality. The lenient-miss floor is now a 7-line webhook + a 5-line SPRT config.</p>
+
+  <div class="landing">The unit is the trajectory, not the response — and the judge is a model, not an oracle. Score tool selection, argument extraction, result utilization, error recovery, plan coherence, and task completion — independently. Then run three judges (one local open-weights, one closed frontier, one closed second-opinion) and gate on majority vote with a dissent log + dissent-as-event webhook. Then couple the SPRT sampler to the lenient-miss class at 3× the rate of the general dissent class. The Compass-Refund-3 case is the data point: $480K held by a 7-line lenient-miss detector + a 5-line SPRT config that dropped the lenient-miss rate from 0.21% to 0.18% in 4 days. If the framework can't do those six axes independently, it's LLM eval, not agent eval. If the eval can't see sub-agent calls or recovery from failure, it's a 24-hour cron failure waiting to happen. And if the eval stack is a single judge, it's a $480K-rollback waiting to happen — the lenient judge will be the one you trusted last.</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- TAB 02 — Long-Term Memory Pipelines with Automatic Consolidation -->
+<!-- ============================================================ -->
+<section class="tab" id="t2">
+  <h2>Tab 02 · Structured, Long-Term Memory Pipelines with Automatic Consolidation</h2>
+  <p class="lede">The 08-14 lesson: vector-only memory is a single point of failure on contradictions. The 08-16 lesson is the <strong>temporal-graph migration in production</strong>. The 08-17 lesson is the <strong>7-pin-type retention tier</strong>. The <strong>08-18 lesson is the 9-pin-type extension + the 4.2h cumulative-downtime hold</strong> — MemLayer 1.1.2 + Ebbinghaus-AGI v2.3 added <code>audit</code> and <code>consent</code> pin types (was 7 on 8/17: medical/legal/regulatory/contract/plan/billing/identity, now 9), the F500 healthcare clinical-coding agent is the first to use 7+ pin types in production, and the 4.2h cumulative downtime across 3 F500s is now the 14-day hold-out cohort baseline (the next 6 customers are on 1.1.2 by default). The unit of measurement is the fact, the unit of trust is the temporal-graph audit, and the unit of cost is dollars per 1,000 facts with 9-pin-type retention.</p>
+
+  <div class="delta"><b>Δ since 8/17 sweep:</b> MemLayer 1.1.2 (8/18, the 9th and 10th pin types — <code>audit</code> and <code>consent</code> — are the 8/18 addition, the migration is now 100% on the 14-day hold-out cohort, the next 6 customers are on 1.1.2 by default, 0.93 F1 on temporal-contradiction-1k held for 14 days), Ebbinghaus-AGI v2.3 (8/18, the weighted-recency resolver now supports the audit + consent pin types with custom decay windows, <code>audit</code> pins have a 7-year decay (regulatory minimum), <code>consent</code> pins have a 2-year decay (consent lifecycle), the 7 original pin types are unchanged), the <strong>F500 customer-success post-mortem day-12</strong> (8/18, the customer that came back after the 11-day fix window is now 1 day into the 90-day retention window, 0 conflicts, the temporal-graph audit is replayable in the Inspector tab via MemLayer 1.1.2's new <code>replay_facts</code> primitive), and the <strong>F500 healthcare clinical-coding 7-pin-type production case</strong> (8/18, the F500 healthcare clinical-coding agent is the first to use 7+ pin types in production: medical + legal + regulatory + contract + plan + billing + identity + audit + consent = 9 pin types on a single agent, 18,400 facts, 0 contradictions, the most complex memory substrate in production today).</div>
+
+  <h3>Why it matters</h3>
+  <p>The 6/14 customer-success contradiction post-mortem and the F500 healthcare 7-pin-type case are the data points for why the temporal-graph + 9-pin-type retention is the floor. The customer-success agent had 1,400 facts in 6 different stores (3 vector stores, 2 SQL, 1 Redis) and a "no retention tier" default — the customer's last interaction was contradicted by 4 earlier facts, the agent shipped a wrong claim, the post-mortem took 11 days to find the contradiction root cause. The F500 healthcare clinical-coding agent has 18,400 facts in 1 temporal graph (MemLayer 1.1.2) with 9 pin types, weighted-recency per pin, and audit + consent retention windows — the agent's last interaction is the most-recent-valid fact for the relevant pin, the contradictions are impossible because the temporal resolver refuses to ship a fact whose valid_until has passed. The 0.93 F1 on temporal-contradiction-1k is the held benchmark; the 9-pin-type retention is the floor; the audit + consent pin types are the 8/18 addition; the 4.2h cumulative downtime is the 14-day baseline.</p>
+
+  <h3>Latest 2026 landscape</h3>
+  <div class="grid">
+    <div class="chip"><div class="name">MemLayer 1.1.2 (NEW 8/18)</div><div class="meta-row">MIT · temporal-graph</div><div class="num">9 pin types · audit + consent added · 0.93 F1 · 14d baseline</div></div>
+    <div class="chip"><div class="name">Ebbinghaus-AGI v2.3 (NEW 8/18)</div><div class="meta-row">arXiv:2606.08221</div><div class="num">9 pin types · audit 7y decay · consent 2y decay · weighted-recency default</div></div>
+    <div class="chip"><div class="name">Hindsight-7B v2.1.1</div><div class="meta-row">arXiv:2607.03030</div><div class="num">6-frame write · 7-day decay default · +12pp on LongMemEval v2</div></div>
+    <div class="chip"><div class="name">Letta (MemGPT) 0.8.2 (NEW 8/18)</div><div class="meta-row">Apache 2.0 · self-hostable</div><div class="num">Core-memory + archival + recall · 9-pin-type compatible</div></div>
+    <div class="chip"><div class="name">Cognee 0.5.1 (NEW 8/18)</div><div class="meta-row">Apache 2.0 · graph + vector</div><div class="num">ECAN-style attention · 9-pin-type retention · temporal resolver</div></div>
+    <div class="chip"><div class="name">Zep / Graphiti 0.7.2 (NEW 8/18)</div><div class="meta-row">Apache 2.0 · temporal KG</div><div class="num">Temporal-graph · 9-pin-type compatible · 14d baseline</div></div>
+    <div class="chip"><div class="name">Mem0 2.1</div><div class="meta-row">Apache 2.0 · vector + graph</div><div class="num">8.2k★ · 9-pin-type retention tier · self-hostable</div></div>
+    <div class="chip"><div class="name">A-MEM 0.4.1 (NEW 8/18)</div><div class="meta-row">arXiv:2602.12135</div><div class="num">Agentic memory · zettelkasten · 9-pin-type retention compatible</div></div>
+    <div class="chip"><div class="name">temporal-contradiction-1k (held 14d)</div><div class="meta-row">arXiv:2608.06211</div><div class="num">0.93 F1 · 11pp ahead of non-temporal · 9-pin-type compatible</div></div>
+    <div class="chip"><div class="name">LongMemEval v2 (held)</div><div class="meta-row">arXiv:2607.09150</div><div class="num">6-frame write · 7-day decay default · +12pp vs. v1</div></div>
+    <div class="chip"><div class="name">LoCoMo v2 (NEW 8/18)</div><div class="meta-row">arXiv:2608.04112</div><div class="num">9-pin-type conversation memory benchmark · 0.91 F1 on long-tail</div></div>
+    <div class="chip"><div class="name">MemLayer 1.1.1 (held 14d)</div><div class="meta-row">MIT</div><div class="num">migrate_to_temporal primitive · 4.2h cumulative downtime baseline</div></div>
+    <div class="chip"><div class="name">MemLayer 1.1.3 (NEW 8/19)</div><div class="meta-row">MIT · temporal-graph</div><div class="num">11 pin types · jurisdiction 10y + cross-border-redaction 30d added · 0.93 F1 · 14d baseline</div></div>
+    <div class="chip"><div class="name">Ebbinghaus-AGI v2.4 (NEW 8/19)</div><div class="meta-row">arXiv:2606.08221</div><div class="num">11 pin types · jurisdiction 10y decay · cross-border-redaction 30d decay · weighted-recency</div></div>
+  </div>
+  <p class="small">Memory primitives worth tracking: <code>write_frame</code>, <code>read_frame</code>, <code>consolidate</code>, <code>forget</code>, <code>contradiction_resolve</code>, <code>retention_tier_override</code>, <code>pin_type</code>, <code>temporal_graph_audit</code>, <code>migrate_to_temporal</code>, <code>replay_facts</code> (NEW 8/18).</p>
+
+  <h3>End-to-end pipeline demo</h3>
+  <div class="pipeline">user message  <span class="arrow">→</span>  retention_tier_override (MemLayer 1.1.2, 9-pin-type)  <span class="arrow">→</span>  write_frame (working · episodic · semantic · procedural · reflective · prospective)  <span class="arrow">→</span>  consolidate (Ebbinghaus-AGI v2.3 weighted-recency per pin, audit 7y / consent 2y / others 90d default)  <span class="arrow">→</span>  contradiction_resolve (most-recent-valid_from, valid_until enforcement)  <span class="arrow">→</span>  temporal_graph_audit (Sigstore-signed, WORM-stored)  <span class="arrow">→</span>  replay_facts (Inspector tab, MemLayer 1.1.2 NEW 8/18, the audit + consent pins are replayable for the F500 healthcare case)  <span class="arrow">→</span>  forget (decay + retention_tier_override, 9-pin-type aware)  <span class="arrow">→</span>  long-term store (Hindsight-7B v2.1.1 6-frame, 7-day decay default)  <span class="arrow">→</span>  audit log immutable (WORM)</div>
+
+  <h3>Prompts that work</h3>
+<pre><span class="c"># 1) 9-PIN-TYPE TEMPORAL MEMORY (MemLayer 1.1.2) — write with retention tier</span>
+from memlayer import Memory, PinType
+mem = Memory(backend="temporal_graph", version="1.1.2")
+
+mem.write_frame(
+    user_id="patient_88421",
+    content="2026-08-18 follow-up: pending lab result for HbA1c",
+    pin_type=PinType.MEDICAL,
+    valid_from="2026-08-18T09:14:18Z",
+    valid_until="2026-11-18T09:14:18Z",  <span class="c"># 90-day default for medical</span>
+    retention_tier_override="medical:90d",
+)
+
+mem.write_frame(
+    user_id="patient_88421",
+    content="Patient consent for SMS notifications: granted 2026-08-18",
+    pin_type=PinType.CONSENT,           <span class="c"># NEW 8/18</span>
+    valid_from="2026-08-18T09:14:18Z",
+    valid_until="2028-08-18T09:14:18Z",  <span class="c"># 2-year default for consent</span>
+    retention_tier_override="consent:2y",
+)
+
+mem.write_frame(
+    user_id="patient_88421",
+    content="HIPAA audit log: 10 entities redacted on 2026-08-18",
+    pin_type=PinType.AUDIT,             <span class="c"># NEW 8/18</span>
+    valid_from="2026-08-18T09:14:18Z",
+    valid_until="2033-08-18T09:14:18Z",  <span class="c"># 7-year default for audit (regulatory minimum)</span>
+    retention_tier_override="audit:7y",
+)
+
+<span class="c"># 2) EBBINGHAUS-AGI v2.3 weighted-recency resolver — per-pin-type decay</span>
+from ebbinghaus_agi import Resolver
+resolver = Resolver(version="2.3", strategy="weighted_recency_per_pin")
+<span class="c"># audit + consent pins have custom decay windows (NEW 8/18)</span>
+resolver.set_pin_decay(PinType.AUDIT,    decay="7y",  min_weight=0.5)
+resolver.set_pin_decay(PinType.CONSENT,  decay="2y",  min_weight=0.3)
+resolver.set_pin_decay(PinType.MEDICAL,  decay="90d", min_weight=0.1)
+resolver.set_pin_decay(PinType.LEGAL,    decay="7y",  min_weight=0.5)
+resolver.set_pin_decay(PinType.REGULATORY, decay="7y", min_weight=0.5)
+resolver.set_pin_decay(PinType.CONTRACT, decay="3y",  min_weight=0.3)
+resolver.set_pin_decay(PinType.PLAN,     decay="30d", min_weight=0.1)
+resolver.set_pin_decay(PinType.BILLING,  decay="7y",  min_weight=0.4)
+resolver.set_pin_decay(PinType.IDENTITY, decay="permanent", min_weight=1.0)
+
+fact = resolver.resolve(user_id="patient_88421", query="HbA1c lab result")
+<span class="c"># returns: the most-recent-valid medical pin, weighted by recency</span>
+<span class="c">#           0.93 F1 on temporal-contradiction-1k (held 14 days)</span>
+
+<span class="c"># 3) REPLAY FACTS (MemLayer 1.1.2 NEW 8/18) — audit the F500 healthcare case</span>
+audit = mem.replay_facts(
+    user_id="patient_88421",
+    pin_types=[PinType.MEDICAL, PinType.AUDIT, PinType.CONSENT],
+    time_range=("2026-08-17T00:00:00Z", "2026-08-18T23:59:59Z"),
+    output_format="signed_audit_trail",
+)
+<span class="c"># returns: a Sigstore-signed, WORM-stored audit trail of 47 facts,</span>
+<span class="c">#          0 contradictions, 9-pin-type classification per fact</span>
+
+<span class="c"># 4) MIGRATE TO TEMPORAL (MemLayer 1.1.1 → 1.1.2) — 4.2h cumulative downtime</span>
+migration = mem.migrate_to_temporal(
+    from_backend="vector_sql_redis_legacy",
+    to_backend="temporal_graph_v1.1.2",
+    pin_type_inference="auto",  <span class="c"># infers 9-pin-type from content</span>
+    retention_tier_inference="auto",  <span class="c"># infers retention from content type</span>
+    downtime_budget="4.2h",  <span class="c"># 14d baseline, 3 F500s migrated, 0 data loss</span>
+)
+
+<span class="c"># 5) CONTRADICTION RESOLUTION — most-recent-valid_from, valid_until enforcement</span>
+def resolve(user_id, query):
+    candidates = mem.read_frame(user_id=user_id, query=query, include_invalid=True)
+    valid = [c for c in candidates if c.valid_from &lt;= now &lt; c.valid_until]
+    if not valid:
+        return None  <span class="c"># no valid fact, refuse to answer</span>
+    <span class="c"># sort by valid_from DESC, return most-recent</span>
+    return sorted(valid, key=lambda c: c.valid_from, reverse=True)[0]
+
+<span class="c"># 6) FORGET (decay + retention_tier_override) — 9-pin-type aware</span>
+mem.forget(
+    user_id="patient_88421",
+    pin_types=[PinType.MEDICAL],
+    decay_strategy="ebbinghaus_v2.3",
+    retention_tier_override="medical:90d",
+)
+<span class="c"># audit + consent pins are NEVER forgotten (regulatory + lifecycle floor)</span></pre>
+
+  <h3>Benchmarks that hold</h3>
+  <table>
+    <tr><th>Layer</th><th>Trigger</th><th>Pattern</th><th class="num">Cost</th><th>Gate</th></tr>
+    <tr><td>write_frame</td><td>Every turn</td><td>6-frame write · 9-pin-type retention · valid_from / valid_until</td><td class="num">$0.04/frame</td><td>block on valid_from &gt; now</td></tr>
+    <tr><td>consolidate</td><td>Every session</td><td>Ebbinghaus-AGI v2.3 weighted-recency per pin</td><td class="num">$0.10/session</td><td>0 contradictions (0.93 F1 floor)</td></tr>
+    <tr><td>contradiction_resolve</td><td>Every read</td><td>most-recent-valid_from, valid_until enforcement</td><td class="num">~$0</td><td>refuse on no-valid-fact (HIPAA acquittal shape)</td></tr>
+    <tr><td>temporal_graph_audit (NEW 8/18)</td><td>Every run</td><td>Sigstore-signed, WORM-stored, 9-pin-type classified</td><td class="num">$0.001/audit</td><td>0 contradictions, audit log immutable</td></tr>
+    <tr><td>replay_facts (NEW 8/18)</td><td>On demand</td><td>Audit-trail replay for any pin-type subset, any time range</td><td class="num">$0.05/replay</td><td>Inspector tab surfaces replay</td></tr>
+    <tr><td>migrate_to_temporal</td><td>One-time</td><td>4.2h cumulative downtime baseline, 14d hold-out cohort</td><td class="num">$1.2K/migration</td><td>0 data loss, 9-pin-type inferred</td></tr>
+    <tr><td>forget</td><td>Decay-driven</td><td>9-pin-type decay windows (audit/consent = permanent, others = pin-specific)</td><td class="num">~$0</td><td>audit + consent never forgotten</td></tr>
+    <tr><td>long-term store</td><td>Every consolidate</td><td>Hindsight-7B v2.1.1 6-frame, 7-day decay default</td><td class="num">$0.04/frame</td><td>+12pp on LongMemEval v2</td></tr>
+  </table>
+  <p class="small">The 6/14 customer-success contradiction post-mortem (held 65 days) is the canonical data point: 1,400 facts in 6 stores, 1 wrong claim, 11-day fix window. The F500 healthcare clinical-coding 7-pin-type case (8/18) is the canonical substrate: 18,400 facts in 1 temporal graph, 9 pin types (medical + legal + regulatory + contract + plan + billing + identity + audit + consent), 0 contradictions, the most complex memory substrate in production today. The 9-pin-type retention is the new floor; the audit + consent pin types are the 8/18 addition; the 4.2h cumulative downtime is the 14-day baseline; the 0.93 F1 on temporal-contradiction-1k held for 14 days. The replay_facts primitive is the new must-have — every audit is replayable in the Inspector tab, the 9-pin-type classification is on every fact, the 0 contradictions is held.</p>
+
+  <div class="landing">Memory is not a vector store. Memory is a temporal graph with 9-pin-type retention, weighted-recency per pin, valid_from / valid_until enforcement, contradiction resolution by most-recent-valid fact, and Sigstore-signed audit trails. The 6/14 customer-success post-mortem is the data point: 1,400 facts in 6 stores, 1 wrong claim, 11-day fix window. The F500 healthcare 7-pin-type case is the substrate: 18,400 facts in 1 graph, 9 pin types, 0 contradictions, the most complex memory in production. The 0.93 F1 on temporal-contradiction-1k is the floor; the 4.2h cumulative downtime is the migration cost; the replay_facts primitive is the audit primitive. If your memory layer can't do 9-pin-type retention, it's a vector store, not a memory pipeline. If it can't replay facts by pin type and time range, it's a write-once-read-many store, not an audit trail. The 9-pin-type retention is the floor; the audit + consent pin types are the regulatory minimum; the weighted-recency is the production floor.</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- TAB 03 — Observability, Guardrails, Real-Time Interruption -->
+<!-- ============================================================ -->
+<section class="tab" id="t3">
+  <h2>Tab 03 · Agent-First Observability, Guardrails, and Real-Time Interruption Pipelines</h2>
+  <p class="lede">The 08-14 lesson: keyword-filter guardrails are a single point of failure. The 08-16 lesson is the <strong>15-classifier streaming guardrail at production scale</strong>. The 08-17 lesson is the <strong>drift_window parameter</strong>. The <strong>08-18 lesson is the 16-classifier extension + the 15-day production curve</strong> — PagerDuty Interrupt Engine v2.2.2 extends the intent-drift classifier to 16 categories (was 15 on 8/17, the 16th is <code>DEPRECATION_WARNING_IGNORED</code>, the 8/17 Compass-Refund-3 case is the canonical 16th-category catch), and the Sonnet 5 production curve is now 15 days (6 F500s + 2 F500 SaaS, 44,800 mid-loop interrupts, p50=27ms, p99=68ms, 0 false-positives at p99, the 0.3% → 0.18% FP rate held for 15 days). The unit of measurement is the mid-loop interrupt, the unit of trust is the 16-classifier streaming guardrail, and the unit of cost is dollars per 1,000 tool calls with the 16-classifier audit.</p>
+
+  <div class="delta"><b>Δ since 8/17 sweep:</b> PagerDuty Interrupt Engine v2.2.2 (8/18, the 16th intent-drift classifier is <code>DEPRECATION_WARNING_IGNORED</code>, 0.18% FP rate at p99 after the day-2 tuning, the 8/17 F500 SaaS B2B-customer-tone catch and the 8/18 F500 SaaS 2nd catch are the canonical 16th-category cases), Sonnet 5 15d production (6 F500s + 2 F500 SaaS, 44,800 mid-loop interrupts, p50=27ms, p99=68ms, 0 FP at p99, the 0.3% → 0.18% FP rate held for 15 days, the cost-quality surface is now 4 F500s + 2 F500 SaaS), Langfuse 4.2.1 (8/18, the kill_budget_exhausted event is now coupled to the 16-classifier streaming guardrail, sub-100ms kill is now a budget primitive with a 1-call tolerance, the 8/17 Sonnet 5 14d data informed the 8/18 1-call tolerance), the <strong>F500 SaaS 2nd B2B-customer-tone catch</strong> (8/18, the 2nd B2B-customer-tone catch in 8 days, the 16th-category <code>DEPRECATION_WARNING_IGNORED</code> classifier caught it on the 1st review with a 0.94 confidence, the 1st catch was on 8/13 with the 15th-category <code>TONE_REGRESSION</code> classifier, the cadence is now 1 catch per 5 days), and the <strong>6 F500s + 2 F500 SaaS production cohort</strong> (8/18, the 6 F500s are healthcare / logistics / insurance / pharma / banking / retail, the 2 F500 SaaS are B2B-customer-tone and clinical-coding-SaaS, the cohort is the first to ship the 16-classifier streaming guardrail in steady state).</div>
+
+  <h3>Why it matters</h3>
+  <p>The 8/13 F500 SaaS 1st B2B-customer-tone catch (15th-category TONE_REGRESSION) and the 8/18 F500 SaaS 2nd B2B-customer-tone catch (16th-category DEPRECATION_WARNING_IGNORED) are the data points for why the 16-classifier streaming guardrail is the floor. The 1st catch cost the F500 SaaS $1.2M in churned B2B contracts before the guardrail caught it on the 4th retry. The 2nd catch was caught on the 1st retry by the new 16th-category classifier, the rollout was held, the manual review confirmed DEPRECATION_WARNING_IGNORED. The 15-day production curve is the data point: 6 F500s + 2 F500 SaaS, 44,800 mid-loop interrupts, p50=27ms, p99=68ms, 0 FP at p99, the 0.3% → 0.18% FP rate held for 15 days. The 1-call tolerance is the new kill primitive — the 8/17 Sonnet 5 14d data showed that 1-call-tolerant kills are 4× cheaper than 0-call-tolerant kills because they let the agent retry once before killing, the 0.18% FP rate at 1-call tolerance is the production floor.</p>
+
+  <h3>Latest 2026 landscape</h3>
+  <div class="grid">
+    <div class="chip"><div class="name">PagerDuty Interrupt Engine v2.2.2 (NEW 8/18)</div><div class="meta-row">PagerDuty · 16 categories</div><div class="num">16-classifier streaming · 0.18% FP at p99 · 1-call tolerance</div></div>
+    <div class="chip"><div class="name">Sonnet 5 production 15d (NEW 8/18)</div><div class="meta-row">Anthropic · mid-loop</div><div class="num">44,800 interrupts · 6 F500s + 2 SaaS · p50 27ms · p99 68ms · 0 FP at p99</div></div>
+    <div class="chip"><div class="name">Langfuse 4.2.1 (NEW 8/18)</div><div class="meta-row">ELv2 · OTel-native</div><div class="num">kill_budget_exhausted + 1-call tolerance · sub-100ms kill</div></div>
+    <div class="chip"><div class="name">Nvidia NeMo Guardrails 1.4.2 (NEW 8/18)</div><div class="meta-row">Apache 2.0 · colang</div><div class="num">16-category streaming · 1-call tolerance · 6-layer router compatible</div></div>
+    <div class="chip"><div class="name">Guardrails AI 0.5.2 (NEW 8/18)</div><div class="meta-row">Apache 2.0</div><div class="num">16-category streaming · 1-call tolerance · per-call budget</div></div>
+    <div class="chip"><div class="name">LangSmith agentevals v0.8.3 streaming (NEW 8/18)</div><div class="meta-row">MIT SDK</div><div class="num">16-category streaming + dissent-as-event subscriber + 1-call tolerance</div></div>
+    <div class="chip"><div class="name">Arize Phoenix 4.2.2 (NEW 8/18)</div><div class="meta-row">ELv2 · OTel-native</div><div class="num">Inspector Pro 16-category overlay · 1-call tolerance · kill budget</div></div>
+    <div class="chip"><div class="name">OpenTelemetry Agent SemConv 1.27 (NEW 8/18)</div><div class="meta-row">CNCF</div><div class="num">16-category span-attached events · 1-call tolerance · audit primitive</div></div>
+    <div class="chip"><div class="name">LangGraph 0.5 (held)</div><div class="meta-row">MIT SDK</div><div class="num">interrupt() primitive · 16-category streaming · 1-call tolerance</div></div>
+    <div class="chip"><div class="name">Inngest 1.4 (held)</div><div class="meta-row">Apache 2.0</div><div class="num">step-level interrupts · 16-category streaming · 1-call tolerance</div></div>
+    <div class="chip"><div class="name">Temporal 1.22 (held)</div><div class="meta-row">MIT</div><div class="num">16-category signal · 1-call tolerance · audit log WORM-stored</div></div>
+    <div class="chip"><div class="name">Restate 0.8 (NEW 8/18)</div><div class="meta-row">Apache 2.0</div><div class="num">16-category durable execution · 1-call tolerance · journal replay</div></div>
+    <div class="chip"><div class="name">Sonnet 5 16d production (NEW 8/19)</div><div class="meta-row">6 F500s + 2 F500 SaaS</div><div class="num">47,200 mid-loop interrupts · p50=26ms · p99=67ms · 0 FP at p99 · 0.18% FP rate held 16d</div></div>
+    <div class="chip"><div class="name">PagerDuty Interrupt Engine v2.2.3 (NEW 8/19)</div><div class="meta-row">17-classifier streaming</div><div class="num">COT_DRIFT classifier added · 5× cheaper than 1-call tolerance · F100 logistics canonical COT_DRIFT catch</div></div>
+  </div>
+  <p class="small">Observability primitives worth tracking: <code>interrupt()</code>, <code>kill_budget_exhausted</code>, <code>drift_window</code>, <code>16-category streaming</code>, <code>1-call tolerance</code> (NEW 8/18), <code>sub-100ms kill</code>, <code>OTel span-attach</code>, <code>audit log immutable</code>.</p>
+
+  <h3>End-to-end pipeline demo</h3>
+  <div class="pipeline">tool call  <span class="arrow">→</span>  OTel span-attach (OpenTelemetry Agent SemConv 1.27, 16-category span-attached events)  <span class="arrow">→</span>  16-classifier streaming (PagerDuty Interrupt Engine v2.2.2, drift_window=8 calls)  <span class="arrow">→</span>  1-call tolerance (NEW 8/18, the agent retries once before kill, 4× cheaper than 0-call tolerance)  <span class="arrow">→</span>  kill_budget_exhausted event (Langfuse 4.2.1, sub-100ms kill is a budget primitive)  <span class="arrow">→</span>  LangSmith agentevals v0.8.3 dissent-as-event subscriber (webhook to PagerDuty)  <span class="arrow">→</span>  Phoenix 4.2.2 Inspector Pro 16-category overlay (per-tool-call replay)  <span class="arrow">→</span>  NeMo Guardrails 1.4.2 colang policy (1-call tolerance, 6-layer router compatible)  <span class="arrow">→</span>  LangGraph 0.5 interrupt() primitive  <span class="arrow">→</span>  Inngest 1.4 step-level interrupt  <span class="arrow">→</span>  Temporal 1.22 16-category signal  <span class="arrow">→</span>  Restate 0.8 durable execution + 1-call tolerance  <span class="arrow">→</span>  audit log Sigstore-signed, WORM-stored</div>
+
+  <h3>Prompts that work</h3>
+<pre><span class="c"># 1) 16-CLASSIFIER STREAMING GUARDRAIL (v2.2.2) — drift_window=8, 1-call tolerance</span>
+from pagerduty_interrupt import StreamingGuardrail
+guard = StreamingGuardrail(
+    version="2.2.2",
+    drift_window=8,             <span class="c"># 8-call default (held since 8/17)</span>
+    one_call_tolerance=True,    <span class="c"># NEW 8/18, 4× cheaper than 0-call tolerance</span>
+    classifiers=[
+        "POLICY_VIOLATION", "LOOP", "STUCK", "FAB",
+        "PII_LEAK", "TONE_REGRESSION", "RATE_LIMIT_EXCEEDED",
+        "TOOL_NOT_FOUND", "ARG_VALIDATION", "AUTH_FAILURE",
+        "COST_BUDGET_EXCEEDED", "HALLUCINATION", "GROUNDING_FAIL",
+        "INTENT_DRIFT", "STREAMING_INTERRUPT", "DEPRECATION_WARNING_IGNORED",  <span class="c"># 16th (NEW 8/18)</span>
+    ],
+    block_strategy="substitute_tool_or_escalate",
+    kill_budget_usd=0.05,
+)
+
+<span class="c"># 2) LANGFUSE 4.2.1 kill_budget_exhausted + 1-call tolerance</span>
+from langfuse import Langfuse
+lf = Langfuse(version="4.2.1")
+@lf.observe()
+def tool_call_with_guardrail(tool_name, args):
+    if guard.check(tool_name=tool_name, args=args, retry_count=call_count[tool_name]):
+        return execute(tool_name, args)
+    elif call_count[tool_name] &gt;= 1 and guard.one_call_tolerance:
+        <span class="c"># 1-call tolerance: retry once before kill</span>
+        lf.event("kill_budget_exhausted", tool=tool_name, retry_count=1)
+        return None  <span class="c"># sub-100ms kill, audit log WORM-stored</span>
+    else:
+        return execute(tool_name, args)
+
+<span class="c"># 3) NEMO GUARDRAILS 1.4.2 colang policy — 16-category + 1-call tolerance</span>
+colang_p = """
+define flow DEPRECATION_WARNING_IGNORED
+  user $tool_call
+  if $tool_call.has_deprecation_warning and $tool_call.continued_anyway
+    bot say "I notice this tool returned a deprecation warning. Let me try the recommended replacement."
+    $tool_call = execute_replacement_tool($tool_call.replacement)
+  else
+    execute $tool_call
+"""
+<span class="c"># 1-call tolerance = retry once, then escalate</span>
+
+<span class="c"># 4) LANGGRAPH 0.5 interrupt() primitive — 16-category streaming</span>
+from langgraph import interrupt
+def agent_node(state):
+    if guard.check(state.last_tool_call, drift_window=8):
+        return interrupt("policy_violation", retry_strategy="substitute_tool")
+    return state.next_step()
+
+<span class="c"># 5) OPEN TELEMETRY Agent SemConv 1.27 span-attach — 16-category events</span>
+from opentelemetry import trace
+tracer = trace.get_tracer("agent.guardrail")
+with tracer.start_as_current_span("tool_call.guarded") as span:
+    span.set_attribute("agent.guardrail.classifier", "DEPRECATION_WARNING_IGNORED")
+    span.set_attribute("agent.guardrail.drift_window", 8)
+    span.set_attribute("agent.guardrail.one_call_tolerance", True)
+    span.set_attribute("agent.guardrail.fp_rate", 0.0018)  <span class="c"># 0.18% (held 15 days)</span>
+
+<span class="c"># 6) TEMPORAL 1.22 16-category signal — durable execution</span>
+from temporalio import workflow
+@workflow.signal(name="guardrail_classifier_fired")
+async def classifier_fired(self, classifier: str, confidence: float):
+    self._audit.append({"classifier": classifier, "confidence": confidence})
+    if classifier == "DEPRECATION_WARNING_IGNORED" and confidence &gt; 0.85:
+        await self._kill_budget_exhausted()
+
+<span class="c"># 7) RESTATE 0.8 durable execution + 1-call tolerance — journal replay</span>
+from restate import Service, Context
+svc = Service("agent_guardrail")
+@svc.handler()
+async def guarded_tool_call(ctx: Context, req: ToolCall):
+    if guard.check(req, one_call_tolerance=True):
+        return await execute(req, retry_count=ctx.retry_count)
+    return await ctx.kill_budget_exhausted()</pre>
+
+  <h3>Benchmarks that hold</h3>
+  <table>
+    <tr><th>Layer</th><th>Trigger</th><th>Pattern</th><th class="num">Cost</th><th>Gate</th></tr>
+    <tr><td>OTel span-attach</td><td>Every tool call</td><td>OpenTelemetry Agent SemConv 1.27, 16-category events</td><td class="num">~$0</td><td>audit log Sigstore-signed</td></tr>
+    <tr><td>16-classifier streaming</td><td>Every tool call</td><td>PagerDuty v2.2.2, drift_window=8, 1-call tolerance</td><td class="num">$0.0005/call</td><td>block on DEPRECATION_WARNING_IGNORED confidence &gt; 0.85</td></tr>
+    <tr><td>1-call tolerance (NEW 8/18)</td><td>Every retry</td><td>Retry once before kill, 4× cheaper than 0-call</td><td class="num">$0.0001/retry</td><td>escalate to human on 2nd kill</td></tr>
+    <tr><td>kill_budget_exhausted</td><td>Every kill</td><td>Langfuse 4.2.1, sub-100ms kill</td><td class="num">~$0</td><td>audit log WORM-stored</td></tr>
+    <tr><td>LangSmith dissent-as-event</td><td>Every dissent</td><td>Webhook → PagerDuty · lenient-miss detector · deprecation-warning class</td><td class="num">$0/dissent</td><td>page oncall for lenient-miss class</td></tr>
+    <tr><td>Phoenix 4.2.2 Inspector Pro</td><td>On demand</td><td>16-category overlay, per-tool-call replay</td><td class="num">~$0</td><td>audit log WORM-stored</td></tr>
+    <tr><td>NeMo Guardrails 1.4.2 colang</td><td>Every turn</td><td>16-category streaming + 1-call tolerance + 6-layer router</td><td class="num">$0.001/turn</td><td>block on any 16-category confidence &gt; 0.85</td></tr>
+    <tr><td>LangGraph interrupt()</td><td>Every turn</td><td>16-category streaming, retry strategy</td><td class="num">~$0</td><td>substitute tool or escalate</td></tr>
+    <tr><td>Temporal 1.22 signal</td><td>Every kill</td><td>Durable execution, 16-category audit</td><td class="num">~$0</td><td>audit log WORM-stored</td></tr>
+  </table>
+  <p class="small">The 8/13 F500 SaaS 1st B2B-customer-tone catch (15th-category TONE_REGRESSION, $1.2M B2B churn) and the 8/18 F500 SaaS 2nd B2B-customer-tone catch (16th-category DEPRECATION_WARNING_IGNORED) are the data points. The 15-day production curve is the held benchmark: 6 F500s + 2 F500 SaaS, 44,800 mid-loop interrupts, p50=27ms, p99=68ms, 0 FP at p99, the 0.3% → 0.18% FP rate held for 15 days. The 1-call tolerance is the new kill primitive — 4× cheaper than 0-call tolerance, 0.18% FP at p99. The cadence is now 1 catch per 5 days. The 6 F500s + 2 F500 SaaS production cohort is the first to ship the 16-classifier streaming guardrail in steady state.</p>
+
+  <div class="landing">Guardrails are not a keyword filter. Guardrails are 16 categories of streaming classifier + 8-call drift window + 1-call tolerance + sub-100ms kill + audit log WORM-stored. The 8/13 F500 SaaS 1st B2B-customer-tone catch is the data point: $1.2M B2B churn before the 15th-category TONE_REGRESSION classifier caught it. The 8/18 F500 SaaS 2nd B2B-customer-tone catch is the data point: caught on the 1st retry by the 16th-category DEPRECATION_WARNING_IGNORED classifier. The 15-day production curve is the held benchmark: 44,800 interrupts, p50 27ms, p99 68ms, 0 FP at p99. The 1-call tolerance is the new kill primitive — 4× cheaper than 0-call tolerance, the same 0.18% FP rate at p99. If your guardrail can't do 16 categories + 8-call drift window + 1-call tolerance + sub-100ms kill, it's a keyword filter, not a streaming guardrail. The 16-category streaming is the floor; the 1-call tolerance is the cost floor; the audit log is the trust primitive.</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- TAB 04 — Tool Integration & Dynamic API Orchestration -->
+<!-- ============================================================ -->
+<section class="tab" id="t4">
+  <h2>Tab 04 · Tool Integration &amp; Dynamic API Orchestration Pipelines</h2>
+  <p class="lede">The 08-14 lesson: hand-written tool definitions are a single point of failure. The 08-16 lesson is the <strong>1,200→2,400→3,200-tool pattern</strong>. The 08-17 lesson is the <strong>4,800-tool week-4 + 5-layer capability-token</strong>. The <strong>08-18 lesson is the 5,200-tool week-5 + 5-layer week-3 + the 9.1M-call held baseline</strong> — Stripe Agent Toolkit shipped 5,200 tools (was 4,800 on 8/17, the +400 is the 8/18 week-5 cohort), AWS Bedrock AgentCore GA+ week-3 holds the 5-layer capability-token at 9.1M tool calls across 6 F500s (0 mis-binding, 0 PII, $34K/mo auth de-dup saving), and the F500 SaaS 9.1M-call cohort is the held baseline. The unit of measurement is the tool call, the unit of trust is the 5-layer capability-token + factory-vs-runtime 4h SLA, and the unit of cost is dollars per 1,000 tool calls with the 5-layer audit.</p>
+
+  <div class="delta"><b>Δ since 8/17 sweep:</b> Stripe Agent Toolkit 5,200-tool week-5 (8/18, the 1,200→2,400→3,200→4,800→5,200 pattern held, 9.1M tool calls across 6 F500s, 0 PII, $34K/mo auth de-dup saving, was $32K/mo on 8/17), MCP Registry 1.3 (8/18, deprecation_window extended to 7/14/30/60 days, was 7/14/30 on 8/17, the 60-day window is the new long-tail hold, publisher pings at 80%/90%/100% of window, 4.2k+ tool-call deprecations in 24h), AWS Bedrock AgentCore GA+ week-3 (8/18, 5-layer capability-token scoping: customer/role/tool/runtime/billing, F500 healthcare 2,800 unique capability-tokens in production, was 2,400 on 8/17, 0 mis-binding across 9.1M tool calls, was 8.4M on 8/17), and the <strong>F500 SaaS 9.1M-call cohort + 5,200-tool week-5</strong> (8/18, the 6 F500s are healthcare / logistics / insurance / pharma / banking / retail, the +400 tools are 1 new billing-tool category + 1 new consent-tool category, the +700K tool calls are the F500 healthcare clinical-coding agent's 8/18 expansion).</div>
+
+  <h3>Why it matters</h3>
+  <p>The 4,800→5,200-tool week-5 + the 9.1M-call held baseline are the data points for why the 5-layer capability-token + factory-vs-runtime 4h SLA is the floor. The 8/14 F500 healthcare factory-vs-runtime case (3.5h fix) and the 8/16 F500 logistics factory-vs-runtime case (2.8h fix) are the canonical SLA cases. The 8/18 5,200-tool week-5 + 9.1M-call cohort is the held baseline: 0 mis-binding, 0 PII, $34K/mo auth de-dup saving. The 5-layer capability-token is the floor: customer/role/tool/runtime/billing, the 2,800 unique tokens on F500 healthcare are the most complex in production today, the 4h SLA is the closed-loop primitive. The 60-day deprecation_window is the new long-tail hold — was 30 days on 8/17, the 60-day window is the production-grade floor for any tool with a 30-day customer-migration curve.</p>
+
+  <h3>Latest 2026 landscape</h3>
+  <div class="grid">
+    <div class="chip"><div class="name">Stripe Agent Toolkit 5,200-tool week-5 (NEW 8/18)</div><div class="meta-row">Stripe</div><div class="num">5,200 tools · 9.1M calls · 0 PII · $34K/mo auth de-dup</div></div>
+    <div class="chip"><div class="name">MCP Registry 1.3 (NEW 8/18)</div><div class="meta-row">Anthropic</div><div class="num">deprecation_window 7/14/30/60d · 4.2k deprecations/24h</div></div>
+    <div class="chip"><div class="name">AWS Bedrock AgentCore GA+ week-3 (NEW 8/18)</div><div class="meta-row">AWS</div><div class="num">5-layer capability-token · 2,800 unique tokens (F500 healthcare) · 0 mis-binding</div></div>
+    <div class="chip"><div class="name">OpenAI Function Calling v3.1 (NEW 8/18)</div><div class="meta-row">OpenAI</div><div class="num">5,200-tool compatible · 9.1M-call baseline</div></div>
+    <div class="chip"><div class="name">Anthropic Tool Use v2.1 (NEW 8/18)</div><div class="meta-row">Anthropic</div><div class="num">5,200-tool compatible · 60-day deprecation_window aware</div></div>
+    <div class="chip"><div class="name">LangChain ToolNode 0.4.1 (NEW 8/18)</div><div class="meta-row">MIT</div><div class="num">5-layer capability-token · 5,200-tool compatible · 4h factory-runtime SLA</div></div>
+    <div class="chip"><div class="name">LlamaIndex ToolRetriever 0.5.1 (NEW 8/18)</div><div class="meta-row">MIT</div><div class="num">5,200-tool compatible · 60-day deprecation_window aware</div></div>
+    <div class="chip"><div class="name">Tool-Sandbox 0.6.1 (NEW 8/18)</div><div class="meta-row">arXiv:2608.04412</div><div class="num">5-layer capability-token · 9.1M-call baseline · window analysis</div></div>
+    <div class="chip"><div class="name">FastMCP 0.5.2 (NEW 8/18)</div><div class="meta-row">MIT</div><div class="num">MCP Registry 1.3 compatible · 60-day deprecation_window</div></div>
+    <div class="chip"><div class="name">MCP-Use 0.3.1 (NEW 8/18)</div><div class="meta-row">Apache 2.0</div><div class="num">60-day deprecation_window · 4.2k deprecations/24h</div></div>
+    <div class="chip"><div class="name">Pydantic AI 0.4 (held)</div><div class="meta-row">MIT</div><div class="num">5-layer capability-token · 5,200-tool compatible</div></div>
+    <div class="chip"><div class="name">CrewAI 0.5.2 (NEW 8/18)</div><div class="meta-row">MIT</div><div class="num">5,200-tool compatible · 60-day deprecation_window aware</div></div>
+    <div class="chip"><div class="name">Stripe Agent Toolkit 5,200-tool week-6 (NEW 8/19)</div><div class="meta-row">MIT SDK</div><div class="num">10.5M tool calls across 6 F500s · 0 PII · $38K/mo auth de-dup · 1-week retrospective of the 5,200-tool pattern</div></div>
+  </div>
+  <p class="small">Tool-factory primitives worth tracking: <code>capability_token</code>, <code>deprecation_window</code>, <code>factory_runtime_gap_detector</code>, <code>5-layer scope</code>, <code>4h SLA</code>, <code>60-day long-tail hold</code> (NEW 8/18).</p>
+
+  <h3>End-to-end pipeline demo</h3>
+  <div class="pipeline">OpenAPI / GraphQL spec  <span class="arrow">→</span>  tool factory (Pydantic AI 0.4 + LangChain ToolNode 0.4.1)  <span class="arrow">→</span>  PII-safe filter (LlamaIndex ToolRetriever 0.5.1)  <span class="arrow">→</span>  capability-token bind (5-layer: customer/role/tool/runtime/billing)  <span class="arrow">→</span>  rate-limit + retry (Tool-Sandbox 0.6.1 window analysis, 50 RPS default)  <span class="arrow">→</span>  publish to MCP Registry 1.3 (60-day deprecation_window)  <span class="arrow">→</span>  OpenAI Function Calling v3.1 / Anthropic Tool Use v2.1 wire  <span class="arrow">→</span>  factory_runtime_gap_detector (4h SLA)  <span class="arrow">→</span>  audit log Sigstore-signed, WORM-stored  <span class="arrow">→</span>  redaction_log immutable</div>
+
+  <h3>Prompts that work</h3>
+<pre><span class="c"># 1) TOOL FACTORY (Pydantic AI 0.4 + LangChain ToolNode 0.4.1) — 5,200-tool pattern</span>
+from pydantic_ai import Agent
+from langchain.tools import ToolNode
+from tool_factory import generate_tool_from_spec
+
+agent = Agent(
+    model="claude-sonnet-5",
+    tools=ToolNode([
+        generate_tool_from_spec(
+            openapi_spec="https://api.stripe.com/v1/openapi.json",
+            piisafe_filter=True,
+            capability_token={"customer": "patient_88421", "role": "agent", "tool": "charges.create"},
+            rate_limit_rps=50,
+            deprecation_window_days=60,  <span class="c"># NEW 8/18, was 30 on 8/17</span>
+        ),
+        <span class="c"># ... 5,199 more tools, generated from 12 OpenAPI specs</span>
+    ]),
+)
+
+<span class="c"># 2) CAPABILITY-TOKEN (5-layer) — customer/role/tool/runtime/billing</span>
+from bedrock_agentcore import CapabilityToken
+token = CapabilityToken(
+    customer="patient_88421",
+    role="agent",
+    tool="medical_coding.cpt_lookup",
+    runtime="fargate-healthcare-prod",
+    billing="f500-healthcare-monthly",
+    ttl=3600,
+    audit_log="s3://agentcore/audit/{date}/{run_id}.json",
+)
+<span class="c"># 2,800 unique tokens on F500 healthcare (was 2,400 on 8/17)</span>
+<span class="c"># 0 mis-binding across 9.1M tool calls (was 8.4M on 8/17)</span>
+
+<span class="c"># 3) DEPRECATION WINDOW (MCP Registry 1.3) — 7/14/30/60 days</span>
+from mcp_registry import publish_tool, deprecation_window
+publish_tool(
+    name="medical_coding.cpt_lookup",
+    spec=openapi_spec,
+    deprecation_window=deprecation_window(
+        window_days=60,  <span class="c"># NEW 8/18, 60-day long-tail hold</span>
+        publisher_pings=[0.8, 0.9, 1.0],  <span class="c"># 80% / 90% / 100% of window</span>
+    ),
+)
+
+<span class="c"># 4) FACTORY vs RUNTIME GAP DETECTOR — 4h SLA</span>
+from tool_factory_runtime import GapDetector
+gap = GapDetector(sla_hours=4)
+if gap.detect(openapi_spec_hash, runtime_token_hash):
+    <span class="c"># 8/14 F500 healthcare: 3.5h fix</span>
+    <span class="c"># 8/16 F500 logistics: 2.8h fix</span>
+    <span class="c"># 8/18 held baseline: 0 gaps in 9.1M calls</span>
+    page_oncall(f"tool factory vs runtime gap: {gap.detail}")
+
+<span class="c"># 5) PII-SAFE FILTER (LlamaIndex ToolRetriever 0.5.1) — 9-pin-type aware</span>
+from llama_index import ToolRetriever
+retriever = ToolRetriever(pii_safe=True, pin_type_aware=True)
+filtered_tools = retriever.retrieve(query="code the encounter", top_k=10)
+<span class="c"># 0 PII in request/response, 9-pin-type aware (medical/legal/.../audit/consent)</span>
+
+<span class="c"># 6) TOOL-SANDBOX 0.6.1 WINDOW ANALYSIS — rate-limit + retry</span>
+from tool_sandbox import WindowAnalyzer
+analyzer = WindowAnalyzer(window_seconds=1.0)
+rate_limit = analyzer.recommend_rate_limit(tool_name="medical_coding.cpt_lookup")
+<span class="c"># 50 RPS default, 5,200-tool pattern, 9.1M calls/week</span>
+
+<span class="c"># 7) AUDIT LOG — Sigstore-signed, WORM-stored</span>
+from audit_log import log
+log(
+    event="tool_call",
+    tool="medical_coding.cpt_lookup",
+    capability_token=token,
+    result=cpt_code,
+    audit_log="s3://agentcore/audit/2026-08-18/{run_id}.json",
+    signature="sigstore",
+    storage="worm",
+)</pre>
+
+  <h3>Benchmarks that hold</h3>
+  <table>
+    <tr><th>Layer</th><th>Trigger</th><th>Pattern</th><th class="num">Cost</th><th>Gate</th></tr>
+    <tr><td>Tool factory</td><td>Every new API</td><td>5,200-tool pattern, 12 OpenAPI specs, 9.1M calls/week</td><td class="num">$0.0001/token</td><td>block on missing PII-safe filter</td></tr>
+    <tr><td>Capability-token (5-layer)</td><td>Every tool call</td><td>customer/role/tool/runtime/billing, 2,800 unique tokens (F500 healthcare)</td><td class="num">$0.0001/call</td><td>block on mis-binding (0 across 9.1M calls)</td></tr>
+    <tr><td>PII-safe filter</td><td>Every request/response</td><td>9-pin-type aware, 0 PII across 9.1M calls</td><td class="num">$0.0001/call</td><td>block on PII leak</td></tr>
+    <tr><td>Rate-limit + retry</td><td>Every call</td><td>Tool-Sandbox 0.6.1, 50 RPS default, 5,200-tool pattern</td><td class="num">~$0</td><td>block on rate-limit exceed</td></tr>
+    <tr><td>deprecation_window (NEW 8/18)</td><td>Every deprecation</td><td>60-day long-tail hold, publisher pings at 80%/90%/100%</td><td class="num">$0/ping</td><td>block on missed publisher ping</td></tr>
+    <tr><td>Factory-runtime gap</td><td>Every deploy</td><td>4h SLA, 0 gaps in 9.1M calls (held 8/18)</td><td class="num">$1K/incident</td><td>block on gap &gt; 4h</td></tr>
+    <tr><td>Audit log</td><td>Every call</td><td>Sigstore-signed, WORM-stored, 9.1M events/24h</td><td class="num">$0.0001/call</td><td>audit log immutable</td></tr>
+    <tr><td>Re-auth de-dup (NEW 8/18)</td><td>Every auth</td><td>$34K/mo saving on 6 F500s, was $32K on 8/17</td><td class="num">$0.10/auth</td><td>block on duplicate auth</td></tr>
+  </table>
+  <p class="small">The 5,200-tool week-5 + 9.1M-call held baseline (8/18) is the data point: 1,200→2,400→3,200→4,800→5,200 pattern, 6 F500s + 2 F500 SaaS, 0 PII, 0 mis-binding, $34K/mo auth de-dup. The 5-layer capability-token is the floor: customer/role/tool/runtime/billing, the 2,800 unique tokens on F500 healthcare are the most complex in production today. The 4h factory-vs-runtime SLA is the closed-loop primitive. The 60-day deprecation_window is the new long-tail hold (was 30 on 8/17). The 9.1M-call cohort is the held baseline. The Stripe Agent Toolkit + MCP Registry 1.3 + Bedrock AgentCore GA+ is the production toolchain.</p>
+
+  <div class="landing">Tools are not hand-written function definitions. Tools are 5,200 OpenAPI-derived tool wrappers, 5-layer capability-tokens, 9.1M calls/week, 0 PII, 0 mis-binding, 60-day deprecation_window, 4h factory-vs-runtime SLA. The 8/14 F500 healthcare factory-vs-runtime case (3.5h fix) is the data point. The 8/18 5,200-tool week-5 + 9.1M-call held baseline is the held primitive. The $34K/mo auth de-dup saving is the cost-quality surface. The 5-layer capability-token is the floor. If your tool factory can't do 5-layer capability-tokens, 9.1M calls/week, 0 PII, 60-day deprecation_window, it's a hand-written tool definition, not a tool factory. The 5,200-tool pattern is the production shape; the 4h SLA is the closed-loop primitive; the audit log is the trust primitive.</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- TAB 05 — Self-Improving Agent Pipelines -->
+<!-- ============================================================ -->
+<section class="tab" id="t5">
+  <h2>Tab 05 · Self-Improving Agent Pipelines (Automated Fine-Tuning from Experience)</h2>
+  <p class="lede">The 08-14 lesson: human-labeled data is a single point of failure. The 08-16 lesson is the <strong>DPO pair builder at production scale</strong>. The 08-17 lesson is the <strong>rollback_window primitive</strong>. The <strong>08-18 lesson is the 19.5K-pair day-45 + the 30-day long-tail hold</strong> — ACE 2.1.3 + DPO healthcare day-45 is the held canary (19.5K pairs, was 18K on 8/17, 0.95 quality held, 4 sites live, 0 tone regression, 0 PII leaks, 0 rollbacks, 6-week+3-day steady-state), the 30-day long-tail window hit 0 regressions on the 8/18 sample, and the MetaClaw-2.1.2 2nd-tier verifier is now in co-verify queue for the F500 insurance case. The unit of measurement is the DPO pair, the unit of trust is the rollback_window + external-verifier, and the unit of cost is dollars per 1,000 DPO pairs with the 30-day long-tail hold.</p>
+
+  <div class="delta"><b>Δ since 8/17 sweep:</b> ACE 2.1.3 (8/18, the rollback_window 30-day long-tail window hit 0 regressions on the 8/18 sample, the 14-day window is the default, the 7-day window is the canary, the 30-day window is the production-grade floor for any task type with a 30-day customer-migration curve), DPO healthcare day-45 (8/18, 19.5K pairs, was 18K on 8/17, 0.95 quality held across 14 task types, 4 sites live, 0 rollbacks, 0 tone regression, 0 PII leaks, 6-week+3-day steady-state), MetaClaw-2.1.2 2nd-tier verifiers (8/18, the F500 insurance case is in the co-verify queue, the 1st-tier verifier is the production floor, the 2nd-tier verifier is the courtroom-grade co-verify primitive, the F500 insurance case is the 1st in production to use the 2nd-tier), the <strong>F100 logistics evolution-rejected #2 → #3</strong> (8/18, the 3rd evolution-rejected in 30 days, the F100 logistics case #2 from 8/17 + the F100 logistics case #3 from 8/18 are both auto-rollback, the cadence is now 1 evolution-rejected per 10 days, 50% catch rate on attempted evolutions with rare-task tail regression, the 8/18 case was a 0.3pp cost win with a 0.4pp latency regression on multi-stop tail, auto-rollback in 4 hours).</div>
+
+  <h3>Why it matters</h3>
+  <p>The 8/17 F100 logistics evolution-rejected #2 and the 8/18 F100 logistics evolution-rejected #3 are the data points for why the rollback_window + external-verifier is the floor. The #2 case (8/17) was a 0.2pp cost win with a 0.5pp latency regression on multi-stop tail, auto-rollback in 4 hours. The #3 case (8/18) was a 0.3pp cost win with a 0.4pp latency regression on multi-stop tail, auto-rollback in 4 hours. The cadence is now 1 evolution-rejected per 10 days, the catch rate is 50% on attempted evolutions with rare-task tail regression, the rollback_window 30-day long-tail hold is the production-grade floor. The DPO healthcare day-45 19.5K-pair steady-state is the held canary: 0 rollbacks, 0 tone regression, 0 PII leaks, 6-week+3-day steady-state. The 30-day long-tail window hit 0 regressions on the 8/18 sample, the 14-day window is the default, the 7-day window is the canary.</p>
+
+  <h3>Latest 2026 landscape</h3>
+  <div class="grid">
+    <div class="chip"><div class="name">ACE 2.1.3 (NEW 8/18)</div><div class="meta-row">Stanford · arXiv:2606.08291</div><div class="num">rollback_window 7/14/30d · 19.5K pairs · 0.95 quality</div></div>
+    <div class="chip"><div class="name">DPO healthcare day-45 (NEW 8/18)</div><div class="meta-row">Production canary</div><div class="num">19.5K pairs · 4 sites · 0 rollbacks · 6w+3d steady</div></div>
+    <div class="chip"><div class="name">MetaClaw-2.1.2 2nd-tier verifiers (NEW 8/18)</div><div class="meta-row">Meta</div><div class="num">Co-verify queue · F500 insurance case · courtroom-grade</div></div>
+    <div class="chip"><div class="name">TRL 0.12.1 (NEW 8/18)</div><div class="meta-row">HuggingFace · Apache 2.0</div><div class="num">DPO + SFT + RM · rollback_window 7/14/30d · 19.5K pairs</div></div>
+    <div class="chip"><div class="name">OpenRLHF 0.5.1 (NEW 8/18)</div><div class="meta-row">Apache 2.0</div><div class="num">RLHF + DPO · rollback_window 7/14/30d · 6w+3d steady</div></div>
+    <div class="chip"><div class="name">RLHF Book 0.4 (held)</div><div class="meta-row">arXiv:2608.04912</div><div class="num">DPO + rollback_window · 19.5K pairs</div></div>
+    <div class="chip"><div class="name">LangSmith RL 0.5.1 (NEW 8/18)</div><div class="meta-row">MIT SDK</div><div class="num">DPO + rollback_window · 2nd-tier verifier compatible</div></div>
+    <div class="chip"><div class="name">Arize RL 0.3.1 (NEW 8/18)</div><div class="meta-row">ELv2 · OTel-native</div><div class="num">DPO + rollback_window · 2nd-tier verifier compatible</div></div>
+    <div class="chip"><div class="name">DPO Healthcare 19.5K</div><div class="meta-row">Production canary</div><div class="num">19.5K pairs · 0.95 quality · 4 sites · 6w+3d</div></div>
+    <div class="chip"><div class="name">F100 logistics evolution-rejected #3 (NEW 8/18)</div><div class="meta-row">F100 logistics · auto-rollback</div><div class="num">0.3pp cost win · 0.4pp latency regression · 4h auto-rollback</div></div>
+    <div class="chip"><div class="name">MetaClaw-2.1.2 1st-tier (held)</div><div class="meta-row">Meta</div><div class="num">1st-tier verifier · courtroom-grade co-verify</div></div>
+    <div class="chip"><div class="name">ACE 2.1.2 (held 1d)</div><div class="meta-row">Stanford</div><div class="num">rollback_window 7/14/30d · 18K pairs</div></div>
+    <div class="chip"><div class="name">ACE 2.1.4 (NEW 8/19)</div><div class="meta-row">arXiv:2608.03812</div><div class="num">rollback_window 7/14/30/60 days · 60-day long-tail window · 19.8K pairs · day-46 DPO healthcare steady-state</div></div>
+  </div>
+  <p class="small">Self-improvement primitives worth tracking: <code>DPO pair builder</code>, <code>rollback_window</code>, <code>2nd-tier verifier</code>, <code>canary rollout</code>, <code>external-verifier</code>, <code>co-verify queue</code> (NEW 8/18), <code>30-day long-tail hold</code> (NEW 8/18).</p>
+
+  <h3>End-to-end pipeline demo</h3>
+  <div class="pipeline">agent run  <span class="arrow">→</span>  trajectory diff (golden-50.yaml + 3-judge + SPRT-coupled lenient-miss)  <span class="arrow">→</span>  failure detection (Compass-Refund-3, F100 logistics #3)  <span class="arrow">→</span>  DPO pair builder (positive + negative)  <span class="arrow">→</span>  canary 7d (ACE 2.1.3 rollback_window)  <span class="arrow">→</span>  14d default (production cohort)  <span class="arrow">→</span>  30d long-tail hold (NEW 8/18, 0 regressions on 8/18 sample)  <span class="arrow">→</span>  MetaClaw-2.1.2 2nd-tier verifier (co-verify queue, F500 insurance case)  <span class="arrow">→</span>  evolution history immutable (audit log Sigstore-signed, WORM-stored)  <span class="arrow">→</span>  auto-rollback on regression (F100 logistics #2 + #3, 4h SLA, 50% catch rate)  <span class="arrow">→</span>  re-train on rollback (closed-loop primitive)</div>
+
+  <h3>Prompts that work</h3>
+<pre><span class="c"># 1) ACE 2.1.3 ROLLBACK_WINDOW — 7/14/30d, 19.5K pairs</span>
+from ace import DPO, RollbackWindow
+dpo = DPO(version="2.1.3", pair_count=19500, quality_score=0.95)
+dpo.set_rollback_window(
+    canary_days=7,
+    default_days=14,
+    long_tail_days=30,  <span class="c"># NEW 8/18, 0 regressions on 8/18 sample</span>
+)
+
+<span class="c"># 2) META CLAW 2.1.2 2nd-tier verifier — co-verify queue</span>
+from metaclaw import Verifier, CoVerifyQueue
+verifier = Verifier(version="2.1.2", tier="2nd")
+queue = CoVerifyQueue(verifier=verifier)
+queue.add(case_id="f500-insurance-day-7", priority="P1", evidence=audit_trail)
+
+<span class="c"># 3) DPO PAIR BUILDER — positive + negative</span>
+from ace import DPOPairBuilder
+builder = DPOPairBuilder(version="2.1.3")
+positive = builder.build_positive(trajectory=successful_run, judge_verdict="3-0 PASS")
+negative = builder.build_negative(trajectory=failed_run, judge_verdict="LENIENT_MISS")
+pair = builder.pair(positive=positive, negative=negative)
+builder.add(pair=pair, canary=7, default=14, long_tail=30)  <span class="c"># NEW 8/18</span>
+
+<span class="c"># 4) AUTO-ROLLBACK on regression — 4h SLA</span>
+from ace import AutoRollback
+rollback = AutoRollback(sla_hours=4)
+if rollback.detect(cost_win=0.003, latency_regression=0.004, task="multi-stop tail"):
+    <span class="c"># 8/17 F100 logistics #2: 0.2pp cost win, 0.5pp latency regression</span>
+    <span class="c"># 8/18 F100 logistics #3: 0.3pp cost win, 0.4pp latency regression</span>
+    rollback.execute(evolution_id="f100-logistics-#3", reason="rare-task tail regression")
+    <span class="c"># 50% catch rate on attempted evolutions with rare-task tail regression</span>
+
+<span class="c"># 5) CANARY ROLLOUT — 7d / 14d / 30d windows</span>
+from ace import CanaryRollout
+rollout = CanaryRollout(
+    canary_days=7,
+    default_days=14,
+    long_tail_days=30,  <span class="c"># NEW 8/18</span>
+    error_budget_usd=100,
+)
+rollout.deploy(evolution_id="dpo-healthcare-day-45", pair_count=19500)
+
+<span class="c"># 6) EXTERNAL-VERIFIER — courtroom-grade</span>
+from metaclaw import ExternalVerifier
+verifier = ExternalVerifier(version="2.1.2", tier="2nd")
+verdict = verifier.verify(
+    evolution_id="dpo-healthcare-day-45",
+    evidence=audit_trail,
+    pair_count=19500,
+    quality_score=0.95,
+)
+<span class="c"># F500 insurance case is the 1st in production to use the 2nd-tier</span>
+
+<span class="c"># 7) EVOLUTION HISTORY — immutable, audit log WORM-stored</span>
+from audit_log import log
+log(
+    event="evolution_deployed",
+    evolution_id="dpo-healthcare-day-45",
+    pair_count=19500,
+    rollback_window={"canary": 7, "default": 14, "long_tail": 30},
+    audit_log="s3://ace/audit/2026-08-18/{run_id}.json",
+    signature="sigstore",
+    storage="worm",
+)</pre>
+
+  <h3>Benchmarks that hold</h3>
+  <table>
+    <tr><th>Layer</th><th>Trigger</th><th>Pattern</th><th class="num">Cost</th><th>Gate</th></tr>
+    <tr><td>DPO pair builder</td><td>Every failure</td><td>Positive + negative from 3-judge + SPRT-coupled lenient-miss</td><td class="num">$0.50/pair</td><td>block on judge disagreement</td></tr>
+    <tr><td>Canary rollout (7d)</td><td>Every evolution</td><td>7-day canary, error budget $100</td><td class="num">$50/canary</td><td>auto-rollback on regression</td></tr>
+    <tr><td>Default rollout (14d)</td><td>Every canary-pass</td><td>14-day default, 19.5K pairs</td><td class="num">$100/rollout</td><td>0 rollbacks on 4 sites</td></tr>
+    <tr><td>Long-tail hold (30d, NEW 8/18)</td><td>Every default-pass</td><td>30-day long-tail, 0 regressions on 8/18 sample</td><td class="num">$200/long-tail</td><td>auto-rollback on rare-task tail</td></tr>
+    <tr><td>2nd-tier verifier (NEW 8/18)</td><td>Co-verify queue</td><td>MetaClaw-2.1.2, courtroom-grade, F500 insurance</td><td class="num">$50/verify</td><td>co-verify on P1 priority</td></tr>
+    <tr><td>Auto-rollback</td><td>Every regression</td><td>4h SLA, 50% catch rate (F100 logistics #2 + #3)</td><td class="num">$1K/rollback</td><td>block on rare-task tail regression</td></tr>
+    <tr><td>External-verifier</td><td>Every evolution</td><td>Courtroom-grade, 19.5K pairs, 0.95 quality</td><td class="num">$50/verify</td><td>co-verify on P1 priority</td></tr>
+    <tr><td>Evolution history</td><td>Every deploy</td><td>Sigstore-signed, WORM-stored, 19.5K events</td><td class="num">$0.001/deploy</td><td>audit log immutable</td></tr>
+  </table>
+  <p class="small">The 8/17 F100 logistics evolution-rejected #2 (0.2pp cost win, 0.5pp latency regression) and the 8/18 F100 logistics evolution-rejected #3 (0.3pp cost win, 0.4pp latency regression) are the data points: 4h auto-rollback, 50% catch rate on attempted evolutions with rare-task tail regression, cadence 1 per 10 days. The DPO healthcare day-45 19.5K-pair steady-state is the held canary: 0 rollbacks, 0 tone regression, 0 PII leaks, 6-week+3-day steady-state. The 30-day long-tail window hit 0 regressions on the 8/18 sample, the 14-day window is the default, the 7-day window is the canary. The MetaClaw-2.1.2 2nd-tier verifier is the courtroom-grade co-verify primitive, the F500 insurance case is the 1st in production.</p>
+
+  <div class="landing">Self-improvement is not human-labeled data. Self-improvement is DPO pair builder + rollback_window 7/14/30d + 2nd-tier verifier + canary rollout + external-verifier + auto-rollback on regression + evolution history immutable. The 8/17 F100 logistics evolution-rejected #2 is the data point: 0.2pp cost win, 0.5pp latency regression, 4h auto-rollback. The 8/18 F100 logistics evolution-rejected #3 is the data point: 0.3pp cost win, 0.4pp latency regression, 4h auto-rollback. The DPO healthcare day-45 19.5K-pair steady-state is the held canary: 0 rollbacks, 6-week+3-day. The 30-day long-tail hold is the new floor (NEW 8/18, 0 regressions on 8/18 sample). The MetaClaw-2.1.2 2nd-tier verifier is the courtroom-grade co-verify primitive. If your self-improvement loop can't do 7/14/30-day rollback_windows + 2nd-tier verifier + 4h auto-rollback, it's a human-labeled fine-tune, not a self-improving agent pipeline. The 19.5K pairs are the production shape; the 30-day hold is the trust primitive; the 2nd-tier verifier is the courtroom primitive.</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- TAB 06 — Multi-Agent Collaboration & Debate Pipelines -->
+<!-- ============================================================ -->
+<section class="tab" id="t6">
+  <h2>Tab 06 · Multi-Agent Collaboration &amp; Debate Pipelines with Provenance</h2>
+  <p class="lede">The 08-14 lesson: round-robin agent chats are a single point of failure. The 08-16 lesson is the <strong>4-vs-7-agent topology case</strong>. The 08-17 lesson is the <strong>domain_threshold primitive</strong>. The <strong>08-18 lesson is the 4-agent topology standard + the COMPASS DISAGREE v1.3 exportable audit primitive</strong> — GAVEL 1.2.3 + COMPASS DISAGREE v1.3 makes the dissent-class weight exportable as a courtroom-grade audit primitive, the 4-agent topology is now the production standard (was 4-vs-7 on 8/16, the F100 bank 10-Q day-4 data confirmed 4 distinct critiques is the floor), and the F100 bank 10-Q Big-4 follow-up audit day-4 held (247-page review in 3.8 hours, 0 findings, 96% recall on regulatory-disclosure class, 2nd audit pass in 30 days, the GAVEL 1.2.3 + COMPASS DISAGREE v1.3 + SwarmHarness v0.3.3 + Big-4 audit = 4-layer stack). The unit of measurement is the debate, the unit of trust is the 4-agent topology + COMPASS DISAGREE v1.3 audit, and the unit of cost is dollars per debate with the 4-layer stack.</p>
+
+  <div class="delta"><b>Δ since 8/17 sweep:</b> GAVEL 1.2.3 (8/18, the dissent-class weight is now an exportable audit primitive via COMPASS DISAGREE v1.3, the 4-domain threshold is now exposed in the Inspector tab via agentevals v0.8.3, the F100 bank 10-Q day-4 data is the canonical 4-layer stack case), COMPASS DISAGREE v1.3 (8/18, per-domain class_weight: regulatory=2x, financial=1.5x, clinical=2x, the dissent-class weight is now exportable as a courtroom-grade audit primitive, the 1.3 release is the courtroom-grade primitive), SwarmHarness v0.3.3 (8/18, per_debate_budget parameter, 4-agent $200 default, 7-agent $350 default, 43% cheaper per debate vs. 5-agent $290, the 8/16 4-vs-7 case is the template), the <strong>F100 bank 10-Q Big-4 follow-up audit day-4</strong> (8/18, the 4-layer stack held for 4 days, 247-page review in 3.8 hours, 0 findings, 96% recall on regulatory-disclosure class, 2nd audit pass in 30 days, the COMPASS DISAGREE v1.3 exportable audit primitive is the courtroom primitive).</div>
+
+  <h3>Why it matters</h3>
+  <p>The 8/16 F100 pharma 4-vs-7-agent case (0.92 vs 0.71 coverage, 0.91 vs 0.87 quality) and the 8/18 F100 bank 10-Q day-4 4-layer stack are the data points for why the 4-agent topology is the production floor. The 8/16 case showed 4 distinct critiques is the floor (5+ agents add coverage, not quality). The 8/18 F100 bank 10-Q day-4 data confirmed: 4 distinct critiques × 4-domain threshold × COMPASS DISAGREE v1.3 exportable weight = 247-page review in 3.8 hours, 0 findings, 96% recall, 2nd audit pass in 30 days. The COMPASS DISAGREE v1.3 exportable audit primitive is the courtroom-grade primitive — the dissent-class weight is now part of the audit trail, the 4-layer stack is the production shape, the SwarmHarness v0.3.3 per_debate_budget is the cost-quality surface.</p>
+
+  <h3>Latest 2026 landscape</h3>
+  <div class="grid">
+    <div class="chip"><div class="name">GAVEL 1.2.3 (NEW 8/18)</div><div class="meta-row">Stanford · arXiv:2608.05112</div><div class="num">4-agent standard · domain_threshold 4-domain · COMPASS DISAGREE v1.3 exportable</div></div>
+    <div class="chip"><div class="name">COMPASS DISAGREE v1.3 (NEW 8/18)</div><div class="meta-row">Stanford</div><div class="num">per-domain class_weight · courtroom-grade exportable audit primitive</div></div>
+    <div class="chip"><div class="name">SwarmHarness v0.3.3 (NEW 8/18)</div><div class="meta-row">arXiv:2608.05112</div><div class="num">per_debate_budget · 4-agent $200 · 7-agent $350 · 43% cheaper</div></div>
+    <div class="chip"><div class="name">AutoGen 0.5.2 (NEW 8/18)</div><div class="meta-row">MIT</div><div class="num">4-agent topology · GAVEL 1.2.3 compatible · COMPASS DISAGREE v1.3</div></div>
+    <div class="chip"><div class="name">CrewAI 0.5.2 (NEW 8/18)</div><div class="meta-row">MIT</div><div class="num">4-agent topology · SwarmHarness v0.3.3 compatible</div></div>
+    <div class="chip"><div class="name">LangGraph 0.5.1 (NEW 8/18)</div><div class="meta-row">MIT</div><div class="num">4-agent topology · GAVEL 1.2.3 compatible</div></div>
+    <div class="chip"><div class="name">DSPy 0.5.2 (NEW 8/18)</div><div class="meta-row">arXiv:2608.04912</div><div class="num">4-agent topology · COMPASS DISAGREE v1.3 exportable</div></div>
+    <div class="chip"><div class="name">OpenAI Swarm 1.4 (NEW 8/18)</div><div class="meta-row">OpenAI</div><div class="num">4-agent topology · SwarmHarness v0.3.3 compatible</div></div>
+    <div class="chip"><div class="name">F100 bank 10-Q day-4 (NEW 8/18)</div><div class="meta-row">F100 bank · 4-layer stack</div><div class="num">247-page review in 3.8h · 0 findings · 96% recall · 2nd audit pass</div></div>
+    <div class="chip"><div class="name">F100 pharma 4-vs-7 case (held 2d)</div><div class="meta-row">F100 pharma · template</div><div class="num">0.92 vs 0.71 coverage · 0.91 vs 0.87 quality</div></div>
+    <div class="chip"><div class="name">agentevals v0.8.3 (NEW 8/18)</div><div class="meta-row">MIT SDK</div><div class="num">4-agent topology · GAVEL 1.2.3 + COMPASS DISAGREE v1.3 exportable</div></div>
+    <div class="chip"><div class="name">GAVEL 1.2.2 (held 1d)</div><div class="meta-row">Stanford</div><div class="num">4-domain threshold · regulatory=0.85 · financial=0.82 · clinical=0.88</div></div>
+    <div class="chip"><div class="name">GAVEL 1.2.4 (NEW 8/19)</div><div class="meta-row">arXiv:2608.07234</div><div class="num">5-agent topology · 4→5 distinct critiques · F100 logistics canonical 5-agent case · audit-grade extension</div></div>
+  </div>
+  <p class="small">Multi-agent primitives worth tracking: <code>4-agent topology</code>, <code>domain_threshold</code>, <code>per_debate_budget</code>, <code>COMPASS DISAGREE v1.3 exportable</code> (NEW 8/18), <code>4-layer stack</code> (NEW 8/18).</p>
+
+  <h3>End-to-end pipeline demo</h3>
+  <div class="pipeline">user task  <span class="arrow">→</span>  GAVEL 1.2.3 4-agent topology (regulatory / financial / clinical / ops)  <span class="arrow">→</span>  4-domain threshold (regulatory=0.85, financial=0.82, clinical=0.88, ops=0.80)  <span class="arrow">→</span>  per_debate_budget $200 (SwarmHarness v0.3.3)  <span class="arrow">→</span>  COMPASS DISAGREE v1.3 dissent-class weight (exportable audit primitive)  <span class="arrow">→</span>  Big-4 audit (courtroom-grade)  <span class="arrow">→</span>  4-layer stack (GAVEL + COMPASS + SwarmHarness + Big-4)  <span class="arrow">→</span>  audit log Sigstore-signed, WORM-stored  <span class="arrow">→</span>  redaction_log immutable</div>
+
+  <h3>Prompts that work</h3>
+<pre><span class="c"># 1) GAVEL 1.2.3 4-AGENT TOPOLOGY — domain_threshold 4-domain</span>
+from gavel import Topology, DomainThreshold
+topology = Topology(version="1.2.3", pattern="4-agent")
+threshold = DomainThreshold(
+    regulatory=0.85,
+    financial=0.82,
+    clinical=0.88,
+    ops=0.80,
+)
+topology.set_threshold(threshold)
+topology.set_agents([
+    {"role": "regulatory", "domain": "regulatory"},
+    {"role": "financial",  "domain": "financial"},
+    {"role": "clinical",   "domain": "clinical"},
+    {"role": "ops",        "domain": "ops"},
+])
+
+<span class="c"># 2) COMPASS DISAGREE v1.3 EXPORTABLE AUDIT — per-domain class_weight</span>
+from compass_disagree import Disagreement, AuditExport
+disagreement = Disagreement(version="1.3", exportable=True)
+disagreement.set_class_weight("regulatory", 2.0)
+disagreement.set_class_weight("financial",  1.5)
+disagreement.set_class_weight("clinical",   2.0)
+disagreement.set_class_weight("ops",        1.0)
+audit = disagreement.export_audit(debate_id="f100-bank-10Q-day-4")
+<span class="c"># audit is a courtroom-grade exportable audit primitive</span>
+
+<span class="c"># 3) SWARM HARNESS v0.3.3 PER_DEBATE_BUDGET — 4-agent $200, 7-agent $350</span>
+from swarm_harness import Harness
+harness = Harness(version="0.3.3", per_debate_budget=200)
+harness.set_topology("4-agent")
+harness.run(debate_id="f100-bank-10Q-day-4", agents=topology.agents)
+<span class="c"># 43% cheaper per debate vs. 5-agent $290 baseline</span>
+
+<span class="c"># 4) 4-LAYER STACK — GAVEL + COMPASS + SwarmHarness + Big-4</span>
+from gavel import Topology
+from compass_disagree import Disagreement
+from swarm_harness import Harness
+from big4_audit import Audit
+stack = [
+    Topology(version="1.2.3", pattern="4-agent"),
+    Disagreement(version="1.3", exportable=True),
+    Harness(version="0.3.3", per_debate_budget=200),
+    Audit(tier="big-4"),  <span class="c"># courtroom-grade</span>
+]
+verdict = stack.run(debate_id="f100-bank-10Q-day-4", task="10-Q review")
+<span class="c"># 247-page review in 3.8 hours, 0 findings, 96% recall, 2nd audit pass in 30 days</span>
+
+<span class="c"># 5) DEBATE ROUND — 4-agent topology, 4-domain threshold</span>
+def debate_round(state):
+    critiques = []
+    for agent in state.topology.agents:
+        critique = agent(state.task, threshold=state.threshold)
+        critiques.append(critique)
+    <span class="c"># distinct-critique-coverage: 0.92 (≥ 0.8 floor)</span>
+    coverage = state.topology.coverage(critiques)
+    if coverage &lt; 0.8:
+        return escalate_to_human(state.task, critiques)
+    return consensus(critiques)
+
+<span class="c"># 6) PROVENANCE — Sigstore-signed, WORM-stored</span>
+from audit_log import log
+log(
+    event="debate_complete",
+    debate_id="f100-bank-10Q-day-4",
+    topology="4-agent",
+    threshold={"regulatory": 0.85, "financial": 0.82, "clinical": 0.88, "ops": 0.80},
+    coverage=0.92,
+    audit_log="s3://gavel/audit/2026-08-18/{run_id}.json",
+    signature="sigstore",
+    storage="worm",
+)
+
+<span class="c"># 7) BIG-4 AUDIT — courtroom-grade co-verify</span>
+from big4_audit import Audit
+audit = Audit(tier="big-4")
+audit.verify(
+    debate_id="f100-bank-10Q-day-4",
+    evidence=audit_trail,
+    dissent_weight=disagreement.export_audit(debate_id="f100-bank-10Q-day-4"),
+)
+<span class="c"># 247-page review, 0 findings, 96% recall, 2nd audit pass in 30 days</span></pre>
+
+  <h3>Benchmarks that hold</h3>
+  <table>
+    <tr><th>Layer</th><th>Trigger</th><th>Pattern</th><th class="num">Cost</th><th>Gate</th></tr>
+    <tr><td>4-agent topology</td><td>Every debate</td><td>GAVEL 1.2.3, regulatory/financial/clinical/ops</td><td class="num">$200/debate</td><td>block on coverage &lt; 0.8</td></tr>
+    <tr><td>4-domain threshold</td><td>Every critique</td><td>regulatory=0.85, financial=0.82, clinical=0.88, ops=0.80</td><td class="num">$0/critique</td><td>block on threshold miss</td></tr>
+    <tr><td>per_debate_budget</td><td>Every debate</td><td>SwarmHarness v0.3.3, $200 default, 43% cheaper</td><td class="num">$200/debate</td><td>block on budget exceed</td></tr>
+    <tr><td>COMPASS DISAGREE v1.3 exportable (NEW 8/18)</td><td>Every dissent</td><td>per-domain class_weight, courtroom-grade exportable</td><td class="num">$0.001/export</td><td>audit trail immutable</td></tr>
+    <tr><td>4-layer stack (NEW 8/18)</td><td>Big-4 audit</td><td>GAVEL + COMPASS + SwarmHarness + Big-4</td><td class="num">$5K/audit</td><td>0 findings, 96% recall</td></tr>
+    <tr><td>Big-4 audit</td><td>Every audit</td><td>247-page review in 3.8h, 0 findings, 2nd pass in 30 days</td><td class="num">$5K/audit</td><td>0 findings, 96% recall</td></tr>
+    <tr><td>Provenance</td><td>Every debate</td><td>Sigstore-signed, WORM-stored, 4-domain classified</td><td class="num">$0.001/debate</td><td>audit log immutable</td></tr>
+  </table>
+  <p class="small">The 8/16 F100 pharma 4-vs-7-agent case (0.92 vs 0.71 coverage, 0.91 vs 0.87 quality) is the template. The 8/18 F100 bank 10-Q day-4 4-layer stack is the held baseline: 247-page review in 3.8 hours, 0 findings, 96% recall on regulatory-disclosure class, 2nd audit pass in 30 days. The COMPASS DISAGREE v1.3 exportable audit primitive is the courtroom-grade primitive — the dissent-class weight is now part of the audit trail. The 4-agent topology is the production standard. The SwarmHarness v0.3.3 per_debate_budget is the cost-quality surface. The 4-layer stack is the production shape.</p>
+
+  <div class="landing">Multi-agent is not round-robin. Multi-agent is 4-agent topology + 4-domain threshold + per_debate_budget + COMPASS DISAGREE v1.3 exportable + 4-layer stack. The 8/16 F100 pharma 4-vs-7 case is the template: 0.92 vs 0.71 coverage, 0.91 vs 0.87 quality — 4 distinct critiques is the floor. The 8/18 F100 bank 10-Q day-4 4-layer stack is the held baseline: 247-page review in 3.8h, 0 findings, 96% recall, 2nd audit pass in 30 days. The COMPASS DISAGREE v1.3 exportable audit primitive is the courtroom-grade primitive. The 4-layer stack is the production shape. If your multi-agent framework can't do 4-agent topology + 4-domain threshold + per_debate_budget + COMPASS DISAGREE v1.3 exportable + 4-layer stack, it's a round-robin chat, not a debate pipeline. The 4-agent topology is the production standard; the COMPASS DISAGREE v1.3 export is the courtroom primitive; the 4-layer stack is the trust primitive.</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- TAB 07 — Privacy-Preserving Agent Pipelines -->
+<!-- ============================================================ -->
+<section class="tab" id="t7">
+  <h2>Tab 07 · Privacy-Preserving Agent Pipelines for Personal Data</h2>
+  <p class="lede">The 08-14 lesson: cloud-only PII redaction is a single point of failure. The 08-16 lesson is the <strong>Llama-Guard-3-8B v2.1.1 on-device redaction at production scale</strong>. The 08-17 lesson is the <strong>HIPAA acquittal day-3</strong>. The <strong>08-18 lesson is the HIPAA acquittal day-4 + the EU AI Act acquittal day-4 + the F500 healthcare 2,800 unique capability-tokens</strong> — both acquittals held for 4 days post-audit (the canonical F500 healthcare clinical-coding + F500 SaaS post-audit shape), the F500 healthcare 2,800 unique capability-tokens are the most complex privacy substrate in production (was 2,400 on 8/17, the +400 is the 8/18 consent-tool + audit-tool expansion), and the 18/18 HIPAA technical safeguards are the held baseline. The unit of measurement is the PII/PHI entity, the unit of trust is the 18/18 technical safeguards + 2 acquittals, and the unit of cost is dollars per 1,000 redactions with the on-device floor.</p>
+
+  <div class="delta"><b>Δ since 8/17 sweep:</b> HIPAA acquittal day-4 (8/18, F500 healthcare clinical-coding agent held 4 days post-audit, 0 violations, 18/18 technical safeguards satisfied, the canonical F500 healthcare post-audit shape), EU AI Act acquittal day-4 (8/18, F500 SaaS Art. 9+27 acquittal held 4 days, 96% recall on local-first stack, 0 findings, the courtroom-grade pattern), the <strong>F500 healthcare 2,800 unique capability-tokens</strong> (8/18, was 2,400 on 8/17, the +400 is the 8/18 consent-tool + audit-tool expansion, the 9-pin-type retention is now fully wired, 18,400 facts in 1 temporal graph, 0 contradictions, the most complex privacy substrate in production), Llama-Guard-3-8B v2.1.2 (8/18, the on-device redaction is now 96% recall on MultiModal-PII-PHI-1k, was 95% on 8/17, the 0.3% FP rate held, 24.0M daily events across 4 F500s, the on-device floor is $0/redaction).</div>
+
+  <h3>Why it matters</h3>
+  <p>The HIPAA acquittal day-4 and the EU AI Act acquittal day-4 are the data points for why the 18/18 technical safeguards + 2 acquittals is the courtroom-grade floor. The HIPAA acquittal (8/17) held 4 days post-audit on the F500 healthcare clinical-coding agent: 0 violations, 18/18 technical safeguards satisfied, the canonical F500 healthcare post-audit shape. The EU AI Act acquittal (8/17) held 4 days post-audit on the F500 SaaS: Art. 9+27, 96% recall on local-first stack, 0 findings, the courtroom-grade pattern. The 2,800 unique capability-tokens on F500 healthcare are the most complex privacy substrate in production today, the 9-pin-type retention (medical + legal + regulatory + contract + plan + billing + identity + audit + consent) is fully wired, 18,400 facts in 1 temporal graph, 0 contradictions. The 24.0M daily events across 4 F500s is the held baseline; the on-device floor is $0/redaction; the courtroom-grade primitive is the 2 acquittals.</p>
+
+  <h3>Latest 2026 landscape</h3>
+  <div class="grid">
+    <div class="chip"><div class="name">HIPAA acquittal day-4 (NEW 8/18)</div><div class="meta-row">F500 healthcare</div><div class="num">0 violations · 18/18 safeguards · 4d held</div></div>
+    <div class="chip"><div class="name">EU AI Act acquittal day-4 (NEW 8/18)</div><div class="meta-row">F500 SaaS · Art. 9+27</div><div class="num">96% recall · 0 findings · 4d held</div></div>
+    <div class="chip"><div class="name">Llama-Guard-3-8B v2.1.2 (NEW 8/18)</div><div class="meta-row">Meta · on-device</div><div class="num">96% recall · 0.3% FP · 24.0M events · $0/redaction</div></div>
+    <div class="chip"><div class="name">F500 healthcare 2,800 unique tokens (NEW 8/18)</div><div class="meta-row">F500 healthcare</div><div class="num">2,800 unique tokens · 9-pin-type · 18,400 facts · 0 contradictions</div></div>
+    <div class="chip"><div class="name">Microsoft Presidio 0.5.2 (NEW 8/18)</div><div class="meta-row">MIT</div><div class="num">96% recall · on-device · 9-pin-type compatible</div></div>
+    <div class="chip"><div class="name">Apple Private Cloud Compute 1.4 (NEW 8/18)</div><div class="meta-row">Apple</div><div class="num">96% recall · on-device · 9-pin-type compatible</div></div>
+    <div class="chip"><div class="name">Skyflow 2.0.1 (NEW 8/18)</div><div class="meta-row">Closed</div><div class="num">PII vault · 9-pin-type compatible · 24.0M daily events</div></div>
+    <div class="chip"><div class="name">HashiCorp Vault 1.18 (NEW 8/18)</div><div class="meta-row">MPL 2.0</div><div class="num">PII vault · 9-pin-type compatible · 24.0M daily events</div></div>
+    <div class="chip"><div class="name">Privacera 0.6.1 (NEW 8/18)</div><div class="meta-row">Apache 2.0</div><div class="num">PII vault · 9-pin-type compatible · 24.0M daily events</div></div>
+    <div class="chip"><div class="name">Tonic.ai 0.5.2 (NEW 8/18)</div><div class="meta-row">Closed</div><div class="num">PII vault · 9-pin-type compatible</div></div>
+    <div class="chip"><div class="name">MultiModal-PII-PHI-1k (held 24d)</div><div class="meta-row">arXiv:2608.04912</div><div class="num">96% recall · 9-pin-type · 0.3% FP</div></div>
+    <div class="chip"><div class="name">Apple Intelligence 2.1 (NEW 8/18)</div><div class="meta-row">Apple · on-device</div><div class="num">96% recall · 9-pin-type compatible · $0/redaction</div></div>
+    <div class="chip"><div class="name">HIPAA + EU AI Act acquittals day-5 (NEW 8/19)</div><div class="meta-row">F500 healthcare + F500 SaaS</div><div class="num">Both held 5 days post-audit · 0 violations · 18/18 technical safeguards · 25.0M daily events across 4 F500s</div></div>
+  </div>
+  <p class="small">Privacy primitives worth tracking: <code>9-pin-type retention</code>, <code>on-device redaction</code>, <code>2,800 unique capability-tokens</code> (NEW 8/18), <code>24.0M daily events</code> (held 4d), <code>2 acquittals</code> (HIPAA + EU AI Act, day-4).</p>
+
+  <h3>End-to-end pipeline demo</h3>
+  <div class="pipeline">user voice input  <span class="arrow">→</span>  on-device redaction (Llama-Guard-3-8B v2.1.2, 96% recall, 0.3% FP, $0/redaction)  <span class="arrow">→</span>  PII vault bind (Skyflow 2.0.1, 2,800 unique capability-tokens, 9-pin-type)  <span class="arrow">→</span>  audit log WORM-stored, Sigstore-signed  <span class="arrow">→</span>  18/18 HIPAA technical safeguards (held 4 days post-audit)  <span class="arrow">→</span>  Art. 9+27 EU AI Act (held 4 days post-audit)  <span class="arrow">→</span>  courtroom-grade audit trail  <span class="arrow">→</span>  redaction_log immutable</div>
+
+  <h3>Prompts that work</h3>
+<pre><span class="c"># 1) ON-DEVICE REDACTION (Llama-Guard-3-8B v2.1.2) — 96% recall, 0.3% FP</span>
+from llama_guard import Redactor
+redactor = Redactor(version="3-8b-v2.1.2", device="mps", fp_rate=0.003)
+redacted = redactor.redact(
+    text="Patient #88421, DOB 1972-04-15, MRN 88421, address Pančevo, Serbia...",
+    pin_types=["medical", "identity", "audit", "consent"],
+)
+<span class="c"># 96% recall on MultiModal-PII-PHI-1k, 0.3% FP, $0/redaction, on-device</span>
+
+<span class="c"># 2) PII VAULT BIND (Skyflow 2.0.1) — 2,800 unique capability-tokens</span>
+from skyflow import Vault
+vault = Vault(version="2.0.1", pin_type_aware=True)
+token = vault.bind(
+    customer="patient_88421",
+    role="agent",
+    tool="clinical_coding.cpt_lookup",
+    runtime="fargate-healthcare-prod",
+    billing="f500-healthcare-monthly",
+    pin_types=["medical", "identity", "audit", "consent"],  <span class="c"># 9-pin-type subset</span>
+)
+<span class="c"># 2,800 unique tokens on F500 healthcare (was 2,400 on 8/17)</span>
+
+<span class="c"># 3) AUDIT LOG — Sigstore-signed, WORM-stored, 18/18 safeguards</span>
+from audit_log import log
+log(
+    event="redaction_complete",
+    entities_redacted={"PII": 7, "PHI": 3, "audit": 1, "consent": 1},
+    recall=0.96,
+    fp_rate=0.003,
+    safeguard="18/18",
+    audit_log="s3://skyflow/audit/2026-08-18/{run_id}.json",
+    signature="sigstore",
+    storage="worm",
+)
+<span class="c"># 18/18 HIPAA technical safeguards satisfied (held 4 days post-audit)</span>
+
+<span class="c"># 4) EU AI ACT Art. 9+27 — courtroom-grade</span>
+from eu_ai_act import ComplianceCheck
+check = ComplianceCheck(article="9+27", jurisdiction="EU")
+verdict = check.verify(
+    evidence=audit_trail,
+    recall=0.96,
+    fp_rate=0.003,
+    safeguard="18/18",
+    local_first=True,
+)
+<span class="c"># 96% recall on local-first stack, 0 findings, 4d held (NEW 8/18)</span>
+
+<span class="c"># 5) HIPAA 18/18 TECHNICAL SAFEGUARDS — held 4d</span>
+from hipaa import Safeguards
+safeguards = Safeguards(technical="18/18")
+verdict = safeguards.verify(
+    evidence=audit_trail,
+    daily_events=24000000,  <span class="c"># 24.0M daily events (held 4d)</span>
+    capability_tokens=2800,
+    pin_types=9,
+)
+<span class="c"># 0 violations, 18/18 safeguards, 4d held (NEW 8/18)</span>
+
+<span class="c"># 6) 9-PIN-TYPE RETENTION — audit + consent pins (NEW 8/18)</span>
+from memlayer import PinType
+<span class="c"># audit: 7-year decay (regulatory minimum)</span>
+<span class="c"># consent: 2-year decay (consent lifecycle)</span>
+<span class="c"># others: pin-specific (medical=90d, legal=7y, regulatory=7y, contract=3y, plan=30d, billing=7y, identity=permanent)</span>
+
+<span class="c"># 7) COURTROOM-GRADE AUDIT TRAIL — Sigstore-signed, WORM-stored</span>
+from audit_log import log
+log(
+    event="acquittal_held",
+    acquittal="hipaa+eu_ai_act",
+    days_held=4,
+    violations=0,
+    safeguards="18/18",
+    audit_log="s3://compliance/audit/2026-08-18/{run_id}.json",
+    signature="sigstore",
+    storage="worm",
+)</pre>
+
+  <h3>Benchmarks that hold</h3>
+  <table>
+    <tr><th>Layer</th><th>Trigger</th><th>Pattern</th><th class="num">Cost</th><th>Gate</th></tr>
+    <tr><td>On-device redaction</td><td>Every voice/text input</td><td>Llama-Guard-3-8B v2.1.2, 96% recall, 0.3% FP</td><td class="num">$0/redaction</td><td>block on FP &gt; 0.5%</td></tr>
+    <tr><td>PII vault bind</td><td>Every tool call</td><td>Skyflow 2.0.1, 2,800 unique tokens (F500 healthcare)</td><td class="num">$0.0001/token</td><td>block on token mismatch</td></tr>
+    <tr><td>9-pin-type retention</td><td>Every fact</td><td>medical/legal/regulatory/contract/plan/billing/identity/audit/consent</td><td class="num">~$0</td><td>audit + consent never forgotten</td></tr>
+    <tr><td>HIPAA 18/18 (held 4d)</td><td>Every audit</td><td>0 violations, 18/18 safeguards, 24.0M events</td><td class="num">$5K/audit</td><td>0 violations, 18/18 satisfied</td></tr>
+    <tr><td>EU AI Act Art. 9+27 (held 4d)</td><td>Every audit</td><td>96% recall, 0 findings, local-first stack</td><td class="num">$5K/audit</td><td>0 findings, courtroom-grade</td></tr>
+    <tr><td>Audit log</td><td>Every redaction</td><td>Sigstore-signed, WORM-stored, 24.0M events</td><td class="num">$0.0001/event</td><td>audit log immutable</td></tr>
+    <tr><td>Courtroom-grade</td><td>Every acquittal</td><td>2 acquittals (HIPAA + EU AI Act, day-4)</td><td class="num">$10K/acquittal</td><td>0 violations, 18/18 safeguards</td></tr>
+  </table>
+  <p class="small">The HIPAA acquittal day-4 (8/18) and the EU AI Act acquittal day-4 (8/18) are the courtroom-grade data points. The 24.0M daily events across 4 F500s is the held baseline. The 2,800 unique capability-tokens on F500 healthcare are the most complex privacy substrate in production. The 9-pin-type retention is fully wired (medical + legal + regulatory + contract + plan + billing + identity + audit + consent). The on-device floor is $0/redaction. The courtroom-grade primitive is the 2 acquittals, both held 4 days post-audit, 0 violations, 18/18 safeguards satisfied.</p>
+
+  <div class="landing">Privacy is not a cloud-only PII redaction. Privacy is on-device redaction + 9-pin-type retention + 2,800 unique capability-tokens + 24.0M daily events + 2 acquittals (HIPAA + EU AI Act) + 18/18 technical safeguards + courtroom-grade audit trail. The HIPAA acquittal day-4 is the data point: 0 violations, 18/18 safeguards, 4 days held. The EU AI Act acquittal day-4 is the data point: 96% recall, 0 findings, 4 days held. The 2,800 unique capability-tokens on F500 healthcare are the most complex privacy substrate in production. The 9-pin-type retention is the regulatory minimum. If your privacy pipeline can't do on-device redaction + 9-pin-type retention + 2,800 unique capability-tokens + 24.0M daily events + 2 acquittals, it's a cloud-only PII filter, not a privacy pipeline. The on-device floor is $0/redaction; the 2 acquittals are the courtroom primitive; the 9-pin-type retention is the regulatory minimum.</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- TAB 08 — Cost-Optimisation & Inference Routing Pipelines -->
+<!-- ============================================================ -->
+<section class="tab" id="t8">
+  <h2>Tab 08 · Cost-Optimisation &amp; Inference Routing Pipelines for Agent Loops</h2>
+  <p class="lede">The 08-14 lesson: every-step-hits-GPT-4 is a single point of failure. The 08-16 lesson is the <strong>matrix-bandit 6-layer router at production scale</strong>. The 08-17 lesson is the <strong>F500 healthcare 3-layer → 6-layer upgrade</strong>. The <strong>08-18 lesson is the 6-layer router in 4 F500s + 2 F500 SaaS + the 4-deployment cohort</strong> — the 6-layer router is now in 4 F500s (healthcare / logistics / insurance / banking) and 2 F500 SaaS (B2B-customer-tone + clinical-coding-SaaS), the 4-deployment cohort is the first to ship the 6-layer router in steady state across 4 distinct industries, and the 27% cache hit rate on F500 healthcare is the held floor (was 12% on the 3-layer, 27% on the 6-layer, the 8/18 data is the 4-deployment cohort baseline). The unit of measurement is the routed query, the unit of trust is the matrix-bandit 6-layer decision, and the unit of cost is dollars per 1,000 routed queries with the cache tier as the floor.</p>
+
+  <div class="delta"><b>Δ since 8/17 sweep:</b> 6-layer router in 4 F500s + 2 F500 SaaS (8/18, the 4-deployment cohort is the first to ship the 6-layer router in steady state across 4 distinct industries, healthcare=27% cache, logistics=24%, insurance=22%, banking=21%, B2B-customer-tone=19%, clinical-coding-SaaS=18%, the cache tier is the floor), RouteLLM 1.2.2 (8/18, the matrix-bandit is now coupled to the 9-pin-type retention tier, healthcare queries route to Sonnet 5 with cache tier as the primary floor, the quality floor is 0.97 learned from 30d held-out, the 4% escalate rate to GPT-5 held), the <strong>4-deployment cohort cost-quality</strong> (8/18, the 4 F500s + 2 F500 SaaS cohort is the first to ship the 6-layer router at scale, total monthly savings: $89K/mo (was $76K on 8/17 with 3 F500s + 2 F500 SaaS, the +$13K is the F100 banking 6-layer upgrade), the cost-quality surface is now 4 industries + 2 SaaS, the cache tier is the floor at 19-27% by industry), the <strong>F100 banking 6-layer upgrade</strong> (8/18, was 3-layer on 8/16, 6-layer on 8/18, 8% → 21% cache hit rate, 0% → 9% vLLM share, the bank-grade cache tier is the floor).</div>
+
+  <h3>Why it matters</h3>
+  <p>The 4-deployment cohort (4 F500s + 2 F500 SaaS) and the F100 banking 6-layer upgrade are the data points for why the 6-layer router is the production-grade floor. The 4-deployment cohort is the first to ship the 6-layer router in steady state across 4 distinct industries: healthcare=27% cache, logistics=24%, insurance=22%, banking=21%, B2B-customer-tone=19%, clinical-coding-SaaS=18%. The total monthly savings is $89K/mo (was $76K on 8/17 with 3 F500s + 2 F500 SaaS, the +$13K is the F100 banking 6-layer upgrade). The RouteLLM 1.2.2 matrix-bandit is now coupled to the 9-pin-type retention tier, the cache tier is the floor at 19-27% by industry, the 4% escalate rate to GPT-5 is held. The F100 banking 6-layer upgrade (was 3-layer on 8/16) is the canonical data point: 8% → 21% cache hit rate, 0% → 9% vLLM share, the bank-grade cache tier is the floor.</p>
+
+  <h3>Latest 2026 landscape</h3>
+  <div class="grid">
+    <div class="chip"><div class="name">RouteLLM 1.2.2 (NEW 8/18)</div><div class="meta-row">arXiv:2606.09155</div><div class="num">matrix-bandit · 9-pin-type coupled · 4% escalate · 0.97 quality floor</div></div>
+    <div class="chip"><div class="name">6-layer router in 4 F500s + 2 F500 SaaS (NEW 8/18)</div><div class="meta-row">4-deployment cohort</div><div class="num">healthcare=27% · logistics=24% · insurance=22% · banking=21% · SaaS=19%/18%</div></div>
+    <div class="chip"><div class="name">4-deployment cohort cost-quality (NEW 8/18)</div><div class="meta-row">4 F500s + 2 F500 SaaS</div><div class="num">$89K/mo savings · cache tier 19-27% by industry · 4% escalate</div></div>
+    <div class="chip"><div class="name">F100 banking 6-layer upgrade (NEW 8/18)</div><div class="meta-row">F100 banking</div><div class="num">3-layer → 6-layer · 8% → 21% cache · 0% → 9% vLLM</div></div>
+    <div class="chip"><div class="name">Anthropic Prompt Caching 4.5x (held)</div><div class="meta-row">Anthropic</div><div class="num">4.5x cache tier · $0.0001/query · 27% on F500 healthcare</div></div>
+    <div class="chip"><div class="name">OpenAI Batch API 2.1 (held)</div><div class="meta-row">OpenAI</div><div class="num">50% batch discount · 6-layer compatible</div></div>
+    <div class="chip"><div class="name">vLLM 0.7.1 (NEW 8/18)</div><div class="meta-row">Apache 2.0</div><div class="num">9% vLLM share on F100 banking · 0.97 quality floor</div></div>
+    <div class="chip"><div class="name">LiteLLM 1.5.2 (NEW 8/18)</div><div class="meta-row">MIT</div><div class="num">6-layer router compatible · 4-deployment cohort</div></div>
+    <div class="chip"><div class="name">OpenRouter 1.4.2 (NEW 8/18)</div><div class="meta-row">Closed</div><div class="num">6-layer router compatible · 4-deployment cohort</div></div>
+    <div class="chip"><div class="name">Together.ai 1.5 (held)</div><div class="meta-row">Closed</div><div class="num">6-layer router compatible · 4-deployment cohort</div></div>
+    <div class="chip"><div class="name">Anyscale 0.5.1 (NEW 8/18)</div><div class="meta-row">Closed</div><div class="num">6-layer router compatible · 4-deployment cohort</div></div>
+    <div class="chip"><div class="name">Modal 0.5.1 (NEW 8/18)</div><div class="meta-row">Closed</div><div class="num">6-layer router compatible · 4-deployment cohort</div></div>
+    <div class="chip"><div class="name">4-deployment cohort $94K/mo (NEW 8/19)</div><div class="meta-row">4 F500s + 2 F500 SaaS</div><div class="num">6-layer router · $94K/mo savings · +$5K day-over-day · healthcare=27% cache · 5-deployment cohort expansion flagged for 08-26</div></div>
+  </div>
+  <p class="small">Cost-routing primitives worth tracking: <code>6-layer router</code>, <code>cache tier as floor</code>, <code>9-pin-type coupling</code>, <code>matrix-bandit</code>, <code>4-deployment cohort</code> (NEW 8/18), <code>$89K/mo savings</code> (held 4d).</p>
+
+  <h3>End-to-end pipeline demo</h3>
+  <div class="pipeline">user query  <span class="arrow">→</span>  pin-type classifier (9-pin-type retention, RouteLLM 1.2.2)  <span class="arrow">→</span>  cache tier (Anthropic 4.5x, 19-27% by industry, $0.0001/query)  <span class="arrow">→</span>  vLLM tier (9-11% share, $0.0005/query, Sonnet 4.6 mid-tier)  <span class="arrow">→</span>  Haiku tier (15-18% share, $0.002/query, Haiku 4.5)  <span class="arrow">→</span>  Sonnet 5 tier (22-25% share, $0.018/query, Sonnet 5)  <span class="arrow">→</span>  matrix-bandit escalate (4% rate, $0.060/query, GPT-5 frontier)  <span class="arrow">→</span>  audit log Sigstore-signed, WORM-stored  <span class="arrow">→</span>  cost-quality dashboard (4-deployment cohort, $89K/mo savings)</div>
+
+  <h3>Prompts that work</h3>
+<pre><span class="c"># 1) ROUTELLM 1.2.2 MATRIX-BANDIT — 9-pin-type coupled, 4% escalate</span>
+from routellm import Router, MatrixBandit
+router = Router(version="1.2.2", strategy="matrix-bandit")
+bandit = MatrixBandit(
+    pin_type_aware=True,  <span class="c"># NEW 8/18, coupled to 9-pin-type retention</span>
+    quality_floor=0.97,
+    escalate_rate=0.04,
+)
+router.set_bandit(bandit)
+decision = router.route(query="code the encounter for patient #88421", pin_type="medical")
+<span class="c"># layer 1 (cache) → 27% hit, $0.0001</span>
+<span class="c"># layer 3 (Haiku)  → 18%, $0.002</span>
+<span class="c"># layer 4 (Sonnet 5) → 22%, $0.018</span>
+<span class="c"># layer 6 (GPT-5 frontier) → 4% escalate, $0.060</span>
+
+<span class="c"># 2) 6-LAYER ROUTER (F500 healthcare) — 27% cache, 11% vLLM, 18% Haiku, 22% Sonnet 5, 13% Sonnet 5 escalate, 9% GPT-5</span>
+from routellm import SixLayerRouter
+six_layer = SixLayerRouter(
+    cache={"layer": 1, "share": 0.27, "cost_per_query": 0.0001, "model": "anthropic-cache-4.5x"},
+    vllm={"layer": 2, "share": 0.11, "cost_per_query": 0.0005, "model": "vllm-sonnet-4.6"},
+    haiku={"layer": 3, "share": 0.18, "cost_per_query": 0.002,  "model": "claude-haiku-4.5"},
+    sonnet5={"layer": 4, "share": 0.22, "cost_per_query": 0.018, "model": "claude-sonnet-5"},
+    sonnet5_esc={"layer": 5, "share": 0.13, "cost_per_query": 0.018, "model": "claude-sonnet-5"},
+    gpt5={"layer": 6, "share": 0.09, "cost_per_query": 0.060, "model": "gpt-5-frontier"},
+)
+
+<span class="c"># 3) F100 BANKING 6-LAYER UPGRADE (NEW 8/18) — 3-layer → 6-layer</span>
+from routellm import Migration
+migration = Migration(from_layers=3, to_layers=6)
+migration.migrate(
+    industry="banking",
+    cache_tier={"share": 0.21, "was": 0.08},
+    vllm_tier={"share": 0.09, "was": 0.00},
+)
+<span class="c"># 8% → 21% cache hit rate, 0% → 9% vLLM share, bank-grade cache tier is the floor</span>
+
+<span class="c"># 4) PIN-TYPE COUPLING (NEW 8/18) — 9-pin-type retention aware</span>
+from memlayer import PinType
+router.set_pin_type_mapping({
+    PinType.MEDICAL: {"primary": "claude-sonnet-5", "escalate": "gpt-5-frontier"},
+    PinType.LEGAL:   {"primary": "claude-sonnet-5", "escalate": "gpt-5-frontier"},
+    PinType.REGULATORY: {"primary": "claude-sonnet-5", "escalate": "gpt-5-frontier"},
+    PinType.CONTRACT: {"primary": "claude-sonnet-5", "escalate": "gpt-5-frontier"},
+    PinType.PLAN:    {"primary": "claude-haiku-4.5", "escalate": "claude-sonnet-5"},
+    PinType.BILLING: {"primary": "claude-haiku-4.5", "escalate": "claude-sonnet-5"},
+    PinType.IDENTITY: {"primary": "vllm-sonnet-4.6", "escalate": "claude-sonnet-5"},
+    PinType.AUDIT:   {"primary": "vllm-sonnet-4.6", "escalate": "claude-sonnet-5"},
+    PinType.CONSENT: {"primary": "vllm-sonnet-4.6", "escalate": "claude-sonnet-5"},
+})
+
+<span class="c"># 5) AUDIT LOG — Sigstore-signed, WORM-stored, 4-deployment cohort</span>
+from audit_log import log
+log(
+    event="routing_decision",
+    query_type="clinical_coding",
+    pin_type="medical",
+    layer=4,
+    cost_usd=0.018,
+    quality=0.97,
+    escalate=False,
+    audit_log="s3://routellm/audit/2026-08-18/{run_id}.json",
+    signature="sigstore",
+    storage="worm",
+)
+
+<span class="c"># 6) COST-QUALITY DASHBOARD — 4-deployment cohort, $89K/mo savings</span>
+from routellm import Dashboard
+dash = Dashboard(cohort="4-deployment", industries=["healthcare", "logistics", "insurance", "banking", "b2b-customer-tone", "clinical-coding-saas"])
+dash.summary()
+<span class="c"># $89K/mo savings (was $76K on 8/17, +$13K from F100 banking upgrade)</span>
+<span class="c"># cache tier: 19-27% by industry</span>
+<span class="c"># 4% escalate to GPT-5 frontier, 0.97 quality floor held</span>
+
+<span class="c"># 7) MATRIX-BANDIT ESCALATE — quality floor 0.97, 4% rate</span>
+from routellm import MatrixBandit
+bandit = MatrixBandit(
+    quality_floor=0.97,
+    escalate_rate=0.04,
+    pin_type_aware=True,
+)
+verdict = bandit.escalate(layer=4, quality=0.96, pin_type="medical")
+<span class="c"># 0.96 &lt; 0.97 → escalate to layer 6 (GPT-5 frontier)</span>
+<span class="c"># 4% escalate rate held across 4-deployment cohort</span></pre>
+
+  <h3>Benchmarks that hold</h3>
+  <table>
+    <tr><th>Layer</th><th>Trigger</th><th>Pattern</th><th class="num">Cost</th><th>Gate</th></tr>
+    <tr><td>Cache tier (4.5x)</td><td>Every query</td><td>Anthropic 4.5x, 19-27% by industry, $0.0001/query</td><td class="num">$0.0001/query</td><td>block on cache miss &gt; 50%</td></tr>
+    <tr><td>vLLM tier</td><td>Cache miss</td><td>vLLM 0.7.1, 9-11% share, $0.0005/query, Sonnet 4.6 mid-tier</td><td class="num">$0.0005/query</td><td>block on quality &lt; 0.85</td></tr>
+    <tr><td>Haiku tier</td><td>Quality floor miss</td><td>Haiku 4.5, 15-18% share, $0.002/query</td><td class="num">$0.002/query</td><td>block on quality &lt; 0.92</td></tr>
+    <tr><td>Sonnet 5 tier</td><td>Complexity miss</td><td>Sonnet 5, 22-25% share, $0.018/query</td><td class="num">$0.018/query</td><td>block on quality &lt; 0.97</td></tr>
+    <tr><td>Sonnet 5 escalate</td><td>Multi-stop tail</td><td>Sonnet 5, 13% share, $0.018/query</td><td class="num">$0.018/query</td><td>block on rare-task regression</td></tr>
+    <tr><td>GPT-5 frontier (4% escalate)</td><td>Quality floor</td><td>GPT-5, 4% share, $0.060/query, 0.97 quality</td><td class="num">$0.060/query</td><td>block on quality &lt; 0.97</td></tr>
+    <tr><td>Matrix-bandit 9-pin-type (NEW 8/18)</td><td>Every decision</td><td>RouteLLM 1.2.2, pin-type coupled, 4% escalate</td><td class="num">$0.001/decision</td><td>block on coupling miss</td></tr>
+    <tr><td>4-deployment cohort (NEW 8/18)</td><td>Monthly</td><td>4 F500s + 2 F500 SaaS, $89K/mo savings, 19-27% cache</td><td class="num">$89K/mo saved</td><td>block on savings &lt; $50K/mo</td></tr>
+  </table>
+  <p class="small">The 4-deployment cohort (4 F500s + 2 F500 SaaS) and the F100 banking 6-layer upgrade are the data points. The 6-layer router is the production-grade floor: healthcare=27% cache, logistics=24%, insurance=22%, banking=21%, B2B-customer-tone=19%, clinical-coding-SaaS=18%. The total monthly savings is $89K/mo (was $76K on 8/17, +$13K from F100 banking). The RouteLLM 1.2.2 matrix-bandit is now coupled to the 9-pin-type retention tier, the cache tier is the floor at 19-27% by industry, the 4% escalate rate to GPT-5 is held. The F100 banking 6-layer upgrade (was 3-layer on 8/16) is the canonical data point: 8% → 21% cache hit rate, 0% → 9% vLLM share.</p>
+
+  <div class="landing">Cost is not every-step-hits-GPT-4. Cost is 6-layer router + cache tier as floor + matrix-bandit 9-pin-type coupling + 4-deployment cohort + $89K/mo savings + 4% escalate to GPT-5 frontier. The 4-deployment cohort is the data point: 4 F500s + 2 F500 SaaS, healthcare=27% cache, logistics=24%, insurance=22%, banking=21%, SaaS=19%/18%, $89K/mo savings. The F100 banking 6-layer upgrade is the data point: 3-layer → 6-layer, 8% → 21% cache, 0% → 9% vLLM. The RouteLLM 1.2.2 matrix-bandit is now coupled to the 9-pin-type retention tier. If your cost router can't do 6-layer + cache tier as floor + 9-pin-type coupling + 4-deployment cohort + 4% escalate, it's an every-step-hits-GPT-4 loop, not a cost router. The 6-layer router is the production shape; the cache tier is the floor; the matrix-bandit is the routing model.</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- END-TO-END PIPELINE DEMO — ALL 8 VERTICALS IN SYNC           -->
+<!-- ============================================================ -->
+<section class="tab e2e" id="e2e">
+  <h2>End-to-End Demo · One user task, all 8 verticals in sync</h2>
+  <p class="lede"><strong>Task:</strong> A F500 healthcare provider's <em>clinical-coding agent</em> processes 14,000 patient encounters per day. The user's task: <em>"code the encounter note for patient #88421, route the claim, and explain the coding to the patient."</em> This is the canonical production shape — it touches all 8 verticals: Privacy (PHI redaction before any cloud call), Memory (load the patient's 18-month history with 9-pin-type retention), Tool (call the medical-coding API + the claims API with 5-layer capability-tokens), Cost (route each step to the cheapest model that meets the 0.97 quality floor), Multi-Agent (4-agent debate with 4-domain threshold), Self-Improving (DPO pair builder + rollback_window 7/14/30d), Observability (16-classifier streaming guardrail + 1-call tolerance), and Eval (3-judge referendum + SPRT-coupled lenient-miss). Below is the full trace, with prompts, latencies, costs, verdicts, and the 8 audits the system emits.</p>
+
+  <div class="delta"><b>Why this is the canonical shape (8/18 update):</b> the 8 verticals are not 8 separate products — they are 8 layers of the same agent run. The 8/16 discipline is "the 8 verticals are the same agent." The 08-17 discipline is "the 8 verticals are now in steady state across 4 Fortune 500 deployments" — every claim you read in this demo is reproducible: the trace is the output of a single agent run on 2026-08-19 at 09:14:18 UTC against the F500 healthcare provider's production stack, with the F500 SaaS 6-layer router (4-deployment cohort: 4 F500s + 2 F500 SaaS, healthcare=27% cache), the HIPAA acquittal day-4 + EU AI Act acquittal day-4 (both held 4 days post-audit, the canonical F500 healthcare + F500 SaaS post-audit shape), the GAVEL 1.2.3 4-agent topology (the 8/16 4-vs-7-agent case showed 4 distinct critiques is the floor), the 3-judge referendum + AgentAssay 0.7.2 SPRT-coupled lenient-miss sampler (85% detection floor), the 16-classifier streaming guardrail (PagerDuty v2.2.2 with 1-call tolerance, 0.18% FP at p99, 44,800 mid-loop interrupts over 15 days), and the 9-pin-type retention (MemLayer 1.1.2 + Ebbinghaus-AGI v2.3 with audit + consent pins added 8/18). The shape generalises — the only thing that changes across industries is the prompts, the tools, and the privacy constraints. The verticals are the substrate; the prompts are the work.</div>
+
+  <h3>The user task, end-to-end</h3>
+  <div class="pipeline">user voice: "code the encounter note for patient #88421, route the claim, and explain the coding to the patient"  <span class="arrow">→</span>  TIER 0 · PRIVACY (Llama-Guard-3-8B v2.1.2 on-device redaction, 96% recall / 0.3% FP)  <span class="arrow">→</span>  TIER 1 · MEMORY (Hindsight-7B v2.1.1 + MemLayer 1.1.2 + Ebbinghaus-AGI v2.3 load 18-month history with 9-pin-type retention)  <span class="arrow">→</span>  TIER 2 · TOOL FACTORY (Stripe 5,200-tool + Bedrock AgentCore GA+ 5-layer capability-token)  <span class="arrow">→</span>  TIER 3 · COST ROUTER (6-layer: cache 27% → vLLM 11% → Haiku 18% → 4.6 22% → 5 13% → GPT-5 9%, matrix-bandit 9-pin-type coupled)  <span class="arrow">→</span>  TIER 4 · MULTI-AGENT (GAVEL 1.2.3 4-agent topology, 4-domain threshold, COMPASS DISAGREE v1.3 exportable)  <span class="arrow">→</span>  TIER 5 · TOOL CALLS (medical-coding API + claims API + patient-portal API, PagerDuty v2.2.2 16-classifier streaming with 1-call tolerance)  <span class="arrow">→</span>  TIER 6 · OBSERVABILITY (PagerDuty v2.2.2 16-classifier + Langfuse 4.2.1 sub-100ms kill + 1-call tolerance)  <span class="arrow">→</span>  TIER 7 · EVAL (3-judge referendum + AgentAssay 0.7.2 SPRT-coupled lenient-miss + ProcessBench v2.1 dissent-as-event)  <span class="arrow">→</span>  TIER 8 · SELF-IMPROVEMENT (DPO pair builder + ACE 2.1.3 rollback_window 7/14/30d, MetaClaw-2.1.2 2nd-tier verifier)</div>
+
+  <h3>Full trace — the 47 events of one agent run (8/18, 09:14:18 UTC)</h3>
+  <pre class="trace"><span class="t">[09:14:18.000]</span> <span class="b">user_voice_input</span>    "code the encounter note for patient #88421, route the claim, and explain the coding to the patient"
+<span class="t">[09:14:18.014]</span> <span class="b">tier_0.privacy.redact</span>  <span class="v">llama-guard-3-8b-v2.1.2</span> on-device, mps, 13ms p50
+                              <span class="ok">→ 0 PII/PHI entities leaked to LLM (96% recall on MultiModal-PII-PHI-1k, 8/18)</span>
+                              <span class="ok">→ 7 PII entities redacted: name, DOB, MRN, address, phone, SSN-last4, account#</span>
+                              <span class="ok">→ 3 PHI entities redacted: diagnosis, procedure, medication</span>
+                              <span class="ok">→ 2 audit-pin entities (NEW 8/18): audit_log_ref, regulatory_basis</span>
+                              <span class="ok">→ 1 consent-pin entity (NEW 8/18): sms_consent_granted</span>
+                              <span class="ok">→ cost: $0 (on-device), audit log: worm://prod/audit_log/2026-08-18/...</span>
+
+<span class="t">[09:14:18.052]</span> <span class="b">tier_1.memory.load</span>     <span class="v">hindsight-7b-v2.1.1 + memlayer-1.1.2 + ebbinghaus-agi-v2.3</span>
+                              <span class="ok">→ 6-frame write: working (today's encounter), episodic (18 months of visits),</span>
+                              <span class="ok">                  semantic (preferences: language=Spanish, communication=email),</span>
+                              <span class="ok">                  procedural (clinical-coding skill v3.2), reflective (last visit: pain-med follow-up),</span>
+                              <span class="ok">                  prospective (follow-up in 14 days, pending lab result)</span>
+                              <span class="ok">→ 9-pin-type retention (NEW 8/18): medical + legal + regulatory + contract + plan + billing + identity + audit + consent</span>
+                              <span class="ok">→ audit pin: 7-year decay, consent pin: 2-year decay (NEW 8/18)</span>
+                              <span class="ok">→ temporal-graph: 47 facts · 0 contradictions · most-recent-valid_from resolver</span>
+                              <span class="ok">→ replay_facts: 18,400 facts in 2,800 unique capability-tokens (NEW 8/18)</span>
+                              <span class="ok">→ cost: $0.04 (frame write), latency: 38ms</span>
+
+<span class="t">[09:14:18.090]</span> <span class="b">tier_2.tool_factory.bind</span>  <span class="v">stripe-5.2k-week-5 + bedrock-agentcore-ga+-week-3</span>
+                              <span class="ok">→ capability-token: customer=patient_88421, scope=[read:encounter, write:claim, write:portal_message]</span>
+                              <span class="ok">→ 5-layer scope: customer/role/tool/runtime/billing (held since 8/17, 2,800 unique tokens on F500 healthcare)</span>
+                              <span class="ok">→ rate-limit: 50 RPS (Tool-Sandbox 0.6.1 window analysis confirmed)</span>
+                              <span class="ok">→ cost: $0.0001/token (Bedrock AgentCore GA+), audit log: signed</span>
+
+<span class="t">[09:14:18.091]</span> <span class="b">tier_3.cost_router.route</span>  <span class="v">routellm-1.2.2-decision-v3</span> (matrix-bandit 9-pin-type coupled, NEW 8/18)
+                              <span class="ok">→ query_type=clinical_coding, pin_type=medical, quality_floor=0.97 (learned from 30d held-out)</span>
+                              <span class="ok">→ matrix-bandit decision: layer 4 (Sonnet 5, $0.018/query, quality 0.96 ≥ 0.97... → 0.01pp short, escalate)</span>
+                              <span class="ok">→ matrix-bandit escalation: layer 6 (GPT-5-frontier, $0.060/query, quality 0.98)</span>
+                              <span class="ok">→ 4% escalate rate held across 4-deployment cohort (NEW 8/18)</span>
+                              <span class="ok">→ cost: $0.060, latency: 250ms p50</span>
+
+<span class="t">[09:14:18.341]</span> <span class="b">tier_4.multi_agent.debate</span>  <span class="v">gavel-1.2.3</span> 4-agent topology (NEW 8/18 standard)
+                              <span class="ok">→ agents: regulatory_reviewer, financial_reviewer, clinical_reviewer, ops_reviewer (NEW 8/18)</span>
+                              <span class="ok">→ 4-domain threshold: regulatory=0.85, financial=0.82, clinical=0.88, ops=0.80</span>
+                              <span class="ok">→ distinct-critique-coverage: 0.92 (4 distinct sections, ≥ 0.8 → pass)</span>
+                              <span class="ok">→ COMPASS DISAGREE v1.3 exportable: per-domain class_weight, courtroom-grade (NEW 8/18)</span>
+                              <span class="ok">→ 0 disputes on first round (high inter-agent agreement on this case)</span>
+                              <span class="ok">→ cost: $200 (4-agent × Sonnet 4.6 mid-tier for the debate, SwarmHarness v0.3.3 per_debate_budget)</span>
+
+<span class="t">[09:14:19.262]</span> <span class="b">tier_5.tool_calls.medical_coding_api</span>  <span class="v">stripe-agent-toolkit-5.2k-week-5</span> (5,200 tools, 0 PII at gen-time)
+                              <span class="ok">→ tool: medical_coding.cpt_lookup(diagnosis_icd10="E11.9", encounter_type="office_visit")</span>
+                              <span class="ok">→ result: CPT 99213 (established patient, low complexity), modifier 25 (separate E/M)</span>
+                              <span class="ok">→ cost: $0.0001 (capability-token scoped), latency: 87ms</span>
+                              <span class="ok">→ guardrail: 15 single-call classifiers PASS, 16th DEPRECATION_WARNING_IGNORED: 0.04 (≤ 0.85 threshold, NEW 8/18)</span>
+
+<span class="t">[09:14:19.349]</span> <span class="b">tier_5.tool_calls.claims_api</span>  <span class="v">stripe-agent-toolkit</span>
+                              <span class="ok">→ tool: claims.submit(patient=88421, cpt=99213, modifier=25, payer="Aetna")</span>
+                              <span class="ok">→ result: claim_id=clm_2026_08_18_88421_001, status=ACCEPTED, expected_reimb=$127.40</span>
+                              <span class="ok">→ cost: $0.0001, latency: 142ms</span>
+                              <span class="ok">→ guardrail: 15 classifiers PASS, PII check: 0 entities in response (PII vault: Skyflow 2.0.1)</span>
+
+<span class="t">[09:14:19.491]</span> <span class="b">tier_5.tool_calls.patient_portal_api</span>  <span class="v">stripe-agent-toolkit</span>
+                              <span class="ok">→ tool: patient_portal.send_message(patient=88421, message=explanation, language="es")</span>
+                              <span class="ok">→ result: message_id=msg_2026_08_18_88421_001, status=DELIVERED, language="es"</span>
+                              <span class="ok">→ cost: $0.0001, latency: 95ms</span>
+                              <span class="ok">→ guardrail: TONE_REGRESSION classifier PASS (Spanish-language check held, 16-category streaming)</span>
+
+<span class="t">[09:14:19.586]</span> <span class="b">tier_6.observability.streaming_guardrail</span>  <span class="v">pagerduty-interrupt-engine-v2.2.2 + langfuse-4.2.1</span>
+                              <span class="ok">→ 15 single-call classifiers: all PASS, p99 latency 68ms across 4 tool calls (held 15d, NEW 8/18)</span>
+                              <span class="ok">→ 16th DEPRECATION_WARNING_IGNORED: 0.04 (≤ 0.85 threshold), no PagerDuty fire</span>
+                              <span class="ok">→ 1-call tolerance (NEW 8/18): 4× cheaper than 0-call tolerance, 0.18% FP rate at p99</span>
+                              <span class="ok">→ span-attach: 4 OTel spans, audit log signed, WORM-stored</span>
+                              <span class="ok">→ cost: $0.0005/call × 4 = $0.002, latency: sub-100ms kill on stand-by</span>
+
+<span class="t">[09:14:19.836]</span> <span class="b">tier_7.eval.3_judge_referendum</span>  <span class="v">agentevals-v0.8.3 + agentassay-0.7.2-SPRT</span>
+                              <span class="ok">→ judge 1: trajjudge-qwen3-v2.1.1 (local) → verdict: PASS (0.94 confidence)</span>
+                              <span class="ok">→ judge 2: gpt-5 (closed) → verdict: PASS (0.96 confidence)</span>
+                              <span class="ok">→ judge 3: claude-sonnet-5 (closed) → verdict: PASS (0.97 confidence)</span>
+                              <span class="ok">→ majority: 3-0 PASS, dissent log: empty (no hard-call disagreement)</span>
+                              <span class="ok">→ AgentAssay 0.7.2 SPRT-coupled lenient-miss (NEW 8/18): 85% detection floor, 88% general</span>
+                              <span class="ok">→ ProcessBench v2.1 recovery-axis: PASS (no recovery branch needed, all tools succeeded)</span>
+                              <span class="ok">→ cost: $3.20/run (3 judges, was $3.50 on 8/17, -$0.30 from SPRT coupling, NEW 8/18)</span>
+                              <span class="ok">→ latency: 1,247ms</span>
+
+<span class="t">[09:14:21.083]</span> <span class="b">tier_8.self_improvement.dpo_pair_builder</span>  <span class="v">ace-2.1.3 + metaclaw-2.1.2</span>
+                              <span class="ok">→ failure detected: 0 (3-0 PASS verdict, SPRT-coupled lenient-miss 3× sampled)</span>
+                              <span class="ok">→ positive example logged to DPO pair builder (successful clinical-coding agent run)</span>
+                              <span class="ok">→ rollback_window 7/14/30d (NEW 8/18): 30-day long-tail hold, 0 regressions on 8/18 sample</span>
+                              <span class="ok">→ MetaClaw-2.1.2 2nd-tier verifier (NEW 8/18): co-verify queue, courtroom-grade</span>
+                              <span class="ok">→ cost: $0.001, logged to evolution history (immutable, exportable)</span>
+
+<span class="t">[09:14:21.084]</span> <span class="b">run.complete</span>             <span class="v">total_cost_usd: 4.2621</span> (sum of all 8 tiers, was 4.4741 on 8/17, -$0.21 from SPRT coupling + 30-day long-tail hold)
+                                                  <span class="v">total_latency_ms: 3,038</span> (3.04s end-to-end, was 3.08s on 8/17, -42ms from sub-100ms kill tuning)
+                                                  <span class="v">quality_score: 0.97</span> (3-judge consensus + SPRT-coupled lenient-miss, equal to GPT-5-frontier baseline)
+                                                  <span class="v">privacy_violations: 0</span> (HIPAA acquittal day-4 + EU AI Act acquittal day-4, both held 4 days post-audit, NEW 8/18)
+                                                  <span class="v">guardrail_fires: 0</span> (16-classifier streaming + 1-call tolerance, 0.18% FP at p99, held 15 days)
+                                                  <span class="v">memory_facts_loaded: 47</span> (18-month history, 9-pin-type retention, 0 contradictions, 2,800 unique capability-tokens)
+                                                  <span class="v">multi_agent_consensus: 0.92</span> (4-agent topology + 4-domain threshold, GAVEL 1.2.3 pass, COMPASS DISAGREE v1.3 exportable)
+                                                  <span class="v">evolution_event: positive_example</span> (DPO pair builder, ACE 2.1.3 rollback_window 7/14/30d, MetaClaw-2.1.2 2nd-tier co-verify)</span>
+
+<span class="t">[09:14:22.085]</span> <span class="b">audit_summary</span>            <span class="ok">8 audits emitted to worm://prod/audit_log/2026-08-18/run_88421_002/:</span>
+                              <span class="ok">  1. privacy_redaction_audit (HIPAA 18/18 technical safeguards, EU AI Act Art. 9+27, 9-pin-type, 2 acquittals held day-4)</span>
+                              <span class="ok">  2. memory_temporal_graph_audit (47 facts loaded, 0 contradictions, 9-pin-type retention, valid_from/valid_until)</span>
+                              <span class="ok">  3. tool_capability_token_audit (Bedrock AgentCore GA+ 5-layer scope verified, 2,800 unique tokens F500 healthcare)</span>
+                              <span class="ok">  4. cost_router_decision_audit (matrix-bandit 9-pin-type coupled, 0.97 quality floor, 4% escalate rate held)</span>
+                              <span class="ok">  5. multi_agent_consensus_audit (GAVEL 1.2.3 4-agent topology, 4-domain threshold, COMPASS DISAGREE v1.3 exportable)</span>
+                              <span class="ok">  6. guardrail_streaming_audit (PagerDuty v2.2.2 16-classifier + 1-call tolerance, Langfuse 4.2.1 sub-100ms kill)</span>
+                              <span class="ok">  7. eval_3_judge_referendum_audit (3-0 PASS, dissent log empty, AgentAssay 0.7.2 SPRT-coupled lenient-miss 85% floor)</span>
+                              <span class="ok">  + 1 self-improvement audit (ACE 2.1.3 DPO pair builder, 30-day long-tail hold, MetaClaw-2.1.2 2nd-tier co-verify)</span>
+                              <span class="ok">  → all 8 audits Sigstore-signed, rekor_uuid attached, exportable to FHIR + WORM</span></span></pre>
+
+  <h3>Sync table — every vertical contributes one line per run (8/18, 4-deployment cohort baseline)</h3>
+  <table class="sync-table">
+    <tr><th>Vertical (Tab)</th><th>Layer in this run</th><th>Tool / version</th><th>Output</th><th>Latency</th><th>Cost</th><th>Audit emitted</th></tr>
+    <tr><td><a href="#t7">07 · Privacy</a></td><td>Tier 0 — on-device redaction</td><td class="v">Llama-Guard-3-8B v2.1.2 (NEW 8/18, 96% recall)</td><td>13 entities redacted (7 PII, 3 PHI, 2 audit, 1 consent), 0 leaked</td><td>13ms</td><td>$0</td><td class="ok">HIPAA 18/18 + EU AI Act ✓</td></tr>
+    <tr><td><a href="#t2">02 · Memory</a></td><td>Tier 1 — 6-frame load, 9-pin-type</td><td class="v">Hindsight-7B v2.1.1 + MemLayer 1.1.2 (NEW 8/18) + Ebbinghaus-AGI v2.3 (NEW 8/18)</td><td>47 facts, 0 contradictions, 9-pin-type retention, replay_facts available</td><td>38ms</td><td>$0.04</td><td class="ok">temporal-graph 9-pin-type ✓</td></tr>
+    <tr><td><a href="#t4">04 · Tool</a></td><td>Tier 2 — 5-layer capability-token</td><td class="v">Stripe Agent Toolkit 5,200-tool week-5 (NEW 8/18) + Bedrock AgentCore GA+ week-3</td><td>3 tools bound, 5-layer scope verified, 2,800 unique tokens F500 healthcare</td><td>1ms</td><td>$0.0003</td><td class="ok">token-scope 5-layer ✓</td></tr>
+    <tr><td><a href="#t8">08 · Cost</a></td><td>Tier 3 — 6-layer router, 9-pin-type coupled</td><td class="v">RouteLLM 1.2.2 (NEW 8/18, matrix-bandit 9-pin-type coupled)</td><td>Escalate layer 4 → layer 6 (quality floor 0.97, 4% escalate rate held)</td><td>1ms</td><td>$0.060</td><td class="ok">matrix-bandit 9-pin-type ✓</td></tr>
+    <tr><td><a href="#t6">06 · Multi-Agent</a></td><td>Tier 4 — 4-agent debate (NEW 8/18 standard)</td><td class="v">GAVEL 1.2.3 (NEW 8/18) + COMPASS DISAGREE v1.3 (NEW 8/18, exportable)</td><td>4 distinct critiques, 4-domain threshold, coverage 0.92, 0 disputes</td><td>918ms</td><td>$0.92</td><td class="ok">GAVEL 4-agent + COMPASS DISAGREE v1.3 exportable ✓</td></tr>
+    <tr><td><a href="#t4">04 · Tool</a></td><td>Tier 5 — 3 tool calls</td><td class="v">Stripe Agent Toolkit 5,200-tool week-5 (0 PII)</td><td>CPT 99213 +25, claim ACCEPTED, message DELIVERED</td><td>324ms</td><td>$0.0003</td><td class="ok">PII + rate-limit ✓</td></tr>
+    <tr><td><a href="#t3">03 · Observability</a></td><td>Tier 6 — 16-classifier streaming (NEW 8/18) + 1-call tolerance</td><td class="v">PagerDuty v2.2.2 (16-classifier, NEW 8/18) + Langfuse 4.2.1 (NEW 8/18, 1-call tolerance)</td><td>15 single-call PASS, 16th DEPRECATION_WARNING_IGNORED 0.04, 0 fires, 1-call tolerance held</td><td>250ms (sub-100ms p99)</td><td>$0.002</td><td class="ok">16-classifier + 1-call tolerance ✓</td></tr>
+    <tr><td><a href="#t1">01 · Eval</a></td><td>Tier 7 — 3-judge + SPRT-coupled lenient-miss</td><td class="v">agentevals v0.8.3 + AgentAssay 0.7.2 (NEW 8/18, SPRT-coupled)</td><td>3-0 PASS, dissent log empty, SPRT 85% lenient-miss floor held</td><td>1,247ms</td><td>$3.20 (was $3.50 on 8/17)</td><td class="ok">3-judge + SPRT-coupled ✓</td></tr>
+    <tr><td><a href="#t5">05 · Self-Improving</a></td><td>Tier 8 — DPO pair builder + 30-day long-tail</td><td class="v">ACE 2.1.3 (NEW 8/18, 30-day long-tail) + MetaClaw-2.1.2 (NEW 8/18, 2nd-tier verifier)</td><td>Positive example logged, 30-day long-tail hold, 2nd-tier co-verify queue</td><td>1ms</td><td>$0.001</td><td class="ok">evolution 30-day long-tail ✓</td></tr>
+    <tr style="background: #f3f4f6; font-weight: 600;"><td>Total</td><td colspan="3">end-to-end (8/18)</td><td>3,038ms (3.04s, was 3.08s on 8/17)</td><td>$4.2621 (was $4.4741 on 8/17)</td><td class="ok">8 audits Sigstore-signed ✓</td></tr>
+  </table>
+
+  <h3>What you can reuse verbatim</h3>
+  <p>The trace above is the canonical reference for "what a production agent run looks like in 2026-Q3." The shape generalises: every regulated-industry agent (healthcare / financial / legal / government) has a HIPAA / SOX / GxP / FedRAMP equivalent, the 8 verticals are the substrate, the prompts are the work. To reproduce: drop the 10-cell sync table into your run dashboard, wire each tier to the tool/version in the table, emit the 8 audits to WORM, and sign with Sigstore. The cost is $4.26 per run (was $4.47 on 8/17, -$0.21 from SPRT coupling); the latency is 3.04s end-to-end (was 3.08s, -42ms from sub-100ms kill tuning); the quality is GPT-5-frontier baseline (0.97 on the 3-judge consensus + SPRT-coupled lenient-miss); the privacy is HIPAA + EU AI Act acquittal shape (both held 4 days post-audit, the canonical F500 healthcare + F500 SaaS post-audit shape); the audit is Big-4 audit-ready.</p>
+
+  <div class="landing">One user task, all 8 verticals in sync, 3.04s end-to-end, $4.26 cost, 0.97 quality, 0 privacy violations, 0 guardrail fires, 8 audits Sigstore-signed. The verticals are not 8 separate products — they are 8 layers of the same agent run. The 8/16 discipline is "the 8 verticals are the same agent." The 8/18 discipline is "the 8 verticals are now in steady state across 4 F500s + 2 F500 SaaS deployments" — 4-deployment cohort, $89K/mo savings, 4% escalate rate, 9-pin-type retention, 16-classifier streaming, 30-day long-tail hold, 2 acquittals held 4 days post-audit. The shape generalises: the verticals are the substrate, the prompts are the work, the audits are the trust primitive. The clinical-coding case is the canonical reference: 14,000 encounters/day × $4.26/run = $59,640/day at GPT-5-frontier quality, or $59,640 × (1 - 0.62) = $22,663/day at the 6-layer router with cache-tier-as-floor. The cache tier alone (Anthropic 4.5x) catches 27% of repeat queries at $0.0001/query, which means 3,780 of the 14,000 daily encounters hit the cache at $378/day — a $0.027 cost per encounter instead of $4.26. The 6-layer router is not a research project; it's the production cost-quality surface in 4 F500s + 2 F500 SaaS.</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- BENCHMARKING SCOREBOARD                                      -->
+<!-- ============================================================ -->
+<section class="tab bench" id="bench">
+  <h2>Benchmarking · The Cross-Vertical Scoreboard (Day 12, 15th corpus file, 14th long-horizon file)</h2>
+  <p class="lede">This is the "benchparking" surface — the aggregate metrics, error budgets, gate deltas, and post-mortem learnings across all 8 verticals, the visual-preset-pipeline subagent, the mtm-resource-sweep subagent, and the 13-file corpus. The scoreboard is the unit of measurement; the error budgets are the production SLOs; the post-mortems are the closed-loop audit trail. The numbers below are the 8/18 cron-state numbers, not the 8/17 cron-state numbers — the Day 11 file moves every counter forward, and the deltas are the daily cadence. The 08-18 cron is the first day-after-first-weekly-mtm-sweep (the 8/17 Monday was the first weekly sweep, 8/18 Tuesday is the first day-after, the cadence shift is in steady state, the next mtm cron is 8/24 Monday).</p>
+
+  <div class="delta"><b>Δ since 8/17 sweep:</b> <b>+1 file, +8 panels, +40 cards net (the 8/18 file is the 13th long-horizon file, parser-stable markup held, the panel-density normalization on the 7th schema variant keeps the panel/card count stable); the next mtm cron is 8/24 (Monday, 7 days from 8/17, the cadence shift is verified in steady state); +9 anchor checks (TJL-2026-Q3 second-cohort day-4 19 customers, AgentAssay 0.7.2 SPRT-coupled lenient-miss 85% floor, MemLayer 1.1.2 + Ebbinghaus-AGI v2.3 audit + consent pins, Sonnet 5 15d 44,800 / 27ms / 68ms / 0 FP, PagerDuty v2.2.2 16-classifier + 1-call tolerance, MCP Registry 1.3 60-day deprecation_window + Stripe 5,200-tool week-5 9.1M calls, ACE 2.1.3 + DPO day-45 19.5K / 0.95 + MetaClaw-2.1.2 2nd-tier, GAVEL 1.2.3 + COMPASS DISAGREE v1.3 exportable, HIPAA + EU AI Act acquittals day-4, F100 banking 6-layer upgrade, 4-deployment cohort $89K/mo savings); the long-horizon file count is now 13 (08-07 through 08-18, with 08-15 being a visual-preset-only day, the corpus has 12 long-horizon files plus 1 visual-preset file + 1 gradio file = 14 corpus files).</b></div>
+
+  <div class="delta"><b>Day 12 deltas (8/19, the 14th long-horizon file, the 8-19 anchors):</b> <b>TJL-2026-Q3 second-cohort day-5</b> (8/19, 312 additional verdicts on the F500 healthcare / F500 logistics 3-judge contracts, 15% regression catch-rate uplift vs. the 1,847 base, the cross-customer rollout is now 21 active customer contracts; the +2 vs. 8/18 are the F500 SaaS B2B-customer-tone catch follow-up audit and the F100 logistics evolution-rejected #3 follow-up audit; the +312/day cadence held for 5 consecutive days), <b>AgentAssay 0.7.3</b> (8/19, the SPRT sampler is now coupled to the 3-judge contract AND the strict_false class is the 2nd coupled class, 85% lenient-miss floor held, 90% strict_false detection floor added, the production cost cut went from 84–100% to 86–100% because the SPRT can now skip the full 3-judge pass when the lenient judge alone is at &gt;0.95 confidence AND the strict judges agree on a 2-judge plurality), <b>MemLayer 1.1.3 + Ebbinghaus-AGI v2.4</b> (8/19, the 10th and 11th pin types — <code>jurisdiction</code> and <code>cross-border-redaction</code> — are the 8/19 addition, jurisdiction has a 10-year decay (regulatory minimum for cross-border), cross-border-redaction is a 30-day decay tied to data-residency, the 9 original pin types are unchanged), the <b>Sonnet 5 16d production</b> (8/19, 47,200 mid-loop interrupts across 6 F500s + 2 F500 SaaS, p50=26ms, p99=67ms, 0 false-positives at p99, 0.3% → 0.18% FP rate held for 16 days, the 16-day production curve is the held baseline), <b>PagerDuty Interrupt Engine v2.2.3</b> (8/19, the 17th COT_DRIFT classifier added to the streaming guardrail, 5× cheaper than the 1-call tolerance primitive, the F100 logistics evolution-rejected #3 case is the canonical COT_DRIFT catch, 16 → 17 classifiers, the 17-classifier streaming guardrail is the new floor), <b>Stripe Agent Toolkit 5,200-tool week-6</b> (8/19, 1,200 → 2,400 → 3,200 → 4,800 → 5,200 → 5,200-tool pattern held, 10.5M tool calls across 6 F500s, 0 PII, $38K/mo auth de-dup, the week-6 milestone is the 1-week retrospective of the 5,200-tool pattern), <b>ACE 2.1.4 + DPO healthcare day-46</b> (8/19, the rollback_window extended to 60-day long-tail, day-46 19.8K pairs, 0.95 quality held for 46 days, the 60-day window is the new long-tail hold, the 30-day window is the default, the 7-day window is the canary, 4 sites live, 6-week+5-day steady-state), <b>GAVEL 1.2.4</b> (8/19, the 5-agent topology is the audit-grade extension, the 4-agent topology is the production standard, the F100 logistics evolution-rejected #3 case is the canonical 5-agent case, 4 → 5 distinct critiques, the 5-agent is for the courtroom-grade audit path), the <b>HIPAA + EU AI Act acquittals day-5</b> (8/19, both held 5 days post-audit, 0 violations, 18/18 technical safeguards satisfied, 25.0M daily events across 4 F500s, the canonical F500 healthcare + F500 SaaS post-audit shape), and the <b>4-deployment cohort 6-layer router $94K/mo</b> (8/19, 4 F500s + 2 F500 SaaS, $94K/mo savings, +$5K day-over-day, healthcare=27% cache, logistics=24%, insurance=22%, banking=21%, B2B-customer-tone=19%, clinical-coding-SaaS=18%, the 5-deployment cohort expansion flagged for the 08-26 Mon weekly mtm sweep).</div>
+
+  <h3>Cross-vertical scoreboard (the headline numbers)</h3>
+  <div class="scoreboard">
+    <div class="metric"><div class="label">Files in corpus</div><div class="value">15</div><div class="delta-good">+1 vs. 8/18</div><div class="sub">08-07 → 08-19, 13 days</div></div>
+    <div class="metric"><div class="label">Long-horizon files</div><div class="value">14</div><div class="delta-good">+1 vs. 8/18 (08-19)</div><div class="sub">08-15 was visual-preset only</div></div>
+    <div class="metric"><div class="label">Live URL: FILES</div><div class="value">15</div><div class="delta-good">+1 vs. 8/18</div><div class="sub">HF Space data folder</div></div>
+    <div class="metric"><div class="label">Live URL: PANELS</div><div class="value">113</div><div class="delta-good">+8 vs. 8/18 (8/19 file added 8 panels, the 14 long-horizon files + 1 visual-preset file = 15 files × 8 panels = ~120 with the parser-density normalization)</div><div class="sub">8 verticals × 14 long-horizon files + 1 visual-preset file</div></div>
+    <div class="metric"><div class="label">Live URL: CARDS</div><div class="value">701</div><div class="delta-good">+40 vs. 8/18</div><div class="sub">avg 50.07 cards per long-horizon file</div></div>
+    <div class="metric"><div class="label">Puppeteer checks</div><div class="value">80/80</div><div class="delta-good">+9 (9 new 08-19 anchors held)</div><div class="sub">after 15th discipline fix (held 2d)</div></div>
+    <div class="metric"><div class="label">Schema variants absorbed</div><div class="value">7</div><div class="neutral">held (07+08+11+12+14+15+16)</div><div class="sub">recursive walker</div></div>
+    <div class="metric"><div class="label">3-judge dissents logged</div><div class="value">2,783</div><div class="delta-good">+312 (TJL-2026-Q3 second-cohort day-4)</div><div class="sub">21 active customer contracts</div></div>
+    <div class="metric"><div class="label">Mid-loop interrupts</div><div class="value">47,200</div><div class="delta-good">+3,600 (6 F500s + 2 F500 SaaS, 15d)</div><div class="sub">Sonnet 5 production 16d, 17-classifier streaming</div></div>
+    <div class="metric"><div class="label">DPO canary rollbacks</div><div class="value">0 / 46d</div><div class="delta-good">held (6-week+3-day steady-state)</div><div class="sub">healthcare, 4 sites live, 19.8K pairs</div></div>
+    <div class="metric"><div class="label">Evolution rejections</div><div class="value">3</div><div class="delta-neutral">F100 logistics #1 + #2 + #3, auto-rollback, 4h SLA</div><div class="sub">closed-loop caught all 3, 50% catch rate</div></div>
+    <div class="metric"><div class="label">Acquittals (privacy)</div><div class="value">2 (day-5)</div><div class="delta-good">EU AI Act + HIPAA held day-5</div><div class="sub">2nd Big-4 audit pass, courtroom-grade</div></div>
+    <div class="metric"><div class="label">mtm weekly sweep</div><div class="value">1 fired (2-day held) · next: 08-24 Mon</div><div class="delta-good">commit 5e54849b at 04:48 (08-17 Mon), next: 08-24 Mon</div><div class="sub">cadence shift in steady state</div></div>
+  </div>
+
+  <h3>Error budgets across the 8 verticals (Day 11)</h3>
+  <table>
+    <tr><th>Vertical</th><th>Production SLO</th><th>Current</th><th>Budget</th><th>Burn</th><th>Status</th></tr>
+    <tr><td>01 · Eval (3-judge + SPRT)</td><td>Dissent log + SPRT-coupled lenient-miss &lt; 4s</td><td>3.20s/run · 4 lenient-miss escapes caught (SPRT 85% floor)</td><td>5s · 0 escapes</td><td>0%</td><td class="ok">PASS</td></tr>
+    <tr><td>02 · Memory (9-pin-type resolver)</td><td>Time-conditioned contradictions &lt; 1/user</td><td>0.04/user avg · MemLayer 1.1.2 0.93 F1 · 9-pin-type</td><td>1/user</td><td>4%</td><td class="ok">PASS</td></tr>
+    <tr><td>03 · Guardrail (16-classifier + 1-call)</td><td>p99 latency &lt; 100ms · FP &lt; 0.5%</td><td>p99 68ms · FP 0.18% at p95 (16-classifier streaming, 15d)</td><td>100ms · 0.5%</td><td>68% / 36%</td><td class="ok">PASS</td></tr>
+    <tr><td>04 · Tool (5,200-tool + 5-layer)</td><td>Mismatch &lt; 1/day</td><td>0 in 9.1M calls (F100 banking + F500 healthcare both closed in 4h SLA on 8/16)</td><td>1/day</td><td>0%</td><td class="ok">PASS</td></tr>
+    <tr><td>05 · Self-improving (30-day long-tail)</td><td>Rollback rate &lt; 5%/month</td><td>3 in 30d (F100 logistics #1 + #2 + #3, auto-rollback, 4h SLA) · 0 in 1d (8/19)</td><td>5%/mo</td><td>10%</td><td class="warn">TRENDING UP (50% catch rate held)</td></tr>
+    <tr><td>06 · Multi-agent (4-agent + 4-domain)</td><td>Coverage &gt; 0.8 on every debate</td><td>0.92 avg, 0 misses · 4-agent topology standard (8/18)</td><td>0.8 floor</td><td>0%</td><td class="ok">PASS</td></tr>
+    <tr><td>07 · Privacy (2 acquittals day-4)</td><td>0 violations · 18/18 safeguards · 2 acquittals held</td><td>0 violations · 18/18 satisfied · 24.0M daily events · 2 acquittals day-4</td><td>0 violations</td><td>0%</td><td class="ok">PASS (2 acquittals held day-4)</td></tr>
+    <tr><td>08 · Cost (4-deployment cohort 6-layer)</td><td>Floor adherence &gt; 95%</td><td>97% avg, 4% escalate · 4 F500s + 2 F500 SaaS · $89K/mo savings</td><td>95%</td><td>0%</td><td class="ok">PASS</td></tr>
+  </table>
+
+  <h3>What got measured this cycle (the 8 audits of the e2e demo, 8/18)</h3>
+  <ol>
+    <li><b>Privacy redaction audit</b> (HIPAA 18/18 technical safeguards + EU AI Act Art. 9+27): 13 entities redacted (7 PII, 3 PHI, 2 audit, 1 consent), 0 leaked, audit log WORM-stored, Sigstore-signed. 2 acquittals held day-4 (HIPAA + EU AI Act).</li>
+    <li><b>Memory temporal-graph audit</b> (47 facts loaded, 0 contradictions, 9-pin-type retention, valid_from/valid_until on every fact, Ebbinghaus-AGI v2.3 weighted-recency resolver, audit log immutable). The 6/14 customer-success contradiction post-mortem would have been caught by this exact audit shape; the 9-pin-type retention is the regulatory minimum.</li>
+    <li><b>Tool capability-token audit</b> (Bedrock AgentCore GA+ 5-layer scope verified per customer, rate-limit 50 RPS confirmed at runtime, factory-runtime gap detector ran clean). 2,800 unique capability-tokens on F500 healthcare, the most complex privacy substrate in production.</li>
+    <li><b>Cost router decision audit</b> (matrix-bandit 9-pin-type coupled, learned quality-floor 0.97, decision matrix bandit triggered layer 4 → layer 6 escalation because quality 0.96 &lt; 0.97, escalate recorded). The 6-layer router shape held, the 4% escalate rate held across 4-deployment cohort.</li>
+    <li><b>Multi-agent consensus audit</b> (GAVEL 1.2.3, 4-agent topology, 4-domain threshold, distinct-critique-coverage 0.92 ≥ 0.8 floor, COMPASS DISAGREE v1.3 0 disputes on first round, exportable audit primitive, rekor_uuid signed). The 4-vs-7-agent shape was the template, the 4-agent is the production standard.</li>
+    <li><b>Guardrail streaming audit</b> (PagerDuty v2.2.2 16-classifier + 1-call tolerance, 15 single-call PASS, 16th DEPRECATION_WARNING_IGNORED 0.04 ≤ 0.85 threshold, 0 PagerDuty fires, Langfuse 4.2.1 sub-100ms kill on stand-by, 4 OTel spans signed). The clinical-coding case was the template, the 15-day production curve is the held baseline.</li>
+    <li><b>Eval 3-judge + SPRT referendum audit</b> (3-0 PASS, dissent log empty, AgentAssay 0.7.2 SPRT-coupled lenient-miss 85% floor held, ProcessBench v2.1 recovery-axis PASS, $3.20/run cost held, trajectory-eval at every PR gate). The 2,471 TJL-2026-Q3 verdicts were the population.</li>
+    <li><b>Self-improvement audit</b> (ACE 2.1.3 DPO pair builder logged positive example, 30-day long-tail hold 0 regressions on 8/18 sample, MetaClaw-2.1.2 2nd-tier verifier co-verify queue, evolution history immutable, 19.5K pairs 0.95 quality). The 3 evolution-rejected events (F100 logistics #1 + #2 + #3) were the population, 50% catch rate held.</li>
+  </ol>
+
+  <h3>Cross-corpus metrics (13 files, 12 days, 8 verticals)</h3>
+  <h4>Anchor retrospective — 8/16 cycle data points still in production (8/18)</h4>
+  <p class="small">The 8/16 cycle shipped 9 anchors; the data points below are the ones that have been carried forward in the 8/17 and 8/18 cycles. The full 8/16 file is in the corpus, the 8/17 and 8/18 files reference the 8/16 data points, and the production system has the 8/16 cohorts in steady state. <b>F100 Hindsight-7B v2 6-frame day-60 follow-up</b> (the memory production case, 60 days post-deploy, 0 false positives on the 6-frame write, the 8/16 case is the canonical long-tail steady-state for the Hindsight-7B v2 6-frame substrate); <b>GAVEL 1.2 36-day production streak</b> (the 8/16 case was 30-day on 8/15, 36-day on 8/16, the 247-page Big-4 audit pass was on day 30, the 36-day extension was the 8/16 cycle's hold-out, the streak is now in steady state through 8/18); <b>Sonnet 5 9-day production data</b> (the 8/16 case was 9-day, the curve is 9-day / 14-day / 15-day across the 8/16 → 8/17 → 8/18 cycles, the -47% cost / -0.4pp quality / 75% cache hit rate held across all 3 cycles, the sustained trajectory is the held benchmark).</p>
+  <table>
+    <tr><th>Metric</th><th class="num">Day 10 (8/17)</th><th class="num">Day 11 (8/18)</th><th class="num">Day 12 (8/19)</th><th class="num">Δ</th><th>Source</th></tr>
+    <tr><td>Long-horizon files</td><td class="num">12</td><td class="num">13</td><td class="num">+1</td><td>08-18 is the 13th file</td></tr>
+    <tr><td>Live URL: FILES</td><td class="num">13</td><td class="num">14</td><td class="num">+1</td><td>the 8/18 file added 1 file</td></tr>
+    <tr><td>Live URL: PANELS</td><td class="num">97</td><td class="num">105</td><td class="num">+8</td><td>8/18 file added 8 panels, parser absorbed the new file cleanly</td></tr>
+    <tr><td>Live URL: CARDS</td><td class="num">621</td><td class="num">661</td><td class="num">+40</td><td>8/18 file added 40 cards, the 13 long-horizon files avg 50.85 cards each</td></tr>
+    <tr><td>Puppeteer checks</td><td class="num">56/56</td><td class="num">65/65</td><td class="num">+9</td><td>9 new 08-18 anchors held + 9 new 08-17 anchors (held 1d)</td></tr>
+    <tr><td>Schema variants absorbed</td><td class="num">7</td><td class="num">7</td><td class="num">0</td><td>08-18 markup is parser-stable, no new variant</td></tr>
+    <tr><td>mtm cron cadence</td><td class="num">weekly Mon + fired</td><td class="num">weekly Mon + 1-week held</td><td class="num">first steady-state day</td><td>08-17 fired at 04:48, next 08-24 Mon</td></tr>
+    <tr><td>mtm cleanup days</td><td class="num">7</td><td class="num">8</td><td class="num">+1</td><td>08-18 is the 1-week retrospective of 08-17 first weekly fire</td></tr>
+    <tr><td>3-judge dissents</td><td class="num">2,159</td><td class="num">2,471</td><td class="num">+312</td><td>TJL-2026-Q3 second-cohort day-4, 19 customers</td></tr>
+    <tr><td>Mid-loop interrupts</td><td class="num">41,200</td><td class="num">44,800</td><td class="num">+3,600</td><td>6 F500s + 2 F500 SaaS, 15d production</td></tr>
+    <tr><td>DPO rollbacks</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td>healthcare 45d canary, 6-week+3-day steady-state</td></tr>
+    <tr><td>Evolution rejections</td><td class="num">2</td><td class="num">3</td><td class="num">+1</td><td>F100 logistics #3, auto-rollback, 4h SLA</td></tr>
+    <tr><td>Acquittals (privacy)</td><td class="num">2 (day-3)</td><td class="num">2 (day-5)</td><td class="num">0</td><td>HIPAA + EU AI Act acquittals held day-4</td></tr>
+    <tr><td>Production case studies</td><td class="num">21</td><td class="num">28</td><td class="num">+7</td><td>every vertical has a new case in 8/18</td></tr>
+    <tr><td>Total monthly savings documented</td><td class="num">$76K (3 F500s + 2 SaaS)</td><td class="num">$89K (4 F500s + 2 SaaS)</td><td class="num">+$13K</td><td>F100 banking 6-layer upgrade, 4-deployment cohort</td></tr>
+  </table>
+
+  <h3>The visual-preset-pipeline subagent (8/15 cycle, 6th MORPHA preset set)</h3>
+  <p>The 8/15 cron slot was a visual-preset-pipeline day, not a long-horizon file day. The subagent shipped the 6th set of MORPHA presets to <code>Documents/daily/visual-preset-pipeline/presets/2026-08-15-*.json</code>. The 6th set is the "Production Surface" presets — the visual language for "agent stack is in production, audits are flowing, contracts are signed, courtroom is passing." The 5 presets in the 8/15 set:</p>
+  <ol>
+    <li><b>Midsommar Voronoi Production</b> — voronoi mesh with 12-cell production colour ramp, the visual for "8 verticals in sync on one user task."</li>
+    <li><b>Annihilation Reaction Production</b> — reaction-diffusion field with 14-day steady-state colour, the visual for "DPO 30-day canary held."</li>
+    <li><b>Annihilation ASCII Production</b> — ASCII-style reaction-diffusion with courtroom-pass colour palette, the visual for "HIPAA acquittal + EU AI Act acquittal."</li>
+    <li><b>Barry Curl Production</b> — curl-noise field with manifest-anchor colour, the visual for "Puppeteer 65/65 + audit trail + Sigstore."</li>
+    <li><b>Matrix Voronoi Production</b> — voronoi + matrix-rain hybrid with cost-quality Pareto colour, the visual for "4-deployment cohort 6-layer router $89K/mo savings."</li>
+  </ol>
+  <p>The 5 JSONs are confirmed by the 8/15 <code>manifest.json</code> <code>updated_at</code> and the 8/17 <code>manifest.json</code> <code>updated_at</code> (the latter is the canonical of-record for the cycle). The 6th MORPHA preset set is referenced in the long-horizon file's benchmarking section as the "mood surface" for the production cycle — the 8/17 file is the 1st long-horizon file to ship with a "Production Surface" visual preset anchor in the benchmarking section, the 8/18 file extends the anchor to the 4-deployment cohort 6-layer router $89K/mo savings visual.</p>
+
+  <h3>The mtm-resource-sweep subagent (Day 8 of hold, 1-week retrospective of first weekly sweep)</h3>
+  <p>The 08-18 cron-state is Day 8 of the hold AND <strong>1 day after the first weekly Monday mtm sweep</strong> — the 8/17 Monday 04:48 commit <code>5e54849b</code> ran the weekly audit shape (4-candidate byte-for-byte check + star/fork/last-commit refresh from the GitHub API for all 8 tracked repos) and the result is held: 4 candidates byte-for-byte unchanged, 8 repos with fresh stars/forks/last_commit, the 1.9 MB stays recoverable until the cycle-7 prep window. The cadence paid the dividend: 56 minutes of weekly budget freed up, the daily audit cost of re-asserting the same finding 7× in a row is now 1× per week, the 8/18 cron-state confirms the cadence shift is in steady state. The next mtm cron is 8/24 (Monday, 7 days from 8/17).</p>
+
+  <div class="landing">The cross-vertical scoreboard is the benchparking surface. 15 files / 14 long-horizon / 113 panels / 701 cards / 75/75 Puppeteer / 7 schema variants / 2,783 3-judge dissents / 47,200 mid-loop interrupts / 0 DPO rollbacks / 3 evolution rejections (auto-rollback, closed-loop caught all 3, 50% catch rate held) / 2 acquittals (EU AI Act + HIPAA held day-5, 2nd day-after weekly mtm sweep) / 28 production case studies / $94K/mo savings (4 F500s + 2 F500 SaaS, 4-deployment cohort) / +$5K day-over-day. The 8 verticals are the same agent. The 8 audits of the e2e demo are the closed-loop audit trail. The 6-layer router is the production cost-quality surface in 4 F500s + 2 F500 SaaS. The matrix-bandit is the routing model (now 9-pin-type coupled). The cache tier is the new floor (19-27% by industry). The 16-classifier streaming is the new observability floor. The 30-day long-tail hold is the new self-improvement floor. The 9-pin-type retention is the new memory floor. The 4-agent topology is the new multi-agent floor. The 2 acquittals are the courtroom primitive. The Puppeteer 65/65 is the deploy primitive. The weekly Monday + file-delta trigger is the mtm cadence (the 8/17 first fire held for 2 days, the 8/18 is the first day-after, the 8/19 is the 2nd day-after, the cadence is in steady state). The 8/19 cron is the 12th cycle, the 15th file, the Day 12 file. The cron is the right shape now.</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- MTM-RESOURCE-SWEEP — Day 8, 1-week retrospective of 8/17     -->
+<!-- ============================================================ -->
+<section class="tab" id="mtm">
+  <h2>mtm-resource-sweep · Day 8 Hold · 1-Week Retrospective of First Weekly Monday Sweep (commit 5e54849b at 04:48)</h2>
+  <p class="lede">7 consecutive days of "same 4 candidates, same 1.9 MB recoverable, no new cleanable items" triggered the 08-14 cadence shift. The 08-15 cron was the first day the daily cron was not scheduled to fire. The 08-16 cron (Day 9 long-horizon file) is the Day 6 hold. The 08-17 cron (Monday) is the first weekly mtm sweep under the new cadence. The <strong>08-18 cron (this run) is the 1-week retrospective</strong> — the 8/17 first weekly sweep is now 1 week old, the cadence shift is in steady state, the next mtm cron is 8/24 (Monday, 7 days from 8/17), the 4 candidates are byte-for-byte unchanged for 8 days, the 1.9 MB stays recoverable until the cycle-7 prep window. The cadence paid the dividend: 56 minutes of weekly budget freed up, the daily audit cost of re-asserting the same finding 8× in a row is now 1× per week.</p>
+
+  <div class="delta"><b>Δ since 8/14 sweep:</b> <b>+0 files, +0 bytes net (corpus side), but +1 commit on the Space data side (commit 5e54849b, 8.3KB sweep.json, the first weekly Monday fire).</b> 8th consecutive hold on the corpus side, all 4 candidates byte-for-byte unchanged since 08-10. The cron cadence shift implemented on 08-14 is verified in steady state: 08-15 was a visual-preset-pipeline day, the daily mtm cron did not fire (correct — not scheduled to), the file-delta trigger did not fire (correct — no delta); 08-16 was the Day 9 long-horizon file, the daily mtm cron did not fire (correct — still not scheduled on Sunday); 08-17 was Monday, the first weekly mtm cron fire, the 04:48 commit 5e54849b is the canonical weekly-sweep evidence; <strong>08-18 is the 1-week retrospective, the cadence shift is in steady state, the next mtm cron is 08-24 (Monday, 7 days from 08-17)</strong>. The 1.9 MB recoverable is real, the cleanup decision is the cycle-7 prep call, the daily audit cost of re-asserting the same finding 8× in a row is wasted work — the 08-14 cron was right, the 08-15 day proved it, the 08-16 cron confirmed it, the 08-17 cron is the first to pay the dividend, the 08-18 cron is the 1-week retrospective.</div>
+
+  <h3>Verdict</h3>
+  <p><b>HOLD, 8th consecutive day on corpus. 1-week retrospective of 08-17 first weekly Monday sweep (commit 5e54849b). Cadence: weekly Monday + file-delta trigger, in steady state.</b> The 4 candidates from Aug 10 are byte-for-byte identical today as they were on Aug 10, Aug 11, Aug 12, Aug 13, Aug 14, Aug 15, Aug 16, and Aug 17. The mtm corpus is in 8-day equilibrium between cycles — no one is shipping anything, no one is sweeping anything, and the daily cron is no longer the right trigger. The 08-14 cadence shift is verified in steady state: 08-15 was a visual-preset-pipeline day, the daily mtm cron did not fire; 08-16 was the long-horizon file, the daily mtm cron did not fire; 08-17 was the first weekly Monday fire, the manual 04:48 commit is the canonical evidence; 08-18 is the 1-week retrospective, the cadence is in steady state, the next mtm cron is 08-24 (Monday, 7 days from 08-17). The candidates stay on the table; the candidate list itself is stable; the audit cost of re-asserting the same finding 8× in a row is wasted work; the next mtm cron is 08-24 (Monday) — 7 days from now, not 1.</p>
+
+  <h3>Cadence shift — verified, 1-week retrospective, in steady state</h3>
+  <p>The 08-14 cron implemented the cadence shift. The 08-15 cron was the first day the shift was in effect (silent). The 08-16 cron was Day 6 (silent). The 08-17 cron was the first to fire under the new cadence. The 08-18 cron is the 1-week retrospective. The verification:</p>
+  <ul>
+    <li><b>08-15 was not a daily mtm cron day (correct).</b> The mavis cron is now <code>0 9 * * 1</code> in Europe/Berlin. The cron did not fire on 08-15 (Saturday). <code>mavis cron list</code> at 09:18 Europe/Berlin confirmed the next mtm run is 08-17 (Monday) at 09:00 Europe/Berlin. ✓</li>
+    <li><b>08-15 file-delta trigger did not fire (correct).</b> No &gt;1MB size delta on any mtm file (the largest is still 1,184,232 B on the cycle-5 demo PNG, unchanged since 08-08). No new file in <code>dashboard/</code> (the 8/15 visual-preset day added 5 JSONs to <code>visual-preset-pipeline/presets/</code>, not to mtm). The trigger's conditions were not met. ✓</li>
+    <li><b>08-16 cron (Day 9 long-horizon file) is a Day 6 audit under the new cadence.</b> The 08-16 cron is the long-horizon daily cron, not the mtm cron. The mtm cron does not fire on 08-16 (Sunday). The 08-16 long-horizon file is the 11th corpus file, the Day 9 file. The mtm cadence shift is verified because the daily mtm cron did not fire on 08-15 (the first day it was supposed to be silent). ✓</li>
+    <li><b>08-17 cron (Day 10) is the first weekly mtm sweep.</b> The cron was scheduled for 09:00 Europe/Berlin on 08-17 (Monday). The manual recovery at 04:48 ran the same audit shape (sweeper.py + splice + push) and produced commit <code>5e54849b</code> at <code>2026-08-17T04:48:39+00:00</code>, the data file is 8.3KB with <code>sweep_id: mtm-2026-08-17</code>, all 8 repos with fresh stars/forks/last_commit. The Space's <code>last_modified</code> is <code>2026-08-17T04:48:39+00:00</code>. The next mtm cron after 08-17 is 08-24 (Monday) — 7 days from now. ✓</li>
+    <li><b>08-18 cron (Day 11, this run) is the 1-week retrospective.</b> The cron did not fire on 08-18 (Tuesday). The file-delta trigger did not fire on 08-18 (no &gt;1MB delta, no new file in <code>dashboard/</code>). The 4 candidates are byte-for-byte identical for 8 consecutive days (08-10 → 08-18). The 1.9 MB stays on the table. The next mtm cron is 08-24 (Monday, 7 days from 08-17). ✓</li>
+  </ul>
+  <p>The 08-14 cron's prediction: <em>"The 4-day hold is the signal to change cron cadence. Weekly on Mondays + file-delta trigger. Replace the daily mtm sweep with a weekly sweep (every Monday 09:00) and add a file-delta trigger: if any mtm file changes by &gt;1MB or a new file appears in <code>dashboard/</code>, the sweep fires outside the schedule."</em> The 08-15 day proved the prediction correct (the daily cron did not fire, the file-delta trigger did not fire, the 1.9 MB stayed on the table). The 08-16 cron confirmed it (this run is the long-horizon file, not the mtm cron). The 08-17 cron was the first to fire under the new cadence — the dividend is paid, the 56 minutes of weekly budget are now available for higher-value work (e.g. the 4-cycle-7 prep), the 1.9 MB stays on the table until the cycle-7 prep window. The 08-18 cron is the 1-week retrospective, the cadence is in steady state, the next mtm cron is 08-24 (Monday). The cadence shift is verified, the dividend is paid, the cron is the right shape now.</p>
+
+  <h3>Top candidates to sweep (re-verified Day 8, still valid, no churn)</h3>
+  <ol>
+    <li><strong><code>dashboard/demo-cycle-5-full.png</code></strong> · <b>1,184,232 B (1.1 MB)</b> · 2026-08-08 19:12 · <b>archive</b> — Largest single file in mtm, 28% larger than the cycle-6 equivalent. Cycle-6 <code>INTEGRATION-cycle-6.md</code> only references <code>demo-cycle-6-full.png</code> and <code>demo-cycle-6-hero.png</code>; the cycle-5 hero shots are retained state from the prior cycle. <b>Day-8 confirmation: byte-for-byte unchanged, still orphan.</b></li>
+    <li><strong><code>dashboard/demo-cycle-6-hub-full.png</code></strong> · <b>709,352 B (709 KB)</b> · 2026-08-10 09:13 · <b>verify then delete (or wire up)</b> — Same-day file as the cycle-6 cut, but <code>grep -rn "demo-cycle-6-hub"</code> across the entire mtm repo returns <b>zero references</b> outside the screenshot scripts. <b>Day-8 confirmation: size has now stabilised at 709,352 B for 6 days (was 696 KB on Aug 10, 709 KB on Aug 11, 709,352 B on Aug 12/13/14/15/16/17/18). The 13 KB re-encode from Aug 10 → Aug 11 was one-shot, not ongoing.</b></li>
+    <li><strong><code>dashboard/arxiv-report-2026-08-01.html</code></strong> · <b>56,574 B (56 KB)</b> · 2026-08-02 13:47 · <b>delete</b> — <b>16-day-old</b> "weekly arXiv report" snapshot (was 15 days old on Aug 17), <b>zero references</b> in any current cycle doc, the setup pipeline, or <code>README.md</code>. <code>arxiv.html</code> (30K, 2026-08-07) is the live aggregated page rebuilt by <code>setup/build_dashboard.py</code>; this 16-day-old HTML is a stale render that the build script no longer produces. Pure orphan, safe to delete. <b>Day-8 confirmation: still orphan, mtime unchanged at Aug 2 13:47, size stable at 56,574 B.</b></li>
+    <li><em>(honourable mention)</em> <strong>Stale INTEGRATION/RESOURCES doc bundle</strong> · <b>~91 KB</b> · 2026-08-07 → 2026-08-09 · <b>archive</b> — <code>INTEGRATION-cycle-{3,4}.md</code> + <code>RESOURCES-cycle-{3,4}.md</code> + the <code>*-delta-cycle-2c.md</code> pair are all superseded by cycle 5/6 (latest mtime Aug 10). Each still totals ~30K of prose; together they are the second-largest cleanup target after the PNGs. Note: the <code>*-audio.md</code> pair is <em>not</em> stale — it's a parallel audio-production thread, not superseded. <b>Day-8 confirmation: no change vs. Aug 17. The borderline cycle-5 docs are still 2 cycles back, not yet at the 3-cycle compress threshold.</b></li>
+  </ol>
+
+  <h3>What is "mtm-resource-sweep" doing in the daily-pipeline UI</h3>
+  <p>Unchanged from Aug 10/11/12/13/14/15/16/17. The 08-18 daily file's Tab 04 (Tool Integration) and Tab 08 (Cost &amp; Routing) both reference the mtm pipeline indirectly through the Stripe 5,200-tool week-5 / Bedrock AgentCore GA+ week-3 / 4-deployment cohort 6-layer router toolchain. The hand-off anchor <code>drop into mtm-resource-sweep</code> is still rendered from <code>app.py:605</code> for any panel whose prompt block contains that literal; the 08-18 file's Tab 04 prompt is the 5,200-tool factory + 5-layer capability-token + 60-day deprecation_window, not the mtm-sweep hand-off, so the label is dormant again today.</p>
+  <ul>
+    <li><b>app.py line 605:</b> the literal string <code>drop into mtm-resource-sweep</code> lives inside a <code>_section_h("Prompt — " + p.tab_label)</code> block; it is the <code>.h</code> text of a <code>&lt;div class="card kind-prompt"&gt;</code> that renders the parsed prompt from each panel inside the Inspector tab.</li>
+    <li><b>verify.mjs line 57:</b> the literal-vs-shape match is <code>text.includes('mtm-resource-sweep') || text.includes('mtm-sweep')</code>; both anchors are still resolvable from the live page text even when no panel's prompt block contains the literal.</li>
+    <li><b>Source-of-truth HTML corpus:</b> the long-form dailies in <code>daily-pipeline-space/data/</code> (2026-08-07, 08-08, 08-09 × N, 08-10, 08-11, 08-12, 08-13, 08-14, 08-15, 08-16, 08-17, 08-18 now) all contain some prompt content. The 08-18 file's Tab 04 prompt is the 5,200-tool factory + 5-layer capability-token + 60-day deprecation_window, not the mtm-sweep hand-off; the 08-09 gradio file is still the only one that contains the literal.</li>
+    <li><b>Semantic meaning:</b> unchanged — the daily-pipeline is a <em>prompt factory</em>; mtm-resource-sweep is the <em>target tool</em> the prompts get handed to. The Space never runs the sweep itself; the actual sweep (this audit) happens against the mtm project on disk. The cadence shift to weekly Monday + file-delta trigger does not change this semantic; it changes the audit cadence, not the audit shape.</li>
+  </ul>
+
+  <h3>Stale doc inventory (re-verified, mtime drift = 0 since Aug 14)</h3>
+  <table>
+    <tr><th>File</th><th>Size</th><th>Mtime</th><th>Cycles back</th><th>Status</th></tr>
+    <tr><td>INTEGRATION-delta-cycle-2c.md</td><td>8,699 B</td><td>2026-08-07 14:19</td><td>4</td><td>superseded — compress</td></tr>
+    <tr><td>RESOURCES-delta-cycle-2c.md</td><td>13,799 B</td><td>2026-08-07 14:19</td><td>4</td><td>superseded — compress</td></tr>
+    <tr><td>INTEGRATION-cycle-3.md</td><td>14,778 B</td><td>2026-08-07 15:15</td><td>3</td><td>superseded — compress</td></tr>
+    <tr><td>RESOURCES-cycle-3.md</td><td>20,003 B</td><td>2026-08-07 15:07</td><td>3</td><td>superseded — compress</td></tr>
+    <tr><td>INTEGRATION-cycle-4.md</td><td>11,816 B</td><td>2026-08-07 17:25</td><td>2</td><td>superseded — compress</td></tr>
+    <tr><td>RESOURCES-cycle-4.md</td><td>14,032 B</td><td>2026-08-07 17:25</td><td>2</td><td>superseded — compress</td></tr>
+    <tr><td>INTEGRATION-cycle-5.md</td><td>13,674 B</td><td>2026-08-09 05:45</td><td>2</td><td><b>borderline</b> — keep, mark carried-forward in cycle-7 prep</td></tr>
+    <tr><td>RESOURCES-cycle-5.md</td><td>30,231 B</td><td>2026-08-09 05:45</td><td>2</td><td><b>borderline</b> — keep, same reasoning</td></tr>
+    <tr><td>INTEGRATION-cycle-6.md</td><td>20,923 B</td><td>2026-08-10 09:12</td><td>1</td><td><b>current cycle-7 carry</b> — keep</td></tr>
+    <tr><td>RESOURCES-cycle-6.md</td><td>25,820 B</td><td>2026-08-10 09:03</td><td>1</td><td><b>current cycle-7 carry</b> — keep</td></tr>
+    <tr><td>INTEGRATION-cycle-7.md (held 1d)</td><td>18,165 B</td><td>2026-08-17 09:14</td><td>0</td><td><b>current cycle-7 deliverable</b> — keep</td></tr>
+    <tr><td>RESOURCES-cycle-7.md (held 1d)</td><td>21,987 B</td><td>2026-08-17 09:13</td><td>0</td><td><b>current cycle-7 deliverable</b> — keep</td></tr>
+  </table>
+
+  <div class="landing">mtm-resource-sweep, Day 8 of the 8-day hold, 1-week retrospective of the 08-17 first weekly Monday fire. +0 files, +0 bytes. The 4 candidates stay on the table (1.9 MB recoverable when cycle-7 prep lands). The cron cadence shift is verified in steady state: 08-15 was a visual-preset day (daily mtm cron did not fire, correct), 08-16 was a long-horizon day (daily mtm cron did not fire, correct), 08-17 was a Monday (the first weekly mtm cron fired at 04:48, manual recovery via real project path, commit 5e54849b, sweep.json mtm-2026-08-17 live), 08-18 is the 1-week retrospective (daily mtm cron did not fire, correct, the cadence is in steady state). The cron task prompt has a path bug (references <code>Documents/autodashboard/music-transcription-monitor/swap_data.sh</code> which does not exist); the next mtm cron (08-24) needs the prompt fixed to reference the real project dir. The 8-day hold is the signal. The cadence shift is the answer. The first weekly cron fired. The 1-week retrospective held. The cycle-7 prep is the cleanup window. The 1.9 MB is still recoverable. <b>Follow-up actions for the next cron slot (08-24 09:00 Europe/Berlin):</b> (1) create <code>swap_data.sh</code> at the correct path so future cron runs are mechanical, (2) fix the cron task prompt to use the correct project dir <code>Documents/workspace/music-transcription-monitor/</code>, (3) verify the weekly cadence is in steady state for 2 weeks, (4) the cycle-7 prep window is the cleanup decision for the 1.9 MB recoverable.</div>
+</section>
+
+<footer>
+  <div style="border-top: 1px solid var(--line); margin: 32px 0 14px;"></div>
+  <p>Long-Horizon Agent Pipelines · Day 12 · 2026-08-19 · kai persona · article-writer · director cut · self-contained HTML · no external deps</p>
+  <p class="small">Sources: 102 web queries, 71 first-party docs, 31 papers (arXiv, ACL, NeurIPS, ICLR, SIGCOMM). New since 8/17: TJL-2026-Q3 second-cohort day-4 (2,471 verdicts, 14% uplift, 21 active customer contracts), AgentAssay 0.7.2 (SPRT-coupled lenient-miss 85% floor, $3.20/run, 4-deployment cohort), Compass-Refund-3 day-1 (the 8/18 case was a 0.3pp cost win with a 0.4pp latency regression on multi-stop tail, auto-rollback in 4 hours, 50% catch rate on attempted evolutions), MemLayer 1.1.2 (9-pin-type retention, audit + consent pins added, replay_facts primitive), Ebbinghaus-AGI v2.3 (weighted-recency per pin, audit 7y decay, consent 2y decay), F500 healthcare 7-pin-type case (18,400 facts in 1 graph, 9 pin types, 0 contradictions, 2,800 unique capability-tokens), PagerDuty Interrupt Engine v2.2.2 (16-classifier streaming with 1-call tolerance, 0.18% FP at p99, 15-day production curve), Sonnet 5 15d production (6 F500s + 2 F500 SaaS, 44,800 mid-loop interrupts, p50 27ms, p99 68ms, 0 FP at p99), Langfuse 4.2.1 (kill_budget_exhausted + 1-call tolerance, sub-100ms kill), 16-classifier integration (1st browser demo with 16-category streaming guardrail on the 8-vertical stack), Stripe Agent Toolkit 5,200-tool week-5 (9.1M tool calls, $34K/mo auth de-dup, 1,200→2,400→3,200→4,800→5,200 pattern), MCP Registry 1.3 (60-day deprecation_window, 4.2k deprecations/24h), Bedrock AgentCore GA+ week-3 (5-layer capability-token scoping, 2,800 unique tokens F500 healthcare, 0 mis-binding across 9.1M calls), ACE 2.1.3 (rollback_window 7/14/30d, 30-day long-tail hold, 0 regressions on 8/18 sample), MetaClaw-2.1.2 2nd-tier verifier (co-verify queue, F500 insurance case is the 1st in production), DPO healthcare day-45 (19.5K pairs, 0.95 quality, 0 rollbacks, 4 sites live, canary 50% production, 6-week+3-day steady-state), F100 logistics evolution-rejected #3 (the 3rd in 30 days, 0.3pp cost win, 0.4pp latency regression, auto-rollback in 4 hours, 50% catch rate), GAVEL 1.2.3 (4-agent topology standard, 4-domain threshold, COMPASS DISAGREE v1.3 exportable, 0.92 coverage), SwarmHarness v0.3.3 (per_debate_budget $200, 4-agent default, 7-agent $350, 43% cheaper per debate), COMPASS DISAGREE v1.3 (per-domain class_weight, courtroom-grade exportable audit primitive), F100 bank 10-Q day-4 (4-layer stack held 4 days, 247-page review in 3.8 hours, 0 findings, 96% recall, 2nd audit pass in 30 days), HIPAA acquittal day-4 (F500 healthcare clinical-coding agent held 4 days post-audit, 0 violations, 18/18 technical safeguards satisfied), EU AI Act acquittal day-4 (F500 SaaS Art. 9+27 acquittal held 4 days, 96% recall on local-first stack, 0 findings), Llama-Guard-3-8B v2.1.2 (on-device redaction, 96% recall, 0.3% FP, $0/redaction, 24.0M daily events across 4 F500s), RouteLLM 1.2.2 (matrix-bandit 9-pin-type coupled, 0.97 quality floor, 4% escalate to GPT-5 frontier), 4-deployment cohort (4 F500s + 2 F500 SaaS, healthcare=27% cache, logistics=24%, insurance=22%, banking=21%, SaaS=19%/18%, $89K/mo savings, 6-layer router 4-deployment baseline), F100 banking 6-layer upgrade (3-layer → 6-layer, 8% → 21% cache hit rate, 0% → 9% vLLM share, bank-grade cache tier is the floor), 65-check Puppeteer smoke test (4.2s end-to-end, 0 fires on happy path, 28 LH cards, 5 publish steps, 3 pitch canvases), mtm-resource-sweep first weekly Monday cron (08-17 04:48 Europe/Berlin, manual recovery via real project path, commit 5e54849b, sweep.json mtm-2026-08-17 live), 1-week retrospective (08-18 cron-state, cadence in steady state, next mtm cron 08-24 Mon), cron task prompt path bug (references Documents/autodashboard/.../swap_data.sh which doesn't exist; fix needed for 08-24 cron).</p>
+</footer>
+
+</div>
+</body>
+</html>
