@@ -169,7 +169,7 @@ writeFileSync(join(OUT, 'public', 'eye-kairi', 'index.html'), renderIndex(ekProj
 
 const agentCards = publicAgents.map(a => `
   <article class="card" data-kind="${a.kind}" data-status="${a.status}">
-    <h3>${a.display_name}</h3>
+    <h3><a href="${a.name}.html">${a.display_name}</a></h3>
     <p class="desc">${a.purpose}</p>
     <div class="meta">
       <span class="kind ${a.kind}">${a.kind}</span>
@@ -180,11 +180,138 @@ const agentCards = publicAgents.map(a => `
 
 writeFileSync(join(OUT, 'public', 'agents', 'index.html'), `<!doctype html>
 <html><head><meta charset="utf-8"><title>Agents</title>
-<style>body{font:14px/1.5 -apple-system,system-ui,sans-serif;background:#04060a;color:#d6e1f0;margin:0;padding:2rem}h1{color:#00e5ff}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem}.card{background:#0a0f17;border:1px solid #1a2533;border-radius:8px;padding:1rem}.card:hover{border-color:#ff3df0}.card h3{margin:0 0 .5rem}.desc{color:#6b7d96;font-size:.9rem;margin:0 0 .75rem}.meta{display:flex;gap:.5rem;margin-bottom:.5rem}.kind,.status{padding:2px 6px;border-radius:3px;font-size:.75rem;background:#1a2533;color:#00e5ff}.kind.utility{color:#ff3df0}.kind.research{color:#00e5ff}.kind.infrastructure{color:#ffb547}.caps{display:flex;flex-wrap:wrap;gap:4px}.cap{font-size:.7rem;padding:2px 5px;border-radius:2px;background:#1a2533;color:#5cffa0;font-family:ui-monospace,monospace}</style>
+<style>body{font:14px/1.5 -apple-system,system-ui,sans-serif;background:#04060a;color:#d6e1f0;margin:0;padding:2rem}h1{color:#00e5ff}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem}.card{background:#0a0f17;border:1px solid #1a2533;border-radius:8px;padding:1rem}.card:hover{border-color:#ff3df0}.card h3{margin:0 0 .5rem}.desc{color:#6b7d96;font-size:.9rem;margin:0 0 .75rem}.meta{display:flex;gap:.5rem;margin-bottom:.5rem}.kind,.status{padding:2px 6px;border-radius:3px;font-size:.75rem;background:#1a2533;color:#00e5ff}.kind.utility{color:#ff3df0}.kind.research{color:#00e5ff}.kind.infrastructure{color:#ffb547}.caps{display:flex;flex-wrap:wrap;gap:4px}.cap{font-size:.7rem;padding:2px 5px;border-radius:2px;background:#1a2533;color:#5cffa0;font-family:ui-monospace,monospace}.card h3 a{color:inherit;text-decoration:none}.card h3 a:hover{color:#00e5ff}</style>
 </head><body>
 <h1>Agent Team — ${agents.length} personas</h1>
 <div class="grid">${agentCards}</div>
 </body></html>`);
+
+// ---------------------------------------------------------------------------
+// Per-agent pages — public/agents/<name>.html + monogram graphics.
+// Plan §18C: graphic, purpose, inputs/outputs, capabilities, calls-into,
+// called-by (reverse index), depends-on. Private agents get no page at all;
+// unlisted agents get a page but a noindex robots tag.
+// ---------------------------------------------------------------------------
+const esc = (s) => String(s ?? '')
+  .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+  .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+const KIND_COLORS = {
+  utility: '#ff3df0', research: '#00e5ff', infrastructure: '#ffb547',
+  creative: '#5cffa0', orchestrator: '#d6e1f0',
+};
+
+function monogramSvg(a) {
+  const c = KIND_COLORS[a.kind] || '#00e5ff';
+  const label = a.display_name || a.name;
+  const letter = label.trim().charAt(0).toUpperCase();
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="${esc(label)}">
+  <rect x="1.5" y="1.5" width="61" height="61" rx="12" fill="#0a0f17" stroke="${c}" stroke-width="1.5"/>
+  <circle cx="32" cy="32" r="21" fill="none" stroke="${c}" stroke-width="0.75" opacity="0.35"/>
+  <text x="32" y="41" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,monospace" font-size="26" fill="${c}">${esc(letter)}</text>
+</svg>
+`;
+}
+
+// Reverse index: which public agents reference this one in calls_into / depend_on.
+function callersOf(agent) {
+  const hay = agent.name.toLowerCase();
+  return publicAgents.filter(x => x.name !== agent.name &&
+    [...(x.calls_into || []), ...(x.depend_on || [])]
+      .some(ref => String(ref).toLowerCase().includes(hay)));
+}
+
+function linkifyRef(ref) {
+  const s = String(ref);
+  if (publicAgents.some(x => x.name === s)) return `<a href="${s}.html">${esc(s)}</a>`;
+  if (/^[\w.-]+\/[\w.-]+$/.test(s))
+    return `<a href="https://huggingface.co/${esc(s)}" target="_blank" rel="noopener">${esc(s)} ↗</a>`;
+  return esc(s);
+}
+
+function renderAgentPage(a, callers) {
+  const c = KIND_COLORS[a.kind] || '#00e5ff';
+  const chips = (arr) => (arr && arr.length)
+    ? arr.map(x => `<span class="chip">${esc(x)}</span>`).join('')
+    : '<span class="none">—</span>';
+  const list = (arr, fn) => (arr && arr.length)
+    ? `<ul>${arr.map(x => `<li>${fn(x)}</li>`).join('')}</ul>`
+    : '<p class="none">—</p>';
+  const noindex = a.visibility === 'unlisted' ? '\n<meta name="robots" content="noindex">' : '';
+  return `<!doctype html>
+<html><head><meta charset="utf-8"><title>${esc(a.display_name || a.name)} — Agent — Sovereign Signal</title>${noindex}
+<style>
+  body { font: 14px/1.5 -apple-system, system-ui, sans-serif; background:#04060a; color:#d6e1f0; margin:0; padding:2rem; max-width:760px; }
+  a { color:#00e5ff; text-decoration:none; } a:hover { color:#ff3df0; }
+  header { border-bottom:1px solid #1a2533; padding-bottom:1rem; margin-bottom:2rem; }
+  header .crumb { font-size:0.8rem; color:#6b7d96; }
+  .id { display:flex; gap:1rem; align-items:center; margin-top:1rem; }
+  .id img { width:64px; height:64px; }
+  .id h1 { margin:0; color:${c}; }
+  .badges { display:flex; gap:.5rem; margin-top:.35rem; }
+  .badges span { padding:2px 6px; border-radius:3px; font-size:.75rem; background:#1a2533; }
+  .kind { color:${c}; } .status { color:#6b7d96; } .entity { color:#ffb547; }
+  .purpose { font-size:1.05rem; color:#d6e1f0; border-left:3px solid ${c}; padding-left:1rem; margin:1.5rem 0; }
+  .io { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1.5rem 0; }
+  h2 { color:#6b7d96; text-transform:uppercase; letter-spacing:.1em; font-size:.75rem; margin:0 0 .5rem; }
+  .chip { display:inline-block; font-size:.72rem; padding:2px 6px; margin:2px; border-radius:2px; background:#1a2533; color:#5cffa0; font-family:ui-monospace,monospace; }
+  ul { margin:.25rem 0 0; padding-left:1.1rem; } li { margin:.2rem 0; }
+  .none { color:#3a4a5f; }
+  section { margin:1.5rem 0; }
+  footer { margin-top:3rem; border-top:1px solid #1a2533; padding-top:1rem; font-size:.75rem; color:#3a4a5f; }
+</style></head>
+<body>
+<header>
+  <div class="crumb"><a href="../index.html">Sovereign Signal</a> / <a href="./">Agent Team</a> / ${esc(a.name)}</div>
+  <div class="id">
+    <img src="../assets/agents/${esc(a.name)}.svg" alt="${esc(a.display_name || a.name)} graphic" width="64" height="64">
+    <div>
+      <h1>${esc(a.display_name || a.name)}</h1>
+      <div class="badges">
+        <span class="kind">${esc(a.kind)}</span>
+        <span class="status">${esc(a.status || 'unknown')}</span>
+        <span class="entity">${esc(a.entity || 'research')}</span>
+        ${a.visibility && a.visibility !== 'public' ? `<span>visibility: ${esc(a.visibility)}</span>` : ''}
+      </div>
+    </div>
+  </div>
+</header>
+
+<p class="purpose">${esc(a.purpose)}</p>
+
+<div class="io">
+  <section><h2>Inputs</h2><div>${chips(a.inputs)}</div></section>
+  <section><h2>Outputs</h2><div>${chips(a.outputs)}</div></section>
+</div>
+
+<section><h2>Capabilities</h2><div>${chips(a.capabilities)}</div></section>
+<section><h2>Calls into</h2>${list(a.calls_into, linkifyRef)}</section>
+<section><h2>Called by</h2>${callers.length
+    ? `<ul>${callers.map(x => `<li><a href="${x.name}.html">${esc(x.display_name || x.name)}</a></li>`).join('')}</ul>`
+    : '<p class="none">No agents reference this one yet.</p>'}</section>
+<section><h2>Depends on</h2>${list(a.depend_on, esc)}</section>
+<section><h2>Material access</h2><div>${chips(a.material_access)}</div></section>
+
+<footer>Generated by agent-hub-framework build.mjs · owned by ${esc(a.owned_by || 'instance')} · paywall-gated</footer>
+</body></html>`;
+}
+
+mkdirSync(join(OUT, 'public', 'assets', 'agents'), { recursive: true });
+let pagesWritten = 0;
+for (const a of publicAgents) {
+  if (a.visibility === 'private') continue;
+  const assetRel = join('assets', 'agents', `${a.name}.svg`);
+  if (a.graphic && existsSync(join(SOURCE, a.graphic))) {
+    // Respect a hand-authored graphic shipped in the source data.
+    const svg = readFileSync(join(SOURCE, a.graphic));
+    mkdirSync(dirname(join(OUT, 'public', assetRel)), { recursive: true });
+    writeFileSync(join(OUT, 'public', assetRel), svg);
+  } else {
+    writeFileSync(join(OUT, 'public', assetRel), monogramSvg(a));
+  }
+  writeFileSync(join(OUT, 'public', 'agents', `${a.name}.html`), renderAgentPage(a, callersOf(a)));
+  pagesWritten++;
+}
 
 const publicState = {
   version: 'v1',
@@ -210,5 +337,6 @@ writeFileSync(join(OUT, 'internal', 'state.json'), JSON.stringify({
 }, null, 2));
 
 console.log(`✓ Built ${researchProjects.length} research + ${ekProjects.length} eye-kairi + ${internalProjects.length} paywalled (internal-only)`);
+console.log(`✓ Rendered ${pagesWritten} per-agent pages + graphics`);
 console.log(`  → ${OUT}/public/`);
 console.log(`  → ${OUT}/internal/`);
